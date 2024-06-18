@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-color: #ff0000;
+  --main-click-color: #ff3822;
+  --text-color: #f3f3f3;
+  --medium-color: #f3f3f3a3;
+
+  --background-color: #0d0d0d;
+  --viewer-color: #1d1d1d;
+}
+
+[data-theme="light"]:root {
+  --main-color: #ff0000;
+  --main-click-color: #ff3822;
+  --text-color: #0d0d0d;
+  --medium-color: #0d0d0da3;
+
+  --background-color: #ffffff;
+  --viewer-color: #f3f3f3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+a,
+input,
+button,
+textarea {
+  outline: none;
+  font-family: Montserrat;
+  text-decoration: none;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+input,
+textarea {
+  cursor: text;
+}
+
+::selection {
+  background: rgba($color: #ff3822, $alpha: 0.2);
+}
+::-webkit-scrollbar {
+  all: unset;
+  width: 0;
+  height: 0;
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+  scroll-behavior: smooth;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+#__next {
+  max-width: 100vw;
+  min-height: 100vh;
+  background: var(--background-color);
+  color: var(--text-color);
+  background-image: url("/back.webp");
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-size: contain;
+  overflow-y: auto;
+}
+
+#home {
+  @import "./home/others.scss";
+  @import "./home/header.scss";
+  @import "./home/hero.scss";
+  @import "./home/movies.scss";
+  @import "./home/series.scss";
+  @import "./home/footer.scss";
+}

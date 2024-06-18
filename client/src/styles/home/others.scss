@@ -1,0 +1,15 @@
+.container {
+  // max-width: 1600px;
+  padding: 0 16px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+#imageshadow {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  height: 66.6666vw;
+  background: linear-gradient(#0000005e 30%, var(--background-color) 92%);
+}

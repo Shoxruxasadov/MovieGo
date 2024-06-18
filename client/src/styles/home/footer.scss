@@ -1,0 +1,26 @@
+footer {
+  .container {
+    padding-bottom: 32px;
+  }
+
+  hr {
+    border-color: rgba(255, 255, 255, 0.12);
+    margin-bottom: 32px;
+  }
+
+  .rights {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      font-weight: 500;
+      text-align: center;
+      color: #cecece;
+
+      a:hover{
+        color: white;
+      }
+    }
+  }
+}

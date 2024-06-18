@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /login/
+Disallow: /signup/
+Sitemap: https://moviego.uz/sitemap.xml
