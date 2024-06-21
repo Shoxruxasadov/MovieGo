@@ -18,7 +18,7 @@ export default function Home() {
         <Hero />
         <div id="imageshadow"></div>
         <Movies />
-        <Series />
+        {/* <Series /> */}
       </main>
       <Footer />
     </Root>

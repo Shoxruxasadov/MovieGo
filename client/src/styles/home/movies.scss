@@ -1,4 +1,5 @@
 #movies {
+  min-height: 100vh;
   margin-bottom: 40px;
   position: relative;
   z-index: 1;
@@ -26,20 +27,41 @@
         border: 1px solid #222;
         border-radius: 6px;
         cursor: pointer;
+        position: relative;
+        overflow: hidden;
 
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Fmarvel%2FKapitan%20Amerika%20(Birinchi%20Qasoskor)%2Fposter.webp?alt=media&token=d917e08d-439d-4dec-8da9-bb964d2dc9bd");
+        background: rgb(133, 29, 29);
         background-position: center;
         background-repeat: no-repeat;
         background-size: 100%;
         transition: 0.2s;
 
-        &:nth-child(even) {
-          background-image: url("https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Fmarvel%2FKapitan%20Marvel%2Fposter.webp?alt=media&token=b0af05a5-3d9b-4635-b7f4-1e9e0bb9317b");
-        }
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        padding: 40px;
 
         &:hover {
           background-size: 102%;
           transform: scale(1.02);
+        }
+
+        .shadow{
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(transparent, #000000d2);
+        }
+
+        .title{
+          position: relative;
+          z-index: 1;
+
+          h3{
+            text-align: center;
+          }
         }
       }
     }
