@@ -21,6 +21,9 @@ export class Movies {
   source: string;
 
   @Prop({ required: true })
+  type: string;
+
+  @Prop({ required: true })
   image: ImageDto;
 
   @Prop({ required: true })

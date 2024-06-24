@@ -16,6 +16,9 @@ export class MoviesDto {
     source: string;
 
     @IsNotEmpty()
+    type: string;
+
+    @IsNotEmpty()
     image: ImageDto;
     
     @IsNotEmpty()
