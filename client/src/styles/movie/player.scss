@@ -1,0 +1,13 @@
+#player {
+  position: relative;
+  z-index: 1;
+
+  .container {
+    .plyr {
+        border-radius: 8px;
+      .plyr__controls__item * {
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -11,7 +11,7 @@ export default function Hero() {
           exit={{ y: "1rem", opacity: 0 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
         >
-          <Image src='/spider/logo.webp' width={500} height={200} alt="logo" />
+          <Image src='/spider/logo.webp' width={640} height={256} alt="logo" />
           <div className="credits">
             <p className="certificate">CBFC:U/A</p>
             <p className="genre">Action</p>

@@ -79,7 +79,6 @@ body {
 }
 
 #home {
-  // Home
   @import "./home/others.scss";
   @import "./home/header.scss";
   @import "./home/hero.scss";
@@ -87,9 +86,21 @@ body {
   @import "./home/series.scss";
   @import "./home/footer.scss";
 
-  // Movie
+  main {
+    min-height: 132vh;
+    background-image: url("/spider/back.webp");
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: contain;
+  }
+}
+
+#movie {
+  @import "./home/others.scss";
+  @import "./home/header.scss";
   @import "./movie/watch.scss";
-  @import "./movie/movie.scss";
+  @import "./movie/player.scss";
+  @import "./home/footer.scss";
 
   main {
     min-height: 132vh;

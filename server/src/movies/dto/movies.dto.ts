@@ -13,7 +13,7 @@ export class MoviesDto {
     description: LangDto;
 
     @IsNotEmpty()
-    movie: string;
+    source: string;
 
     @IsNotEmpty()
     image: ImageDto;

@@ -18,7 +18,7 @@ export class Movies {
   description: LangDto;
 
   @Prop({ required: true })
-  movie: string;
+  source: string;
 
   @Prop({ required: true })
   image: ImageDto;
