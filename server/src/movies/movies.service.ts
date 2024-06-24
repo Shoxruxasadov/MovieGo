@@ -14,8 +14,8 @@ export class MoviesService {
     return this.moviesModel.find();
   }
 
-  findById(id: number) {
-    return this.moviesModel.findOne({ _id: id });
+  findByName(name: string) {
+    return this.moviesModel.findOne({ name });
   }
 
   create(dto: MoviesDto) {

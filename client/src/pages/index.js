@@ -7,19 +7,24 @@ import Header from "@/components/home/header";
 import Footer from "@/components/home/footer";
 import Movies from "@/components/home/movies";
 import Series from "@/components/home/series";
+import Animated from "@/components/others/animated";
 
 export default function Home() {
-  useEffect(() => { Aos.init({ duration: 500 }) })
+
+  useEffect(() => {
+    Aos.init({ duration: 500 })
+    document.querySelector("main").style.backgroundImage = `url("/spider/back.webp")`
+  })
 
   return (
     <Root page="home">
       <Header />
-      <main>
+      <Animated>
         <Hero />
-        <div id="imageshadow"></div>
+        <div id="imageshadow" />
         <Movies />
         {/* <Series /> */}
-      </main>
+      </Animated>
       <Footer />
     </Root>
   );

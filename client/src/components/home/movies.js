@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import Link from "next/link"
 
 export default function Movies() {
 
   const { data: movies, isLoading, isError, isSuccess, error, refetch } = useQuery({
     queryKey: ['allUsers'],
-    queryFn: () => axios.get(`http://localhost:8080/api/movies`).then(({ data }) => data)
+    queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies`).then(({ data }) => data)
   })
 
   return (
@@ -18,19 +19,25 @@ export default function Movies() {
           </div>
           <div className="movies">
             {isSuccess && movies.map((item, index) => (
-              <div key={index} className="card" style={{ backgroundImage: `url(${item.image.poster})` }}>
-                <div className="shadow"></div>
+              <Link
+                style={{ backgroundImage: `url(${item.image.poster})` }}
+                href={`/movie/${item.module}/${item.name}`}
+                className="card"
+                key={item._id}
+              >
+                <div className="shadow" />
                 <div className="title">
-                  <h3>{item.title.uz}</h3>
+                  <span className="resolution">{item.resolution}p</span>
+                  <span className="format">{item.format}</span>
+                  <h3>{item.title.en}</h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           <div className="right">
 
           </div>
         </div>
-        {/* <img src={movies[0].image.poster} alt="" /> */}
       </div>
     </section>
   )

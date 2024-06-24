@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Anton");
 
 @tailwind base;
 @tailwind components;
@@ -14,15 +15,15 @@
   --viewer-color: #1d1d1d;
 }
 
-[data-theme="light"]:root {
-  --main-color: #ff0000;
-  --main-click-color: #ff3822;
-  --text-color: #0d0d0d;
-  --medium-color: #0d0d0da3;
+// [data-theme="light"]:root {
+//   --main-color: #ff0000;
+//   --main-click-color: #ff3822;
+//   --text-color: #0d0d0d;
+//   --medium-color: #0d0d0da3;
 
-  --background-color: #ffffff;
-  --viewer-color: #f3f3f3;
-}
+//   --background-color: #ffffff;
+//   --viewer-color: #f3f3f3;
+// }
 
 * {
   margin: 0;
@@ -75,20 +76,45 @@ body {
 #__next {
   max-width: 100vw;
   min-height: 100vh;
-  background: var(--background-color);
-  color: var(--text-color);
-  background-image: url("/back.webp");
-  background-repeat: no-repeat;
-  background-position: center 0;
-  background-size: contain;
-  overflow-y: auto;
 }
 
 #home {
+  // Home
   @import "./home/others.scss";
   @import "./home/header.scss";
   @import "./home/hero.scss";
   @import "./home/movies.scss";
   @import "./home/series.scss";
   @import "./home/footer.scss";
+
+  // Movie
+  @import "./movie/watch.scss";
+  @import "./movie/movie.scss";
+
+  main {
+    min-height: 132vh;
+    background-image: url("/spider/back.webp");
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: contain;
+  }
+}
+
+#loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  @import "./loading/style.scss";
+}
+
+#error {
+  height: 100svh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+
+  @import "./home/others.scss";
+  @import "./home/header.scss";
+  @import "./error/style.scss";
 }

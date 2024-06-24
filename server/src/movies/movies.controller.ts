@@ -25,9 +25,9 @@ export class MoviesController {
   }
 
   @HttpCode(200)
-  @Get(':id')
-  async findById(@Param('id') id: string) {
-    return this.moviesService.findById(+id);
+  @Get(':name')
+  async findByName(@Param('name') name: string) {
+    return this.moviesService.findByName(name);
   }
 
   @HttpCode(201)

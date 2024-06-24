@@ -1,0 +1,38 @@
+.loader {
+    &_text {
+      margin: 5px auto;
+      color: var(--main-click-color);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: Anton, Montserrat, sans-serif;
+    }
+    &_filmstrip {
+      position: relative;
+      width: 56px;
+      height: 70px;
+      background: var(--main-click-color);
+
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        height: 120%;
+        border-left: 5px dashed var(--background-color);
+        animation: roll 20ms infinite;
+      }
+      &:before {
+        left: 5px;
+      }
+      &:after {
+        right: 5px;
+      }
+    }
+  }
+  @keyframes roll {
+    0% {
+      top: 0px;
+    }
+    100% {
+      top: -15px;
+    }
+  }

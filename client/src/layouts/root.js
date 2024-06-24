@@ -1,3 +1,4 @@
+import Animated from '@/components/others/animated'
 import Head from 'next/head'
 
 export default function Root({ children, page, title }) {
