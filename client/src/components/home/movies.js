@@ -15,7 +15,7 @@ export default function Movies() {
         <h2>Movies</h2>
         <div className="wrapper">
           <div className="left">
-            
+
           </div>
           <div className="movies">
             {isSuccess ? movies.map((item, index) => (
@@ -27,7 +27,7 @@ export default function Movies() {
               >
                 <div className="shadow" />
                 <div className="title">
-                  <span className="resolution">{item.resolution}p</span>
+                  <span className="resolution">{item.resolution}</span>
                   <span className="format">{item.format}</span>
                   <h3>{item.title.en}</h3>
                 </div>
@@ -35,39 +35,45 @@ export default function Movies() {
             )) : <>
               <div className="card skeleton" >
                 <div className="title">
-                  <span className="resolution"></span>
-                  <span className="format"></span>
-                  <h3></h3>
+                  <div className="resolution" />
+                  <div className="format" />
+                  <div className="text" />
                 </div>
               </div><div className="card skeleton" >
                 <div className="title">
-                  <span className="resolution"></span>
-                  <span className="format"></span>
-                  <h3></h3>
+                  <div className="resolution" />
+                  <div className="format" />
+                  <div className="text" />
                 </div>
               </div><div className="card skeleton" >
                 <div className="title">
-                  <span className="resolution"></span>
-                  <span className="format"></span>
-                  <h3></h3>
+                  <div className="resolution" />
+                  <div className="format" />
+                  <div className="text" />
                 </div>
               </div><div className="card skeleton" >
                 <div className="title">
-                  <span className="resolution"></span>
-                  <span className="format"></span>
-                  <h3></h3>
+                  <div className="resolution" />
+                  <div className="format" />
+                  <div className="text" />
                 </div>
               </div><div className="card skeleton" >
                 <div className="title">
-                  <span className="resolution"></span>
-                  <span className="format"></span>
-                  <h3></h3>
+                  <div className="resolution" />
+                  <div className="format" />
+                  <div className="text" />
                 </div>
               </div><div className="card skeleton" >
                 <div className="title">
-                  <span className="resolution"></span>
-                  <span className="format"></span>
-                  <h3></h3>
+                  <div className="resolution" />
+                  <div className="format" />
+                  <div className="text" />
+                </div>
+              </div><div className="card skeleton" >
+                <div className="title">
+                  <div className="resolution" />
+                  <div className="format" />
+                  <div className="text" />
                 </div>
               </div>
             </>}

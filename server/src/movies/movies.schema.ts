@@ -18,7 +18,7 @@ export class Movies {
   @Prop({ required: true })
   description: LangDto;
 
-  @Prop([{ required: true }])
+  @Prop({ required: true })
   source: FilmDto[];
 
   @Prop({ required: true })
@@ -57,10 +57,10 @@ export class Movies {
   @Prop({ required: true })
   certificate: string;
 
-  @Prop([{ required: true }])
+  @Prop({ required: true })
   genre: string[];
 
-  @Prop([{ required: true }])
+  @Prop({ required: true })
   languages: string[];
 
   @Prop({ required: true })
@@ -69,16 +69,16 @@ export class Movies {
   @Prop({ required: true })
   admitted: number;
 
-  @Prop([{ required: true }])
+  @Prop({ required: true })
   cast: string[];
 
-  @Prop([{ required: true }])
+  @Prop({ required: true })
   directors: string[];
 
-  @Prop([{ required: true }])
+  @Prop({ required: true })
   producers: string[];
 
-  @Prop([{ required: true }])
+  @Prop({ required: true })
   screenwriters: string[];
 }
 

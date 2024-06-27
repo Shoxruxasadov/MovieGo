@@ -100,17 +100,21 @@
           }
         }
 
-        &.skeleton{
+        &.skeleton {
           background: #333;
 
-          span{
-            background: #444!important;
-            box-shadow: none!important;
+          .resolution,
+          .format {
+            background: #444 !important;
+            box-shadow: none !important;
             width: 80px;
             height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
 
-          h3{
+          .text {
             background: #444;
             width: 100px;
             height: 20px;

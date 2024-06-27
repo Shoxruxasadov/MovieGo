@@ -4,10 +4,12 @@
 
   .container {
     .plyr {
-        border-radius: 8px;
-        width: 1280px;
-        height: 720px;
-        
+      border-radius: 8px;
+      max-width: 800px;
+      height: 30vw;
+      max-height: 450px;
+      margin: 100px 0;
+
       .plyr__controls__item * {
         cursor: pointer;
       }

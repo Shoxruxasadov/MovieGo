@@ -23,12 +23,10 @@ export default function Player({ movie }) {
                     source={{
                         type: "video",
                         poster: movie.image.preview,
-                        sources: [
-                            {
-                                src: movie.source[0].film,
-                                size: movie.source[0].size
-                            }
-                        ],
+                        sources: movie.source.map((item)=>({
+                            src: item.film,
+                            size: item.size
+                        })),
                     }}
 
                 />
