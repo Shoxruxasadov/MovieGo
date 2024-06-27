@@ -1,6 +1,7 @@
 import { IsNotEmpty } from "class-validator";
 import { LangDto } from "./lang.dto";
 import { ImageDto } from "./image.dto";
+import { FilmDto } from "./film.dto";
 
 export class MoviesDto {
     @IsNotEmpty()
@@ -13,7 +14,7 @@ export class MoviesDto {
     description: LangDto;
 
     @IsNotEmpty()
-    source: string;
+    source: FilmDto[];
 
     @IsNotEmpty()
     type: string;
@@ -43,7 +44,7 @@ export class MoviesDto {
     format: string;
 
     @IsNotEmpty()
-    resolution: number;
+    resolution: string;
 
     @IsNotEmpty()
     duration: number;

@@ -5,6 +5,9 @@
   .container {
     .plyr {
         border-radius: 8px;
+        width: 1280px;
+        height: 720px;
+        
       .plyr__controls__item * {
         cursor: pointer;
       }

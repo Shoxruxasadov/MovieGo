@@ -1,8 +1,6 @@
 import Plyr from "plyr-react";
 
 export default function Player({ movie }) {
-    console.log(movie);
-
     return (
         <section id="player">
             <div className="container">
@@ -10,8 +8,8 @@ export default function Player({ movie }) {
                     options={{
                         controls: [
                             "play-large",
-                            "play",
                             "rewind",
+                            "play",
                             "fast-forward",
                             "progress",
                             "current-time",
@@ -19,22 +17,20 @@ export default function Player({ movie }) {
                             "volume",
                             "captions",
                             "settings",
-                            // "pip",
-                            "fullscreen"
+                            "fullscreen",
                         ],
-                        captions: { active: true, language: "auto", update: true },
-                        previewThumbnails: { enabled: false, src: "" }
                     }}
                     source={{
                         type: "video",
+                        poster: movie.image.preview,
                         sources: [
                             {
-                                src: movie.source,
-                                type: "video/mp4",
-                                size: movie.resolution
+                                src: movie.source[0].film,
+                                size: movie.source[0].size
                             }
                         ],
                     }}
+
                 />
             </div>
         </section>

@@ -15,10 +15,10 @@ export default function Movies() {
         <h2>Movies</h2>
         <div className="wrapper">
           <div className="left">
-
+            
           </div>
           <div className="movies">
-            {isSuccess && movies.map((item, index) => (
+            {isSuccess ? movies.map((item, index) => (
               <Link
                 style={{ backgroundImage: `url(${item.image.poster})` }}
                 href={`/movie/${item.module}/${item.name}`}
@@ -32,8 +32,47 @@ export default function Movies() {
                   <h3>{item.title.en}</h3>
                 </div>
               </Link>
-            ))}
+            )) : <>
+              <div className="card skeleton" >
+                <div className="title">
+                  <span className="resolution"></span>
+                  <span className="format"></span>
+                  <h3></h3>
+                </div>
+              </div><div className="card skeleton" >
+                <div className="title">
+                  <span className="resolution"></span>
+                  <span className="format"></span>
+                  <h3></h3>
+                </div>
+              </div><div className="card skeleton" >
+                <div className="title">
+                  <span className="resolution"></span>
+                  <span className="format"></span>
+                  <h3></h3>
+                </div>
+              </div><div className="card skeleton" >
+                <div className="title">
+                  <span className="resolution"></span>
+                  <span className="format"></span>
+                  <h3></h3>
+                </div>
+              </div><div className="card skeleton" >
+                <div className="title">
+                  <span className="resolution"></span>
+                  <span className="format"></span>
+                  <h3></h3>
+                </div>
+              </div><div className="card skeleton" >
+                <div className="title">
+                  <span className="resolution"></span>
+                  <span className="format"></span>
+                  <h3></h3>
+                </div>
+              </div>
+            </>}
           </div>
+
           <div className="right">
 
           </div>

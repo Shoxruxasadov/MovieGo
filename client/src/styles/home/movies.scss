@@ -44,7 +44,7 @@
           transform: scale(1.02);
 
           .title h3 {
-            margin-bottom: 4px;
+            transform: translateY(-4px);
           }
         }
 
@@ -97,6 +97,24 @@
           h3 {
             transition: 0.2s;
             text-align: center;
+          }
+        }
+
+        &.skeleton{
+          background: #333;
+
+          span{
+            background: #444!important;
+            box-shadow: none!important;
+            width: 80px;
+            height: 30px;
+          }
+
+          h3{
+            background: #444;
+            width: 100px;
+            height: 20px;
+            border-radius: 8px;
           }
         }
       }

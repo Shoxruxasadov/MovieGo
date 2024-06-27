@@ -14,18 +14,18 @@ import ErrorPage from "@/pages/404"
 export default function AppMovie() {
   const pathname = usePathname()
 
-  const { data: movie, isLoading, isError, isSuccess, isFetching, refetch } = useQuery({
+  const { data: movie, isError, isSuccess, isFetching, refetch } = useQuery({
     queryKey: ['movie'],
     queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies/${pathname.split('/')[3]}`).then(({ data }) => data)
   })
 
   useEffect(() => {
-    if (movie && !isFetching) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
+    if (isSuccess) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
     else document.querySelector("main").style.backgroundImage = `none`
   }, [isFetching])
 
   if (isFetching) return <Loading />
-  if (!movie) return <ErrorPage />
+  if (isError || !movie) return <ErrorPage />
   if (isSuccess) return (
     <Root page="movie" title={movie.title.en}>
       <Header />

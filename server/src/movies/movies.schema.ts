@@ -3,6 +3,7 @@ import { HydratedDocument } from 'mongoose';
 import { Document, Types, Schema as MongooseSchema } from 'mongoose';
 import { LangDto } from './dto/lang.dto';
 import { ImageDto } from './dto/image.dto';
+import { FilmDto } from './dto/film.dto';
 
 export type MoviesDocument = HydratedDocument<Movies>;
 
@@ -17,8 +18,8 @@ export class Movies {
   @Prop({ required: true })
   description: LangDto;
 
-  @Prop({ required: true })
-  source: string;
+  @Prop([{ required: true }])
+  source: FilmDto[];
 
   @Prop({ required: true })
   type: string;
@@ -48,7 +49,7 @@ export class Movies {
   format: string;
 
   @Prop({ required: true })
-  resolution: number;
+  resolution: string;
 
   @Prop({ required: true })
   duration: number;
@@ -56,10 +57,10 @@ export class Movies {
   @Prop({ required: true })
   certificate: string;
 
-  @Prop({ required: true })
+  @Prop([{ required: true }])
   genre: string[];
 
-  @Prop({ required: true })
+  @Prop([{ required: true }])
   languages: string[];
 
   @Prop({ required: true })
@@ -68,16 +69,16 @@ export class Movies {
   @Prop({ required: true })
   admitted: number;
 
-  @Prop({ required: true })
+  @Prop([{ required: true }])
   cast: string[];
 
-  @Prop({ required: true })
+  @Prop([{ required: true }])
   directors: string[];
 
-  @Prop({ required: true })
+  @Prop([{ required: true }])
   producers: string[];
 
-  @Prop({ required: true })
+  @Prop([{ required: true }])
   screenwriters: string[];
 }
 
