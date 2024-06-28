@@ -3,11 +3,63 @@
   z-index: 1;
 
   .container {
-    .plyr {
-      border-radius: 12px;
-      margin: 100px 0;
+    .title {
+      margin: 16px 0;
 
-      .plyr__controls__item * {
+      .description {
+        margin-bottom: 32px;
+        color: var(--text-color);
+        opacity: 80%;
+      }
+
+      .casts {
+        h2 {
+          color: var(--text-color);
+          font-size: 28px;
+          font-weight: 500;
+          line-height: 26px;
+          letter-spacing: 0.12px;
+          margin-bottom: 20px;
+        }
+
+        .scrolling {
+          display: flex;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+
+          .wrapper {
+            display: flex;
+            gap: 24px;
+
+            .cast {
+              width: max-content;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+
+              img {
+                width: 60px;
+                border-radius: 50%;
+              }
+
+              h3 {
+                white-space: nowrap;
+              }
+
+              p {
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .player {
+      border-radius: 12px;
+      margin: 60px 0;
+
+      .plyr .plyr__controls__item * {
         cursor: pointer;
       }
     }

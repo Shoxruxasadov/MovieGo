@@ -20,7 +20,7 @@ export default function AppMovie() {
   })
 
   useEffect(() => {
-    if (isSuccess) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
+    if (!isFetching && isSuccess) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
     else document.querySelector("main").style.backgroundImage = `none`
   }, [isFetching])
 
