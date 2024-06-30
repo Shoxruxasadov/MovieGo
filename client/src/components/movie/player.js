@@ -1,7 +1,6 @@
 import Plyr from "plyr-react";
 
 export default function Player({ movie }) {
-    console.log(movie);
     return (
         <section id="player">
             <div className="container">
@@ -12,7 +11,7 @@ export default function Player({ movie }) {
                         <div className="scrolling">
                             <div className="wrapper">
                                 {movie.cast.map((item, i) => (
-                                    <div className="cast">
+                                    <div className="cast" key={i}>
                                         <img src="https://lorenzon.uz/_next/image?url=%2Flanding%2Fteam%2Ftom.webp&w=128&q=75" alt="avatar" />
                                         <div>
                                             <h3>{item}</h3>
