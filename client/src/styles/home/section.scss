@@ -76,16 +76,16 @@
     }
   }
 
-  .wrapper-movie, .wrapper-serie, .wrapper-module {
+  .wrapper {
     height: 100%;
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 12px 48px;
 
-    .movies,
-    .series,
-    .modules {
+    .movie,
+    .serie,
+    .module {
       display: flex;
       gap: 12px;
 
