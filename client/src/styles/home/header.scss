@@ -5,87 +5,83 @@ header {
   z-index: 10;
   top: 0;
   transition: 0.2s;
+  padding: 0 48px;
 
-  .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  .logo {
+    width: 110px;
+    height: 70%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    cursor: pointer;
 
-    .left,
-    .manage {
+    img {
+      width: auto;
       height: 100%;
-      display: flex;
-      align-items: center;
-      gap: 48px;
+      cursor: pointer;
     }
 
-    .left {
-      .logo {
-        height: 70%;
-        display: flex;
-        align-items: center;
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--main-click-color);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+  }
+
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    li {
+      &,
+      * {
         cursor: pointer;
-
-        img {
-          width: auto;
-          height: 100%;
-          cursor: pointer;
-        }
-
-        h1 {
-          font-size: 24px;
-          font-weight: 700;
-          color: var(--main-click-color);
-          cursor: pointer;
-          transition: 0.2s;
-        }
       }
 
-      nav ul {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-
-        li a {
-          cursor: pointer;
+      &.search{
+        svg{
+          font-size: 18px;
         }
       }
     }
+  }
 
-    .manage {
-      gap: 24px;
+  // .search {
+  //   input {
+  //     width: 280px;
+  //     border-radius: 40px;
+  //     border: 1px solid #ffffff40;
+  //     background: #0000001a;
+  //     transition: 0.2s;
+  //     padding: 8px 20px;
+  //     font-size: 14px;
+  //     cursor: text;
+  //   }
+  // }
 
-      .search {
-        input {
-          width: 280px;
-          border-radius: 40px;
-          border: 1px solid #ffffff40;
-          background: #0000001a;
-          transition: 0.2s;
-          padding: 8px 20px;
-          font-size: 14px;
-          cursor: text;
-        }
-      }
+  .account {
+    button {
+      width: 110px;
+      border: 1px solid #ffffff40;
+      background: #0000001a;
+      transition: 0.2s;
+      color: #fff;
+      padding: 8px 24px;
+      border-radius: 10em;
+      font-weight: 400;
+      white-space: nowrap;
+      transition: 0.2s ease;
 
-      .account {
-        button {
-          width: 100px;
-          border: 1px solid #ffffff40;
-          background: #0000001a;
-          transition: 0.2s;
-          color: #fff;
-          padding: 8px 24px;
-          border-radius: 10em;
-          font-weight: 400;
-          white-space: nowrap;
-          transition: 0.2s ease;
-
-          &:hover {
-            background: var(--main-color);
-            border-color: var(--main-color);
-          }
-        }
+      &:hover {
+        background: var(--main-color);
+        border-color: var(--main-color);
       }
     }
   }
@@ -95,22 +91,12 @@ header {
     backdrop-filter: blur(15px);
     height: 70px;
 
-    .container {
-      .left {
-        .logo h1 {
-          font-size: 22px;
-        }
-      }
+    .logo h1 {
+      font-size: 22px;
+    }
 
-      .manage {
-        .search input {
-          padding: 6px 20px;
-        }
-
-        .account button {
-            padding: 6px 24px;
-        }
-      }
+    .account button {
+      padding: 6px 24px;
     }
   }
 }

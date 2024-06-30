@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IoSearch } from "react-icons/io5";
 
 export default function Header() {
   const [isScrolled, setScrolled] = useState(false);
@@ -27,49 +28,45 @@ export default function Header() {
 
   return (
     <header className={isScrolled ? 'active' : ''}>
-      <div className="container">
-        <div className="left">
-          {pathname == '/' ? <Scroll
-            className="logo"
-            duration={500}
-            smooth={true}
-            spy={true}
-            offset={0}
-            to='home'
-          >
-            <Image src='/logo/logo.png' width={256} height={256} alt="MovieGo" />
-            <h1>MovieGo</h1>
-          </Scroll> : <Link href="/" className="logo">
-            <Image src='/logo/logo.png' width={256} height={256} alt="MovieGo" />
-            <h1>MovieGo</h1>
-          </Link>}
-          {pathname == '/' && <nav>
-            <ul>
-              {list.map((section, i) => (
-                <li key={i}>
-                  <Scroll
-                    activeClass="active"
-                    to={section.link}
-                    spy={true}
-                    smooth={true}
-                    offset={section.position}
-                    duration={500}
-                  >
-                    {section.name}
-                  </Scroll>
-                </li>
-              ))}
-            </ul>
-          </nav>}
-        </div>
-        <div className="manage">
-          <div className="search">
-            <input type="text" placeholder="Search Movies, Series..." />
-          </div>
-          <div className="account">
-            <button>Log In</button>
-          </div>
-        </div>
+      {pathname == '/' ? <Scroll
+        className="logo"
+        duration={500}
+        smooth={true}
+        spy={true}
+        offset={0}
+        to='home'
+      >
+        <Image src='/logo/logo.png' width={256} height={256} alt="MovieGo" />
+        <h1>MovieGo</h1>
+      </Scroll> : <Link href="/" className="logo">
+        <Image src='/logo/logo.png' width={256} height={256} alt="MovieGo" />
+        <h1>MovieGo</h1>
+      </Link>}
+
+      {pathname == '/' && <nav>
+        <ul>
+          {list.map((section, i) => (
+            <li key={i}>
+              <Scroll
+                activeClass="active"
+                to={section.link}
+                spy={true}
+                smooth={true}
+                offset={section.position}
+                duration={500}
+              >
+                {section.name}
+              </Scroll>
+            </li>
+          ))}
+          <li className="search">
+            <Link href='/search'><IoSearch /></Link>
+          </li>
+        </ul>
+      </nav>}
+
+      <div className="account">
+        <button>Log In</button>
       </div>
     </header>
   )

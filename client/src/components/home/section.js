@@ -4,7 +4,6 @@ import Link from "next/link"
 import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-
 export default function Section({ type, title, route, name }) {
     const [isScrolled, setScrolled] = useState(false)
     
