@@ -4,7 +4,7 @@
 
   .container {
     .title {
-      margin: 16px 0;
+      margin: 6px 0 24px;
 
       .description {
         margin-bottom: 32px;
@@ -56,11 +56,14 @@
     }
 
     .player {
-      border-radius: 12px;
       margin: 60px 0;
 
-      .plyr .plyr__controls__item * {
-        cursor: pointer;
+      .plyr {
+        border-radius: 12px;
+
+        .plyr__controls__item * {
+          cursor: pointer;
+        }
       }
     }
   }

@@ -1,11 +1,12 @@
 #hero {
-  min-height: 100svh;
+  height: 100svh;
+  max-height: 1030px;
   padding-top: 80px;
   position: relative;
   z-index: 1;
 
   .container {
-    min-height: 90svh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

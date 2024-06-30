@@ -10,23 +10,23 @@ export class MoviesService {
     @InjectModel(Movies.name) private moviesModel: Model<MoviesDocument>,
   ) {}
 
-  findAll() {
-    return this.moviesModel.find();
+  async findByType(type: string) {
+    return this.moviesModel.find({ type: type });
   }
 
-  findByName(name: string) {
+  async findByName(name: string) {
     return this.moviesModel.findOne({ name });
   }
 
-  create(dto: MoviesDto) {
+  async create(dto: MoviesDto) {
     this.moviesModel.create(dto);
   }
 
-  update(id: number, dto: MoviesDto) {
+  async update(id: number, dto: MoviesDto) {
     this.moviesModel.findByIdAndUpdate(id, dto, { new: true });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     this.moviesModel.findByIdAndDelete(id);
   }
 }

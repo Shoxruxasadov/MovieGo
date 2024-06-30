@@ -31,8 +31,8 @@ export default function AppMovie() {
       <Header />
       <Animated>
         <Watch movie={movie} />
-        <div id="imageshadow" />
         <Player movie={movie} />
+        <div id="shadow" />
       </Animated>
       <Footer />
     </Root>

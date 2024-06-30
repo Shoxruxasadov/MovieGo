@@ -1,5 +1,7 @@
-#movies {
-  min-height: 100vh;
+#movies,
+#series,
+#modules {
+  min-height: 485px;
   margin-bottom: 40px;
   position: relative;
   z-index: 1;
@@ -8,22 +10,88 @@
     color: #fff;
     font-size: 24px;
     font-weight: 500;
-    padding: 0 4px;
+    padding: 0 48px;
   }
 
-  .wrapper {
+  &:hover{
+    .left{
+      visibility: visible;
+      opacity: 1;
+    }
+    .right{
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .left {
+    width: 100px;
+    height: calc(100% - 60px);
+    background: linear-gradient(to left, transparent, #0d0d0dc4);
+    position: absolute;
+    top: 48px;
+    left: 0;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    transition: 0.2s;
+    opacity: 0;
+
+    &, *{
+      cursor: pointer;
+    }
+
+    svg{
+      font-size: 32px;
+      opacity: 75%;
+    }
+  }
+
+  .right {
+    width: 100px;
+    height: calc(100% - 60px);
+    background: linear-gradient(to right, transparent, #0d0d0dc4);
+    position: absolute;
+    top: 48px;
+    right: 0;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    transition: 0.2s;
+    opacity: 0;
+
+    &, *{
+      cursor: pointer;
+    }
+
+    svg{
+      font-size: 32px;
+      opacity: 75%;
+    }
+  }
+
+  .wrapper-movie, .wrapper-serie, .wrapper-module {
+    height: 100%;
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding: 12px 4px;
+    padding: 12px 48px;
 
-    .movies {
+    .movies,
+    .series,
+    .modules {
       display: flex;
       gap: 12px;
 
       .card {
-        width: 275px;
-        height: 400px;
+        width: 288px;
+        height: 425px;
         border: 1px solid #222;
         border-radius: 6px;
         overflow: hidden;

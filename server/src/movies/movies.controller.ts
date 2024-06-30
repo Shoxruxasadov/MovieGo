@@ -10,6 +10,7 @@ import {
   HttpCode,
   ValidationPipe,
   UsePipes,
+  Headers,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { MoviesDto } from './dto/movies.dto';
@@ -20,8 +21,8 @@ export class MoviesController {
 
   @HttpCode(200)
   @Get()
-  async findAll() {
-    return this.moviesService.findAll();
+  async findByType(@Headers('type') type: string) {
+    return this.moviesService.findByType(type);
   }
 
   @HttpCode(200)
