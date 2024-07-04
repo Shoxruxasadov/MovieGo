@@ -23,7 +23,7 @@ export default function Player({ movie }) {
                         </div>
                     </div>
                 </div>
-                <div className="player">
+                <div className="player" id="plyr">
                     <Plyr
                         options={{
                             controls: [

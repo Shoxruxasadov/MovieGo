@@ -2,6 +2,11 @@
   position: relative;
   z-index: 1;
 
+  .container{
+    padding: 0 48px!important;
+    max-width: none!important;
+  }
+
   .container {
     .title {
       margin: 6px 0 24px;
