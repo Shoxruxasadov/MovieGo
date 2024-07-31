@@ -7,7 +7,7 @@
   z-index: 1;
 
   @media (max-width: 1024px) and (max-height: 576px) {
-    min-height: 400px;
+    min-height: 360px;
   }
 
   h2 {
@@ -130,8 +130,8 @@
         transition: 0.2s;
 
         @media (max-width: 1024px) and (max-height: 576px) {
-          width: 230px;
-          height: 340px;
+          width: 200px;
+          height: 300px;
         }
 
         &,
