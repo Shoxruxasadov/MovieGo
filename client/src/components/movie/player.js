@@ -69,7 +69,7 @@ export default function Player({ movie }) {
                         </div>
                         <div className="card release">
                             <p>Other </p>
-                            <p><span>{movie.made}</span> <span>{movie.admitted}+</span></p>
+                            <p><span className="made">{movie.made}</span> <span className="admitted">{movie.admitted}+</span></p>
                         </div>
                     </div>
                 </div>

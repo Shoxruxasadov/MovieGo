@@ -17,7 +17,7 @@
         opacity: 80%;
 
         @media (max-width: 900px) and (max-height: 600px) {
-          font-size: 14px;
+          font-size: 13px;
         }
       }
 
@@ -102,14 +102,31 @@
 
       .credits {
         width: 25%;
+        margin-top: 2px;
 
         .card {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          margin-bottom: 8px;
 
           @media (max-width: 900px) and (max-height: 600px) {
             font-size: 12px;
+          }
+
+          .admitted {
+            font-size: 14px;
+            padding: 0 8px 0 10px;
+            border: solid 1px #fff9;
+            border-radius: 6px;
+            margin-left: 4px;
+
+            @media (max-width: 900px) and (max-height: 600px) {
+              font-size: 11px;
+              padding: 0 6px 0 8px;
+              border-radius: 5px;
+              margin-left: 3px;
+            }
           }
         }
       }
