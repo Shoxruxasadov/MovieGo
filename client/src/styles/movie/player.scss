@@ -16,7 +16,7 @@
         color: var(--text-color);
         opacity: 80%;
 
-        @media (max-width: 900px) and (max-height: 600px) {
+        @media (max-width: 1024px) and (max-height: 576px) {
           font-size: 13px;
         }
       }
@@ -30,7 +30,7 @@
           letter-spacing: 0.12px;
           margin-bottom: 20px;
 
-          @media (max-width: 900px) and (max-height: 600px) {
+          @media (max-width: 1024px) and (max-height: 576px) {
             font-size: 20px;
           }
         }
@@ -63,7 +63,7 @@
                 white-space: nowrap;
               }
 
-              @media (max-width: 900px) and (max-height: 600px) {
+              @media (max-width: 1024px) and (max-height: 576px) {
                 img {
                   width: 40px;
                 }
@@ -87,7 +87,7 @@
       display: flex;
       gap: 24px;
 
-      @media (max-width: 900px) and (max-height: 600px) {
+      @media (max-width: 1024px) and (max-height: 576px) {
         margin: 40px 0;
       }
 
@@ -110,7 +110,7 @@
           justify-content: space-between;
           margin-bottom: 8px;
 
-          @media (max-width: 900px) and (max-height: 600px) {
+          @media (max-width: 1024px) and (max-height: 576px) {
             font-size: 12px;
           }
 
@@ -121,7 +121,7 @@
             border-radius: 6px;
             margin-left: 4px;
 
-            @media (max-width: 900px) and (max-height: 600px) {
+            @media (max-width: 1024px) and (max-height: 576px) {
               font-size: 11px;
               padding: 0 6px 0 8px;
               border-radius: 5px;

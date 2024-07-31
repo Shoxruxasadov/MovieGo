@@ -6,7 +6,7 @@ footer {
     border-color: rgba(255, 255, 255, 0.12);
     margin-bottom: 32px;
 
-    @media (max-width: 900px) and (max-height: 600px) {
+    @media (max-width: 1024px) and (max-height: 576px) {
       margin-bottom: 24px;
     }
   }
@@ -21,7 +21,7 @@ footer {
       text-align: center;
       color: #cecece;
 
-      @media (max-width: 900px) and (max-height: 600px) {
+      @media (max-width: 1024px) and (max-height: 576px) {
         font-size: 10px;
       }
 
