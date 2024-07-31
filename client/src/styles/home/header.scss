@@ -12,6 +12,10 @@ header {
   justify-content: space-between;
   gap: 24px;
 
+  @media (max-width: 900px) and (max-height: 600px) {
+    height: 60px;
+  }
+
   .logo {
     width: 110px;
     height: 70%;
@@ -23,6 +27,10 @@ header {
       width: auto;
       height: 100%;
       cursor: pointer;
+    }
+
+    @media (max-width: 900px) and (max-height: 600px) {
+      transform: scale(0.8) translateX(-18px);
     }
 
     h1 {
@@ -39,14 +47,18 @@ header {
     align-items: center;
     gap: 32px;
 
+    @media (max-width: 900px) and (max-height: 600px) {
+      transform: scale(0.8);
+    }
+
     li {
       &,
       * {
         cursor: pointer;
       }
 
-      &.search{
-        svg{
+      &.search {
+        svg {
           font-size: 18px;
         }
       }
@@ -67,6 +79,10 @@ header {
   // }
 
   .account {
+    @media (max-width: 900px) and (max-height: 600px) {
+      transform: scale(0.8) translateX(18px);
+    }
+
     button {
       width: 110px;
       border: 1px solid #ffffff40;
@@ -90,6 +106,10 @@ header {
     background: #0d0d0d7d;
     backdrop-filter: blur(15px);
     height: 70px;
+
+    @media (max-width: 900px) and (max-height: 600px) {
+      height: 50px;
+    }
 
     .logo h1 {
       font-size: 22px;

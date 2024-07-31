@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Link from "next/link"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 export default function Section({ type, title, route, name }) {
@@ -10,12 +10,15 @@ export default function Section({ type, title, route, name }) {
         queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/${route}`, { headers: { 'type': type } }).then(({ data }) => data)
     })
 
+    const scrollDemoRef = useRef(null);
+
+
     return (
         <section id={name}>
             <h2>{title}</h2>
-            <div className="left"><FaChevronLeft /></div>
-            <div className="right"><FaChevronRight /></div>
-            <div className='wrapper'>
+            <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= 600 }}><FaChevronLeft /></div>
+            <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += 600 }}><FaChevronRight /></div>
+            <div className='wrapper' ref={scrollDemoRef} style={{scrollBehavior: "smooth"}}>
                 <div className={type}>
                     {isSuccess ? movies.map(item => (
                         <Link

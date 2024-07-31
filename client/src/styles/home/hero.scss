@@ -5,6 +5,10 @@
   position: relative;
   z-index: 1;
 
+  @media (max-width: 900px) and (max-height: 600px) {
+    transform: scale(0.75);
+  }
+
   .container {
     height: 100%;
     display: flex;

@@ -49,6 +49,29 @@ export default function Player({ movie }) {
                             })),
                         }}
                     />
+
+                    <div className="credits">
+                        <div className="card release">
+                            <p>Release </p>
+                            <p>{movie.issue}</p>
+                        </div>
+                        <div className="card release">
+                            <p>MCU Timeline </p>
+                            <p>{movie.event}</p>
+                        </div>
+                        <div className="card release">
+                            <p>Grossing </p>
+                            <p>${movie.income}</p>
+                        </div>
+                        <div className="card release">
+                            <p>Budget </p>
+                            <p>${movie.expense}</p>
+                        </div>
+                        <div className="card release">
+                            <p>Other </p>
+                            <p><span>{movie.made}</span> <span>{movie.admitted}+</span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

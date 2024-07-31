@@ -1,11 +1,14 @@
 footer {
-  .container {
-    padding-bottom: 32px;
-  }
+  padding: 0 48px;
+  padding-bottom: 32px;
 
   hr {
     border-color: rgba(255, 255, 255, 0.12);
     margin-bottom: 32px;
+
+    @media (max-width: 900px) and (max-height: 600px) {
+      margin-bottom: 24px;
+    }
   }
 
   .rights {
@@ -18,7 +21,11 @@ footer {
       text-align: center;
       color: #cecece;
 
-      a:hover{
+      @media (max-width: 900px) and (max-height: 600px) {
+        font-size: 10px;
+      }
+
+      a:hover {
         color: white;
       }
     }
