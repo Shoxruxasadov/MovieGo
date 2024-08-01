@@ -76,7 +76,6 @@
     right: 0;
     z-index: 2;
 
-
     @media (max-width: 1024px) and (max-height: 576px) {
       top: 42px;
     }
@@ -213,7 +212,29 @@
         }
 
         &.skeleton {
-          background: #333;
+          background: linear-gradient(
+              to right,
+              rgba(68, 68, 68, 0) 0%,
+              rgba(68, 68, 68, 0.5) 5%,
+              rgba(68, 68, 68, 0.5) 30%,
+              rgba(68, 68, 68, 0) 100%
+            ),
+            #222;
+          background-repeat: repeat-y;
+          background-size: 72% 100%;
+          background-position: 0 0;
+          animation: shine 2s infinite ease-out;	
+          backdrop-filter: blur(20px);
+
+          @keyframes shine {	
+            5%{
+              background-position: 0 0;
+            }50%{
+              background-position: 100% 0;
+            }95%{
+              background-position: 0 0;
+            }
+          }
 
           .resolution,
           .format {

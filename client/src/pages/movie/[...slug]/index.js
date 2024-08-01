@@ -19,6 +19,8 @@ export default function AppMovie() {
     queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies/${pathname.split('/')[3]}`).then(({ data }) => data)
   })
 
+  console.log(movie);
+
   useEffect(() => {
     if (!isFetching && isSuccess) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
     else document.querySelector("main").style.backgroundImage = `none`
