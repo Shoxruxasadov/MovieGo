@@ -227,6 +227,13 @@
             border: solid 1px #fff9;
             border-radius: 6px;
             margin-left: 6px;
+
+            @media (max-width: 1024px) and (max-height: 576px) {
+              font-size: 11px;
+              padding: 1px 7px 0 7px;
+              border-radius: 5px;
+              margin-left: 5px;
+            }
           }
         }
       }
