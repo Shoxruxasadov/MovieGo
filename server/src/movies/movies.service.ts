@@ -20,13 +20,16 @@ export class MoviesService {
 
   async create(dto: MoviesDto) {
     this.moviesModel.create(dto);
+    return 'success';
   }
 
   async update(id: number, dto: MoviesDto) {
     this.moviesModel.findByIdAndUpdate(id, dto, { new: true });
+    return 'success';
   }
 
   async remove(id: number) {
     this.moviesModel.findByIdAndDelete(id);
+    return 'success';
   }
 }

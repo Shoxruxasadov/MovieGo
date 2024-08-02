@@ -77,6 +77,10 @@ export default function Player({ movie }) {
                             <p>Facturer </p>
                             <p>{movie.manufacturer}</p>
                         </div>
+                        <div className="card certificate">
+                            <p>Certificate </p>
+                            <p>{movie.certificate}</p>
+                        </div>
                         <div className="card time">
                             <p>Time </p>
                             <p>{`${Math.floor(movie.duration / 60)}h ${Math.floor(movie.duration % 60)}m`}</p>
