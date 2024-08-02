@@ -212,33 +212,21 @@
         }
 
         &.skeleton {
-          background: linear-gradient(
-              to right,
-              rgba(68, 68, 68, 0) 0%,
-              rgba(68, 68, 68, 0.5) 5%,
-              rgba(68, 68, 68, 0.5) 30%,
-              rgba(68, 68, 68, 0) 100%
-            ),
-            #222;
+          background: linear-gradient(to right, transparent, #4444444d 50% ,transparent), #222;
           background-repeat: repeat-y;
-          background-size: 72% 100%;
-          background-position: 0 0;
-          animation: shine 2s infinite ease-out;	
-          backdrop-filter: blur(20px);
+          background-size: 70% 100%;
+          background-position: -320% 0;
+          animation: shine 2s infinite ease;
 
-          @keyframes shine {	
-            5%{
-              background-position: 0 0;
-            }50%{
-              background-position: 100% 0;
-            }95%{
-              background-position: 0 0;
+          @keyframes shine {
+            to {
+              background-position: 320% 0;
             }
           }
 
           .resolution,
           .format {
-            background: #444 !important;
+            background: #3c3c3c !important;
             box-shadow: none !important;
             width: 80px;
             height: 30px;
@@ -253,7 +241,7 @@
           }
 
           .text {
-            background: #444;
+            background: #404040 !important;
             width: 100px;
             height: 20px;
             border-radius: 8px;

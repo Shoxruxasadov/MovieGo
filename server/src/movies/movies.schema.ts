@@ -4,6 +4,7 @@ import { Document, Types, Schema as MongooseSchema } from 'mongoose';
 import { LangDto } from './dto/lang.dto';
 import { ImageDto } from './dto/image.dto';
 import { FilmDto } from './dto/film.dto';
+import { CastDto } from './dto/cast.dto';
 
 export type MoviesDocument = HydratedDocument<Movies>;
 
@@ -70,7 +71,7 @@ export class Movies {
   admitted: number;
 
   @Prop({ required: true })
-  cast: string[];
+  cast: CastDto[];
 
   @Prop({ required: true })
   directors: string[];

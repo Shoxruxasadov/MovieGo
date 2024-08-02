@@ -2,6 +2,7 @@ import { IsNotEmpty } from "class-validator";
 import { LangDto } from "./lang.dto";
 import { ImageDto } from "./image.dto";
 import { FilmDto } from "./film.dto";
+import { CastDto } from "./cast.dto";
 
 export class MoviesDto {
     @IsNotEmpty()
@@ -65,7 +66,7 @@ export class MoviesDto {
     admitted: number;
 
     @IsNotEmpty()
-    cast: string[];
+    cast: CastDto[];
     
     @IsNotEmpty()
     directors: string[];

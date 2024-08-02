@@ -73,6 +73,12 @@ export default function Section({ type, title, route, name }) {
                                 <div className="format" />
                                 <div className="text" />
                             </div>
+                        </div><div className="card skeleton" >
+                            <div className="title">
+                                <div className="resolution" />
+                                <div className="format" />
+                                <div className="text" />
+                            </div>
                         </div>
                     </>}
                 </div>
