@@ -92,7 +92,7 @@ export default function Player({ movie }) {
                         <div className="card language">
                             <p>Language </p>
                             <p>{movie.languages.map((item, i) => (
-                                <span>{item}</span>
+                                <span key={i}>{item}</span>
                             ))}</p>
                         </div>
                     </div>
