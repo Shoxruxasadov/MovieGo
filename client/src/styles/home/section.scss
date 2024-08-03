@@ -167,6 +167,10 @@
           position: relative;
           z-index: 1;
 
+          @media (max-width: 1024px) and (max-height: 576px) {
+            padding: 24px;
+          }
+
           .resolution {
             position: absolute;
             top: 24px;
@@ -208,7 +212,7 @@
             text-align: center;
 
             @media (max-width: 1024px) and (max-height: 576px) {
-              font-size: 10px;
+              font-size: 12px;
             }
           }
         }
