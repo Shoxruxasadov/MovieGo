@@ -116,8 +116,8 @@
       gap: 12px;
 
       .card {
-        width: 288px;
-        height: 425px;
+        width: 270px;
+        height: 400px;
         border: 1px solid #222;
         border-radius: 6px;
         overflow: hidden;
@@ -129,8 +129,8 @@
         transition: 0.2s;
 
         @media (max-width: 1024px) and (max-height: 576px) {
-          width: 200px;
-          height: 300px;
+          width: 189px;
+          height: 280px;
         }
 
         &,
