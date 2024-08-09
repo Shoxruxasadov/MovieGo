@@ -11,7 +11,8 @@ export class MoviesService {
   ) {}
 
   async findByType(type: string) {
-    return this.moviesModel.find({ type: type });
+    const movies = await this.moviesModel.find({ type: type })
+    return movies.reverse()
   }
 
   async findByName(name: string) {
