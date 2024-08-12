@@ -137,6 +137,7 @@ body {
 }
 
 #sign {
+  overflow: hidden;
   @import "./sign/login.scss";
 
   main {
