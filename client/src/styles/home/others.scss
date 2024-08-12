@@ -3,6 +3,10 @@
   padding: 0 16px;
   margin: 0 auto;
   height: 100%;
+
+  @media (max-width: 440px) {
+    padding: 0 8px;
+  }
 }
 
 #shadow {
@@ -12,4 +16,18 @@
   width: 100%;
   height: 66.6666vw;
   background: linear-gradient(#0000005e 30%, var(--background-color) 92%);
+
+
+  @media (max-width: 1024px) {
+    height: 100vw;
+  }
+  
+  @media (max-width: 1024px) and (min-height: 576px) {
+    height: 66.6666vw;
+  }
+
+  @media (max-width: 440px) {
+    height: 270vw;
+  }
+
 }

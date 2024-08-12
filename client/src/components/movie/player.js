@@ -239,10 +239,10 @@ export default function Player({ movie }) {
           />
 
           {/* <div className="need">
-            <p>You need to register or login to watch movies</p>
+            <p>You need to sign up or log in to watch movies</p>
             <div className="sign">
-              <Link href="/register">Registration</Link>
-              <Link href="/login">Login</Link>
+              <Link href="/signup">Sign Up</Link>
+              <Link href="/login">Log In</Link>
             </div>
           </div> */}
 

@@ -1,14 +1,9 @@
 #movies,
 #series,
 #modules {
-  min-height: 485px;
   margin-bottom: 40px;
   position: relative;
   z-index: 1;
-
-  @media (max-width: 1024px) and (max-height: 576px) {
-    min-height: 360px;
-  }
 
   h2 {
     color: #fff;
@@ -16,8 +11,12 @@
     font-weight: 500;
     padding: 0 48px;
 
-    @media (max-width: 1024px) and (max-height: 576px) {
+    @media (max-width: 1024px) {
       font-size: 20px;
+    }
+
+    @media (max-width: 440px) {
+      padding: 0 8px;
     }
   }
 
@@ -39,15 +38,21 @@
 
   .left {
     width: 80px;
-    height: calc(100% - 64px);
+    height: calc(100% - 44px);
     background: linear-gradient(to left, transparent, #0d0d0de6);
     position: absolute;
     top: 40px;
     left: 0;
     z-index: 2;
 
+    @media (max-width: 1024px) {
+      display: none;
+    }
+
     @media (max-width: 1024px) and (max-height: 576px) {
-      top: 42px;
+      display: flex;
+      height: calc(100% - 36px);
+      top: 33px;
     }
 
     display: flex;
@@ -67,7 +72,7 @@
       opacity: 80%;
       margin-right: 12px;
 
-      @media (max-width: 1024px) and (max-height: 576px) {
+      @media (max-width: 1024px) {
         font-size: 24px;
       }
     }
@@ -75,15 +80,21 @@
 
   .right {
     width: 80px;
-    height: calc(100% - 64px);
+    height: calc(100% - 44px);
     background: linear-gradient(to right, transparent, #0d0d0de6);
     position: absolute;
     top: 40px;
     right: 0;
     z-index: 2;
 
+    @media (max-width: 1024px) {
+      display: none;
+    }
+
     @media (max-width: 1024px) and (max-height: 576px) {
-      top: 42px;
+     display: flex;
+      height: calc(100% - 36px);
+      top: 33px;
     }
 
     display: flex;
@@ -103,7 +114,7 @@
       opacity: 75%;
       margin-left: 12px;
 
-      @media (max-width: 1024px) and (max-height: 576px) {
+      @media (max-width: 1024px) {
         font-size: 24px;
       }
     }
@@ -116,15 +127,19 @@
     scroll-behavior: smooth;
     padding: 12px 48px;
 
+    @media (max-width: 440px) {
+      padding: 8px;
+    }
+
     .movie,
     .serie,
     .module {
       display: flex;
-      gap: 5px;
+      gap: 6px;
 
       .card {
-        width: 270px;
-        height: 400px;
+        width: 15vw;
+        height: 22.22vw;
         border-radius: 8px;
         overflow: hidden;
         position: relative;
@@ -134,9 +149,30 @@
         background-size: 100.5%;
         transition: 0.2s;
 
+        @media (max-width: 1280px) {
+          width: 18vw;
+          height: 26.66vw;
+        }
+
+        @media (max-width: 1024px) {
+          width: 22.5vw;
+          height: 33.33vw;
+        }
+
+        @media (max-width: 880px) {
+          width: 28vw;
+          height: 41.48vw;
+        }
+
+        // TV TCL
         @media (max-width: 1024px) and (max-height: 576px) {
           width: 189px;
           height: 280px;
+        }
+
+        @media (max-width: 440px) {
+          width: 45vw;
+          height: 66.66vw;
         }
 
         &,
@@ -150,7 +186,6 @@
 
           .title {
             h3 {
-            
             }
 
             h3,
@@ -177,7 +212,8 @@
         .title {
           width: 100%;
           height: 100%;
-          padding: 12px 12px;
+          padding: 12px;
+          padding-bottom: 4px;
 
           display: flex;
           flex-direction: column;
@@ -186,8 +222,14 @@
           position: relative;
           z-index: 1;
 
-          @media (max-width: 1024px) and (max-height: 576px) {
-            padding: 24px;
+          @media (max-width: 1280px) {
+            padding: 10px;
+            padding-bottom: 3px;
+          }
+
+          @media (max-width: 1024px) {
+            padding: 8px;
+            padding-bottom: 2px;
           }
 
           .resolution {
@@ -203,7 +245,12 @@
             font-size: 14px;
             font-weight: 500;
 
-            @media (max-width: 1024px) and (max-height: 576px) {
+            @media (max-width: 1280px) {
+              font-size: 12px;
+              padding: 3.5px 14px 3.5px 18px;
+            }
+
+            @media (max-width: 1024px) {
               font-size: 10px;
               padding: 3px 12px 3px 16px;
             }
@@ -222,7 +269,12 @@
             font-size: 14px;
             font-weight: 500;
 
-            @media (max-width: 1024px) and (max-height: 576px) {
+            @media (max-width: 1280px) {
+              font-size: 12px;
+              padding: 3.5px 18px 3.5px 14px;
+            }
+
+            @media (max-width: 1024px) {
               font-size: 10px;
               padding: 3px 16px 3px 12px;
             }
@@ -236,13 +288,17 @@
             color: springgreen;
             margin-bottom: 2px;
 
-            @media (max-width: 1024px) and (max-height: 576px) {
+            @media (max-width: 1280px) {
+              font-size: 12px;
+            }
+
+            @media (max-width: 1024px) {
               font-size: 10px;
             }
           }
 
           h3 {
-            width: 220px;
+            width: 90%;
             transition: 0.2s;
             text-align: center;
             font-weight: 500;
@@ -251,7 +307,11 @@
             text-overflow: ellipsis;
             overflow: hidden;
 
-            @media (max-width: 1024px) and (max-height: 576px) {
+            @media (max-width: 1280px) {
+              font-size: 14px;
+            }
+
+            @media (max-width: 1024px) {
               font-size: 12px;
             }
           }
@@ -270,15 +330,24 @@
               border: solid 1px #fff9;
               border-radius: 6px;
 
-              @media (max-width: 1024px) and (max-height: 576px) {
+              @media (max-width: 1280px) {
+                font-size: 12px;
+                padding: 0 7px 0 9px;
+                border-radius: 5px;
+              }
+
+              @media (max-width: 1024px) {
                 font-size: 11px;
                 padding: 0 6px 0 8px;
-                border-radius: 5px;
-                margin-left: 3px;
+                border-radius: 4px;
               }
             }
 
-            @media (max-width: 1024px) and (max-height: 576px) {
+            @media (max-width: 1280px) {
+              font-size: 14px;
+            }
+
+            @media (max-width: 1024px) {
               font-size: 12px;
             }
           }
@@ -313,7 +382,12 @@
             align-items: center;
             justify-content: center;
 
-            @media (max-width: 1024px) and (max-height: 576px) {
+            @media (max-width: 1280px) {
+              width: 70px;
+              height: 25px;
+            }
+
+            @media (max-width: 1024px) {
               width: 60px;
               height: 22px;
             }
