@@ -9,19 +9,23 @@ export default function Header() {
   const [isScrolled, setScrolled] = useState(false);
   const pathname = usePathname()
 
-  const list = [
+  const homeList = [
     { name: "Home", link: "home", position: 0 },
     { name: "Movies", link: "movies", position: -100 },
     { name: "Series", link: "series", position: -100 },
     { name: "Modules", link: "modules", position: -100 },
   ]
 
-  const handleScroll = () => {
-    if (window.pageYOffset > 40) setScrolled(true);
-    else setScrolled(false);
-  };
+  const movieList = [
+    { name: "Home", link: "watch", position: 0 },
+    { name: "Watch", link: "player", position: -100 },
+  ]
 
   useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 40) setScrolled(true);
+      else setScrolled(false);
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -43,9 +47,9 @@ export default function Header() {
         <h1>MovieGo</h1>
       </Link>}
 
-      {pathname == '/' && <nav>
+      {pathname == '/' ? <nav>
         <ul>
-          {list.map((section, i) => (
+          {homeList.map((section, i) => (
             <li key={i}>
               <Scroll
                 activeClass="active"
@@ -63,10 +67,30 @@ export default function Header() {
             <Link href='/search'><IoSearch /></Link>
           </li>
         </ul>
-      </nav>}
+      </nav> : pathname.split("/")[1] == 'movie' || pathname.split("/")[1] == "serie" ? <nav>
+        <ul>
+          {movieList.map((section, i) => (
+            <li key={i}>
+              <Scroll
+                activeClass="active"
+                to={section.link}
+                spy={true}
+                smooth={true}
+                offset={section.position}
+                duration={500}
+              >
+                {section.name}
+              </Scroll>
+            </li>
+          ))}
+          <li className="search">
+            <Link href='/search'><IoSearch /></Link>
+          </li>
+        </ul>
+      </nav> : <></>}
 
       <div className="account">
-        <button>Log In</button>
+        {pathname != '/login' && pathname != '/register' && <Link href='/login'>Login</Link>}
       </div>
     </header>
   )

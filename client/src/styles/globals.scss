@@ -6,8 +6,9 @@
 @tailwind utilities;
 
 :root {
-  --main-color: #ff0000;
-  --main-click-color: #ff3822;
+  --main-color: #fa3b3c;
+  --main-color-rgb: 250, 59, 60;
+  --main-click-color: #ff513e;
   --text-color: #f3f3f3;
   --medium-color: #f3f3f3a3;
 
@@ -108,6 +109,31 @@ body {
     background-repeat: no-repeat;
     background-position: center 0;
     background-size: contain;
+  }
+}
+
+#sign {
+  @import "./sign/login.scss";
+
+  main {
+    min-height: 100vh;
+    background-image: url("/sign/bg.png");
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: cover;
+  }
+
+  #shadow {
+    background: rgba($color: var(--main-color-rgb), $alpha: 0.2);
+    border-radius: 100%;
+    filter: blur(9vw);
+    width: 70vw;
+    height: 22vh;
+    position: absolute;
+    top: -15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
   }
 }
 

@@ -38,7 +38,7 @@ export default function ErrorPage() {
                         </Link>
                     </div>
                     <div id="image">
-                        <Image src="/stark.png" width={423} height={577} />
+                        <Image src="/error/stark.png" width={423} height={577} />
                     </div>
                 </motion.div>
             </Animated>

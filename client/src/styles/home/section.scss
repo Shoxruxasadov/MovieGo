@@ -25,6 +25,11 @@
     .left {
       visibility: visible;
       opacity: 1;
+
+      &.close {
+        visibility: hidden;
+        opacity: 0;
+      }
     }
     .right {
       visibility: visible;
@@ -33,11 +38,11 @@
   }
 
   .left {
-    width: 100px;
-    height: calc(100% - 60px);
-    background: linear-gradient(to left, transparent, #0d0d0dc4);
+    width: 80px;
+    height: calc(100% - 64px);
+    background: linear-gradient(to left, transparent, #0d0d0de6);
     position: absolute;
-    top: 48px;
+    top: 40px;
     left: 0;
     z-index: 2;
 
@@ -48,8 +53,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 0.5s;
     visibility: hidden;
-    transition: 0.2s;
     opacity: 0;
 
     &,
@@ -59,7 +64,8 @@
 
     svg {
       font-size: 32px;
-      opacity: 75%;
+      opacity: 80%;
+      margin-right: 12px;
 
       @media (max-width: 1024px) and (max-height: 576px) {
         font-size: 24px;
@@ -68,11 +74,11 @@
   }
 
   .right {
-    width: 100px;
-    height: calc(100% - 60px);
-    background: linear-gradient(to right, transparent, #0d0d0dc4);
+    width: 80px;
+    height: calc(100% - 64px);
+    background: linear-gradient(to right, transparent, #0d0d0de6);
     position: absolute;
-    top: 48px;
+    top: 40px;
     right: 0;
     z-index: 2;
 
@@ -83,8 +89,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 0.5s;
     visibility: hidden;
-    transition: 0.2s;
     opacity: 0;
 
     &,
@@ -95,6 +101,7 @@
     svg {
       font-size: 32px;
       opacity: 75%;
+      margin-left: 12px;
 
       @media (max-width: 1024px) and (max-height: 576px) {
         font-size: 24px;
@@ -113,19 +120,18 @@
     .serie,
     .module {
       display: flex;
-      gap: 12px;
+      gap: 5px;
 
       .card {
         width: 270px;
         height: 400px;
-        border: 1px solid #222;
-        border-radius: 6px;
+        border-radius: 8px;
         overflow: hidden;
         position: relative;
 
         background-position: center;
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: 100.5%;
         transition: 0.2s;
 
         @media (max-width: 1024px) and (max-height: 576px) {
@@ -139,11 +145,23 @@
         }
 
         &:hover {
-          background-size: 103%;
+          background-size: 105%;
           transform: scale(1.02);
 
-          .title h3 {
-            transform: translateY(-4px);
+          .title {
+            h3 {
+            
+            }
+
+            h3,
+            p {
+              transform: translateY(-24px);
+
+              &.other {
+                visibility: visible;
+                opacity: 1;
+              }
+            }
           }
         }
 
@@ -159,11 +177,12 @@
         .title {
           width: 100%;
           height: 100%;
-          padding: 36px;
+          padding: 12px 12px;
 
           display: flex;
-          align-items: end;
-          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          justify-content: end;
           position: relative;
           z-index: 1;
 
@@ -182,6 +201,7 @@
             border-bottom: 1px solid #282828a6;
             border-radius: 2.5em 0 0 10em;
             font-size: 14px;
+            font-weight: 500;
 
             @media (max-width: 1024px) and (max-height: 576px) {
               font-size: 10px;
@@ -200,6 +220,7 @@
             border-bottom: 1px solid #282828a6;
             border-radius: 0 2.5em 10em 0;
             font-size: 14px;
+            font-weight: 500;
 
             @media (max-width: 1024px) and (max-height: 576px) {
               font-size: 10px;
@@ -207,9 +228,55 @@
             }
           }
 
-          h3 {
+          p.type {
+            font-size: 14px;
             transition: 0.2s;
             text-align: center;
+            font-weight: 500;
+            color: springgreen;
+            margin-bottom: 2px;
+
+            @media (max-width: 1024px) and (max-height: 576px) {
+              font-size: 10px;
+            }
+          }
+
+          h3 {
+            width: 220px;
+            transition: 0.2s;
+            text-align: center;
+            font-weight: 500;
+            white-space: nowrap;
+            text-wrap: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+            @media (max-width: 1024px) and (max-height: 576px) {
+              font-size: 12px;
+            }
+          }
+
+          p.other {
+            transition: 0.2s;
+            text-align: center;
+            font-weight: 500;
+            text-transform: capitalize;
+            visibility: hidden;
+            opacity: 0;
+
+            span {
+              font-size: 14px;
+              padding: 0 8px 0 10px;
+              border: solid 1px #fff9;
+              border-radius: 6px;
+
+              @media (max-width: 1024px) and (max-height: 576px) {
+                font-size: 11px;
+                padding: 0 6px 0 8px;
+                border-radius: 5px;
+                margin-left: 3px;
+              }
+            }
 
             @media (max-width: 1024px) and (max-height: 576px) {
               font-size: 12px;
@@ -218,7 +285,13 @@
         }
 
         &.skeleton {
-          background: linear-gradient(to right, transparent, #4444444d 50% ,transparent), #222;
+          background: linear-gradient(
+              to right,
+              transparent,
+              #4444444d 50%,
+              transparent
+            ),
+            #222;
           background-repeat: repeat-y;
           background-size: 70% 100%;
           background-position: -320% 0;
@@ -251,6 +324,7 @@
             width: 100px;
             height: 20px;
             border-radius: 8px;
+            margin-bottom: 32px;
 
             width: 100px;
             height: 16px;

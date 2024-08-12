@@ -5,20 +5,27 @@ import { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 export default function Section({ type, title, route, name }) {
+    const [screenSize, setScreenSize] = useState();
+    const scrollDemoRef = useRef(null);
+
     const { data: movies, isLoading, isError, isSuccess, error, refetch } = useQuery({
         queryKey: [name],
         queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/${route}`, { headers: { 'type': type } }).then(({ data }) => data)
     })
 
-    const scrollDemoRef = useRef(null);
-
-
+    useEffect(() => {
+        setScreenSize([window.innerWidth, window.innerHeight])
+        const handleResize = () => setScreenSize([window.innerWidth, window.innerHeight]);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    
     return (
         <section id={name}>
             <h2>{title}</h2>
-            <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= 600 }}><FaChevronLeft /></div>
-            <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += 600 }}><FaChevronRight /></div>
-            <div className='wrapper' ref={scrollDemoRef} style={{scrollBehavior: "smooth"}}>
+            <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
+            <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
+            <div className='wrapper' ref={scrollDemoRef} style={{ scrollBehavior: "smooth" }}>
                 <div className={type}>
                     {isSuccess ? movies.map(item => (
                         <Link
@@ -33,11 +40,19 @@ export default function Section({ type, title, route, name }) {
                                     <span className="resolution">{item.resolution}</span>
                                     <span className="format">{item.format}</span>
                                 </>}
+                                <p className="type">Bepul</p>
                                 <h3>{item.title.en}</h3>
+                                <p className="other">{item.manufacturer} • <span>{item.admitted}+</span></p>
                             </div>
                         </Link>
                     )) : <>
                         <div className="card skeleton" >
+                            <div className="title">
+                                <div className="resolution" />
+                                <div className="format" />
+                                <div className="text" />
+                            </div>
+                        </div><div className="card skeleton" >
                             <div className="title">
                                 <div className="resolution" />
                                 <div className="format" />

@@ -5,7 +5,7 @@ export default function Root({ children, page, title }) {
     return (
         <>
             <Head>
-                {title ? <title>MovieGo • {title}</title> : <title>MovieGo</title>}
+                {title ? <title>{title} • MovieGo</title> : <title>MovieGo</title>}
                 <link href="/favicon.ico?" rel="icon" />
                 <link href="/favicon.png?" rel="apple-touch-icon" />
                 <link href="/manifest.json" rel="manifest" />
