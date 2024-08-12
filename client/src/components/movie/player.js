@@ -2,6 +2,7 @@ import Plyr from "plyr-react";
 import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
+import { isIOS } from "react-device-detect";
 
 export default function Player({ movie }) {
   const scrollDemoRef = useRef(null);
@@ -58,7 +59,7 @@ export default function Player({ movie }) {
           <Plyr
             options={{
               enabled: true,
-              title: "Axaxa",
+              title: movie.title.en,
               debug: false,
               autoplay: false,
               autopause: true,
@@ -82,9 +83,9 @@ export default function Player({ movie }) {
               blankVideo: "https://cdn.plyr.io/static/blank.mp4",
 
               quality: {
-                default: 1080,
+                default: 720,
                 // The options to display in the UI, if available for the source media
-                options: [2160, 1080, 720, 480],
+                options: [2160, 1080, 720, 360],
                 forced: false,
                 onChange: null,
               },
@@ -194,7 +195,7 @@ export default function Player({ movie }) {
                   2160: "UHD",
                   1080: "FHD",
                   720: "HD",
-                  480: "SD",
+                  360: "SD",
                 },
               },
 
@@ -219,8 +220,7 @@ export default function Player({ movie }) {
             }}
             source={{
               type: "video",
-              // title: movie.title.en,
-              title: "Oxoxo",
+              title: movie.title.en,
               poster: movie.image.preview,
               sources: movie.source.map((item) => ({
                 src: item.film,

@@ -2,7 +2,8 @@
   min-height: 100svh;
   position: relative;
   z-index: 2;
-  padding: 64px 0;
+  padding: 50px 0;
+  overflow: hidden;
 
   @media (max-width: 440px) {
     padding: 0;
