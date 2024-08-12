@@ -2,7 +2,6 @@ import Plyr from "plyr-react";
 import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
-import { isIOS } from "react-device-detect";
 
 export default function Player({ movie }) {
   const scrollDemoRef = useRef(null);
