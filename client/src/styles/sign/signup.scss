@@ -242,17 +242,24 @@
 
           &.icon {
             left: 16px;
+
+            @media (max-width: 1025px) and (min-width: 440px) {
+              left: 12px;
+              width: 16px;
+            }
           }
 
           &.eye {
             right: 16px;
             cursor: pointer;
+
+            @media (max-width: 1025px) and (min-width: 440px) {
+              right: 12px;
+              width: 16px;
+            }
           }
 
-          @media (max-width: 1025px) and (min-width: 440px) {
-            left: 12px;
-            width: 16px;
-          }
+         
         }
 
         input {
