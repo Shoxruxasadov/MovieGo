@@ -224,7 +224,9 @@ export default function Player({ movie }) {
               sources: movie.source.map((item) => ({
                 src: item.film,
                 size: item.size,
+                type: 'video/mp4',
               })),
+              
               //   tracks: [
               //     {
               //       kind: "captions",

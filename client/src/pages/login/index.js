@@ -1,5 +1,3 @@
-import Footer from "@/components/home/footer";
-import Header from "@/components/home/header";
 import Animated from "@/components/others/animated";
 import Root from "@/layouts/root";
 import Image from "next/image";
@@ -14,19 +12,16 @@ export default function Login() {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  console.log(screenWidth);
-  
+  }, []);  
 
   return (
     <Root page="sign" title={"Login"}>
       <Animated>
         <section id="login">
-          <div className="logo">
+          <Link href={'/'} className="logo">
             <Image src={"/logo/logo.png"} width={50} height={50} />
             <p>Login to MovieGo</p>
-          </div>
+          </Link>
           <form>
             {screenWidth > 439 && (
               <>
@@ -224,6 +219,7 @@ export default function Login() {
             </div>
           </footer>
         </section>
+        <div id="light" />
         <div id="shadow" />
       </Animated>
     </Root>
