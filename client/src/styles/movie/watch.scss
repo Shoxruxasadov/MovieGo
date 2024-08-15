@@ -23,6 +23,18 @@
 
   .container .title {
     padding: 40px 0;
+    position: relative;
+
+    &::before{
+      content: '';
+      width: 360px;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      background-color: #0d0d0de6;
+      filter: blur(150px);
+      border-radius: 50%;
+    }
 
     @media (max-width: 440px) {
       width: 100%;
@@ -77,6 +89,17 @@
         border: 1px solid #ffffff60;
         padding: 2px 12px;
       }
+
+      .time{
+        white-space: nowrap;
+      }
+    }
+
+    p.description{
+      margin-bottom: 24px;
+      text-align: center;
+      color: var(--text-color);
+      opacity: 80%;
     }
 
     .watching {
