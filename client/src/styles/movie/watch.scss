@@ -34,6 +34,10 @@
       background-color: #0d0d0de6;
       filter: blur(150px);
       border-radius: 50%;
+
+      @media (max-width: 440px) {
+        filter: blur(100px);
+      }
     }
 
     @media (max-width: 440px) {
