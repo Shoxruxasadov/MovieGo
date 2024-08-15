@@ -4,7 +4,7 @@ header {
   position: fixed;
   z-index: 10;
   top: 0;
-  transition: 0.2s;
+  transition: .2s ease-in-out;
   padding: 0 48px;
 
   display: flex;
@@ -119,6 +119,7 @@ header {
     background: #0d0d0d7d;
     backdrop-filter: blur(15px);
     height: 70px;
+    will-change: transform;
 
     @media (max-width: 1024px) {
       height: 50px;
