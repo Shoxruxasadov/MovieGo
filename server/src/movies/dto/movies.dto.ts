@@ -1,79 +1,81 @@
-import { IsNotEmpty } from "class-validator";
-import { LangDto } from "./lang.dto";
-import { ImageDto } from "./image.dto";
-import { FilmDto } from "./film.dto";
-import { CastDto } from "./cast.dto";
+import { IsNotEmpty } from 'class-validator';
+import { LangDto } from './lang.dto';
+import { ImageDto } from './image.dto';
+import { FilmLangDto } from './filmlang.dto';
 
 export class MoviesDto {
-    @IsNotEmpty()
-    name: string;
+  @IsNotEmpty()
+  name: string;
 
-    @IsNotEmpty()
-    title: LangDto;
+  @IsNotEmpty()
+  title: LangDto;
 
-    @IsNotEmpty()
-    description: LangDto;
+  @IsNotEmpty()
+  description: LangDto;
 
-    @IsNotEmpty()
-    source: FilmDto[];
+  @IsNotEmpty()
+  image: ImageDto;
 
-    @IsNotEmpty()
-    type: string;
+  @IsNotEmpty()
+  source: FilmLangDto;
 
-    @IsNotEmpty()
-    image: ImageDto;
-    
-    @IsNotEmpty()
-    issue: string;
+  @IsNotEmpty()
+  type: string;
 
-    @IsNotEmpty()
-    event: string;
+  @IsNotEmpty()
+  module: string;
 
-    @IsNotEmpty()
-    module: string;
+  @IsNotEmpty()
+  format: string;
 
-    @IsNotEmpty()
-    manufacturer: string;
+  @IsNotEmpty()
+  resolution: string;
 
-    @IsNotEmpty()
-    income: string;
+  @IsNotEmpty()
+  duration: number;
 
-    @IsNotEmpty()
-    expense: string;
+  @IsNotEmpty()
+  release: string;
 
-    @IsNotEmpty()
-    format: string;
+  @IsNotEmpty()
+  timeline: string;
 
-    @IsNotEmpty()
-    resolution: string;
+  @IsNotEmpty()
+  grossing: string;
 
-    @IsNotEmpty()
-    duration: number;
+  @IsNotEmpty()
+  budget: string;
 
-    @IsNotEmpty()
-    certificate: string;
+  @IsNotEmpty()
+  studio: string;
 
-    @IsNotEmpty()
-    genre: string[];
+  @IsNotEmpty()
+  certificate: string;
 
-    @IsNotEmpty()
-    languages: string[];
+  @IsNotEmpty()
+  made: string;
 
-    @IsNotEmpty()
-    made: string;
+  @IsNotEmpty()
+  mpa: number;
 
-    @IsNotEmpty()
-    admitted: number;
+  @IsNotEmpty()
+  genre: string[];
 
-    @IsNotEmpty()
-    cast: CastDto[];
-    
-    @IsNotEmpty()
-    directors: string[];
+  @IsNotEmpty()
+  languages: string[];
 
-    @IsNotEmpty()
-    producers: string[];
-    
-    @IsNotEmpty()
-    screenwriters: string[];
+  @IsNotEmpty()
+  ratings: string[];
+
+  @IsNotEmpty()
+  cast: any[];
+
+  @IsNotEmpty()
+  directors: any[];
+
+  @IsNotEmpty()
+  producers: any[];
+
+  @IsNotEmpty()
+  screenwriters: any[];
 }

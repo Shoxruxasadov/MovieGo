@@ -30,6 +30,10 @@ footer {
       gap: 8px;
     }
 
+    @media (max-width: 1024px) and (max-height: 576px) {
+      flex-direction: row!important;
+    }
+
     @media (max-width: 440px) {
       gap: 2px;
     }

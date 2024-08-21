@@ -38,7 +38,7 @@ export default function ErrorPage() {
                         </Link>
                     </div>
                     <div id="image">
-                        <Image src="/error/stark.webp" width={423} height={577} />
+                        <Image src="/error/stark.webp" width={423} height={577} alt="logo" />
                     </div>
                 </motion.div>
             </Animated>

@@ -25,7 +25,7 @@ export default function Section({ type, title, route, name }) {
             <h2>{title}</h2>
             <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
             <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
-            <div className='wrapper' ref={scrollDemoRef} style={{ scrollBehavior: "smooth" }}>
+            <div className='wrapper' ref={scrollDemoRef}>
                 <div className={type}>
                     {isSuccess ? movies.map(item => (
                         <Link
@@ -42,7 +42,7 @@ export default function Section({ type, title, route, name }) {
                                 </>}
                                 <p className="type">Bepul</p>
                                 <h3>{item.title.en}</h3>
-                                <p className="other">{item.manufacturer} • <span>{item.admitted}+</span></p>
+                                <p className="other">{item.studio} • <span>{item.mpa}+</span></p>
                             </div>
                         </Link>
                     )) : <>

@@ -1,4 +1,4 @@
 export class FilmDto {
-    film: string;
+    src: string;
     size: number;
 }

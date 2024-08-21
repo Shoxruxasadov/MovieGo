@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Date, HydratedDocument } from 'mongoose';
 import { Document, Types, Schema as MongooseSchema } from 'mongoose';
 import { LangDto } from './dto/lang.dto';
 import { ImageDto } from './dto/image.dto';
-import { FilmDto } from './dto/film.dto';
-import { CastDto } from './dto/cast.dto';
+import { FilmLangDto } from './dto/filmlang.dto';
+import { Actors } from 'src/actors/actors.schema';
 
 export type MoviesDocument = HydratedDocument<Movies>;
 
@@ -20,31 +20,16 @@ export class Movies {
   description: LangDto;
 
   @Prop({ required: true })
-  source: FilmDto[];
+  image: ImageDto;
+
+  @Prop({ required: true })
+  source: FilmLangDto;
 
   @Prop({ required: true })
   type: string;
 
   @Prop({ required: true })
-  image: ImageDto;
-
-  @Prop({ required: true })
-  issue: string;
-
-  @Prop({ required: true })
-  event: string;
-
-  @Prop({ required: true })
   module: string;
-
-  @Prop({ required: true })
-  manufacturer: string;
-
-  @Prop({ required: true })
-  income: string;
-
-  @Prop({ required: true })
-  expense: string;
 
   @Prop({ required: true })
   format: string;
@@ -55,8 +40,29 @@ export class Movies {
   @Prop({ required: true })
   duration: number;
 
+  @Prop({ type: Date, required: true })
+  release: Date;
+
+  @Prop({ type: Date, required: true })
+  timeline: Date;
+
+  @Prop({ required: true })
+  grossing: string;
+
+  @Prop({ required: true })
+  budget: string;
+
+  @Prop({ required: true })
+  studio: string;
+
   @Prop({ required: true })
   certificate: string;
+
+  @Prop({ required: true })
+  made: string;
+
+  @Prop({ required: true })
+  mpa: number;
 
   @Prop({ required: true })
   genre: string[];
@@ -65,22 +71,43 @@ export class Movies {
   languages: string[];
 
   @Prop({ required: true })
-  made: string;
+  ratings: string[];
 
-  @Prop({ required: true })
-  admitted: number;
+  @Prop([
+    {
+      type: MongooseSchema.Types.ObjectId,
+      required: true,
+      ref: 'Actors',
+    },
+  ])
+  cast: Actors[];
 
-  @Prop({ required: true })
-  cast: CastDto[];
+  @Prop([
+    {
+      type: MongooseSchema.Types.ObjectId,
+      required: true,
+      ref: 'Actors',
+    },
+  ])
+  directors: Actors[];
 
-  @Prop({ required: true })
-  directors: string[];
+  @Prop([
+    {
+      type: MongooseSchema.Types.ObjectId,
+      required: true,
+      ref: 'Actors',
+    },
+  ])
+  producers: Actors[];
 
-  @Prop({ required: true })
-  producers: string[];
-
-  @Prop({ required: true })
-  screenwriters: string[];
+  @Prop([
+    {
+      type: MongooseSchema.Types.ObjectId,
+      required: true,
+      ref: 'Actors',
+    },
+  ])
+  screenwriters: Actors[];
 }
 
 export const MoviesSchema = SchemaFactory.createForClass(Movies);

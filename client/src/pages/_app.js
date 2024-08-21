@@ -24,12 +24,12 @@ export default function App({ Component, pageProps }) {
   // if (access) return <Animation />
   return <>
     <ThemeProvider>
-      {/* <SessionProvider session={pageProps.session}> */}
+      <SessionProvider session={pageProps.session}>
         <QueryClientProvider client={queryClient}>
           <Component {...pageProps} />
           {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </QueryClientProvider>
-      {/* </SessionProvider> */}
+      </SessionProvider>
     </ThemeProvider>
 
     <ToastContainer />

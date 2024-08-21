@@ -3,32 +3,91 @@ import Root from "@/layouts/root";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import useLocalStorage from "@/hooks/useLocalStorage";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
+  const { register, handleSubmit, formState: { errors }, } = useForm();
   const [screenWidth, setScreenWidth] = useState();
+  const [loading, setLoading] = useState(false);
+  const [oauthGoogle, setOauthGoogle] = useLocalStorage("oauthGoogle", "null");
+  const { data } = useSession();
+  const router = useRouter();
+
+  const auth = async (userData) => {
+    // setLoading(true)
+    // userData.method = "username"
+    // userData.user.split("").map(item => { if (item == "@") userData.method = "email" })
+
+    // axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/auth/login/${userData.method}`, {
+    //   headers: {
+    //     'login': userData.user,
+    //     'password': userData.password,
+    //     'secret': process.env.NEXT_PUBLIC_SECRET
+    //   }
+    // }).then(({ data }) => {
+    //   setToken(data.id)
+    //   success("You a signed in");
+    //   setTimeout(() => router.push('/'), 1000)
+    // }).catch(error => wrong(error.response.data.message)).finally(() => setLoading(false))
+
+    console.log(auth);
+  }
+
+  const authGoogle = () => {
+    setLoading(true);
+    signIn("google");
+    setOauthGoogle("signed");
+  };
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
+    localStorage.removeItem("oauthGoogle");
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);  
+  }, []);
+
+  useEffect(() => {
+    // if (oauthGoogle == "signed" && data) {
+    //   setLoading(true);
+    //   axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/users/email/${data.user.email}`).then((res) => {
+    //     if (res.data == null) {
+    //       // warning("You don't have an account, create one first");
+    //       router.push("/signup");
+    //       // setPage(5);
+    //       // setEmail(data.user.email);
+    //       // setName(data.user.name);
+    //       // setImage(data.user.image);
+    //     } else {
+    //       setToken(res.data._id);
+    //       // success("You a signed in");
+    //       router.push("/");
+    //     }
+    //   }).finally(() => setLoading(false));
+    // }
+    // localStorage.removeItem("oauthGoogle");
+
+    console.log(data);
+  }, [data]);
 
   return (
     <Root page="sign" title={"Login"}>
       <Animated>
         <section id="login">
-          <Link href={'/'} className="logo">
-            <Image src={"/logo/logo.png"} width={50} height={50} />
+          <Link href={"/"} className="logo">
+            <Image src={"/logo/logo.png"} width={50} height={50} alt="logo" />
             <p>Login to MovieGo</p>
           </Link>
-          <form>
+          <form onSubmit={handleSubmit(auth)}>
             {screenWidth > 439 && (
               <>
                 <p className="providers-paragraph">Login with:</p>
-
                 <div className="providers">
-                  <div className="provider google">
+                  <button className="provider google" onClick={authGoogle}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="19"
@@ -54,8 +113,8 @@ export default function Login() {
                       />
                     </svg>
                     <span>Google</span>
-                  </div>
-                  <div className="provider facebook">
+                  </button>
+                  <button className="provider facebook">
                     <svg
                       width="18"
                       height="18"
@@ -69,7 +128,7 @@ export default function Login() {
                       />
                     </svg>
                     <span>Facebook</span>
-                  </div>
+                  </button>
                 </div>
 
                 <div className="or">
@@ -93,9 +152,9 @@ export default function Login() {
                   <path
                     d="M4.43033 16.1987C4.93727 15.0043 6.12085 14.1667 7.50008 14.1667H12.5001C13.8793 14.1667 15.0629 15.0043 15.5698 16.1987M13.3334 7.91667C13.3334 9.75762 11.841 11.25 10.0001 11.25C8.15913 11.25 6.66675 9.75762 6.66675 7.91667C6.66675 6.07572 8.15913 4.58334 10.0001 4.58334C11.841 4.58334 13.3334 6.07572 13.3334 7.91667ZM18.3334 10C18.3334 14.6024 14.6025 18.3333 10.0001 18.3333C5.39771 18.3333 1.66675 14.6024 1.66675 10C1.66675 5.39763 5.39771 1.66667 10.0001 1.66667C14.6025 1.66667 18.3334 5.39763 18.3334 10Z"
                     stroke="white"
-                    stroke-width="1.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <input type="text" placeholder="Username or email" id="user" />
@@ -114,9 +173,9 @@ export default function Login() {
                   <path
                     d="M14.1666 8.33333V6.66667C14.1666 4.36548 12.3011 2.5 9.99992 2.5C7.69873 2.5 5.83325 4.36548 5.83325 6.66667V8.33333M9.99992 12.0833V13.75M7.33325 17.5H12.6666C14.0667 17.5 14.7668 17.5 15.3016 17.2275C15.772 16.9878 16.1544 16.6054 16.3941 16.135C16.6666 15.6002 16.6666 14.9001 16.6666 13.5V12.3333C16.6666 10.9332 16.6666 10.2331 16.3941 9.69836C16.1544 9.22795 15.772 8.8455 15.3016 8.60582C14.7668 8.33333 14.0667 8.33333 12.6666 8.33333H7.33325C5.93312 8.33333 5.23306 8.33333 4.69828 8.60582C4.22787 8.8455 3.84542 9.22795 3.60574 9.69836C3.33325 10.2331 3.33325 10.9332 3.33325 12.3333V13.5C3.33325 14.9001 3.33325 15.6002 3.60574 16.135C3.84542 16.6054 4.22787 16.9878 4.69828 17.2275C5.23306 17.5 5.93312 17.5 7.33325 17.5Z"
                     stroke="white"
-                    stroke-width="1.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <input type="password" placeholder="Password" id="password" />
@@ -148,7 +207,7 @@ export default function Login() {
                 </div>
 
                 <div className="providers">
-                  <div className="provider google">
+                  <button className="provider google" onClick={authGoogle}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="19"
@@ -174,8 +233,8 @@ export default function Login() {
                       />
                     </svg>
                     <span>Google</span>
-                  </div>
-                  <div className="provider facebook">
+                  </button>
+                  <button className="provider facebook">
                     <svg
                       width="18"
                       height="18"
@@ -189,7 +248,7 @@ export default function Login() {
                       />
                     </svg>
                     <span>Facebook</span>
-                  </div>
+                  </button>
                 </div>
               </>
             )}
@@ -210,9 +269,9 @@ export default function Login() {
                 <path
                   d="M1.66675 10H18.3334M1.66675 10C1.66675 14.6024 5.39771 18.3334 10.0001 18.3334M1.66675 10C1.66675 5.39765 5.39771 1.66669 10.0001 1.66669M18.3334 10C18.3334 14.6024 14.6025 18.3334 10.0001 18.3334M18.3334 10C18.3334 5.39765 14.6025 1.66669 10.0001 1.66669M10.0001 1.66669C12.0845 3.94865 13.269 6.91005 13.3334 10C13.269 13.09 12.0845 16.0514 10.0001 18.3334M10.0001 1.66669C7.91568 3.94865 6.73112 6.91005 6.66675 10C6.73112 13.09 7.91568 16.0514 10.0001 18.3334"
                   stroke="#64748B"
-                  stroke-width="1.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
               <span>English</span>

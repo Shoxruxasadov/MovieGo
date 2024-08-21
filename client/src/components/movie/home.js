@@ -2,10 +2,12 @@ import { Link as Scroll } from "react-scroll";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useStore } from "@/store/zustand";
 
-export default function Watch({ movie }) {
+export default function MovieHome() {
   const [loadedImage, setLoadedImage] = useState(false);
   const [screenWidth, setScreenWidth] = useState();
+  const movie = useStore(state => state.movie);
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -15,7 +17,7 @@ export default function Watch({ movie }) {
   }, []);
 
   return (
-    <section id="watch">
+    <section id="movie-home">
       <div className="container">
         <motion.div
           className="title"

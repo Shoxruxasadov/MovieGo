@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoSearch } from "react-icons/io5";
 
-export default function Header() {
+export default function Header({ movie }) {
   const [isScrolled, setScrolled] = useState(false);
   const pathname = usePathname()
 
@@ -67,7 +67,7 @@ export default function Header() {
             <Link href='/search'><IoSearch /></Link>
           </li>
         </ul>
-      </nav> : pathname.split("/")[1] == 'movie' || pathname.split("/")[1] == "serie" ? <nav>
+      </nav> : movie ? <nav>
         <ul>
           {movieList.map((section, i) => (
             <li key={i}>

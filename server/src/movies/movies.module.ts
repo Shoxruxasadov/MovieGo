@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { MoviesService } from './movies.service';
-import { MoviesController } from './movies.controller';
 import { MongooseModule } from '@nestjs/mongoose';
+import { Module } from '@nestjs/common';
 import { Movies, MoviesSchema } from './movies.schema';
+import { MoviesController } from './movies.controller';
+import { MoviesService } from './movies.service';
 
 @Module({
   imports: [

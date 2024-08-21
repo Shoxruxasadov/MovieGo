@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MoviesModule } from 'src/movies/movies.module';
+import { ActorsModule } from 'src/actors/actors.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { MoviesModule } from 'src/movies/movies.module';
     //   //   adapter: new HandlebarsAdapter(),
     //   // },
     // }),
-    MoviesModule
+    MoviesModule,
+    ActorsModule
   ],
   controllers: [AppController],
   providers: [AppService],
