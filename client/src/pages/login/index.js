@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import useLocalStorage from "@/hooks/useLocalStorage";
+// import useLocalStorage from "@/hooks/useLocalStorage";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
@@ -13,7 +13,7 @@ export default function Login() {
   const { register, handleSubmit, formState: { errors }, } = useForm();
   const [screenWidth, setScreenWidth] = useState();
   const [loading, setLoading] = useState(false);
-  const [oauthGoogle, setOauthGoogle] = useLocalStorage("oauthGoogle", "null");
+  // const [oauthGoogle, setOauthGoogle] = useLocalStorage("oauthGoogle", "null");
   const { data } = useSession();
   const router = useRouter();
 
@@ -34,18 +34,18 @@ export default function Login() {
     //   setTimeout(() => router.push('/'), 1000)
     // }).catch(error => wrong(error.response.data.message)).finally(() => setLoading(false))
 
-    console.log(auth);
+    console.log(userData);
   }
 
   const authGoogle = () => {
     setLoading(true);
     signIn("google");
-    setOauthGoogle("signed");
+    // setOauthGoogle("signed");
   };
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
-    localStorage.removeItem("oauthGoogle");
+    // localStorage.removeItem("oauthGoogle");
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -73,6 +73,9 @@ export default function Login() {
 
     console.log(data);
   }, [data]);
+
+  console.log(data, loading);
+  
 
   return (
     <Root page="sign" title={"Login"}>
