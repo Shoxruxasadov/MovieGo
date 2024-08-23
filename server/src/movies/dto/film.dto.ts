@@ -1,4 +1,7 @@
+import { LangDto } from './lang.dto';
+
 export class FilmDto {
-    src: string;
-    size: number;
+  '2160p': LangDto | null;
+  '1080p': LangDto | null;
+  '720p': LangDto | null;
 }

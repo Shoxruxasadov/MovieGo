@@ -47,6 +47,6 @@ export class MoviesController {
   @HttpCode(200)
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return this.moviesService.remove(+id);
+    return this.moviesService.remove(id);
   }
 }

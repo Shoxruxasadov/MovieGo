@@ -3,7 +3,7 @@ import { Date, HydratedDocument } from 'mongoose';
 import { Document, Types, Schema as MongooseSchema } from 'mongoose';
 import { LangDto } from './dto/lang.dto';
 import { ImageDto } from './dto/image.dto';
-import { FilmLangDto } from './dto/filmlang.dto';
+import { FilmDto } from './dto/film.dto';
 import { Actors } from 'src/actors/actors.schema';
 
 export type MoviesDocument = HydratedDocument<Movies>;
@@ -23,7 +23,7 @@ export class Movies {
   image: ImageDto;
 
   @Prop({ required: true })
-  source: FilmLangDto;
+  source: FilmDto;
 
   @Prop({ required: true })
   type: string;

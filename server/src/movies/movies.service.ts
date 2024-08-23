@@ -40,7 +40,7 @@ export class MoviesService {
     return 'success';
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     this.moviesModel.findByIdAndDelete(id);
     return 'success';
   }
