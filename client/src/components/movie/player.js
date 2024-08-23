@@ -2,7 +2,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useRef, useState } from "react";
 import Link from "next/link";
 
-import Player from "@/utils/player"
+import Player from "@/library/player"
 import release from "@/utils/release";
 import timeline from "@/utils/timeline";
 import { useStore } from "@/store/zustand";
