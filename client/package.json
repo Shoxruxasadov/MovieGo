@@ -33,6 +33,7 @@
     "rodal": "^2.1.0",
     "sass": "^1.77.5",
     "styled-components": "^6.1.11",
+    "use-local-storage": "^3.0.0",
     "uuid": "^10.0.0",
     "zustand": "^4.5.2"
   },

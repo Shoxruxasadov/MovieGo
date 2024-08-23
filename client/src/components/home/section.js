@@ -19,7 +19,7 @@ export default function Section({ type, title, route, name }) {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-    
+
     return (
         <section id={name}>
             <h2>{title}</h2>
@@ -40,9 +40,9 @@ export default function Section({ type, title, route, name }) {
                                     <span className="resolution">{item.resolution}</span>
                                     <span className="format">{item.format}</span>
                                 </>}
-                                <p className="type">Bepul</p>
-                                <h3>{item.title.en}</h3>
-                                <p className="other">{item.studio} • <span>{item.mpa}+</span></p>
+                                {type != "module" && <p className="type">Bepul</p>}
+                                {type == "module" ? <h3>{item.name}</h3> : <h3>{item.title.en}</h3>}
+                                {type != "module" && <p className="other">{item.studio} • <span>{item.mpa}+</span></p>}
                             </div>
                         </Link>
                     )) : <>

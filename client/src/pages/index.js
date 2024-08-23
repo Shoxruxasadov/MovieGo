@@ -21,7 +21,7 @@ export default function Home() {
       <Animated>
         <Hero />
         <Section type='movie' title='Movies' route='movies' name='movies' />
-        {/* <Section type='serie' title='Series' route='movies' name='series' /> */}
+        <Section type='serie' title='Series' route='movies' name='series' />
         <Section type='module' title='Modules' route='modules' name='modules' />
         <div id="shadow" />
       </Animated>

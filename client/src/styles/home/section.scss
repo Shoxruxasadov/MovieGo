@@ -92,7 +92,7 @@
     }
 
     @media (max-width: 1024px) and (max-height: 576px) {
-     display: flex;
+      display: flex;
       height: calc(100% - 36px);
       top: 33px;
     }
@@ -185,9 +185,6 @@
           transform: scale(1.02);
 
           .title {
-            h3 {
-            }
-
             h3,
             p {
               transform: translateY(-24px);
@@ -403,6 +400,18 @@
             width: 100px;
             height: 16px;
           }
+        }
+      }
+    }
+
+    .module .card {
+      .title {
+        padding-bottom: 32px;
+      }
+
+      &:hover{
+        .title h3{
+          transform: translateY(-12px);
         }
       }
     }

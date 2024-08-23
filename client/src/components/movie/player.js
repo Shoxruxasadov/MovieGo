@@ -5,12 +5,13 @@ import Link from "next/link";
 import Player from "@/library/player"
 import release from "@/utils/release";
 import timeline from "@/utils/timeline";
-import { useStore } from "@/store/zustand";
+import { useStore, useUser } from "@/store/zustand";
 
 export default function MoviePlayer() {
   const [module, setModule] = useState('Movie')
   const modules = ['Movie', 'Credits', "Authors"]
   const movie = useStore(state => state.movie);
+  const user = useUser(state => state.user);
   const scrollDemoRef = useRef(null);
 
   return (
@@ -20,8 +21,8 @@ export default function MoviePlayer() {
           <p className="description">{movie.description.en}</p>
           <div className="casts">
             <h2>Top Cast</h2>
-            <div className="left" onClick={() => {scrollDemoRef.current.scrollLeft -= 700}}><FaChevronLeft /></div>
-            <div className="right" onClick={() => {scrollDemoRef.current.scrollLeft += 700}}><FaChevronRight /></div>
+            <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= 700 }}><FaChevronLeft /></div>
+            <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += 700 }}><FaChevronRight /></div>
             <div className="scrolling" ref={scrollDemoRef} style={{ scrollBehavior: "smooth" }}>
               <div className="wrapper">
                 {movie.cast.map((item, i) => (
@@ -44,15 +45,13 @@ export default function MoviePlayer() {
           ))}
         </ul>
 
-        <Player module={module == "Movie" ? 'visible' : ''} />
-
-        {/* <div id="need" className={module == "Movie" ? 'visible' : ''}>
+        {user ? <Player module={module == "Movie" ? 'visible' : ''} /> : <div id="need" className={module == "Movie" ? 'visible' : ''}>
           <p>You need to sign up or log in to watch movies</p>
           <div className="sign">
             <Link href="/signup">Sign Up</Link>
             <Link href="/login">Log In</Link>
           </div>
-        </div> */}
+        </div>}
 
         <div id="credits" className={module == "Credits" ? 'visible' : ''}>
           <div className="card release">

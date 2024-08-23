@@ -2,12 +2,49 @@ import Animated from "@/components/others/animated";
 import Root from "@/layouts/root";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import useLocalStorage from "use-local-storage";
 import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import { useForm } from "react-hook-form";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { useStore, useUser } from "@/store/zustand";
+import { success, wrong } from "@/utils/toastify";
 
-export default function Login() {
+export default function Signup() {
+  const setUser = useUser(state => state.setUser);
+  const link = useStore(state => state.link);
+  const { register, handleSubmit, formState: { errors }, } = useForm();
+  const [oauthGoogle, setOauthGoogle] = useLocalStorage("oauthGoogle", false);
+  const [token, setToken] = useLocalStorage("token", null);
   const [screenWidth, setScreenWidth] = useState();
+  const [loading, setLoading] = useState(false);
+  const [eyepass, setEyepass] = useState(false);
+  const { data } = useSession();
+  const router = useRouter();
+
+  const auth = async (user) => {
+    if (user.password !== user.repass) return console.log("Repeat Password Wrong!");
+    setLoading(true)
+    axios.post(`${process.env.NEXT_PUBLIC_SERVER_API}/users`, {
+      name: user.lastname ? `${user.firstname} ${user.lastname}` : user.firstname,
+      email: user.email,
+      password: user.password,
+      image: null,
+    }).then(({ data }) => {
+      setToken(data._id)
+      setUser(data)
+      success("You a signup");
+      setTimeout(() => router.push(link), 1000)
+    }).catch(error => wrong(error.response.data.message)).finally(() => setLoading(false))
+  }
+
+  const authGoogle = () => {
+    setLoading(true);
+    signIn("google");
+    setOauthGoogle(true)
+  };
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -15,6 +52,20 @@ export default function Login() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    if (oauthGoogle && data) {
+      console.log('google');
+      setLoading(true);
+      axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/users/google`, { headers: { 'email': data.user.email, name: data.user.name, image: data.user.image } }).then(({ data }) => {
+        setToken(data._id)
+        setUser(data)
+        success("You a login");
+        setTimeout(() => router.push(link), 1000)
+      }).finally(() => setLoading(false));
+      setOauthGoogle(false)
+    }
+  }, [data]);
 
   return (
     <Root page="sign" title={"Sign Up"}>
@@ -176,13 +227,13 @@ export default function Login() {
               </footer>
             )}
           </section>
-          <form>
+          <form onSubmit={handleSubmit(auth)}>
             {screenWidth > 439 && (
               <>
                 <div className="auth">
                   <p className="providers-paragraph">Sign Up with:</p>
                   <div className="providers">
-                    <div className="provider google">
+                    <div className="provider google" onClick={authGoogle}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="19"
@@ -255,7 +306,7 @@ export default function Login() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="text" placeholder="First Name" id="firstname" />
+                  <input type="text" placeholder="First Name" id="firstname" {...register("firstname", { required: true })} />
                 </div>
               </label>
               <label htmlFor="lastname" className="lastname">
@@ -277,7 +328,7 @@ export default function Login() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="text" placeholder="Last Name" id="lastname" />
+                  <input type="text" placeholder="Last Name" id="lastname" {...register("lastname")} />
                 </div>
               </label>
             </div>
@@ -300,7 +351,7 @@ export default function Login() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type="email" placeholder="Email" id="email" />
+                <input type="email" placeholder="Email" id="email" {...register("email", { required: true })} />
               </div>
             </label>
             <label htmlFor="password" className="password">
@@ -322,28 +373,10 @@ export default function Login() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type="password" placeholder="Password" id="password" />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  className="eye"
-                >
-                  <path
-                    opacity="0.12"
-                    d="M7.5 10C7.5 11.3807 8.61929 12.5 10 12.5C10.6904 12.5 11.3154 12.2202 11.7678 11.7678L8.23223 8.23224C7.77982 8.68465 7.5 9.30965 7.5 10Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M8.95196 4.2436C9.29064 4.19353 9.64002 4.16667 9.99986 4.16667C14.254 4.16667 17.0456 7.9207 17.9834 9.40569C18.0969 9.58542 18.1537 9.67528 18.1855 9.81389C18.2093 9.91799 18.2093 10.0822 18.1854 10.1863C18.1536 10.3249 18.0965 10.4154 17.9822 10.5963C17.7323 10.9918 17.3513 11.5476 16.8466 12.1504M5.60311 5.59586C3.80139 6.81808 2.57822 8.51615 2.0171 9.4044C1.90308 9.58489 1.84607 9.67514 1.81429 9.81373C1.79043 9.91783 1.79042 10.082 1.81427 10.1861C1.84604 10.3247 1.90279 10.4146 2.01629 10.5943C2.95413 12.0793 5.74569 15.8333 9.99986 15.8333C11.7152 15.8333 13.1927 15.223 14.4069 14.3972M2.49986 2.5L17.4999 17.5M8.23209 8.23223C7.77968 8.68464 7.49986 9.30964 7.49986 10C7.49986 11.3807 8.61915 12.5 9.99986 12.5C10.6902 12.5 11.3152 12.2202 11.7676 11.7678"
-                    stroke="white"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <input type={eyepass ? 'text' : 'password'} placeholder="Password" id="password"{...register("password", { required: true })} />
+                <div className="eye" onClick={() => setEyepass(!eyepass)}>
+                  {eyepass ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                </div>
               </div>
             </label>
             <label htmlFor="repass" className="password">
@@ -365,28 +398,10 @@ export default function Login() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type="password" placeholder="Repeat Password" id="repass" />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  className="eye"
-                >
-                  <path
-                    opacity="0.12"
-                    d="M7.5 10C7.5 11.3807 8.61929 12.5 10 12.5C10.6904 12.5 11.3154 12.2202 11.7678 11.7678L8.23223 8.23224C7.77982 8.68465 7.5 9.30965 7.5 10Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M8.95196 4.2436C9.29064 4.19353 9.64002 4.16667 9.99986 4.16667C14.254 4.16667 17.0456 7.9207 17.9834 9.40569C18.0969 9.58542 18.1537 9.67528 18.1855 9.81389C18.2093 9.91799 18.2093 10.0822 18.1854 10.1863C18.1536 10.3249 18.0965 10.4154 17.9822 10.5963C17.7323 10.9918 17.3513 11.5476 16.8466 12.1504M5.60311 5.59586C3.80139 6.81808 2.57822 8.51615 2.0171 9.4044C1.90308 9.58489 1.84607 9.67514 1.81429 9.81373C1.79043 9.91783 1.79042 10.082 1.81427 10.1861C1.84604 10.3247 1.90279 10.4146 2.01629 10.5943C2.95413 12.0793 5.74569 15.8333 9.99986 15.8333C11.7152 15.8333 13.1927 15.223 14.4069 14.3972M2.49986 2.5L17.4999 17.5M8.23209 8.23223C7.77968 8.68464 7.49986 9.30964 7.49986 10C7.49986 11.3807 8.61915 12.5 9.99986 12.5C10.6902 12.5 11.3152 12.2202 11.7676 11.7678"
-                    stroke="white"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <input type={eyepass ? 'text' : 'password'} placeholder="Repeat Password" id="repass" {...register("repass", { required: true })} />
+                <div className="eye" onClick={() => setEyepass(!eyepass)}>
+                  {eyepass ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                </div>
               </div>
               <span>Minimum length is 8 characters.</span>
             </label>
@@ -404,7 +419,7 @@ export default function Login() {
                 </div>
 
                 <div className="providers">
-                  <div className="provider google">
+                  <div className="provider google" onClick={authGoogle}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="19"
@@ -454,6 +469,13 @@ export default function Login() {
         <div id="light" />
         <div id="shadow" />
       </Animated>
+      {loading && <div id="loading">
+        <div className="wrapper">
+          <div className="content">
+            <div className="cube" />
+          </div>
+        </div>
+      </div>}
     </Root>
   );
 }

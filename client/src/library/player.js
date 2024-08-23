@@ -178,6 +178,7 @@ export default function Player({module}) {
       videoRef.current.src = movie.source[quality][language]
       videoRef.current.currentTime = currentTimeChanged
       videoRef.current.play();
+      setPlaying(true)
     } setChanges(true)
   }, [language, quality])
 

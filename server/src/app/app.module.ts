@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MoviesModule } from 'src/movies/movies.module';
 import { ActorsModule } from 'src/actors/actors.module';
+import { UsersModule } from 'src/users/users.module';
+import { ModulesModule } from 'src/modules/modules.module';
 
 @Module({
   imports: [
@@ -26,7 +28,9 @@ import { ActorsModule } from 'src/actors/actors.module';
     //   //   adapter: new HandlebarsAdapter(),
     //   // },
     // }),
+    UsersModule,
     MoviesModule,
+    ModulesModule,
     ActorsModule
   ],
   controllers: [AppController],

@@ -38,15 +38,15 @@ export class MoviesController {
     return this.moviesService.create(dto);
   }
 
-  @HttpCode(200)
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: MoviesDto) {
-    return this.moviesService.update(+id, dto);
-  }
+  // @HttpCode(200)
+  // @Put(':id')
+  // async update(@Param('id') id: string, @Body() dto: MoviesDto) {
+  //   return this.moviesService.update(id, dto);
+  // }
 
-  @HttpCode(200)
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.moviesService.remove(id);
-  }
+  // @HttpCode(200)
+  // @Delete(':id')
+  // async remove(@Param('id') id: string) {
+  //   return this.moviesService.remove(id);
+  // }
 }

@@ -2,80 +2,69 @@ import Animated from "@/components/others/animated";
 import Root from "@/layouts/root";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import useLocalStorage from "use-local-storage";
 import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-// import useLocalStorage from "@/hooks/useLocalStorage";
-import axios from "axios";
 import { useForm } from "react-hook-form";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { useStore, useUser } from "@/store/zustand";
+import { success, wrong } from "@/utils/toastify";
 
 export default function Login() {
+  const setUser = useUser(state => state.setUser);
+  const link = useStore(state => state.link);
   const { register, handleSubmit, formState: { errors }, } = useForm();
+  const [oauthGoogle, setOauthGoogle] = useLocalStorage("oauthGoogle", false);
+  const [token, setToken] = useLocalStorage("token", null);
   const [screenWidth, setScreenWidth] = useState();
   const [loading, setLoading] = useState(false);
-  // const [oauthGoogle, setOauthGoogle] = useLocalStorage("oauthGoogle", "null");
+  const [eyepass, setEyepass] = useState(false);
   const { data } = useSession();
   const router = useRouter();
 
-  const auth = async (userData) => {
-    // setLoading(true)
-    // userData.method = "username"
-    // userData.user.split("").map(item => { if (item == "@") userData.method = "email" })
-
-    // axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/auth/login/${userData.method}`, {
-    //   headers: {
-    //     'login': userData.user,
-    //     'password': userData.password,
-    //     'secret': process.env.NEXT_PUBLIC_SECRET
-    //   }
-    // }).then(({ data }) => {
-    //   setToken(data.id)
-    //   success("You a signed in");
-    //   setTimeout(() => router.push('/'), 1000)
-    // }).catch(error => wrong(error.response.data.message)).finally(() => setLoading(false))
-
-    console.log(userData);
+  const auth = async (user) => {
+    setLoading(true)
+    axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/users`, {
+      headers: {
+        'email': user.email,
+        'password': user.password,
+      }
+    }).then(({ data }) => {
+      setToken(data._id)
+      setUser(data)
+      success("You a login");
+      setTimeout(() => router.push(link), 1000)
+    }).catch(error => wrong(error.response.data.message)).finally(() => setLoading(false))
   }
 
   const authGoogle = () => {
     setLoading(true);
     signIn("google");
-    // setOauthGoogle("signed");
+    setOauthGoogle(true)
   };
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
-    // localStorage.removeItem("oauthGoogle");
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    // if (oauthGoogle == "signed" && data) {
-    //   setLoading(true);
-    //   axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/users/email/${data.user.email}`).then((res) => {
-    //     if (res.data == null) {
-    //       // warning("You don't have an account, create one first");
-    //       router.push("/signup");
-    //       // setPage(5);
-    //       // setEmail(data.user.email);
-    //       // setName(data.user.name);
-    //       // setImage(data.user.image);
-    //     } else {
-    //       setToken(res.data._id);
-    //       // success("You a signed in");
-    //       router.push("/");
-    //     }
-    //   }).finally(() => setLoading(false));
-    // }
-    // localStorage.removeItem("oauthGoogle");
-
-    console.log(data);
+    if (oauthGoogle && data) {
+      console.log('google');
+      setLoading(true);
+      axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/users/google`, { headers: { 'email': data.user.email, name: data.user.name, image: data.user.image } }).then(({ data }) => {
+        setToken(data._id)
+        setUser(data)
+        success("You a login");
+        setTimeout(() => router.push(link), 1000)
+      }).finally(() => setLoading(false));
+      setOauthGoogle(false)
+    }
   }, [data]);
-
-  console.log(data, loading);
-  
 
   return (
     <Root page="sign" title={"Login"}>
@@ -142,8 +131,8 @@ export default function Login() {
               </>
             )}
 
-            <label htmlFor="user" className="user">
-              <p>Username or email</p>
+            <label htmlFor="email" className="email">
+              <p>Email</p>
               <div className="wrapper">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -151,16 +140,17 @@ export default function Login() {
                   height="20"
                   viewBox="0 0 20 20"
                   fill="none"
+                  className="icon"
                 >
                   <path
-                    d="M4.43033 16.1987C4.93727 15.0043 6.12085 14.1667 7.50008 14.1667H12.5001C13.8793 14.1667 15.0629 15.0043 15.5698 16.1987M13.3334 7.91667C13.3334 9.75762 11.841 11.25 10.0001 11.25C8.15913 11.25 6.66675 9.75762 6.66675 7.91667C6.66675 6.07572 8.15913 4.58334 10.0001 4.58334C11.841 4.58334 13.3334 6.07572 13.3334 7.91667ZM18.3334 10C18.3334 14.6024 14.6025 18.3333 10.0001 18.3333C5.39771 18.3333 1.66675 14.6024 1.66675 10C1.66675 5.39763 5.39771 1.66667 10.0001 1.66667C14.6025 1.66667 18.3334 5.39763 18.3334 10Z"
+                    d="M1.6665 5.83334L8.4706 10.5962C9.02158 10.9819 9.29707 11.1747 9.59672 11.2494C9.86142 11.3154 10.1383 11.3154 10.403 11.2494C10.7026 11.1747 10.9781 10.9819 11.5291 10.5962L18.3332 5.83334M5.6665 16.6667H14.3332C15.7333 16.6667 16.4334 16.6667 16.9681 16.3942C17.4386 16.1545 17.821 15.7721 18.0607 15.3017C18.3332 14.7669 18.3332 14.0668 18.3332 12.6667V7.33334C18.3332 5.93321 18.3332 5.23315 18.0607 4.69837C17.821 4.22796 17.4386 3.84551 16.9681 3.60583C16.4334 3.33334 15.7333 3.33334 14.3332 3.33334H5.6665C4.26637 3.33334 3.56631 3.33334 3.03153 3.60583C2.56112 3.84551 2.17867 4.22796 1.93899 4.69837C1.6665 5.23315 1.6665 5.93321 1.6665 7.33334V12.6667C1.6665 14.0668 1.6665 14.7669 1.93899 15.3017C2.17867 15.7721 2.56112 16.1545 3.03153 16.3942C3.56631 16.6667 4.26637 16.6667 5.6665 16.6667Z"
                     stroke="white"
                     strokeWidth="1.2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type="text" placeholder="Username or email" id="user" />
+                <input type="email" placeholder="Email" id="email" {...register("email", { required: true })} />
               </div>
             </label>
             <label htmlFor="password" className="password">
@@ -172,6 +162,7 @@ export default function Login() {
                   height="20"
                   viewBox="0 0 20 20"
                   fill="none"
+                  className="icon"
                 >
                   <path
                     d="M14.1666 8.33333V6.66667C14.1666 4.36548 12.3011 2.5 9.99992 2.5C7.69873 2.5 5.83325 4.36548 5.83325 6.66667V8.33333M9.99992 12.0833V13.75M7.33325 17.5H12.6666C14.0667 17.5 14.7668 17.5 15.3016 17.2275C15.772 16.9878 16.1544 16.6054 16.3941 16.135C16.6666 15.6002 16.6666 14.9001 16.6666 13.5V12.3333C16.6666 10.9332 16.6666 10.2331 16.3941 9.69836C16.1544 9.22795 15.772 8.8455 15.3016 8.60582C14.7668 8.33333 14.0667 8.33333 12.6666 8.33333H7.33325C5.93312 8.33333 5.23306 8.33333 4.69828 8.60582C4.22787 8.8455 3.84542 9.22795 3.60574 9.69836C3.33325 10.2331 3.33325 10.9332 3.33325 12.3333V13.5C3.33325 14.9001 3.33325 15.6002 3.60574 16.135C3.84542 16.6054 4.22787 16.9878 4.69828 17.2275C5.23306 17.5 5.93312 17.5 7.33325 17.5Z"
@@ -181,12 +172,15 @@ export default function Login() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type="password" placeholder="Password" id="password" />
+                <input type={eyepass ? 'text' : 'password'} placeholder="Password" id="password" {...register("password", { required: true })} />
+                <div className="eye" onClick={() => setEyepass(!eyepass)}>
+                  {eyepass ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                </div>
               </div>
             </label>
             <label htmlFor="cbx" className="remember">
               <div className="cbx">
-                <input id="cbx" type="checkbox" />
+                <input id="cbx" type="checkbox" {...register("remember", { required: true })} />
                 <label htmlFor="cbx"></label>
                 <svg width="15" height="14" viewBox="0 0 15 14" fill="none">
                   <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -284,6 +278,13 @@ export default function Login() {
         <div id="light" />
         <div id="shadow" />
       </Animated>
+      {loading && <div id="loading">
+        <div className="wrapper">
+          <div className="content">
+            <div className="cube" />
+          </div>
+        </div>
+      </div>}
     </Root>
   );
 }
