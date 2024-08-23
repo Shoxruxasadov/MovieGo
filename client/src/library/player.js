@@ -142,14 +142,13 @@ export default function Player({module}) {
   }
 
   const makeFullScreen = () => {
-    // if (window.document.fullscreenElement) {
-    //   setFullscreen(false)
-    //   return window.document.exitFullscreen()
-    // }
-    // setFullscreen(true)
-    // setControls(false)
-    // playerRef.current.requestFullscreen()
-    console.log('fullscreen');
+    if (window.document.fullscreenElement) {
+      setFullscreen(false)
+      return window.document.exitFullscreen()
+    }
+    setFullscreen(true)
+    setControls(false)
+    playerRef.current.requestFullscreen()
   }
 
   const formatTime = time => {
