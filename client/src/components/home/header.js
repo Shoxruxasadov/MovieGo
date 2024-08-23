@@ -17,8 +17,8 @@ export default function Header({ movie }) {
   ]
 
   const movieList = [
-    { name: "Home", link: "watch", position: 0 },
-    { name: "Watch", link: "player", position: -100 },
+    { name: "Home", link: "movie-home", position: 0 },
+    { name: "Watch", link: "movie-player", position: -100 },
   ]
 
   useEffect(() => {

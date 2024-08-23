@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Anton");
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,7 +15,7 @@
 
   --background-color: #0d0d0d;
   --viewer-color: #1d1d1d;
-  --plyr-color-main: #fa3b3c;
+  --player-color-main: #fa3b3c;
 }
 
 // [data-theme="light"]:root {

@@ -53,7 +53,7 @@ export default function MovieHome() {
             <div className="left">
               <Scroll
                 activeClass="active"
-                to="plyr"
+                to="player"
                 spy={true}
                 smooth={true}
                 offset={-80}

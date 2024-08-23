@@ -15,8 +15,6 @@ import useLocalStorage from "../hooks/useLocalStorage";
 // import Animation from "../components/loading/animation"
 
 import "@/styles/globals.scss";
-import 'plyr/dist/plyr.css';
-import "plyr-react/plyr.css"
 
 export default function App({ Component, pageProps }) {
   // const [access, setAccess] = useState(true)
