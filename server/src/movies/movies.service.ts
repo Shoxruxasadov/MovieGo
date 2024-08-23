@@ -11,7 +11,7 @@ export class MoviesService {
   ) {}
 
   async findByType(type: string) {
-    return this.moviesModel.find({ type: type }).sort({ createdAt: 1 });
+    return this.moviesModel.find({ type: type }).sort({ timeline: -1 });
   }
 
   async findByName(name: string) {
