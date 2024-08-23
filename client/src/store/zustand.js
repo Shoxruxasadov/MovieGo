@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 import axios from "axios";
 
 export const useStore = create((set) => ({
@@ -8,7 +8,7 @@ export const useStore = create((set) => ({
     getMovie: (movie) => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies/${movie}`).then(({ data }) => set(() => ({ movie: data }))).finally(() => set(() => ({ loading: false })))
 }));
 
-export const usePlayer = create()(persist((set) => ({
+export const usePlayer = create(persist((set) => ({
     language: 'uz',
     setLanguage: (is) => set(() => ({ language: is })),
     quality: '720p',

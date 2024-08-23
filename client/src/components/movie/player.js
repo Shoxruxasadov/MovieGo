@@ -20,27 +20,9 @@ export default function MoviePlayer() {
           <p className="description">{movie.description.en}</p>
           <div className="casts">
             <h2>Top Cast</h2>
-            <div
-              className="left"
-              onClick={() => {
-                scrollDemoRef.current.scrollLeft -= 700;
-              }}
-            >
-              <FaChevronLeft />
-            </div>
-            <div
-              className="right"
-              onClick={() => {
-                scrollDemoRef.current.scrollLeft += 700;
-              }}
-            >
-              <FaChevronRight />
-            </div>
-            <div
-              className="scrolling"
-              ref={scrollDemoRef}
-              style={{ scrollBehavior: "smooth" }}
-            >
+            <div className="left" onClick={() => {scrollDemoRef.current.scrollLeft -= 700}}><FaChevronLeft /></div>
+            <div className="right" onClick={() => {scrollDemoRef.current.scrollLeft += 700}}><FaChevronRight /></div>
+            <div className="scrolling" ref={scrollDemoRef} style={{ scrollBehavior: "smooth" }}>
               <div className="wrapper">
                 {movie.cast.map((item, i) => (
                   <div className="cast" key={i}>
@@ -62,13 +44,15 @@ export default function MoviePlayer() {
           ))}
         </ul>
 
-        {true ? <Player module={module == "Movie" ? 'visible' : ''} /> : <div id="need" className={module == "Movie" ? 'visible' : ''}>
+        <Player module={module == "Movie" ? 'visible' : ''} />
+
+        {/* <div id="need" className={module == "Movie" ? 'visible' : ''}>
           <p>You need to sign up or log in to watch movies</p>
           <div className="sign">
             <Link href="/signup">Sign Up</Link>
             <Link href="/login">Log In</Link>
           </div>
-        </div>}
+        </div> */}
 
         <div id="credits" className={module == "Credits" ? 'visible' : ''}>
           <div className="card release">
