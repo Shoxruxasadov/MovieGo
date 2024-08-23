@@ -57,8 +57,8 @@ export default function MoviePlayer() {
         </div>
 
         <ul className="list-modules">
-          {modules.map((item) => (
-            <li className={`item${module == item ? ' selected' : ''}`} onClick={() => setModule(item)}>{item}</li>
+          {modules.map((item i) => (
+            <li className={`item${module == item ? ' selected' : ''}`} onClick={() => setModule(item)} key={i}>{item}</li>
           ))}
         </ul>
 
