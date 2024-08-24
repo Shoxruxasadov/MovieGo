@@ -22,8 +22,14 @@
   }
 
   .container .title {
-    padding: 40px 0 80px;
+    padding: 40px 0;
     position: relative;
+
+    @media (max-width: 440px) {
+      padding: 40px 0 80px;
+      align-items: center;
+    }
+  
 
     &::before{
       content: '';
