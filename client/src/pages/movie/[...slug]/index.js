@@ -21,28 +21,22 @@ export default function AppMovie() {
   const pathname = usePathname()
 
   useEffect(() => {
-    if (pathname) {
-      if (pathname.split('/').length == 4) {
-        setType('movie')
-        getMovie(pathname.split('/')[3]).finally(() => setLoading(false))
-      }
-      if (pathname.split('/').length == 3) {
-        setType('module')
-        getModule(pathname.split('/')[2]).finally(() => setLoading(false))
-      }
-    }
+    setLoading(true)
+    setType(null)
+    if (pathname && pathname.split('/').length == 4) getMovie(pathname.split('/')[3]).finally(() => { setLoading(false); setType('movie') })
+    if (pathname && pathname.split('/').length == 3) getModule(pathname.split('/')[2]).finally(() => { setLoading(false); setType('module') })
   }, [pathname])
 
   useEffect(() => {
     if (type == "module") { document.querySelector("main").style.backgroundImage = `none`; document.querySelector("main").style.minHeight = `calc(100svh - 88.9px)`; return }
     if (movie) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
     else document.querySelector("main").style.backgroundImage = `none`
-  }, [movie, loading, modules])
+  }, [movie, loading, modules, type])
 
   if (loading) return <Loading />
   if (!movie && !modules) return <ErrorPage />
   return (
-    <Root page="movie" title={type == 'movie' ? movie.title.en : modules[0].studio}>
+    <Root page="movie" title={type == 'movie' ? movie.title.en : type == 'module' ? modules[0].studio : 'Loading'}>
       <Header movie={true} />
       <Animated>
         {type == 'movie' && <>
