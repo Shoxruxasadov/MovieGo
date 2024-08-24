@@ -19,7 +19,7 @@ const BadgePosition = styled.span`
     left: ${props => props.move}px!important;
 `;
 
-export default function Player({module}) {
+export default function Player({ module }) {
   const setLanguage = usePlayer(state => state.setLanguage);
   const setQuality = usePlayer(state => state.setQuality);
   const setSpeed = usePlayer(state => state.setSpeed);
@@ -39,6 +39,7 @@ export default function Player({module}) {
   const [currentTimeView, setCurrentTimeView] = useState('00:00')
   const [durationView, setDurationView] = useState('0:00:00')
   const [badgePosition, setBadgePosition] = useState(0)
+  const [loadingMovie, setLoadingMovie] = useState(true)
   const [accessible, setAccessible] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
   const [percentTime, setPercentTime] = useState(0)
@@ -79,6 +80,11 @@ export default function Player({module}) {
     makeCurrentTime()
   }
 
+  const loadedMovie = event => {
+    setDuration(event.target.duration)
+    setLoadingMovie(false);
+  }
+
   const volumeChange = (event) => {
     videoRef.current.volume = event.target.value
     setVolume(event.target.value)
@@ -90,7 +96,6 @@ export default function Player({module}) {
     setRangeTime(event.target.value)
     setCurrentTime(event.target.value)
     makeCurrentTime()
-
   }
 
   const makeCurrentTime = () => {
@@ -116,12 +121,14 @@ export default function Player({module}) {
   const handleLanguage = language => {
     setLanguage(language);
     setList('main');
+    setLoadingMovie(true);
     setCurrentTimeChanged(currentTime)
   }
 
   const handleQuality = quality => {
     setQuality(quality);
     setList('main');
+    setLoadingMovie(true);
     setCurrentTimeChanged(currentTime)
   }
 
@@ -213,7 +220,7 @@ export default function Player({module}) {
         controls={false}
         onClick={handleVideo}
         onTimeUpdate={timeUpdate}
-        onLoadedData={(e) => setDuration(e.target.duration)}
+        onLoadedData={loadedMovie}
         src={movie.source[quality][language]}
         style={currentTime == 0 ? { visibility: "hidden" } : {}}
       ></video>
@@ -226,7 +233,7 @@ export default function Player({module}) {
             <button className="skip-forward" onClick={() => skip('forward')}><FaForward /></button>
           </li>
           <li className="options center">
-            <div className="video-timeline" onMouseMove={(e) => {
+            <div className={`video-timeline${loadingMovie ? ' loading' : ''}`} onMouseMove={(e) => {
               setBadgePosition(e.nativeEvent.offsetX)
               formatTime((e.nativeEvent.offsetX / progressRef.current.clientWidth) * videoRef.current.duration)
             }}>
@@ -281,7 +288,7 @@ export default function Player({module}) {
                 </ul>
               </div>
             </div>
-            <button className="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaCompressAlt /> : <FaExpandAlt />}</button>
+            <button className="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>
           </li>
         </ul>
       </div>
