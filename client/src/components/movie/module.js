@@ -6,10 +6,10 @@ import { useStore } from "@/store/zustand";
 import Link from "next/link";
 
 export default function MovieModule() {
-    const module = useStore(state => state.module);
+    const modules = useStore(state => state.module);
     const [columnCount, setColumnCount] = useState(6);
 
-    console.log(module);
+    console.log(modules);
 
     useEffect(() => {
         const handleResize = () => {
@@ -33,7 +33,7 @@ export default function MovieModule() {
     return (
         <section id="movie-module">
             <div className="container" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`, }}>
-                {module.map(item => (
+                {modules.map(item => (
                     <Link
                         href={`/movie/${item.module}/${item.name}`}
                         className="card"

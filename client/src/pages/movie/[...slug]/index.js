@@ -14,7 +14,7 @@ import MovieModule from "@/components/movie/module"
 export default function AppMovie() {
   const getModule = useStore(state => state.getModule);
   const getMovie = useStore(state => state.getMovie);
-  const module = useStore(state => state.module);
+  const modules = useStore(state => state.module);
   const movie = useStore(state => state.movie);
   const [loading, setLoading] = useState(true)
   const [type, setType] = useState(null)
@@ -37,12 +37,12 @@ export default function AppMovie() {
     if (type == "module") { document.querySelector("main").style.backgroundImage = `none`; return }
     if (movie) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
     else document.querySelector("main").style.backgroundImage = `none`
-  }, [movie, loading, module])
+  }, [movie, loading, modules])
 
   if (loading) return <Loading />
-  if (!movie && !module) return <ErrorPage />
+  if (!movie && !modules) return <ErrorPage />
   return (
-    <Root page="movie" title={type == 'movie' ? movie.title.en : module[0].studio}>
+    <Root page="movie" title={type == 'movie' ? movie.title.en : modules[0].studio}>
       <Header movie={true} />
       <Animated>
         {type == 'movie' && <>
