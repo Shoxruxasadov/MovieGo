@@ -54,7 +54,6 @@ export default function Login() {
 
   useEffect(() => {
     if (oauthGoogle && data) {
-      console.log('google');
       setLoading(true);
       axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/users/google`, { headers: { 'email': data.user.email, name: data.user.name, image: data.user.image } }).then(({ data }) => {
         setToken(data._id)

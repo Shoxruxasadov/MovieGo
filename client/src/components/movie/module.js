@@ -9,8 +9,6 @@ export default function MovieModule() {
     const modules = useStore(state => state.module);
     const [columnCount, setColumnCount] = useState(6);
 
-    console.log(modules);
-
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth >= 2340) setColumnCount(10);

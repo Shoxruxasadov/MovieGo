@@ -25,7 +25,7 @@ export default function Signup() {
   const router = useRouter();
 
   const auth = async (user) => {
-    if (user.password !== user.repass) return console.log("Repeat Password Wrong!");
+    if (user.password !== user.repass) return wrong("Repeat Password Wrong!");
     setLoading(true)
     axios.post(`${process.env.NEXT_PUBLIC_SERVER_API}/users`, {
       name: user.lastname ? `${user.firstname} ${user.lastname}` : user.firstname,
@@ -55,7 +55,6 @@ export default function Signup() {
 
   useEffect(() => {
     if (oauthGoogle && data) {
-      console.log('google');
       setLoading(true);
       axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/users/google`, { headers: { 'email': data.user.email, name: data.user.name, image: data.user.image } }).then(({ data }) => {
         setToken(data._id)

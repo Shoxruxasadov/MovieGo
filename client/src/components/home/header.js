@@ -13,9 +13,6 @@ export default function Header({ movie }) {
   const [isScrolled, setScrolled] = useState(false);
   const pathname = usePathname()
 
-  console.log(title);
-
-
   const homeList = [
     { name: "Home", link: "home", position: 0 },
     { name: "Movies", link: "movies", position: -100 },

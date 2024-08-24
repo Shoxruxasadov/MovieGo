@@ -34,7 +34,7 @@ export default function AppMovie() {
   }, [pathname])
 
   useEffect(() => {
-    if (type == "module") { document.querySelector("main").style.backgroundImage = `none`; return }
+    if (type == "module") { document.querySelector("main").style.backgroundImage = `none`; document.querySelector("main").style.maxWidth = `calc(100svh - 88.9px)`; return }
     if (movie) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
     else document.querySelector("main").style.backgroundImage = `none`
   }, [movie, loading, modules])
