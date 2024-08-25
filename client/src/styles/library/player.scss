@@ -157,14 +157,25 @@
               position: absolute;
               width: 10%;
               height: 5px;
-              background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
+              background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0),
+                #fff,
+                rgba(255, 255, 255, 0)
+              );
               animation: skeleton-animation 1.25s infinite;
             }
 
             @keyframes skeleton-animation {
-              0% { right: 90% }
-              50% { right: 0 }
-              100% { right: 90% }
+              0% {
+                right: 90%;
+              }
+              50% {
+                right: 0;
+              }
+              100% {
+                right: 90%;
+              }
             }
           }
 
@@ -401,6 +412,13 @@
             &.language {
               width: 156.45px;
               height: 145.44px;
+
+              &.unity {
+                height: 83.46px;
+              }
+              &.dual {
+                height: 114.45px;
+              }
             }
             &.quality {
               width: 144.34px;

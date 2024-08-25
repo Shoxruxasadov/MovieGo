@@ -23,7 +23,7 @@ export class Movies {
   image: ImageDto;
 
   @Prop({ required: true })
-  source: FilmDto;
+  source: FilmDto | null;
 
   @Prop({ required: true })
   type: string;

@@ -8,10 +8,12 @@ import { useEffect, useState } from "react"
 import Loading from "@/components/others/loading"
 import Animated from "@/components/others/animated"
 import ErrorPage from "@/pages/404"
-import { useStore } from "@/store/zustand"
+import { usePlayer, useStore } from "@/store/zustand"
 import MovieModule from "@/components/movie/module"
 
 export default function AppMovie() {
+  const setLanguage = usePlayer(state => state.setLanguage);
+  const setQuality = usePlayer(state => state.setQuality);
   const getModule = useStore(state => state.getModule);
   const getMovie = useStore(state => state.getMovie);
   const modules = useStore(state => state.module);

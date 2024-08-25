@@ -3,11 +3,14 @@ import { persist } from "zustand/middleware";
 import axios from "axios";
 
 export const useStore = create((set) => ({
-    movie: null,
-    getMovie: movie => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies/${movie}`).then(({ data }) => set(() => ({ movie: data, title: data.title.en }))),
-    module: null,
-    getModule: module => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/modules/${module}`).then(({ data }) => set(() => ({ module: data, title: data[0].studio }))),
+    link: '/',
     title: null,
+    movie: null,
+    module: null,
+    setLink: link => set(() => ({ link: link })),
+    getMovie: movie => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies/${movie}`).then(({ data }) => set(() => ({ movie: data, title: data.title.en }))),
+    getModule: module => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/modules/${module}`).then(({ data }) => set(() => ({ module: data, title: data[0].studio }))),
+
 }));
 
 export const useUser = create(persist((set) => ({

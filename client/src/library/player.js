@@ -61,9 +61,9 @@ export default function Player({ module }) {
     setPlaying(!playing);
     if (playing) videoRef.current.pause();
     else videoRef.current.play();
-  };
+  }
 
-  const skip = (move) => {
+  const skip = move => {
     if (move == 'backward') {
       videoRef.current.currentTime -= 10
       setCurrentTime(currentTime - 10)
@@ -74,7 +74,7 @@ export default function Player({ module }) {
     }
   }
 
-  const timeUpdate = (event) => {
+  const timeUpdate = event => {
     setPercentTime((event.target.currentTime / event.target.duration) * 100)
     setCurrentTime(event.target.currentTime)
     makeCurrentTime()
@@ -85,12 +85,12 @@ export default function Player({ module }) {
     setLoadingMovie(false);
   }
 
-  const volumeChange = (event) => {
+  const volumeChange = event => {
     videoRef.current.volume = event.target.value
     setVolume(event.target.value)
   }
 
-  const rangeTimeChange = (event) => {
+  const rangeTimeChange = event => {
     videoRef.current.currentTime = event.target.value
     setPercentTime((event.target.value * 100) / videoRef.current.duration)
     setRangeTime(event.target.value)
@@ -148,6 +148,18 @@ export default function Player({ module }) {
     }
   }
 
+  const menuSize = menu => {
+    if (menu == 'quality') {
+      if ((movie.source[`1080p`] == null && movie.source[`720p`] == null) || (movie.source[`2160p`] == null && movie.source[`720p`] == null) || (movie.source[`2160p`] == null && movie.source[`1080p`] == null)) return ' unity'
+      if (movie.source[`2160p`] == null || movie.source[`1080p`] == null || movie.source[`720p`] == null) return ' dual'
+    }
+    if (menu == 'language') {
+      if ((movie.source[`720p`].ru == null && movie.source[`720p`].en == null) || (movie.source[`720p`].uz == null && movie.source[`720p`].en == null) || (movie.source[`720p`].uz == null && movie.source[`720p`].ru == null)) return ' unity'
+      if (movie.source[`720p`].uz == null || movie.source[`720p`].ru == null || movie.source[`720p`].en == null) return ' dual'
+    }
+    return ''
+  }
+
   const makeFullScreen = () => {
     if (window.document.fullscreenElement) {
       setFullscreen(false)
@@ -176,9 +188,46 @@ export default function Player({ module }) {
   useEffect(() => {
     setCurrentTime(0)
     hideControls(false)
-    if (movie.source[`1080p`] == null && quality == '1080p') setQuality('720p')
-    if (movie.source[`2160p`] == null && quality == '2160p') { if (movie.source[`1080p`] != null) { setQuality('1080p') } else { setQuality('720p') } }
   }, [])
+
+  useEffect(() => {
+    if (language == 'uz') {
+      if ((movie.source[`720p`].uz != null && movie.source[`720p`].ru != null && movie.source[`720p`].en != null)) setLanguage('uz')
+      if ((movie.source[`720p`].uz != null && movie.source[`720p`].ru != null && movie.source[`720p`].en == null)) setLanguage('uz')
+      if ((movie.source[`720p`].uz != null && movie.source[`720p`].ru == null && movie.source[`720p`].en != null)) setLanguage('uz')
+      if ((movie.source[`720p`].uz != null && movie.source[`720p`].ru == null && movie.source[`720p`].en == null)) setLanguage('uz')
+      if ((movie.source[`720p`].uz == null && movie.source[`720p`].ru != null && movie.source[`720p`].en != null)) setLanguage('ru')
+      if ((movie.source[`720p`].uz == null && movie.source[`720p`].ru != null && movie.source[`720p`].en == null)) setLanguage('ru')
+      if ((movie.source[`720p`].uz == null && movie.source[`720p`].ru == null && movie.source[`720p`].en != null)) setLanguage('en')
+    }
+    if (language == 'ru') {
+      if ((movie.source[`720p`].ru != null && movie.source[`720p`].uz != null && movie.source[`720p`].en != null)) setLanguage('ru')
+      if ((movie.source[`720p`].ru != null && movie.source[`720p`].uz != null && movie.source[`720p`].en == null)) setLanguage('ru')
+      if ((movie.source[`720p`].ru != null && movie.source[`720p`].uz == null && movie.source[`720p`].en != null)) setLanguage('ru')
+      if ((movie.source[`720p`].ru != null && movie.source[`720p`].uz == null && movie.source[`720p`].en == null)) setLanguage('ru')
+      if ((movie.source[`720p`].ru == null && movie.source[`720p`].uz != null && movie.source[`720p`].en != null)) setLanguage('uz')
+      if ((movie.source[`720p`].ru == null && movie.source[`720p`].uz != null && movie.source[`720p`].en == null)) setLanguage('uz')
+      if ((movie.source[`720p`].ru == null && movie.source[`720p`].uz == null && movie.source[`720p`].en != null)) setLanguage('en')
+    }
+    if (language == 'en') {
+      if ((movie.source[`720p`].en != null && movie.source[`720p`].uz != null && movie.source[`720p`].ru != null)) setLanguage('en')
+      if ((movie.source[`720p`].en != null && movie.source[`720p`].uz != null && movie.source[`720p`].ru == null)) setLanguage('en')
+      if ((movie.source[`720p`].en != null && movie.source[`720p`].uz == null && movie.source[`720p`].ru != null)) setLanguage('en')
+      if ((movie.source[`720p`].en != null && movie.source[`720p`].uz == null && movie.source[`720p`].ru == null)) setLanguage('en')
+      if ((movie.source[`720p`].en == null && movie.source[`720p`].uz != null && movie.source[`720p`].ru != null)) setLanguage('uz')
+      if ((movie.source[`720p`].en == null && movie.source[`720p`].uz != null && movie.source[`720p`].ru == null)) setLanguage('uz')
+      if ((movie.source[`720p`].en == null && movie.source[`720p`].uz == null && movie.source[`720p`].ru != null)) setLanguage('ru')
+    }
+  }, [movie, language])
+
+  useEffect(() => {
+    if (quality == '2160p') {
+      if (movie.source[`2160p`] != null) return setQuality('2160p')
+      if (movie.source[`1080p`] != null) return setQuality('1080p')
+      return setQuality('720p')
+    }
+    if (quality == '1080p' && movie.source[`1080p`] == null) setQuality('720p')
+  }, [movie, quality])
 
   useEffect(() => {
     if (changes) {
@@ -186,7 +235,7 @@ export default function Player({ module }) {
       videoRef.current.currentTime = currentTimeChanged
       videoRef.current.play();
       setPlaying(true)
-    } setChanges(true)
+    }; setChanges(true)
   }, [language, quality])
 
   useEffect(() => {
@@ -257,7 +306,7 @@ export default function Player({ module }) {
             </div>}
             <div className="setting-content">
               <button className={`settings${accessible ? ' active' : ''}`} onClick={() => setAccessible(!accessible)}><MdSettings /></button>
-              <div className={`menu ${list}${movie.source[`2160p`] == null && movie.source[`1080p`] == null ? ' unity' : movie.source[`2160p`] == null && movie.source[`1080p`] != null ? ' dual' : ''}${accessible ? ' active' : ''}`}>
+              <div className={`menu ${list}${menuSize(list)}${accessible ? ' active' : ''}`}>
                 <ul className={`main-list${accessible && list == 'main' ? ' active' : ''}`}>
                   <li className="child language" onClick={() => setList('language')}>Language <span>{language}</span></li>
                   <li className="child quality" onClick={() => setList('quality')}>Quality <span>{quality}</span></li>

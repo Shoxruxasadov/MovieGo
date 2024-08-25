@@ -6,13 +6,16 @@ import Player from "@/library/player"
 import release from "@/utils/release";
 import timeline from "@/utils/timeline";
 import { useStore, useUser } from "@/store/zustand";
+import { usePathname } from "next/navigation";
 
 export default function MoviePlayer() {
   const [module, setModule] = useState('Movie')
   const modules = ['Movie', 'Credits', "Authors"]
+  const setLink = useStore(state => state.setLink);
   const movie = useStore(state => state.movie);
   const user = useUser(state => state.user);
   const scrollDemoRef = useRef(null);
+  const pathname = usePathname()
 
   return (
     <section id="movie-player">
@@ -45,13 +48,17 @@ export default function MoviePlayer() {
           ))}
         </ul>
 
-        {user ? <Player module={module == "Movie" ? 'visible' : ''} /> : <div id="need" className={module == "Movie" ? 'visible' : ''}>
+        {user ? (movie.source ? <Player module={module == "Movie" ? 'visible' : ''} /> : <div id="need" className={module == "Movie" ? 'visible' : ''}>
+          <p>Coming Soon</p>
+        </div>) : <div id="need" className={module == "Movie" ? 'visible' : ''}>
           <p>You need to sign up or log in to watch movies</p>
-          <div className="sign">
+          <div className="sign" onClick={() => setLink(pathname)}>
             <Link href="/signup">Sign Up</Link>
             <Link href="/login">Log In</Link>
           </div>
         </div>}
+
+
 
         <div id="credits" className={module == "Credits" ? 'visible' : ''}>
           <div className="card release">
