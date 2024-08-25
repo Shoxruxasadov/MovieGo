@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
     </ThemeProvider>
 
     <ToastContainer />
-    <SpeedInsights />
+    {/* <SpeedInsights /> */}
     <Analytics />
   </>;
 }
