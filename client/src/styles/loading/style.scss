@@ -15,6 +15,7 @@
     width: 56px;
     height: 70px;
     background: var(--main-click-color);
+    overflow: hidden;
 
     &:before,
     &:after {

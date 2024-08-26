@@ -469,10 +469,9 @@ export default function Signup() {
         <div id="shadow" />
       </Animated>
       {loading && <div id="loading">
-        <div className="wrapper">
-          <div className="content">
-            <div className="cube" />
-          </div>
+        <div className="loader">
+          <div className="loader_filmstrip" />
+          <p className="loader_text">loading</p>
         </div>
       </div>}
     </Root>

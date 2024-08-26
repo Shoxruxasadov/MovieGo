@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useStore, useUser } from "@/store/zustand";
-import { success, wrong } from "@/utils/toastify";
+import { success, warning, wrong } from "@/utils/toastify";
 
 export default function Login() {
   const setUser = useUser(state => state.setUser);
@@ -24,7 +24,8 @@ export default function Login() {
   const { data } = useSession();
   const router = useRouter();
 
-  const auth = async (user) => {
+  const auth = async user => {
+    if (!user.remember) return warning('Check Remember')
     setLoading(true)
     axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/users`, {
       headers: {
@@ -179,7 +180,7 @@ export default function Login() {
             </label>
             <label htmlFor="cbx" className="remember">
               <div className="cbx">
-                <input id="cbx" type="checkbox" {...register("remember", { required: true })} />
+                <input id="cbx" type="checkbox" {...register("remember")} />
                 <label htmlFor="cbx"></label>
                 <svg width="15" height="14" viewBox="0 0 15 14" fill="none">
                   <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -278,10 +279,9 @@ export default function Login() {
         <div id="shadow" />
       </Animated>
       {loading && <div id="loading">
-        <div className="wrapper">
-          <div className="content">
-            <div className="cube" />
-          </div>
+        <div className="loader">
+          <div className="loader_filmstrip" />
+          <p className="loader_text">loading</p>
         </div>
       </div>}
     </Root>

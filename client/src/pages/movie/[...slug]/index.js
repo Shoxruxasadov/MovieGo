@@ -12,8 +12,6 @@ import { usePlayer, useStore } from "@/store/zustand"
 import MovieModule from "@/components/movie/module"
 
 export default function AppMovie() {
-  const setLanguage = usePlayer(state => state.setLanguage);
-  const setQuality = usePlayer(state => state.setQuality);
   const getModule = useStore(state => state.getModule);
   const getMovie = useStore(state => state.getMovie);
   const modules = useStore(state => state.module);
@@ -30,15 +28,21 @@ export default function AppMovie() {
   }, [pathname])
 
   useEffect(() => {
-    if (type == "module") { document.querySelector("main").style.backgroundImage = `none`; document.querySelector("main").style.minHeight = `calc(100svh - 88.9px)`; return }
-    if (movie) document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
-    else document.querySelector("main").style.backgroundImage = `none`
+    if (type == 'movie' && movie) {
+      document.querySelector("main").style.backgroundImage = `url(${movie.image.banner})`
+    } else {
+      document.querySelector("main").style.backgroundImage = `none`
+    }
+
+    if (type == "module") {
+      document.querySelector("main").style.minHeight = `calc(100svh - 88.9px)`;
+    }
   }, [movie, loading, modules, type])
 
   if (loading) return <Loading />
-  if (!movie && !modules) return <ErrorPage />
+  if (!movie && (!modules || modules.length==0 )) return <ErrorPage />
   return (
-    <Root page="movie" title={type == 'movie' ? movie.title.en : type == 'module' ? modules[0].studio : 'Loading'}>
+    <Root page="movie" title={type == 'movie' ? movie.title.en : type == 'module' ?  modules[0].studio : 'Loading'}>
       <Header movie={true} />
       <Animated>
         {type == 'movie' && <>
