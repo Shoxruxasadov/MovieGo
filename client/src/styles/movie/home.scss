@@ -60,7 +60,7 @@
       filter: blur(20px);
       margin-bottom: 20px;
 
-      @media (max-width: 1024px) and (max-height: 576px) {
+      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
         width: 200px;
         margin-bottom: 14px;
       }
@@ -91,7 +91,7 @@
       gap: 16px;
       margin-bottom: 24px;
 
-      @media (max-width: 1024px) and (max-height: 576px) {
+      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
         margin-bottom: 16px;
         font-size: 12px;
         gap: 14px;
@@ -154,7 +154,7 @@
           padding: 0 32px;
           white-space: nowrap;
 
-          @media (max-width: 1024px) and (max-height: 576px) {
+          @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
             width: 150px;
             height: 36px;
             font-size: 11px;
@@ -192,7 +192,7 @@
         align-items: center;
         gap: 16px;
 
-        @media (max-width: 1024px) and (max-height: 576px) {
+        @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
           transform: scale(0.832) translateX(18px);
         }
 

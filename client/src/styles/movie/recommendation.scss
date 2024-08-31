@@ -51,7 +51,7 @@
       display: none;
     }
 
-    @media (max-width: 1024px) and (max-height: 576px) {
+    @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
       display: flex;
       height: calc(100% - 36px);
       top: 33px;
@@ -93,7 +93,7 @@
       display: none;
     }
 
-    @media (max-width: 1024px) and (max-height: 576px) {
+    @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
       display: flex;
       height: calc(100% - 36px);
       top: 33px;
@@ -170,7 +170,7 @@
         }
 
         // TV TCL
-        @media (max-width: 1024px) and (max-height: 576px) {
+        @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
           width: 189px;
           height: 280px;
         }
