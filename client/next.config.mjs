@@ -2,12 +2,20 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost', 'firebasestorage.googleapis.com', 'lh3.googleusercontent.com', 'moviego.uz', 'www.moviego.uz', 'server.moviego.uz'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ]
   },
-  // i18n: {
-  //   locales: ['uz', 'ru', 'en'],
-  //   defaultLocale: 'en',
-  // },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['uz', 'ru', 'en'],
+  },
 };
-
 export default nextConfig;

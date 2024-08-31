@@ -2,12 +2,16 @@ import { Link as Scroll } from "react-scroll";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import translate from "@/language/translate.json"
 import { useStore } from "@/store/zustand";
+import { useRouter } from "next/router";
+import time from "@/utils/time";
 
 export default function MovieHome() {
   const [loadedImage, setLoadedImage] = useState(false);
   const [screenWidth, setScreenWidth] = useState();
   const movie = useStore(state => state.movie);
+  const { locale } = useRouter()
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -38,17 +42,12 @@ export default function MovieHome() {
           />
           <div className="credits">
             <p className="certificate">{movie.certificate}</p>
-            <p className="genre">{movie.genre[0]}</p>
+            <p className="genre">{translate[locale].movie[movie.genre[0]]}</p>
             <span>•</span>
-            <p className="genre">{movie.genre[1]}</p>
+            <p className="genre">{translate[locale].movie[movie.genre[1]]}</p>
             <span>•</span>
-            <p className="time">{`${Math.floor(
-              movie.duration / 60
-            )}h ${Math.floor(movie.duration % 60)}m`}</p>
+            <p className="time">{time(movie.duration)}</p>
           </div>
-          {screenWidth < 440 && (
-            <p className="description">{movie.description.en}</p>
-          )}
           <div className="watching">
             <div className="left">
               <Scroll
@@ -76,7 +75,7 @@ export default function MovieHome() {
                     fill="white"
                   />
                 </svg>
-                <span>Watch Now</span>
+                <span>{translate[locale].movie.watchBtn}</span>
               </Scroll>
               <button>
                 <svg
@@ -95,7 +94,7 @@ export default function MovieHome() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span>Add Watchlist</span>
+                <span>{translate[locale].movie.listBtn}</span>
               </button>
             </div>
             <div className="right">

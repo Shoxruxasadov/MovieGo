@@ -4,7 +4,7 @@
   justify-content: center;
   width: 100%;
   position: relative;
-  background: #0002;
+  background: #000;
   border-radius: 12px;
   margin-bottom: 40px;
 
@@ -37,6 +37,7 @@
 
   video {
     width: 90%;
+    transition: .2s ease-out;
 
     &::-webkit-media-controls {
       display: none;
@@ -406,7 +407,7 @@
             opacity: 0;
 
             &.main {
-              width: 171.85px;
+              width: 180.85px;
               height: 106.94px;
             }
             &.language {
@@ -572,19 +573,15 @@
                   }
                 }
 
-                span {
-                  margin-left: 28.5px;
-
-                  &.badge {
-                    font-size: 10px;
-                    background: #4a5362;
-                    width: 24px;
-                    height: 18px;
-                    text-align: center;
-                    line-height: 19px;
-                    color: white;
-                    border-radius: 3px;
-                  }
+                span.badge {
+                  font-size: 10px;
+                  background: #4a5362;
+                  width: 24px;
+                  height: 18px;
+                  text-align: center;
+                  line-height: 19px;
+                  color: white;
+                  border-radius: 3px;
                 }
 
                 &:hover {

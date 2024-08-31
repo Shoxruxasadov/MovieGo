@@ -17,6 +17,9 @@
   height: 66.6666vw;
   background: linear-gradient(#0000005e 30%, var(--background-color) 92%);
 
+  @media (max-width: 1280px) {
+    height: 93vw;
+  }
 
   @media (max-width: 1024px) {
     height: 100vw;
@@ -24,6 +27,10 @@
   
   @media (max-width: 1024px) and (max-height: 576px) {
     height: 66.6666vw;
+  }
+
+  @media (max-width: 768px) {
+    height: 134vw;
   }
 
   @media (max-width: 440px) {

@@ -1,6 +1,6 @@
 #movies,
 #series,
-#modules {
+#studios {
   margin-bottom: 40px;
   position: relative;
   z-index: 1;
@@ -13,6 +13,10 @@
 
     @media (max-width: 1024px) {
       font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 32px;
     }
 
     @media (max-width: 440px) {
@@ -121,11 +125,16 @@
   }
 
   .wrapper {
+    min-height: 250px;
     height: 100%;
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 12px 48px;
+
+    @media (max-width: 768px) {
+      padding: 8px 32px;
+    }
 
     @media (max-width: 440px) {
       padding: 8px 16px;
@@ -133,7 +142,7 @@
 
     .movie,
     .serie,
-    .module {
+    .studio {
       display: flex;
       gap: 6px;
 
@@ -151,7 +160,7 @@
 
         @media (max-width: 1280px) {
           width: 18vw;
-          height: 26.66vw;
+          height: 26.664vw;
         }
 
         @media (max-width: 1024px) {
@@ -404,14 +413,17 @@
       }
     }
 
-    .module .card {
+    .studio .card {
       .title {
-        padding-bottom: 32px;
+        padding-bottom: 28px;
       }
 
-      &:hover{
-        .title h3{
-          transform: translateY(-12px);
+      &:hover {
+        .title {
+          h3,
+          p {
+            transform: translateY(-8px);
+          }
         }
       }
     }

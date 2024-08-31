@@ -1,7 +1,8 @@
 import { IsNotEmpty } from 'class-validator';
 import { LangDto } from './lang.dto';
 import { ImageDto } from './image.dto';
-import { FilmDto } from './film.dto';
+import { MovieDto } from './movie.dto';
+import { SerieDto } from './serie.dto.';
 
 export class MoviesDto {
   @IsNotEmpty()
@@ -16,7 +17,11 @@ export class MoviesDto {
   @IsNotEmpty()
   image: ImageDto;
 
-  source: FilmDto | null;
+  source: MovieDto | null;
+  
+  episodes: SerieDto[] | null;
+
+  seasons: string[] | null;
 
   @IsNotEmpty()
   type: string;
@@ -39,14 +44,12 @@ export class MoviesDto {
   @IsNotEmpty()
   timeline: string;
 
-  @IsNotEmpty()
-  grossing: string;
+  grossing: string | null;
+
+  budget: string | null;
 
   @IsNotEmpty()
-  budget: string;
-
-  @IsNotEmpty()
-  studio: string;
+  studio: LangDto;
 
   @IsNotEmpty()
   certificate: string;

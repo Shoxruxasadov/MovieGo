@@ -4,25 +4,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoSearch } from "react-icons/io5";
+import { serverSideTranslations, } from 'next-i18next';
+import { useRouter } from "next/router";
 import { useStore, useUser } from "@/store/zustand";
+import translate from "@/language/translate.json"
 
 export default function Header({ movie }) {
   const user = useUser(state => state.user);
   const title = useStore(state => state.title);
-  const [load, setLoad] = useState(false);
+
   const [isScrolled, setScrolled] = useState(false);
+  const [load, setLoad] = useState(false);
+  const [menu, setMenu] = useState(false);
+
   const pathname = usePathname()
+  const router = useRouter();
+  const { locale } = useRouter()
+
+  const handleLanguage = locale => router.push(router.pathname, router.asPath, { locale })
 
   const homeList = [
-    { name: "Home", link: "home", position: 0 },
-    { name: "Movies", link: "movies", position: -100 },
-    { name: "Series", link: "series", position: -100 },
-    { name: "Modules", link: "modules", position: -100 },
-  ]
-
-  const movieList = [
-    { name: "Home", link: "movie-home", position: 0 },
-    { name: "Watch", link: "movie-player", position: -100 },
+    { name: translate[locale].header.home, link: "home", position: 0 },
+    { name: translate[locale].header.movies, link: "movies", position: -100 },
+    { name: translate[locale].header.serials, link: "series", position: -100 },
+    { name: translate[locale].header.studios, link: "studios", position: -100 },
   ]
 
   useEffect(() => {
@@ -34,8 +39,6 @@ export default function Header({ movie }) {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-
 
   return (
     <header className={isScrolled ? 'active' : ''}>
@@ -75,13 +78,32 @@ export default function Header({ movie }) {
           </li>
         </ul>
       </nav> : movie ? <nav>
-        <h3>{title}</h3>
+        <h3>{title[locale]}</h3>
       </nav> : <></>}
 
       <div className="right">
+        <div className="language"
+          onMouseEnter={() => setMenu(true)}
+          onMouseLeave={() => setMenu(false)}
+        >
+          <div className="selected">
+            <img src={`/language/${locale}.svg`} alt={locale} width={21} height={21} />
+            <span>{translate[locale].header.language}</span>
+          </div>
+          <div className={`menu${menu ? ' active' : ''}`}>
+            {router.locales.map(lng => (
+              <button
+                key={lng}
+                disabled={lng === locale}
+                onClick={() => handleLanguage(lng)}
+              >
+                <img src={`/language/${lng}.svg`} alt={lng} width={21} height={21} />
+                <span>{translate[lng].header.language}</span>
+              </button>
+            ))}
+          </div>
+        </div>
         {load && (user ? <div className="account">
-          <div><h3>{user.name}</h3>
-            <p>{user.email}</p></div>
           <Image
             src={user.image ? user.image : '/sign/user.webp'}
             alt="avatar"
@@ -89,8 +111,16 @@ export default function Header({ movie }) {
             height={256}
             className='avatar'
           />
-        </div> : <Link href='/login'>Login</Link>)}
+        </div> : <Link href='/login'>{translate[locale].header.login}</Link>)}
       </div >
     </header >
   )
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale)),
+    },
+  }
 }

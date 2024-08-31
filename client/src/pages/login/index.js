@@ -6,11 +6,12 @@ import axios from "axios";
 import useLocalStorage from "use-local-storage";
 import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useStore, useUser } from "@/store/zustand";
 import { success, warning, wrong } from "@/utils/toastify";
+import translate from "@/language/translate.json"
 
 export default function Login() {
   const setUser = useUser(state => state.setUser);
@@ -21,6 +22,7 @@ export default function Login() {
   const [screenWidth, setScreenWidth] = useState();
   const [loading, setLoading] = useState(false);
   const [eyepass, setEyepass] = useState(false);
+  const { locale } = useRouter();
   const { data } = useSession();
   const router = useRouter();
 
@@ -45,6 +47,12 @@ export default function Login() {
     signIn("google");
     setOauthGoogle(true)
   };
+
+  const handleLanguage = () => {
+    if (locale == 'uz') router.push(router.pathname, router.asPath, { locale: 'ru' })
+    if (locale == 'ru') router.push(router.pathname, router.asPath, { locale: 'en' })
+    if (locale == 'en') router.push(router.pathname, router.asPath, { locale: 'uz' })
+  }
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -72,12 +80,12 @@ export default function Login() {
         <section id="login">
           <Link href={"/"} className="logo">
             <Image src={"/logo/logo.png"} width={50} height={50} alt="logo" />
-            <p>Login to MovieGo</p>
+            <p>{translate[locale].sign.login.title}</p>
           </Link>
           <form onSubmit={handleSubmit(auth)}>
             {screenWidth > 439 && (
               <>
-                <p className="providers-paragraph">Login with:</p>
+                <p className="providers-paragraph">{translate[locale].sign.login.with}</p>
                 <div className="providers">
                   <button className="provider google" onClick={authGoogle}>
                     <svg
@@ -125,14 +133,14 @@ export default function Login() {
 
                 <div className="or">
                   <hr />
-                  <span>or</span>
+                  <span>{translate[locale].sign.login.or}</span>
                   <hr />
                 </div>
               </>
             )}
 
             <label htmlFor="email" className="email">
-              <p>Email</p>
+              <p>{translate[locale].sign.login.email}</p>
               <div className="wrapper">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -150,11 +158,11 @@ export default function Login() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type="email" placeholder="Email" id="email" {...register("email", { required: true })} />
+                <input type="email" placeholder="example@domain.com" id="email" {...register("email", { required: true })} />
               </div>
             </label>
             <label htmlFor="password" className="password">
-              <p>Password</p>
+              <p>{translate[locale].sign.login.password}</p>
               <div className="wrapper">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +180,7 @@ export default function Login() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type={eyepass ? 'text' : 'password'} placeholder="Password" id="password" {...register("password", { required: true })} />
+                <input type={eyepass ? 'text' : 'password'} placeholder={translate[locale].sign.login.password} id="password" {...register("password", { required: true })} />
                 <div className="eye" onClick={() => setEyepass(!eyepass)}>
                   {eyepass ? <IoEyeOutline /> : <IoEyeOffOutline />}
                 </div>
@@ -186,20 +194,20 @@ export default function Login() {
                   <path d="M2 8.36364L6.23077 12L13 2"></path>
                 </svg>
               </div>
-              <p className="rememberme">Remember Me</p>
+              <p className="rememberme">{translate[locale].sign.login.remember}</p>
             </label>
 
-            <button>Log In</button>
+            <button>{translate[locale].sign.login.button}</button>
 
             <p className="have">
-              Do not have an account? <Link href="signup">Sign Up</Link>
+              {translate[locale].sign.login.have} <Link href="signup">{translate[locale].sign.signup.button}</Link>
             </p>
 
             {screenWidth < 440 && (
               <>
                 <div className="or">
                   <hr />
-                  <span>or</span>
+                  <span>{translate[locale].sign.login.or}</span>
                   <hr />
                 </div>
 
@@ -253,9 +261,9 @@ export default function Login() {
 
           <footer>
             <ul className="list">
-              <li>Terms</li>•<li>Privacy</li>•<li>Docs</li>•<li>Helps</li>
+              <li>{translate[locale].sign.login.terms}</li>•<li>{translate[locale].sign.login.privacy}</li>•<li>{translate[locale].sign.login.docs}</li>•<li>{translate[locale].sign.login.helps}</li>
             </ul>
-            <div className="language">
+            <div className="language" onClick={handleLanguage}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -271,7 +279,7 @@ export default function Login() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>English</span>
+              <span>{translate[locale].header.language}</span>
             </div>
           </footer>
         </section>

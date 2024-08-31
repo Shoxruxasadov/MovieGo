@@ -1,17 +1,17 @@
-#movie-module {
+section {
   position: relative;
   z-index: 1;
 
   .container {
-    padding: 80px 48px 0 !important;
+    padding: 100px 48px 0 !important;
     max-width: none !important;
 
     @media (max-width: 1024px) {
-        padding: 60px 48px 0 !important;
-      }
+      padding: 65px 48px 0 !important;
+    }
 
     @media (max-width: 440px) {
-      padding: 70px 16px 0 !important;
+      padding: 75px 16px 0 !important;
     }
   }
 

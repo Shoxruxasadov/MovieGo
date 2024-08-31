@@ -1,16 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import { appWithTranslation, i18n } from 'next-i18next';
 import { Analytics } from "@vercel/analytics/react"
 import { SessionProvider } from 'next-auth/react';
 import { ToastContainer } from "react-toastify";
-import { ThemeProvider } from 'next-themes'
 import useLocalStorage from "use-local-storage";
-const queryClient = new QueryClient()
-import "@/styles/globals.scss";
+import { ThemeProvider } from 'next-themes'
 import { useEffect } from "react";
 import { useUser } from "@/store/zustand";
+const queryClient = new QueryClient()
+import "@/styles/globals.scss";
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const [token, setToken] = useLocalStorage("token", null);
   const getUser = useUser(state => state.getUser);
   const user = useUser(state => state.user);
@@ -30,7 +31,9 @@ export default function App({ Component, pageProps }) {
     </ThemeProvider>
 
     <ToastContainer />
-    {/* <SpeedInsights /> */}
     <Analytics />
+    {/* <SpeedInsights /> */}
   </>;
 }
+
+export default appWithTranslation(App)

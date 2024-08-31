@@ -3,8 +3,9 @@ import { Date, HydratedDocument } from 'mongoose';
 import { Document, Types, Schema as MongooseSchema } from 'mongoose';
 import { LangDto } from './dto/lang.dto';
 import { ImageDto } from './dto/image.dto';
-import { FilmDto } from './dto/film.dto';
+import { MovieDto } from './dto/movie.dto';
 import { Actors } from 'src/actors/actors.schema';
+import { SerieDto } from './dto/serie.dto.';
 
 export type MoviesDocument = HydratedDocument<Movies>;
 
@@ -23,7 +24,13 @@ export class Movies {
   image: ImageDto;
 
   @Prop({ required: false })
-  source: FilmDto | null;
+  source: MovieDto | null;
+
+  @Prop({ required: false })
+  episodes: SerieDto[] | null;
+
+  @Prop({ required: false })
+  seasons: string[] | null
 
   @Prop({ required: true })
   type: string;
@@ -46,14 +53,14 @@ export class Movies {
   @Prop({ type: Date, required: true })
   timeline: Date;
 
-  @Prop({ required: true })
-  grossing: string;
+  @Prop({ required: false })
+  grossing: string | null;
+
+  @Prop({ required: false })
+  budget: string | null;
 
   @Prop({ required: true })
-  budget: string;
-
-  @Prop({ required: true })
-  studio: string;
+  studio: LangDto;
 
   @Prop({ required: true })
   certificate: string;

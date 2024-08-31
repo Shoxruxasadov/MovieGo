@@ -95,12 +95,20 @@ body {
     background-position: center 0;
     background-size: contain;
 
+    @media (max-width: 1280px) {
+      background-size: 138vw;
+    }
+
     @media (max-width: 1024px) {
       background-size: 150vw;
     }
 
     @media (max-width: 1024px) and (max-height: 576px) {
       background-size: 100vw;
+    }
+    
+    @media (max-width: 768px) {
+      background-size: 200vw;
     }
 
     @media (max-width: 440px) {
@@ -114,7 +122,45 @@ body {
   @import "./home/header.scss";
   @import "./movie/home.scss";
   @import "./movie/player.scss";
-  @import "./movie/module.scss";
+  @import "./movie/recommendation.scss";
+  @import "./home/footer.scss";
+
+
+  main {
+    min-height: 132svh;
+    background-image: url("/spider/back.webp");
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: contain;
+
+    @media (max-width: 1280px) {
+      background-size: 138vw;
+    }
+
+    @media (max-width: 1024px) {
+      background-size: 150vw;
+    }
+
+    @media (max-width: 1024px) and (max-height: 576px) {
+      background-size: 100vw;
+    }
+    
+    @media (max-width: 768px) {
+      background-size: 200vw;
+    }
+
+    @media (max-width: 440px) {
+      background-size: 400vw;
+    }
+  }
+}
+
+#serie {
+  @import "./home/others.scss";
+  @import "./home/header.scss";
+  @import "./serie/home.scss";
+  @import "./serie/player.scss";
+  @import "./movie/recommendation.scss";
   @import "./home/footer.scss";
 
   main {
@@ -124,6 +170,10 @@ body {
     background-position: center 0;
     background-size: contain;
 
+    @media (max-width: 1280px) {
+      background-size: 138vw;
+    }
+
     @media (max-width: 1024px) {
       background-size: 150vw;
     }
@@ -132,9 +182,23 @@ body {
       background-size: 100vw;
     }
 
+    @media (max-width: 768px) {
+      background-size: 200vw;
+    }
+
     @media (max-width: 440px) {
       background-size: 400vw;
     }
+  }
+}
+
+#studio {
+  @import "./home/header.scss";
+  @import "./studio/studio.scss";
+  @import "./home/footer.scss";
+
+  main {
+    min-height: calc(100svh - 88.9px);
   }
 }
 
@@ -189,7 +253,6 @@ body {
 
     * {
       transform-style: preserve-3d;
-      
     }
 
     .wrapper {

@@ -24,6 +24,12 @@ export class MoviesController {
   async findByType(@Headers('type') type: string) {
     return this.moviesService.findByType(type);
   }
+  
+  @HttpCode(200)
+  @Get('random')
+  async findRandom() {
+    return this.moviesService.findRandom();
+  }
 
   @HttpCode(200)
   @Get(':name')

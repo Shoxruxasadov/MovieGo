@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Link from "next/link"
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import translate from "@/language/translate.json"
 
 export default function Section({ type, title, route, name }) {
     const [screenSize, setScreenSize] = useState();
+    const { locale } = useRouter()
     const scrollDemoRef = useRef(null);
 
     const { data: movies, isLoading, isError, isSuccess, error, refetch } = useQuery({
@@ -29,20 +32,20 @@ export default function Section({ type, title, route, name }) {
                 <div className={type}>
                     {isSuccess ? movies.map(item => (
                         <Link
-                            style={{ backgroundImage: `url(${type == 'module' ? item.image : item.image.poster})` }}
-                            href={type == 'module' ? `/movie/${item.module}` : `/movie/${item.module}/${item.name}`}
+                            style={{ backgroundImage: `url(${type == 'studio' ? item.image : item.image.poster})` }}
+                            href={type == 'studio' ? `/studio/${item.module}` : `/${item.type}/${item.name}`}
                             className="card"
                             key={item._id}
                         >
                             <div className="shadow" />
                             <div className="title">
-                                {type != "module" && <>
+                                {type != "studio" && <>
                                     <span className="resolution">{item.resolution}</span>
                                     <span className="format">{item.format}</span>
                                 </>}
-                                {type != "module" && <p className="type">Bepul</p>}
-                                {type == "module" ? <h3>{item.name}</h3> : <h3>{item.title.en}</h3>}
-                                {type != "module" && <p className="other">{item.studio} • <span>{item.mpa}+</span></p>}
+                                <p className="type">{translate[locale].movie.free}</p>
+                                {type == "studio" ? <h3>{item.name[locale]}</h3> : <h3>{item.title[locale]}</h3>}
+                                {type != "studio" && <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>}
                             </div>
                         </Link>
                     )) : <>

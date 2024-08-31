@@ -1,13 +1,13 @@
-import { Link as Scroll } from "react-scroll";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import { useStore } from "@/store/zustand";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import translate from "@/language/translate.json"
+import { useStore } from "@/store/zustand";
 
-export default function MovieModule() {
-    const modules = useStore(state => state.module);
+export default function MovieStudio() {
+    const studio = useStore(state => state.studio);
     const [columnCount, setColumnCount] = useState(6);
+    const { locale } = useRouter()
 
     useEffect(() => {
         const handleResize = () => {
@@ -27,13 +27,12 @@ export default function MovieModule() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-
     return (
-        <section id="movie-module">
+        <section>
             <div className="container" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`, }}>
-                {modules.map(item => (
+                {studio.map(item => (
                     <Link
-                        href={`/movie/${item.module}/${item.name}`}
+                        href={`/${item.type}/${item.name}`}
                         className="card"
                         key={item._id}
                     >
@@ -42,9 +41,9 @@ export default function MovieModule() {
                         <div className="title">
                             <span className="resolution">{item.resolution}</span>
                             <span className="format">{item.format}</span>
-                            <p className="type">Bepul</p>
-                            <h3>{item.title.en}</h3>
-                            <p className="other">{item.studio} • <span>{item.mpa}+</span></p>
+                            <p className="type">{translate[locale].movie.free}</p>
+                            <h3>{item.title[locale]}</h3>
+                            <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>
                         </div>
                     </Link>
                 ))}

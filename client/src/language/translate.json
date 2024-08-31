@@ -1,0 +1,359 @@
+{
+  "uz": {
+    "header": {
+      "home": "Asosiy",
+      "movies": "Filmlar",
+      "serials": "Seriallar",
+      "studios": "Studiyalar",
+      "language": "Uzbek",
+      "login": "Kirish"
+    },
+    "movie": {
+      "action": "Jangari",
+      "adventure": "Sarguzasht",
+      "h": "s",
+      "m": "d",
+      "descHero": "Agar afsun noto'g'ri bo'lsa, boshqa dunyodan xavfli dushmanlar paydo bo'la boshlaydi va Piterni o'rgimchak odam bo'lish nimani anglatishini tushunishga majbur qiladi.",
+      "watchBtn": "Tomosha Qilish",
+      "moreBtn": "Batafsil",
+      "listBtn": "Ko'rilganlarga Qo'shish",
+      "free": "Bepul",
+      "cast": "Eng Yaxshi Aktyorlar",
+      "movie": "Kino",
+      "serie": "Serial",
+      "recommendation": "Tavsiya",
+      "credits": "Tafsilotlar",
+      "authors": "Mualliflar",
+      "nextmovie": "Keyingi Film",
+      "season": "Mavsum",
+      "language": "Til",
+      "speed": "Tezlik",
+      "quality": "Sifat",
+      "normal": "Oddiy",
+      "soon": "Tez kunlarda",
+      "need": "Filmlarni tomosha qilish uchun ro'yxatdan o'tishingiz yoki tizimga kirishingiz kerak",
+      "signup": "Ro'yxatdan o'tish",
+      "login": "Kirish",
+      "release": "Chiqarilgan",
+      "timeline": "Xronologiya",
+      "studio": "Studiya",
+      "grossing": "Daromad",
+      "budget": "Byudjet",
+      "duration": "Davomiyligi",
+      "rating": "Reyting",
+      "country": "Davlat",
+      "directors": "Direktorlar",
+      "producers": "Ishlab chiqaruvchilar",
+      "screenwriters": "Ssenariy mualliflari"
+    },
+    "serie":{
+      "episodes": "Qismlar",
+      "episode": "Qism"
+    },
+    "sign": {
+      "login": {
+        "title": "MovieGo Hisobingizga Kiring",
+        "with": "Orqali kirish:",
+        "or": "yoki",
+        "email": "Pochta",
+        "password": "Parol",
+        "remember": "Eslab Qolish",
+        "button": "Kirish",
+        "have": "Hisobingiz yo'qmi?",
+        "terms": "Shartlar",
+        "privacy": "Maxfiylik",
+        "docs": "Hujjatlar",
+        "helps": "Yordam"
+      },
+      "signup": {
+        "title": "Filmlarni bepul tomosha qiling",
+        "card": "Kredit karta talab qilinmaydi",
+        "invite": {
+          "title": "Cheksiz hamkasblarni taklif qiling",
+          "description": "Qurilishga tayyor yoki past kodli yechimni tanlash uchun kafolatlangan ishlab chiquvchilarga qulay API-lar bilan integratsiya qiling yoki ochiq."
+        },
+        "ensure": {
+          "title": "Muvofiqlikni ta'minlash",
+          "description": "Real vaqt rejimida barcha raqamlaringiz haqida batafsil ma'lumot oling, tashrif buyuruvchilar qayerdan kelayotganini ko'ring."
+        },
+        "security": {
+          "title": "O'rnatilgan xavfsizlik",
+          "description": "Boshqaruv panelini hammaga ochiq baham ko'rish orqali jamoa a'zolari va mijozlaringizni doimiy ravishda kuzatib boring."
+        },
+        "with": "Orqali roʻyxatdan oʻtish:",
+        "name": {
+          "first": "Ism",
+          "last": "Familiya"
+        },
+        "repeat": "Parolni qaytaring",
+        "minimal": "Minimal uzunlik - 8 ta belgi.",
+        "button": "Ro'yxatdan O'tish",
+        "have": "Hisobingiz bormi?"
+      }
+    },
+    "date": {
+      "release": {
+        "january": "Yanvar",
+        "february": "Fevral",
+        "march": "Mart",
+        "april": "Aprel",
+        "may": "May",
+        "june": "Iyun",
+        "july": "Iyul",
+        "august": "Avgust",
+        "september": "Sentyabr",
+        "october": "Oktyabr",
+        "november": "Noyabr",
+        "december": "Dekabr"
+      },
+      "season": {
+        "winter": "Qish",
+        "spring": "Bahor",
+        "summer": "Yoz",
+        "autumn": "Kuz"
+      }
+    },
+    "footer": {
+      "rights": "«Marvel Studios» Barcha materiallar axborot maqsadida taqdim etilgan, barcha huquqlar marvelga tegishli.",
+      "powered": "Huquqlar"
+    }
+  },
+  "ru": {
+    "header": {
+      "home": "Главная",
+      "movies": "Фильмы",
+      "serials": "Сериалы",
+      "studios": "Студии",
+      "language": "Russian",
+      "login": "Войти"
+    },
+    "movie": {
+      "action": "Боевики",
+      "adventure": "Приключения",
+      "h": "ч",
+      "m": "м",
+      "descHero": "Когда заклинание идет не так, начинают появляться опасные враги из других миров, заставляя Питера узнать, что на самом деле значит быть Человеком-пауком.",
+      "watchBtn": "Смотреть",
+      "moreBtn": "Подробнее",
+      "listBtn": "Добавить Просмотра",
+      "free": "Бесплатные",
+      "cast": "Лучшие Актеры",
+      "movie": "Фильм",
+      "serie": "Сериал",
+      "recommendation": "Рекомендация",
+      "credits": "Сведения",
+      "authors": "Авторы",
+      "nextmovie": "Следующий Фильм",
+      "season": "Сезон",
+      "language": "Язык",
+      "speed": "Скорость",
+      "quality": "Качество",
+      "normal": "Нормал",
+      "soon": "Вскоре",
+      "need": "Вам необходимо зарегистрироваться или войти в систему, чтобы смотреть фильмы",
+      "signup": "Зарегистрироваться",
+      "login": "Войти",
+      "release": "Производства",
+      "timeline": "Хронология",
+      "studio": "Студия",
+      "grossing": "Доход",
+      "budget": "Бюджет",
+      "duration": "Время",
+      "rating": "Рейтинг",
+      "country": "Страна",
+      "directors": "Директора",
+      "producers": "Производители",
+      "screenwriters": "Сценаристы"
+    },
+    "serie":{
+      "episodes": "Части",
+      "episode": "Часть"
+    },
+    "sign": {
+      "login": {
+        "title": "Войдите в MovieGo",
+        "with": "Войти с помощью:",
+        "or": "или",
+        "email": "Почта",
+        "password": "Пароль",
+        "remember": "Запомнить Меня",
+        "button": "Войти",
+        "have": "У вас нет аккаунт?",
+        "terms": "Условия",
+        "privacy": "Конфиденциальность",
+        "docs": "Документы",
+        "helps": "Помощь"
+      },
+      "signup": {
+        "title": "Смотреть фильмы бесплатно",
+        "card": "Кредитная карта не требуется",
+        "invite": {
+          "title": "Пригласить неограниченное количество коллег",
+          "description": "Интегрируйтесь с гарантированно удобными для разработчиков API или открыто выбирайте готовое к сборке или требующее минимум кода решение."
+        },
+        "ensure": {
+          "title": "Обеспечить соответствие",
+          "description": "Получайте подробную информацию обо всех ваших показателях в режиме реального времени, узнавайте, откуда приходят посетители."
+        },
+        "security": {
+          "title": "Встроенная безопасность",
+          "description": "Держите членов своей команды и клиентов в курсе событий, сделав панель управления общедоступной."
+        },
+        "with": "Зарегистрируйтесь с помощью:",
+        "name": {
+          "first": "Имя",
+          "last": "Фамилия"
+        },
+        "repeat": "Повторите Пароль",
+        "minimal": "Минимальная длина — 8 символов.",
+        "button": "Зарегистрироваться",
+        "have": "У вас уже есть аккаунт?"
+      }
+    },
+    "date": {
+      "release": {
+        "january": "Январь",
+        "february": "Февраль",
+        "march": "Март",
+        "april": "Апрель",
+        "may": "Май",
+        "june": "Июнь",
+        "july": "Июль",
+        "august": "Август",
+        "september": "Сентябрь",
+        "october": "Октябрь",
+        "november": "Ноябрь",
+        "december": "Декабрь"
+      },
+      "season": {
+        "winter": "Зима",
+        "spring": "Весна",
+        "summer": "Лето",
+        "autumn": "Осень"
+      }
+    },
+    "footer": {
+      "rights": "«Marvel Studios» Все материалы предоставлены исключительно в информационных целях, все права принадлежат Marvel.",
+      "powered": "Права"
+    }
+  },
+  "en": {
+    "header": {
+      "home": "Home",
+      "movies": "Movies",
+      "serials": "Series",
+      "studios": "Studios",
+      "language": "English",
+      "login": "Login"
+    },
+    "movie": {
+      "action": "Action",
+      "adventure": "Adventure",
+      "h": "h",
+      "m": "m",
+      "descHero": "When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
+      "watchBtn": "Watch Now",
+      "moreBtn": "More Info",
+      "listBtn": "Add Watchlist",
+      "free": "Free",
+      "cast": "Top Casts",
+      "movie": "Movie",
+      "serie": "Serie",
+      "recommendation": "Recommendation",
+      "credits": "Credits",
+      "authors": "Authors",
+      "nextmovie": "Next Movie",
+      "season": "Season",
+      "language": "Language",
+      "speed": "Speed",
+      "quality": "Quality",
+      "normal": "Normal",
+      "soon": "Coming Soon",
+      "need": "You need to sign up or log in to watch movies",
+      "signup": "Sign Up",
+      "login": "Log In",
+      "release": "Release",
+      "timeline": "Timeline",
+      "studio": "Studio",
+      "grossing": "Grossing",
+      "budget": "Budget",
+      "duration": "Duration",
+      "rating": "Rating",
+      "country": "Country",
+      "directors": "Directors",
+      "producers": "Producers",
+      "screenwriters": "Screenwriters"
+    },
+    "serie":{
+      "episodes": "Episodes",
+      "episode": "Episode"
+    },
+    "sign": {
+      "login": {
+        "title": "Login to MovieGo",
+        "with": "Login with:",
+        "or": "or",
+        "email": "Email",
+        "password": "Password",
+        "remember": "Remember Me",
+        "button": "Log In",
+        "have": "Do not have an account?",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "docs": "Docs",
+        "helps": "Helps"
+      },
+      "signup": {
+        "title": "Start watching movies for free",
+        "card": "No credit card required",
+        "invite": {
+          "title": "Invite unlimited colleagues",
+          "description": "Integrate with guaranteed developer-friendly APIs or openly to choose a build-ready or low-code solution."
+        },
+        "ensure": {
+          "title": "Ensure compliance",
+          "description": "Receive detailed insights on all your numbers in real-time, see where visitors are coming from."
+        },
+        "security": {
+          "title": "Built-in security",
+          "description": "Keep your team members and customers in the loop by sharing your dashboard public."
+        },
+        "with": "Sign up with:",
+        "name": {
+          "first": "First Name",
+          "last": "Last Name"
+        },
+        "repeat": "Repeat Password",
+        "minimal": "Minimum length is 8 characters.",
+        "button": "Sign Up",
+        "have": "Already have an account?"
+      }
+    },
+    "date": {
+      "release": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+      },
+      "season": {
+        "winter": "Winter",
+        "spring": "Spring",
+        "summer": "Summer",
+        "autumn": "Autumn"
+      }
+    },
+    "footer": {
+      "rights": "«Marvel Studios» All material provided for informational purposes only, all rights reserved by marvel.",
+      "powered": "Powered by"
+    }
+  }
+}

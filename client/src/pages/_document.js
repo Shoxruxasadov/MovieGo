@@ -8,8 +8,7 @@ export default function Document() {
         <link href="/favicon.png?" rel="apple-touch-icon" />
         <link href="/manifest.json" rel="manifest" />
         <meta name="theme-color" content="#0D0D0D" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       </Head>
       <body>
         <Main />

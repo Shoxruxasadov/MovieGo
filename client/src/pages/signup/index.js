@@ -6,11 +6,12 @@ import axios from "axios";
 import useLocalStorage from "use-local-storage";
 import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useStore, useUser } from "@/store/zustand";
 import { success, wrong } from "@/utils/toastify";
+import translate from "@/language/translate.json"
 
 export default function Signup() {
   const setUser = useUser(state => state.setUser);
@@ -21,6 +22,7 @@ export default function Signup() {
   const [screenWidth, setScreenWidth] = useState();
   const [loading, setLoading] = useState(false);
   const [eyepass, setEyepass] = useState(false);
+  const { locale } = useRouter();
   const { data } = useSession();
   const router = useRouter();
 
@@ -45,6 +47,12 @@ export default function Signup() {
     signIn("google");
     setOauthGoogle(true)
   };
+
+  const handleLanguage = () => {
+    if (locale == 'uz') router.push(router.pathname, router.asPath, { locale: 'ru' })
+    if (locale == 'ru') router.push(router.pathname, router.asPath, { locale: 'en' })
+    if (locale == 'en') router.push(router.pathname, router.asPath, { locale: 'uz' })
+  }
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -79,7 +87,7 @@ export default function Signup() {
                 </Link>
                 {screenWidth > 439 && (
                   <>
-                    <h2>Start watching movies for free</h2>
+                    <h2>{translate[locale].sign.signup.title}</h2>
                     <div className="card">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +111,7 @@ export default function Signup() {
                           </clipPath>
                         </defs>
                       </svg>
-                      <span>No credit card required</span>
+                      <span>{translate[locale].sign.signup.card}</span>
                     </div>
                   </>
                 )}
@@ -136,11 +144,8 @@ export default function Signup() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <h3>Invite unlimited colleagues</h3>
-                    <p>
-                      Integrate with guaranteed developer-friendly APIs or
-                      openly to choose a build-ready or low-code solution.
-                    </p>
+                    <h3>{translate[locale].sign.signup.invite.title}</h3>
+                    <p>{translate[locale].sign.signup.invite.description}</p>
                   </div>
                   <div className="part">
                     <svg
@@ -163,11 +168,8 @@ export default function Signup() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <h3>Ensure compliance</h3>
-                    <p>
-                      Receive detailed insights on all your numbers in
-                      real-time, see where visitors are coming from.
-                    </p>
+                    <h3>{translate[locale].sign.signup.ensure.title}</h3>
+                    <p>{translate[locale].sign.signup.ensure.description}</p>
                   </div>
                   <div className="part">
                     <svg
@@ -190,11 +192,8 @@ export default function Signup() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <h3>Built-in security</h3>
-                    <p>
-                      Keep your team members and customers in the loop by
-                      sharing your dashboard public.
-                    </p>
+                    <h3>{translate[locale].sign.signup.security.title}</h3>
+                    <p>{translate[locale].sign.signup.security.description}</p>
                   </div>
                 </>
               )}
@@ -203,9 +202,9 @@ export default function Signup() {
             {screenWidth > 439 && (
               <footer>
                 <ul className="list">
-                  <li>Terms</li>•<li>Privacy</li>•<li>Docs</li>•<li>Helps</li>
+                  <li>{translate[locale].sign.login.terms}</li>•<li>{translate[locale].sign.login.privacy}</li>•<li>{translate[locale].sign.login.docs}</li>•<li>{translate[locale].sign.login.helps}</li>
                 </ul>
-                <div className="language">
+                <div className="language" onClick={handleLanguage}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -221,7 +220,7 @@ export default function Signup() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <span>English</span>
+                  <span>{translate[locale].header.language}</span>
                 </div>
               </footer>
             )}
@@ -230,7 +229,7 @@ export default function Signup() {
             {screenWidth > 439 && (
               <>
                 <div className="auth">
-                  <p className="providers-paragraph">Sign Up with:</p>
+                  <p className="providers-paragraph">{translate[locale].sign.signup.with}</p>
                   <div className="providers">
                     <div className="provider google" onClick={authGoogle}>
                       <svg
@@ -279,7 +278,7 @@ export default function Signup() {
 
                 <div className="or">
                   <hr />
-                  <span>or</span>
+                  <span>{translate[locale].sign.login.or}</span>
                   <hr />
                 </div>
               </>
@@ -287,7 +286,7 @@ export default function Signup() {
 
             <div className="name">
               <label htmlFor="firstname" className="firstname">
-                <p>First Name</p>
+                <p>{translate[locale].sign.signup.name.first}</p>
                 <div className="wrapper">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -305,11 +304,11 @@ export default function Signup() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="text" placeholder="First Name" id="firstname" {...register("firstname", { required: true })} />
+                  <input type="text" placeholder={translate[locale].sign.signup.name.first} id="firstname" {...register("firstname", { required: true })} />
                 </div>
               </label>
               <label htmlFor="lastname" className="lastname">
-                <p>Last Name</p>
+                <p>{translate[locale].sign.signup.name.last}</p>
                 <div className="wrapper">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -327,12 +326,12 @@ export default function Signup() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="text" placeholder="Last Name" id="lastname" {...register("lastname")} />
+                  <input type="text" placeholder={translate[locale].sign.signup.name.last} id="lastname" {...register("lastname")} />
                 </div>
               </label>
             </div>
             <label htmlFor="email" className="email">
-              <p>Email</p>
+              <p>{translate[locale].sign.login.email}</p>
               <div className="wrapper">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -350,11 +349,11 @@ export default function Signup() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type="email" placeholder="Email" id="email" {...register("email", { required: true })} />
+                <input type="email" placeholder="example@domain.com" id="email" {...register("email", { required: true })} />
               </div>
             </label>
             <label htmlFor="password" className="password">
-              <p>Password</p>
+              <p>{translate[locale].sign.login.password}</p>
               <div className="wrapper pass">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -372,14 +371,14 @@ export default function Signup() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type={eyepass ? 'text' : 'password'} placeholder="Password" id="password"{...register("password", { required: true })} />
+                <input type={eyepass ? 'text' : 'password'} placeholder={translate[locale].sign.login.password} id="password"{...register("password", { required: true })} />
                 <div className="eye" onClick={() => setEyepass(!eyepass)}>
                   {eyepass ? <IoEyeOutline /> : <IoEyeOffOutline />}
                 </div>
               </div>
             </label>
             <label htmlFor="repass" className="password">
-              <p>Repeat Password</p>
+              <p>{translate[locale].sign.signup.repeat}</p>
               <div className="wrapper pass char">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -397,23 +396,23 @@ export default function Signup() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <input type={eyepass ? 'text' : 'password'} placeholder="Repeat Password" id="repass" {...register("repass", { required: true })} />
+                <input type={eyepass ? 'text' : 'password'} placeholder={translate[locale].sign.signup.repeat} id="repass" {...register("repass", { required: true })} />
                 <div className="eye" onClick={() => setEyepass(!eyepass)}>
                   {eyepass ? <IoEyeOutline /> : <IoEyeOffOutline />}
                 </div>
               </div>
-              <span>Minimum length is 8 characters.</span>
+              <span>{translate[locale].sign.signup.minimal}</span>
             </label>
 
-            <button>Sign Up</button>
+            <button>{translate[locale].sign.signup.button}</button>
 
-            <p className="have">Already have an account? <Link href={'/login'}>Login</Link></p>
+            <p className="have">{translate[locale].sign.signup.have} <Link href={'/login'}>{translate[locale].sign.login.button}</Link></p>
 
             {screenWidth < 440 && (
               <>
                 <div className="or">
                   <hr />
-                  <span>or</span>
+                  <span>{translate[locale].sign.login.or}</span>
                   <hr />
                 </div>
 

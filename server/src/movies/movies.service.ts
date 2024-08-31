@@ -14,6 +14,12 @@ export class MoviesService {
     return this.moviesModel.find({ type: type }).sort({ timeline: -1 });
   }
 
+  async findRandom() {
+    return this.moviesModel.aggregate([
+      {$sample: {size: 10}}
+    ]);
+  }
+
   async findByName(name: string) {
     return this.moviesModel
       .findOne({ name })

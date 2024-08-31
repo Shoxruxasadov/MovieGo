@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 import { MoviesModule } from 'src/movies/movies.module';
 import { ActorsModule } from 'src/actors/actors.module';
 import { UsersModule } from 'src/users/users.module';
-import { ModulesModule } from 'src/modules/modules.module';
+import { StudiosModule } from 'src/studios/studios.module';
 
 @Module({
   imports: [
@@ -30,7 +30,7 @@ import { ModulesModule } from 'src/modules/modules.module';
     // }),
     UsersModule,
     MoviesModule,
-    ModulesModule,
+    StudiosModule,
     ActorsModule
   ],
   controllers: [AppController],

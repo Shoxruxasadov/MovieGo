@@ -1,0 +1,427 @@
+#recommendation {
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+
+  h2 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 0 48px;
+
+    @media (max-width: 1024px) {
+      font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 32px;
+    }
+
+    @media (max-width: 440px) {
+      padding: 0 16px;
+    }
+  }
+
+  &:hover {
+    .left {
+      visibility: visible;
+      opacity: 1;
+
+      &.close {
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+    .right {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .left {
+    width: 80px;
+    height: calc(100% - 44px);
+    background: linear-gradient(to left, transparent, #0d0d0de6);
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 2;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+
+    @media (max-width: 1024px) and (max-height: 576px) {
+      display: flex;
+      height: calc(100% - 36px);
+      top: 33px;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+
+    &,
+    * {
+      cursor: pointer;
+    }
+
+    svg {
+      font-size: 32px;
+      opacity: 80%;
+      margin-right: 12px;
+
+      @media (max-width: 1024px) {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .right {
+    width: 80px;
+    height: calc(100% - 44px);
+    background: linear-gradient(to right, transparent, #0d0d0de6);
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: 2;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+
+    @media (max-width: 1024px) and (max-height: 576px) {
+      display: flex;
+      height: calc(100% - 36px);
+      top: 33px;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+
+    &,
+    * {
+      cursor: pointer;
+    }
+
+    svg {
+      font-size: 32px;
+      opacity: 75%;
+      margin-left: 12px;
+
+      @media (max-width: 1024px) {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .wrapper {
+    min-height: 250px;
+    height: 100%;
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 12px 48px;
+
+    @media (max-width: 768px) {
+      padding: 8px 32px;
+    }
+
+    @media (max-width: 440px) {
+      padding: 8px 16px;
+    }
+
+    .recommendation {
+      display: flex;
+      gap: 6px;
+
+      .card {
+        width: 15vw;
+        height: 22.22vw;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100.5%;
+        transition: 0.2s;
+
+        @media (max-width: 1280px) {
+          width: 18vw;
+          height: 26.664vw;
+        }
+
+        @media (max-width: 1024px) {
+          width: 22.5vw;
+          height: 33.33vw;
+        }
+
+        @media (max-width: 880px) {
+          width: 28vw;
+          height: 41.48vw;
+        }
+
+        // TV TCL
+        @media (max-width: 1024px) and (max-height: 576px) {
+          width: 189px;
+          height: 280px;
+        }
+
+        @media (max-width: 440px) {
+          width: 45vw;
+          height: 66.66vw;
+        }
+
+        &,
+        * {
+          cursor: pointer;
+        }
+
+        &:hover {
+          background-size: 105%;
+          transform: scale(1.02);
+
+          .title {
+            h3,
+            p {
+              transform: translateY(-24px);
+
+              &.other {
+                visibility: visible;
+                opacity: 1;
+              }
+            }
+          }
+        }
+
+        .shadow {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(transparent -10%, #000000d2 90%);
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+          padding: 12px;
+          padding-bottom: 4px;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: end;
+          position: relative;
+          z-index: 1;
+
+          @media (max-width: 1280px) {
+            padding: 10px;
+            padding-bottom: 3px;
+          }
+
+          @media (max-width: 1024px) {
+            padding: 8px;
+            padding-bottom: 2px;
+          }
+
+          .resolution {
+            position: absolute;
+            top: 24px;
+            right: 0;
+
+            padding: 4px 16px 4px 20px;
+            box-shadow: inset 0 0 6px #00000060, 0 0 8px #00000030;
+            background: linear-gradient(to right, #6b6b6be6, #372a2ae6);
+            border-bottom: 1px solid #282828a6;
+            border-radius: 2.5em 0 0 10em;
+            font-size: 14px;
+            font-weight: 500;
+
+            @media (max-width: 1280px) {
+              font-size: 12px;
+              padding: 3.5px 14px 3.5px 18px;
+            }
+
+            @media (max-width: 1024px) {
+              font-size: 10px;
+              padding: 3px 12px 3px 16px;
+            }
+          }
+
+          .format {
+            position: absolute;
+            top: 24px;
+            left: 0;
+
+            padding: 4px 20px 4px 16px;
+            box-shadow: inset 0 0 6px #00000060, 0 0 8px #00000030;
+            background: linear-gradient(to left, #6b6b6be6, #372a2ae6);
+            border-bottom: 1px solid #282828a6;
+            border-radius: 0 2.5em 10em 0;
+            font-size: 14px;
+            font-weight: 500;
+
+            @media (max-width: 1280px) {
+              font-size: 12px;
+              padding: 3.5px 18px 3.5px 14px;
+            }
+
+            @media (max-width: 1024px) {
+              font-size: 10px;
+              padding: 3px 16px 3px 12px;
+            }
+          }
+
+          p.type {
+            font-size: 14px;
+            transition: 0.2s;
+            text-align: center;
+            font-weight: 500;
+            color: springgreen;
+            margin-bottom: 2px;
+
+            @media (max-width: 1280px) {
+              font-size: 12px;
+            }
+
+            @media (max-width: 1024px) {
+              font-size: 10px;
+            }
+          }
+
+          h3 {
+            width: 90%;
+            transition: 0.2s;
+            text-align: center;
+            font-weight: 500;
+            white-space: nowrap;
+            text-wrap: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+            @media (max-width: 1280px) {
+              font-size: 14px;
+            }
+
+            @media (max-width: 1024px) {
+              font-size: 12px;
+            }
+          }
+
+          p.other {
+            transition: 0.2s;
+            text-align: center;
+            font-weight: 500;
+            text-transform: capitalize;
+            visibility: hidden;
+            opacity: 0;
+
+            span {
+              font-size: 14px;
+              padding: 0 8px 0 10px;
+              border: solid 1px #fff9;
+              border-radius: 6px;
+
+              @media (max-width: 1280px) {
+                font-size: 12px;
+                padding: 0 7px 0 9px;
+                border-radius: 5px;
+              }
+
+              @media (max-width: 1024px) {
+                font-size: 11px;
+                padding: 0 6px 0 8px;
+                border-radius: 4px;
+              }
+            }
+
+            @media (max-width: 1280px) {
+              font-size: 14px;
+            }
+
+            @media (max-width: 1024px) {
+              font-size: 12px;
+            }
+          }
+        }
+
+        &.skeleton {
+          background: linear-gradient(
+              to right,
+              transparent,
+              #4444444d 50%,
+              transparent
+            ),
+            #222;
+          background-repeat: repeat-y;
+          background-size: 70% 100%;
+          background-position: -320% 0;
+          animation: shine 2s infinite ease;
+
+          @keyframes shine {
+            to {
+              background-position: 320% 0;
+            }
+          }
+
+          .resolution,
+          .format {
+            background: #3c3c3c !important;
+            box-shadow: none !important;
+            width: 80px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            @media (max-width: 1280px) {
+              width: 70px;
+              height: 25px;
+            }
+
+            @media (max-width: 1024px) {
+              width: 60px;
+              height: 22px;
+            }
+          }
+
+          .text {
+            background: #404040 !important;
+            width: 100px;
+            height: 20px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+
+            width: 100px;
+            height: 16px;
+          }
+        }
+      }
+    }
+
+    .studio .card {
+      .title {
+        padding-bottom: 28px;
+      }
+
+      &:hover {
+        .title {
+          h3,
+          p {
+            transform: translateY(-8px);
+          }
+        }
+      }
+    }
+  }
+}

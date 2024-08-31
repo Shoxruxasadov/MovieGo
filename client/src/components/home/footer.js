@@ -1,12 +1,15 @@
+import translate from "@/language/translate.json"
+import { useRouter } from "next/router"
+
 export default function Footer() {
+  const { locale } = useRouter()
+
   return (
     <footer>
         <hr />
         <div className="rights">
-          {/* <p>«Marvel Studios» Barcha materiallar axborot maqsadida taqdim etilgan, barcha huquqlar marvelga tegishli.</p> */}
-          {/* <p>«Marvel Studios» Все материалы предоставлены исключительно в информационных целях, все права принадлежат Marvel.</p> */}
-          <p>«Marvel Studios» All material provided for informational purposes only, all rights reserved by marvel.</p>
-          <p><span>&copy; MovieGo {new Date().getFullYear()} | </span><a href="https://shoxrux.site" target="_blank">Powered by</a></p>
+          <p>{translate[locale].footer.rights}</p>
+          <p><span>&copy; MovieGo {new Date().getFullYear()} | </span><a href="https://shoxrux.site" target="_blank">{translate[locale].footer.powered}</a></p>
         </div>
     </footer>
   )

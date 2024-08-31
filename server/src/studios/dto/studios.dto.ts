@@ -1,8 +1,9 @@
 import { IsNotEmpty } from 'class-validator';
+import { LangDto } from 'src/movies/dto/lang.dto';
 
-export class ModulesDto {
+export class StudiosDto {
   @IsNotEmpty()
-  name: string;
+  name: LangDto;
 
   @IsNotEmpty()
   image: string;
