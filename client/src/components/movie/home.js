@@ -5,7 +5,7 @@ import Image from "next/image";
 import translate from "@/language/translate.json"
 import { useStore } from "@/store/zustand";
 import { useRouter } from "next/router";
-import time from "@/utils/time";
+import Time from "@/utils/time";
 
 export default function MovieHome() {
   const [loadedImage, setLoadedImage] = useState(false);
@@ -46,7 +46,7 @@ export default function MovieHome() {
             <span>•</span>
             <p className="genre">{translate[locale].movie[movie.genre[1]]}</p>
             <span>•</span>
-            <p className="time">{time(movie.duration)}</p>
+            <p className="time">{<Time time={movie.duration} />}</p>
           </div>
           <div className="watching">
             <div className="left">

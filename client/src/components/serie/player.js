@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 
 import { useStore, useUser } from "@/store/zustand";
 import translate from "@/language/translate.json"
-import release from "@/utils/release";
-import timeline from "@/utils/timeline";
-import time from "@/utils/time";
+import Release from "@/utils/release";
+import Timeline from "@/utils/timeline";
+import Time from "@/utils/time";
 import Series from "./series";
 
 export default function SeriePlayer() {
@@ -88,11 +88,11 @@ export default function SeriePlayer() {
         <div id="credits" className={module == "Credits" ? 'visible' : ''}>
           <div className="card release">
             <p>{translate[locale].movie.release} </p>
-            <p>{release(movie.release)}</p>
+            <p><Release time={movie.release} /></p>
           </div>
           <div className="card timeline">
             <p>{translate[locale].movie.timeline} </p>
-            <p>{timeline(movie.timeline)}</p>
+            <p><Timeline time={movie.timeline} /></p>
           </div>
           <div className="card manufacturer">
             <p>{translate[locale].movie.studio} </p>
@@ -108,7 +108,7 @@ export default function SeriePlayer() {
           </div>}
           <div className="card time">
             <p>{translate[locale].movie.duration} </p>
-            <p>{time(movie.duration)}</p>
+            <p><Time time={movie.duration} /></p>
           </div>
           <div className="card admitted">
             <p>{translate[locale].movie.rating} </p>

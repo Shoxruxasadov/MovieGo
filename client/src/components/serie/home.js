@@ -5,20 +5,12 @@ import Image from "next/image";
 import translate from "@/language/translate.json"
 import { useStore } from "@/store/zustand";
 import { useRouter } from "next/router";
-import time from "@/utils/time";
+import Time from "@/utils/time";
 
 export default function SerieHome() {
   const [loadedImage, setLoadedImage] = useState(false);
-  const [screenWidth, setScreenWidth] = useState();
   const movie = useStore(state => state.movie);
   const { locale } = useRouter()
-
-  useEffect(() => {
-    setScreenWidth(window.innerWidth);
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <section id="serie-home">
@@ -46,7 +38,7 @@ export default function SerieHome() {
             <span>•</span>
             <p className="genre">{translate[locale].movie[movie.genre[1]]}</p>
             <span>•</span>
-            <p className="time">{time(movie.duration)}</p>
+            <p className="time"><Time time={movie.duration} /></p>
           </div>
           <div className="watching">
             <div className="left">

@@ -3,13 +3,13 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 
 import MoviesPlayer from "@/library/MoviesPlayer"
-import release from "@/utils/release";
-import timeline from "@/utils/timeline";
+import Release from "@/utils/release";
+import Timeline from "@/utils/timeline";
+import Time from "@/utils/time";
 import { useStore, useUser } from "@/store/zustand";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import translate from "@/language/translate.json"
-import time from "@/utils/time";
 
 export default function MoviePlayer() {
   const [module, setModule] = useState('Movie')
@@ -88,11 +88,11 @@ export default function MoviePlayer() {
         <div id="credits" className={module == "Credits" ? 'visible' : ''}>
           <div className="card release">
             <p>{translate[locale].movie.release} </p>
-            <p>{release(movie.release)}</p>
+            <p><Release time={movie.release}/></p>
           </div>
           <div className="card timeline">
             <p>{translate[locale].movie.timeline} </p>
-            <p>{timeline(movie.timeline)}</p>
+            <p><Timeline time={movie.timeline}/></p>
           </div>
           <div className="card manufacturer">
             <p>{translate[locale].movie.studio} </p>
@@ -108,7 +108,7 @@ export default function MoviePlayer() {
           </div>}
           <div className="card time">
             <p>{translate[locale].movie.duration} </p>
-            <p>{time(movie.duration)}</p>
+            <p><Time time={movie.duration}/></p>
           </div>
           <div className="card admitted">
             <p>{translate[locale].movie.rating} </p>

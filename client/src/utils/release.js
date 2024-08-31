@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import translate from "@/language/translate.json"
 
-export default function release(time) {
+export default function Release({ time }) {
     const { locale } = useRouter()
     const year = time.substring(0, 10).split('-')[0]
     const month = time.substring(0, 10).split('-')[1]

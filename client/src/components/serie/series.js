@@ -34,6 +34,7 @@ export default function Series({ module }) {
                         offset={- 80}
                         duration={500}
                         className="card"
+                        key={i}
                         onClick={() => setEpisode(i)}
                         style={{ backgroundImage: `url(${item.image})` }}
                     >
@@ -46,6 +47,7 @@ export default function Series({ module }) {
                         </div>
                         <div className="shadow" />
                     </Scroll> : <div
+                        key={i}
                         className="card"
                         onClick={() => setEpisode(i)}
                         style={{ backgroundImage: `url(${item.image})` }}
