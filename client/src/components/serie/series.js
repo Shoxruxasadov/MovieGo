@@ -1,33 +1,34 @@
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import SeriesPlayer from "@/library/SeriesPlayer"
 import { useStore } from "@/store/zustand";
 import translate from "@/language/translate.json"
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Link as Scroll } from "react-scroll";
 
 export default function Series({ module }) {
-    const [screenSize, setScreenSize] = useState(1280);
-    const [episode, setEpisode] = useState(null)
     const movie = useStore(state => state.movie);
-    const pathname = usePathname()
+    const [screenSize, setScreenSize] = useState([1280, 720]);
+    const [episode, setEpisode] = useState(null)
+    const scrollDemoRef = useRef(null);
     const { locale } = useRouter()
-    const router = useRouter()
 
     useEffect(() => {
-        setScreenSize(window.innerWidth)
-        const handleResize = () => setScreenSize(window.innerWidth);
+        setScreenSize([window.innerWidth, window.innerHeight])
+        const handleResize = () => setScreenSize([window.innerWidth, window.innerHeight]);
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     return <div id="series-list" className={module == "Serie" ? '' : 'hide'}>
         <h2>1-{movie.episodes.length} {translate[locale].serie.episodes}</h2>
-
-        <div className="serie-wrapper">
+        <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
+        <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
+        <div className="serie-wrapper" ref={scrollDemoRef}>
             <div className="child">
                 {movie.episodes.map((item, i) => (
-                    screenSize > 768 ? <Scroll
+                    screenSize[0] > 768 ? <Scroll
                         to="title-movie"
                         spy={true}
                         smooth={true}
