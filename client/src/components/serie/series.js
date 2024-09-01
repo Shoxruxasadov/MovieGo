@@ -22,55 +22,54 @@ export default function Series({ module }) {
     }, []);
 
     return <div id="series-list" className={module == "Serie" ? '' : 'hide'}>
-        <h2>1-{movie.episodes.length} {translate[locale].serie.episodes}</h2>
-        <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
-        <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
-        <div className="serie-wrapper" ref={scrollDemoRef}>
-            <div className="child">
-                {movie.episodes.map((item, i) => (
-                    screenSize[0] > 768 ? <Scroll
-                        to="title-movie"
-                        spy={true}
-                        smooth={true}
-                        offset={- 80}
-                        duration={500}
-                        className="card"
-                        key={i}
-                        onClick={() => setEpisode(i)}
-                        style={{ backgroundImage: `url(${item.image})` }}
-                    >
-                        <div className="title">
-                            <div className="info">
-                                <p>{translate[locale].serie.episode} {i + 1}</p>
-                                <p>{item.duration}{translate[locale].movie.m}</p>
+        <div className="select-series">
+            <h2>1-{movie.episodes.length} {translate[locale].serie.episodes}</h2>
+            <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
+            <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
+            <div className="serie-wrapper" ref={scrollDemoRef}>
+                <div className="child">
+                    {movie.episodes.map((item, i) => (
+                        screenSize[0] > 768 ? <Scroll
+                            to="title-movie"
+                            spy={true}
+                            smooth={true}
+                            offset={- 80}
+                            duration={500}
+                            className="card"
+                            key={i}
+                            onClick={() => setEpisode(i)}
+                            style={{ backgroundImage: `url(${item.image})` }}
+                        >
+                            <div className="title">
+                                <div className="info">
+                                    <p>{translate[locale].serie.episode} {i + 1}</p>
+                                    <p>{item.duration}{translate[locale].movie.m}</p>
+                                </div>
+                                <h4>{item.title[locale]}</h4>
                             </div>
-                            <h4>{item.title[locale]}</h4>
-                        </div>
-                        <div className="shadow" />
-                    </Scroll> : <div
-                        key={i}
-                        className="card"
-                        onClick={() => setEpisode(i)}
-                        style={{ backgroundImage: `url(${item.image})` }}
-                    >
-                        <div className="title">
-                            <div className="info">
-                                <p>{translate[locale].serie.episode} {i + 1}</p>
-                                <p>{item.duration}{translate[locale].movie.m}</p>
+                            <div className="shadow" />
+                        </Scroll> : <div
+                            key={i}
+                            className="card"
+                            onClick={() => setEpisode(i)}
+                            style={{ backgroundImage: `url(${item.image})` }}
+                        >
+                            <div className="title">
+                                <div className="info">
+                                    <p>{translate[locale].serie.episode} {i + 1}</p>
+                                    <p>{item.duration}{translate[locale].movie.m}</p>
+                                </div>
+                                <h4>{item.title[locale]}</h4>
                             </div>
-                            <h4>{item.title[locale]}</h4>
+                            <div className="shadow" />
                         </div>
-                        <div className="shadow" />
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
-
-        {
-            episode != null && (<>
-                <h2 id="title-movie">{translate[locale].movie.movie}</h2>
-                <SeriesPlayer episode={episode} />
-            </>)
-        }
+        {episode != null && (<div className="watching-movie">
+            <h2 id="title-movie">{translate[locale].movie.movie}</h2>
+            <SeriesPlayer episode={episode} />
+        </div>)}
     </div >
 }

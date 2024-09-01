@@ -3,7 +3,7 @@
   z-index: 1;
 
   .title {
-    margin: 6px 0 40px;
+    margin-top: 5px;
 
     .description {
       margin-bottom: 32px;
@@ -33,13 +33,13 @@
 
     .casts {
       position: relative;
+
       h2 {
         color: var(--text-color);
         font-size: 26px;
         font-weight: 500;
         line-height: 26px;
         letter-spacing: 0.12px;
-        margin-bottom: 20px;
         padding: 0 48px;
 
         @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
@@ -58,11 +58,11 @@
 
       .left {
         width: 100px;
-        height: calc(100% - 46px);
+        height: calc(100% - 26px);
         background: linear-gradient(to right, #0d0d0dc4, transparent);
         padding-right: 40px;
         position: absolute;
-        top: 46px;
+        top: 26px;
         left: 0;
         z-index: 2;
 
@@ -99,11 +99,11 @@
 
       .right {
         width: 100px;
-        height: calc(100% - 46px);
+        height: calc(100% - 26px);
         background: linear-gradient(to left, #0d0d0dc4, transparent);
         padding-left: 40px;
         position: absolute;
-        top: 46px;
+        top: 26px;
         right: 0;
         z-index: 2;
 
@@ -157,7 +157,7 @@
         .wrapper {
           display: flex;
           gap: 24px;
-          padding: 0 48px;
+          padding: 20px 48px;
 
           @media (max-width: 768px) {
             padding: 0 32px;
