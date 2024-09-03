@@ -37,11 +37,11 @@ export class StudiosController {
     return this.studiosService.create(dto);
   }
 
-  // @HttpCode(200)
-  // @Put(':id')
-  // async update(@Param('id') id: string, @Body() dto: StudiosDto) {
-  //   return this.studiosService.update(id, dto);
-  // }
+  @HttpCode(200)
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() dto: StudiosDto) {
+    return this.studiosService.update(id, dto);
+  }
 
   // @HttpCode(200)
   // @Delete(':id')

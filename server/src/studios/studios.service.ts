@@ -25,10 +25,10 @@ export class StudiosService {
     return 'success';
   }
 
-//   async update(id: string, dto: StudiosDto) {
-//     this.studiosModel.findByIdAndUpdate(id, dto, { new: true });
-//     return 'success';
-//   }
+  async update(id: string, dto: StudiosDto) {
+    this.studiosModel.findByIdAndUpdate(id, dto, { new: true });
+    return 'success';
+  }
 
 //   async remove(id: string) {
 //     this.studiosModel.findByIdAndDelete(id);

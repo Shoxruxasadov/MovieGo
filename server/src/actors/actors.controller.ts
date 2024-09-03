@@ -46,12 +46,12 @@ export class ActorsController {
   @HttpCode(200)
   @Put(':id')
   async update(@Param('id') id: string, @Body() dto: ActorsDto) {
-    return this.actorsService.update(+id, dto);
+    return this.actorsService.update(id, dto);
   }
 
   @HttpCode(200)
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return this.actorsService.remove(+id);
+    return this.actorsService.remove(id);
   }
 }

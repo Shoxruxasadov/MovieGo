@@ -44,11 +44,11 @@ export class MoviesController {
     return this.moviesService.create(dto);
   }
 
-  // @HttpCode(200)
-  // @Put(':id')
-  // async update(@Param('id') id: string, @Body() dto: MoviesDto) {
-  //   return this.moviesService.update(id, dto);
-  // }
+  @HttpCode(200)
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() dto: MoviesDto) {
+    return this.moviesService.update(id, dto);
+  }
 
   // @HttpCode(200)
   // @Delete(':id')

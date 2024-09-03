@@ -27,15 +27,13 @@ export class ActorsService {
     return 'success';
   }
 
-  async update(id: number, dto: ActorsDto) {
+  async update(id: string, dto: ActorsDto) {
     this.actorsModel.findByIdAndUpdate(id, dto, { new: true });
     return 'success';
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     this.actorsModel.findByIdAndDelete(id);
     return 'success';
   }
-
-  
 }
