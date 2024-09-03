@@ -26,12 +26,12 @@ export class StudiosService {
   }
 
   async update(id: string, dto: StudiosDto) {
-    this.studiosModel.findByIdAndUpdate(id, dto, { new: true });
+    await this.studiosModel.findByIdAndUpdate(id, dto, { new: true });
     return 'success';
   }
 
 //   async remove(id: string) {
-//     this.studiosModel.findByIdAndDelete(id);
+//     await this.studiosModel.findByIdAndDelete(id);
 //     return 'success';
 //   }
 

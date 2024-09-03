@@ -42,12 +42,12 @@ export class MoviesService {
   }
 
   async update(id: string, dto: MoviesDto) {
-    this.moviesModel.findByIdAndUpdate(id, dto, { new: true });
+    await this.moviesModel.findByIdAndUpdate(id, dto, { new: true });
     return 'success';
   }
 
   // async remove(id: string) {
-  //   this.moviesModel.findByIdAndDelete(id);
+  //   await this.moviesModel.findByIdAndDelete(id);
   //   return 'success';
   // }
 }
