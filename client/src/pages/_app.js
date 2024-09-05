@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { SpeedInsights } from "@vercel/speed-insights/react"
-import { appWithTranslation, i18n } from 'next-i18next';
+import { appWithTranslation } from 'next-i18next';
 import { Analytics } from "@vercel/analytics/react"
 import { SessionProvider } from 'next-auth/react';
 import { ToastContainer } from "react-toastify";
@@ -18,6 +18,10 @@ function App({ Component, pageProps }) {
   const user = useUser(state => state.user);
 
   useEffect(() => {
+    console.info(
+      '%cMovieGo',
+      'color: red; font-size: 20pt; font-weight: 600',
+    )
     if (!token) return
     if (!user) getUser(token)
   }, [])
