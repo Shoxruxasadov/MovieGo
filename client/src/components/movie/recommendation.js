@@ -24,7 +24,7 @@ export default function MovieRecommendation() {
   }, []);
 
   return (
-    <section id="recommendation">
+    <section id="recommendation" >
       <h2>{translate[locale].movie.recommendation}</h2>
       <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
       <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
@@ -46,57 +46,13 @@ export default function MovieRecommendation() {
                 <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>
               </div>
             </Link>
-          )) : <>
-            <div className="card skeleton" >
-              <div className="title">
-                <div className="resolution" />
-                <div className="format" />
-                <div className="text" />
-              </div>
-            </div><div className="card skeleton" >
-              <div className="title">
-                <div className="resolution" />
-                <div className="format" />
-                <div className="text" />
-              </div>
-            </div><div className="card skeleton" >
-              <div className="title">
-                <div className="resolution" />
-                <div className="format" />
-                <div className="text" />
-              </div>
-            </div><div className="card skeleton" >
-              <div className="title">
-                <div className="resolution" />
-                <div className="format" />
-                <div className="text" />
-              </div>
-            </div><div className="card skeleton" >
-              <div className="title">
-                <div className="resolution" />
-                <div className="format" />
-                <div className="text" />
-              </div>
-            </div><div className="card skeleton" >
-              <div className="title">
-                <div className="resolution" />
-                <div className="format" />
-                <div className="text" />
-              </div>
-            </div><div className="card skeleton" >
-              <div className="title">
-                <div className="resolution" />
-                <div className="format" />
-                <div className="text" />
-              </div>
-            </div><div className="card skeleton" >
-              <div className="title">
-                <div className="resolution" />
-                <div className="format" />
-                <div className="text" />
-              </div>
+          )) : Array(10).fill(<div className="card skeleton">
+            <div className="title">
+              <div className="resolution" />
+              <div className="format" />
+              <div className="text" />
             </div>
-          </>}
+          </div>).map(item => item)}
         </div>
       </div>
     </section>

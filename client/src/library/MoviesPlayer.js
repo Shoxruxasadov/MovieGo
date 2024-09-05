@@ -324,6 +324,59 @@ export default function MoviesPlayer({ module }) {
     setCurrentTime(0)
     hideControls(false)
     setTimeout(() => { setReload(true) }, 1000);
+
+    let playingKeyCode = playing;
+    let currentTimeKeyCode = currentTime;
+    const handleSpacePress = ({ keyCode }) => {
+      console.log(keyCode);
+
+      if (window.document.fullscreenElement) {
+        if (keyCode === 39) { // Forward Arrow
+          currentTimeKeyCode = videoRef.current.currentTime
+          videoRef.current.currentTime += 10
+          setCurrentTime(currentTimeKeyCode + 10)
+        }
+        if (keyCode === 37) { // Backward Arrow
+          currentTimeKeyCode = videoRef.current.currentTime
+          videoRef.current.currentTime -= 10
+          setCurrentTime(currentTimeKeyCode - 10)
+        }
+
+        if (keyCode === 38) { // Up Arrow
+          if (videoRef.current.volume > 0.89) {
+            videoRef.current.volume = 1
+            setVolume(1)
+          } else {
+            videoRef.current.volume += 0.1
+            setVolume(videoRef.current.volume)
+          }
+        }
+        if (keyCode === 40) { // Bottom Arrow
+          if (videoRef.current.volume < 0.11) {
+            videoRef.current.volume = 0
+            setVolume(0)
+          } else {
+            videoRef.current.volume -= 0.1
+            setVolume(videoRef.current.volume)
+          }
+
+        }
+        console.log(videoRef.current.volume);
+
+        if (keyCode === 32) { // Space Key
+          setPlaying(!playingKeyCode);
+          if (playingKeyCode) {
+            videoRef.current.pause();
+          } else {
+            videoRef.current.play();
+          }
+          playingKeyCode = !playingKeyCode
+        }
+      }
+    }
+
+    document.addEventListener("keyup", handleSpacePress);
+    return () => { document.removeEventListener("keyup", handleSpacePress) };
   }, [])
 
   useEffect(() => {
@@ -427,8 +480,8 @@ export default function MoviesPlayer({ module }) {
                 <ul className={`quality-list${accessible && list == 'quality' ? ' active' : ''}`}>
                   <li className="back" onClick={() => setList('main')}>{translate[locale].movie.quality}</li>
                   {movie.source[`2160p`] != null && <li className={`item${quality == '2160p' ? ' selected' : ''}`} onClick={() => handleQuality('2160p')}>2160p <span className="badge">4K</span></li>}
-                  {movie.source[`1080p`] != null && <li className={`item${quality == '1080p' ? ' selected' : ''}`} onClick={() => handleQuality('1080p')}>1080p <span className="badge">HD</span></li>}
-                  {movie.source[`720p`] != null && <li className={`item${quality == '720p' ? ' selected' : ''}`} onClick={() => handleQuality('720p')}>720p <span className="badge">SD</span></li>}
+                  {movie.source[`1080p`] != null && <li className={`item${quality == '1080p' ? ' selected' : ''}`} onClick={() => handleQuality('1080p')}>1080p <span className="badge">FHD</span></li>}
+                  {movie.source[`720p`] != null && <li className={`item${quality == '720p' ? ' selected' : ''}`} onClick={() => handleQuality('720p')}>720p <span className="badge">HD</span></li>}
                 </ul>
                 <ul className={`speed-list${accessible && list == 'speed' ? ' active' : ''}`}>
                   <li className="back" onClick={() => setList('main')}>{translate[locale].movie.speed}</li>

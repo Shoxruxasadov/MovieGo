@@ -3,7 +3,6 @@
   padding-top: 80px;
   position: relative;
   z-index: 1;
-  overflow: hidden;
 
   display: flex;
   align-items: end;
@@ -40,12 +39,7 @@
       position: absolute;
       z-index: -1;
       background-color: #0d0d0de6;
-      filter: blur(150px);
-      border-radius: 50%;
-
-      @media (max-width: 440px) {
-        filter: blur(100px);
-      }
+      filter: blur(100px);
     }
 
     @media (max-width: 768px) {

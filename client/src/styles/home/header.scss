@@ -155,8 +155,8 @@ header {
       font-weight: 500;
       white-space: nowrap;
       transition: 0.2s ease;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.1);
       text-align: center;
 
       .selected {
@@ -204,10 +204,12 @@ header {
         font-weight: 500;
         white-space: nowrap;
         transition: 0.2s ease;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.1);
         text-align: center;
         transform: translateX(10px);
+        overflow: hidden;
+
 
         button {
           display: flex;
@@ -230,7 +232,8 @@ header {
           }
         }
 
-        &::before {
+
+        &::after {
           content: "";
           position: absolute;
           top: 50%;
@@ -331,7 +334,7 @@ header {
       content: "";
       position: absolute;
       z-index: -1;
-      width: 100%;
+      width: 101%;
       height: 100%;
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
@@ -378,8 +381,20 @@ header {
         }
 
         .menu {
-          top: 39px;
+          top: 38px;
           font-size: 15px;
+
+          &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+          }
           
           img {
             width: 19px;

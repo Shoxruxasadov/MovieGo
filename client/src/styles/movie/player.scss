@@ -9,7 +9,6 @@
       margin-bottom: 32px;
       color: var(--text-color);
       padding: 0 48px;
-      opacity: 80%;
 
       @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
         font-size: 13px;
@@ -25,10 +24,6 @@
         padding: 0 16px;
         margin-bottom: 16px;
       }
-    }
-
-    @media (max-width: 440px) {
-      margin-bottom: 16px;
     }
 
     .casts {
@@ -160,11 +155,11 @@
           padding: 20px 48px;
 
           @media (max-width: 768px) {
-            padding: 0 32px;
+            padding: 19px 32px;
           }
 
           @media (max-width: 440px) {
-            padding: 0 16px;
+            padding: 18px 16px;
           }
 
           .cast {
@@ -222,16 +217,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     padding: 20px 48px 40px;
     gap: 32px;
 
     @media (max-width: 768px) {
       padding: 18px 32px 36px;
       flex-direction: column;
+      gap: 24px;
     }
 
     @media (max-width: 440px) {
       padding: 16px 16px 32px;
+      gap: 16px;
     }
 
     .list {
@@ -263,6 +261,7 @@
         letter-spacing: 0.08px;
 
         @media (max-width: 440px) {
+          padding: 2px 16px;
           font-size: 14px;
         }
 

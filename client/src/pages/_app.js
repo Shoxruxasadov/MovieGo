@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useUser } from "@/store/zustand";
 const queryClient = new QueryClient()
 import "@/styles/globals.scss";
+import 'aos/dist/aos.css';
 
 function App({ Component, pageProps }) {
   const [token, setToken] = useLocalStorage("token", null);

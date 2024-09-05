@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     Aos.init({ duration: 500 })
-    document.querySelector("main").style.backgroundImage = `url("/spider/back.webp")`
+    document.querySelector("main").style.backgroundImage = `url("/spider/banner.webp")`
   })
 
   return (

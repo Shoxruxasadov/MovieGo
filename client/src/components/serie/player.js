@@ -39,8 +39,8 @@ export default function SeriePlayer() {
   return (
     <section id="serie-player">
       <div className="title">
-        <p className="description">{movie.description[locale]}</p>
-        {movie.cast.length > 0 && <div className="casts">
+        <p className="description" data-aos="fade-up">{movie.description[locale]}</p>
+        {movie.cast.length > 0 && <div className="casts" data-aos="fade-up">
           <h2>{translate[locale].movie.cast}</h2>
           <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= 700 }}><FaChevronLeft /></div>
           <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += 700 }}><FaChevronRight /></div>
@@ -60,7 +60,7 @@ export default function SeriePlayer() {
         </div>}
       </div>
 
-      <div className="lists">
+      <div className="lists" data-aos="fade-up">
         <ul className="list">
           {modules.map((item, i) => (
             <li className={`item${module == item.name ? ' selected' : ''}`} onClick={() => setModule(item.name)} key={i}>{item.title}</li>
@@ -73,7 +73,7 @@ export default function SeriePlayer() {
         </ul>
       </div>
 
-      <div className="watching">
+      <div className="watching" data-aos="fade-up">
         {user ? (movie.episodes != null ? <Series module={module} /> : <div className="container-movie"><div id="need" className={module == "Serie" ? 'visible' : ''}>
           <p>{translate[locale].movie.soon}</p>
         </div></div>) : <div className="container-movie"><div id="need" className={module == "Serie" ? 'visible' : ''}>

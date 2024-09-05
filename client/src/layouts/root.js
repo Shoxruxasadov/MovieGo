@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import Head from "next/head";
+import Aos from "aos"
 
 export default function Root({ children, page, title }) {
+
+  useEffect(() => { Aos.init({ duration: 500 }) })
+
   return (
     <>
       <Head>

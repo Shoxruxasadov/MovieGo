@@ -36,6 +36,7 @@ export default function Section({ type, title, route, name }) {
                             href={type == 'studio' ? `/studio/${item.module}` : `/${item.type}/${item.name}`}
                             className="card"
                             key={item._id}
+                            data-aos="flip-left"
                         >
                             <div className="shadow" />
                             <div className="title">
@@ -48,57 +49,13 @@ export default function Section({ type, title, route, name }) {
                                 {type != "studio" && <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>}
                             </div>
                         </Link>
-                    )) : <>
-                        <div className="card skeleton" >
-                            <div className="title">
-                                <div className="resolution" />
-                                <div className="format" />
-                                <div className="text" />
-                            </div>
-                        </div><div className="card skeleton" >
-                            <div className="title">
-                                <div className="resolution" />
-                                <div className="format" />
-                                <div className="text" />
-                            </div>
-                        </div><div className="card skeleton" >
-                            <div className="title">
-                                <div className="resolution" />
-                                <div className="format" />
-                                <div className="text" />
-                            </div>
-                        </div><div className="card skeleton" >
-                            <div className="title">
-                                <div className="resolution" />
-                                <div className="format" />
-                                <div className="text" />
-                            </div>
-                        </div><div className="card skeleton" >
-                            <div className="title">
-                                <div className="resolution" />
-                                <div className="format" />
-                                <div className="text" />
-                            </div>
-                        </div><div className="card skeleton" >
-                            <div className="title">
-                                <div className="resolution" />
-                                <div className="format" />
-                                <div className="text" />
-                            </div>
-                        </div><div className="card skeleton" >
-                            <div className="title">
-                                <div className="resolution" />
-                                <div className="format" />
-                                <div className="text" />
-                            </div>
-                        </div><div className="card skeleton" >
-                            <div className="title">
-                                <div className="resolution" />
-                                <div className="format" />
-                                <div className="text" />
-                            </div>
+                    )) : Array(10).fill(<div className="card skeleton" data-aos="flip-left">
+                        <div className="title">
+                            <div className="resolution" />
+                            <div className="format" />
+                            <div className="text" />
                         </div>
-                    </>}
+                    </div>).map(item => item)}
                 </div>
             </div>
         </section>
