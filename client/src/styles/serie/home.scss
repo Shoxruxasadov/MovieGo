@@ -60,12 +60,17 @@
       margin-bottom: 20px;
 
       @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
-        width: 200px;
+        max-height: 90px;
+        margin-bottom: 14px;
+      }
+
+      @media (max-width: 768px) {
+        max-height: 110px;
         margin-bottom: 14px;
       }
 
       @media (max-width: 440px) {
-        width: 280px;
+        max-height: 100px;
         margin-bottom: 14px;
       }
 
