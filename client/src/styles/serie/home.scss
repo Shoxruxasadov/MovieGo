@@ -54,7 +54,8 @@
     }
 
     .logo {
-      width: 300px;
+      width: fit-content;
+      max-height: 120px;
       filter: blur(20px);
       margin-bottom: 20px;
 
