@@ -33,7 +33,7 @@ function App({ Component, pageProps }) {
 
     <ToastContainer />
     <Analytics />
-    {/* <SpeedInsights /> */}
+    <SpeedInsights />
   </>;
 }
 
