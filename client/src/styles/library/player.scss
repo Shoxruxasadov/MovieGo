@@ -51,6 +51,10 @@
       border-radius: 12px;
       width: 100%;
     }
+
+    @media (max-width: 768px) {
+      border-radius: 0;
+    }
   }
 
   .play-pause-circle {
