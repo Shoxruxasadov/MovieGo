@@ -328,8 +328,6 @@ export default function MoviesPlayer({ module }) {
     let playingKeyCode = playing;
     let currentTimeKeyCode = currentTime;
     const handleSpacePress = ({ keyCode }) => {
-      console.log(keyCode);
-
       if (window.document.fullscreenElement) {
         if (keyCode === 39) { // Forward Arrow
           currentTimeKeyCode = videoRef.current.currentTime
@@ -341,7 +339,6 @@ export default function MoviesPlayer({ module }) {
           videoRef.current.currentTime -= 10
           setCurrentTime(currentTimeKeyCode - 10)
         }
-
         if (keyCode === 38) { // Up Arrow
           if (videoRef.current.volume > 0.89) {
             videoRef.current.volume = 1
@@ -361,8 +358,6 @@ export default function MoviesPlayer({ module }) {
           }
 
         }
-        console.log(videoRef.current.volume);
-
         if (keyCode === 32) { // Space Key
           setPlaying(!playingKeyCode);
           if (playingKeyCode) {

@@ -326,6 +326,54 @@ export default function SeriesPlayer({ episode }) {
     setCurrentTime(0)
     hideControls(false)
     setTimeout(() => { setReload(true) }, 1000);
+
+    let playingKeyCode = playing;
+    let currentTimeKeyCode = currentTime;
+    const handleSpacePress = ({ keyCode }) => {
+      if (window.document.fullscreenElement) {
+        if (keyCode === 39) { // Forward Arrow
+          currentTimeKeyCode = videoRef.current.currentTime
+          videoRef.current.currentTime += 10
+          setCurrentTime(currentTimeKeyCode + 10)
+        }
+        if (keyCode === 37) { // Backward Arrow
+          currentTimeKeyCode = videoRef.current.currentTime
+          videoRef.current.currentTime -= 10
+          setCurrentTime(currentTimeKeyCode - 10)
+        }
+        if (keyCode === 38) { // Up Arrow
+          if (videoRef.current.volume > 0.89) {
+            videoRef.current.volume = 1
+            setVolume(1)
+          } else {
+            videoRef.current.volume += 0.1
+            setVolume(videoRef.current.volume)
+          }
+        }
+        if (keyCode === 40) { // Bottom Arrow
+          if (videoRef.current.volume < 0.11) {
+            videoRef.current.volume = 0
+            setVolume(0)
+          } else {
+            videoRef.current.volume -= 0.1
+            setVolume(videoRef.current.volume)
+          }
+
+        }
+        if (keyCode === 32) { // Space Key
+          setPlaying(!playingKeyCode);
+          if (playingKeyCode) {
+            videoRef.current.pause();
+          } else {
+            videoRef.current.play();
+          }
+          playingKeyCode = !playingKeyCode
+        }
+      }
+    }
+
+    document.addEventListener("keyup", handleSpacePress);
+    return () => { document.removeEventListener("keyup", handleSpacePress) };
   }, [])
 
   useEffect(() => {
