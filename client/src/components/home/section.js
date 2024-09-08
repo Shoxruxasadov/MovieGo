@@ -25,10 +25,10 @@ export default function Section({ type, title, route, name }) {
 
     return (
         <section id={name}>
-            <h2>{title}</h2>
+            <h2 data-aos="fade-up">{title}</h2>
             <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
             <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
-            <div className='wrapper' ref={scrollDemoRef}>
+            <div className='wrapper' ref={scrollDemoRef} data-aos="fade-up">
                 <div className={type}>
                     {isSuccess ? movies.map(item => (
                         <Link
@@ -36,7 +36,6 @@ export default function Section({ type, title, route, name }) {
                             href={type == 'studio' ? `/studio/${item.module}` : `/${item.type}/${item.name}`}
                             className="card"
                             key={item._id}
-                            data-aos="flip-left"
                         >
                             <div className="shadow" />
                             <div className="title">
@@ -49,7 +48,7 @@ export default function Section({ type, title, route, name }) {
                                 {type != "studio" && <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>}
                             </div>
                         </Link>
-                    )) : Array(10).fill(<div className="card skeleton" data-aos="flip-left">
+                    )) : Array(10).fill(<div className="card skeleton">
                         <div className="title">
                             <div className="resolution" />
                             <div className="format" />
