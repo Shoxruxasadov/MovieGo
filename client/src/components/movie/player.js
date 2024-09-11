@@ -67,7 +67,7 @@ export default function MoviePlayer() {
           ))}
         </ul>
         <ul className="list">
-          {movie.seasons.map((item, i) => (
+          {movie.seasons && movie.seasons.map((item, i) => (
             <li className="item selected" onClick={() => router.push(`/${movie.type}/${item}`)} key={i}>{translate[locale].movie.nextmovie}</li>
           ))}
         </ul>
@@ -88,11 +88,11 @@ export default function MoviePlayer() {
         <div id="credits" className={module == "Credits" ? 'visible' : ''}>
           <div className="card release">
             <p>{translate[locale].movie.release} </p>
-            <p><Release time={movie.release}/></p>
+            <p><Release time={movie.release} /></p>
           </div>
           <div className="card timeline">
             <p>{translate[locale].movie.timeline} </p>
-            <p><Timeline time={movie.timeline}/></p>
+            <p><Timeline time={movie.timeline} /></p>
           </div>
           <div className="card manufacturer">
             <p>{translate[locale].movie.studio} </p>
@@ -108,7 +108,7 @@ export default function MoviePlayer() {
           </div>}
           <div className="card time">
             <p>{translate[locale].movie.duration} </p>
-            <p><Time time={movie.duration}/></p>
+            <p><Time time={movie.duration} /></p>
           </div>
           <div className="card admitted">
             <p>{translate[locale].movie.rating} </p>
