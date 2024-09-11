@@ -477,7 +477,7 @@ export default function SeriesPlayer({ episode }) {
                 <ul className={`quality-list${accessible && list == 'quality' ? ' active' : ''}`}>
                   <li className="back" onClick={() => setList('main')}>{translate[locale].movie.quality}</li>
                   {movie.episodes[episode][`2160p`] != null && <li className={`item${quality == '2160p' ? ' selected' : ''}`} onClick={() => handleQuality('2160p')}>2160p <span className="badge">4K</span></li>}
-                  {movie.episodes[episode][`1080p`] != null && <li className={`item${quality == '1080p' ? ' selected' : ''}`} onClick={() => handleQuality('1080p')}>1080p <span className="badge">FHD</span></li>}
+                  {movie.episodes[episode][`1080p`] != null && <li className={`item${quality == '1080p' ? ' selected' : ''}`} onClick={() => handleQuality('1080p')}>1080p <span className="badge">+HD</span></li>}
                   {movie.episodes[episode][`720p`] != null && <li className={`item${quality == '720p' ? ' selected' : ''}`} onClick={() => handleQuality('720p')}>720p <span className="badge">HD</span></li>}
                 </ul>
                 <ul className={`speed-list${accessible && list == 'speed' ? ' active' : ''}`}>
