@@ -11,6 +11,7 @@
     "movie": {
       "action": "Jangari",
       "adventure": "Sarguzasht",
+      "comedy": "Komediya",
       "h": "s",
       "m": "d",
       "descHero": "Agar afsun noto'g'ri bo'lsa, boshqa dunyodan xavfli dushmanlar paydo bo'la boshlaydi va Piterni o'rgimchak odam bo'lish nimani anglatishini tushunishga majbur qiladi.",
@@ -130,6 +131,7 @@
     "movie": {
       "action": "Боевики",
       "adventure": "Приключения",
+      "comedy": "Комедия",
       "h": "ч",
       "m": "м",
       "descHero": "Когда заклинание идет не так, начинают появляться опасные враги из других миров, заставляя Питера узнать, что на самом деле значит быть Человеком-пауком.",
@@ -249,6 +251,7 @@
     "movie": {
       "action": "Action",
       "adventure": "Adventure",
+      "comedy": "Comedy",
       "h": "h",
       "m": "m",
       "descHero": "When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
