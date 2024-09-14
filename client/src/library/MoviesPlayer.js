@@ -61,7 +61,7 @@ export default function MoviesPlayer({ module }) {
   const [qualityChanger, setQualityChanger] = useState(true)
 
   if (languageChanger) {
-    if (movie.source[`720p`] != null) {
+    if (movie.source[`720p`] != null && quality == "720p") {
       if (language == 'uz') {
         if ((movie.source[`720p`].uz != null && movie.source[`720p`].ru != null && movie.source[`720p`].en != null)) setLanguage('uz')
         if ((movie.source[`720p`].uz != null && movie.source[`720p`].ru != null && movie.source[`720p`].en == null)) setLanguage('uz')
@@ -89,7 +89,7 @@ export default function MoviesPlayer({ module }) {
         if ((movie.source[`720p`].en == null && movie.source[`720p`].uz != null && movie.source[`720p`].ru == null)) setLanguage('uz')
         if ((movie.source[`720p`].en == null && movie.source[`720p`].uz == null && movie.source[`720p`].ru != null)) setLanguage('ru')
       }
-    } else if (movie.source[`1080p`] != null) {
+    } else if (movie.source[`1080p`] != null && quality == "1080p") {
       if (language == 'uz') {
         if ((movie.source[`1080p`].uz != null && movie.source[`1080p`].ru != null && movie.source[`1080p`].en != null)) setLanguage('uz')
         if ((movie.source[`1080p`].uz != null && movie.source[`1080p`].ru != null && movie.source[`1080p`].en == null)) setLanguage('uz')
@@ -117,7 +117,7 @@ export default function MoviesPlayer({ module }) {
         if ((movie.source[`1080p`].en == null && movie.source[`1080p`].uz != null && movie.source[`1080p`].ru == null)) setLanguage('uz')
         if ((movie.source[`1080p`].en == null && movie.source[`1080p`].uz == null && movie.source[`1080p`].ru != null)) setLanguage('ru')
       }
-    } else if (movie.source[`2160p`] != null) {
+    } else if (movie.source[`2160p`] != null && quality == "2160p") {
       if (language == 'uz') {
         if ((movie.source[`2160p`].uz != null && movie.source[`2160p`].ru != null && movie.source[`2160p`].en != null)) setLanguage('uz')
         if ((movie.source[`2160p`].uz != null && movie.source[`2160p`].ru != null && movie.source[`2160p`].en == null)) setLanguage('uz')
