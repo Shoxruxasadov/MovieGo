@@ -231,20 +231,20 @@ export default function SeriesPlayer({ episode }) {
     const hour = Math.floor(currentTime / 3600)
     const minute = Math.floor(currentTime / 60) % 60
     const second = Math.floor(currentTime % 60)
-    const makeHour = () => hour == 0 ? '' : `${hour}:`
-    const makeMinute = () => minute < 10 ? `0${minute}` : minute
-    const makeSecond = () => second < 10 ? `0${second}` : second
-    setCurrentTimeView(`${makeHour()}${makeMinute()}:${makeSecond()}`)
+    const makeHour = hour == 0 ? '' : `${hour}:`
+    const makeMinute = minute < 10 ? `0${minute}` : minute
+    const makeSecond = second < 10 ? `0${second}` : second
+    setCurrentTimeView(`${makeHour}${makeMinute}:${makeSecond}`)
   }
 
   const makeDuration = () => {
     const hour = Math.floor(duration / 3600)
     const minute = Math.floor(duration / 60) % 60
     const second = Math.floor(duration % 60)
-    const makeHour = () => hour == 0 ? '' : `${hour}:`
-    const makeMinute = () => minute < 10 ? `0${minute}` : minute
-    const makeSecond = () => second < 10 ? `0${second}` : second
-    setDurationView(`${makeHour()}${makeMinute()}:${makeSecond()}`)
+    const makeHour = hour == 0 ? '' : `${hour}:`
+    const makeMinute = minute < 10 ? `0${minute}` : minute
+    const makeSecond = second < 10 ? `0${second}` : second
+    setDurationView(`${makeHour}${makeMinute}:${makeSecond}`)
   }
 
   const handleLanguage = language => {
@@ -252,6 +252,10 @@ export default function SeriesPlayer({ episode }) {
     setList('main');
     setLoadingMovie(true);
     setCurrentTimeChanged(currentTime)
+
+    // if (movie.source[quality][language]) {
+
+    // }
   }
 
   const handleQuality = quality => {
@@ -418,6 +422,8 @@ export default function SeriesPlayer({ episode }) {
           onClick={handleVideo}
           onTimeUpdate={timeUpdate}
           onLoadedData={loadedMovie}
+          onPlaying={() => setLoadingMovie(false)}
+          onWaiting={() => setLoadingMovie(true)}
           src={movie.episodes[episode][quality][language]}
           style={currentTime == 0 ? { visibility: "hidden" } : {}}
         ></video> : <video
@@ -438,13 +444,20 @@ export default function SeriesPlayer({ episode }) {
             <button className="skip-forward" onClick={() => skip('forward')}><FaForward /></button>
           </li>
           <li className="options center">
-            <div className={`video-timeline${loadingMovie ? ' loading' : ''}`} onMouseMove={(e) => {
-              setBadgePosition(e.nativeEvent.offsetX)
-              formatTime((e.nativeEvent.offsetX / progressRef.current.clientWidth) * videoRef.current.duration)
-            }}>
+            <div className={`video-timeline${loadingMovie ? ' loading' : ''}`}>
               <div className="progress-area" ref={progressRef}>
                 <BadgePosition move={badgePosition}>{badgeTime}</BadgePosition>
-                <input type="range" min={0} max={videoRef.current && videoRef.current.duration} step='any' onChange={rangeTimeChange} value={rangeTime} />
+                <input min={0}
+                  type="range"
+                  step='any'
+                  value={rangeTime}
+                  onChange={rangeTimeChange}
+                  max={videoRef.current && videoRef.current.duration}
+                  onMouseMove={(e) => {
+                    setBadgePosition(e.nativeEvent.offsetX)
+                    formatTime((e.nativeEvent.offsetX / progressRef.current.clientWidth) * videoRef.current.duration)
+                  }}
+                />
                 <RangeTime className="progress-bar" percent={percentTime} />
               </div>
             </div>
