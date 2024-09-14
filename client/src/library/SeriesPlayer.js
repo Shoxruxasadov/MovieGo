@@ -470,9 +470,9 @@ export default function SeriesPlayer({ episode }) {
                 </ul>
                 <ul className={`language-list${accessible && list == 'language' ? ' active' : ''}`}>
                   <li className="back" onClick={() => setList('main')}>{translate[locale].movie.language}</li>
-                  {(movie.episodes[episode][`2160p`] ? (movie.episodes[episode][`2160p`].uz != null) : movie.episodes[episode][`1080p`] ? (movie.episodes[episode][`1080p`].uz != null) : movie.episodes[episode][`720p`] && (movie.episodes[episode][`720p`].uz != null)) && <li className={`item${language == 'uz' ? ' selected' : ''}`} onClick={() => handleLanguage('uz')}>Uzbek <span className="badge">UZ</span></li>}
-                  {(movie.episodes[episode][`2160p`] ? (movie.episodes[episode][`2160p`].ru != null) : movie.episodes[episode][`1080p`] ? (movie.episodes[episode][`1080p`].ru != null) : movie.episodes[episode][`720p`] && (movie.episodes[episode][`720p`].ru != null)) && <li className={`item${language == 'ru' ? ' selected' : ''}`} onClick={() => handleLanguage('ru')}>Russian <span className="badge">RU</span></li>}
-                  {(movie.episodes[episode][`2160p`] ? (movie.episodes[episode][`2160p`].en != null) : movie.episodes[episode][`1080p`] ? (movie.episodes[episode][`1080p`].en != null) : movie.episodes[episode][`720p`] && (movie.episodes[episode][`720p`].en != null)) && <li className={`item${language == 'en' ? ' selected' : ''}`} onClick={() => handleLanguage('en')}>English <span className="badge">EN</span></li>}
+                  {(movie.episodes[episode][quality] && (movie.episodes[episode][quality].uz != null)) && <li className={`item${language == 'uz' ? ' selected' : ''}`} onClick={() => handleLanguage('uz')}>Uzbek <span className="badge">UZ</span></li>}
+                  {(movie.episodes[episode][quality] && (movie.episodes[episode][quality].ru != null)) && <li className={`item${language == 'ru' ? ' selected' : ''}`} onClick={() => handleLanguage('ru')}>Russian <span className="badge">RU</span></li>}
+                  {(movie.episodes[episode][quality] && (movie.episodes[episode][quality].en != null)) && <li className={`item${language == 'en' ? ' selected' : ''}`} onClick={() => handleLanguage('en')}>English <span className="badge">EN</span></li>}
                 </ul>
                 <ul className={`quality-list${accessible && list == 'quality' ? ' active' : ''}`}>
                   <li className="back" onClick={() => setList('main')}>{translate[locale].movie.quality}</li>
