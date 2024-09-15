@@ -252,10 +252,6 @@ export default function SeriesPlayer({ episode }) {
     setList('main');
     setLoadingMovie(true);
     setCurrentTimeChanged(currentTime)
-
-    // if (movie.source[quality][language]) {
-
-    // }
   }
 
   const handleQuality = quality => {
@@ -263,6 +259,21 @@ export default function SeriesPlayer({ episode }) {
     setList('main');
     setLoadingMovie(true);
     setCurrentTimeChanged(currentTime)
+
+    if (!movie.source[quality][language]) {
+      if (language == 'uz') {
+        if (movie.source[quality].ru) return setLanguage('ru');
+        if (movie.source[quality].en) return setLanguage('en');
+      }
+      if (language == 'ru') {
+        if (movie.source[quality].uz) return setLanguage('uz');
+        if (movie.source[quality].en) return setLanguage('en');
+      }
+      if (language == 'en') {
+        if (movie.source[quality].uz) return setLanguage('uz');
+        if (movie.source[quality].ru) return setLanguage('ru');
+      }
+    }
   }
 
   const handleSpeed = speed => {
