@@ -25,8 +25,8 @@ export default function SerieHome() {
           <Image
             src={movie.image.logo}
             alt="logo"
-            width={1280}
-            height={512}
+            width={500}
+            height={200}
             placeholder="blur"
             blurDataURL="/spider/logo.webp"
             className={`logo ${loadedImage ? "unblur" : ""}`}
