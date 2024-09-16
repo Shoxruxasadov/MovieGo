@@ -24,11 +24,11 @@ export default function Section({ type, title, route, name }) {
     }, []);
 
     return (
-        <section id={name}>
-            <h2 data-aos="fade-up">{title}</h2>
+        <section id={name} data-aos="fade-up">
+            <h2>{title}</h2>
             <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
             <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
-            <div className='wrapper' ref={scrollDemoRef} data-aos="fade-up">
+            <div className='wrapper' ref={scrollDemoRef} >
                 <div className={type}>
                     {isSuccess ? movies.map(item => (
                         <Link
