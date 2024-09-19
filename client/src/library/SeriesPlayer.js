@@ -333,8 +333,7 @@ export default function SeriesPlayer({ episode }) {
   }
 
   const hideControls = () => {
-    if (isHovering && !window.document.fullscreen) return setControls(true)
-    if (!playing) return
+    if (!playing || (isHovering && !window.document.fullscreen)) return setControls(true)
     setControls(false)
   }
 
