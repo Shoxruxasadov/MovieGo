@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isIOS } from "react-device-detect";
 import { useRouter } from "next/router";
 import styled from 'styled-components';
 import { usePlayer, useStore } from "@/store/zustand";
@@ -339,7 +339,6 @@ export default function SeriesPlayer({ episode }) {
 
   useEffect(() => {
     setCurrentTime(0)
-    hideControls(false)
     setTimeout(() => { setReload(true) }, 1000);
 
     let playingKeyCode = playing;
@@ -413,9 +412,10 @@ export default function SeriesPlayer({ episode }) {
   }, [isHovering])
 
   useEffect(() => {
-    let interval = setInterval(hideControls, 3000)
+    if (isMobile && !window.document.fullscreen) return
+    let interval = setInterval(hideControls, 2000)
     return (() => clearInterval(interval))
-  }, [isHovering, playing])
+  }, [isHovering, playing, window.document.fullscreen])
 
   return (
     <div
@@ -479,11 +479,13 @@ export default function SeriesPlayer({ episode }) {
             </div>
           </li>
           <li className="options right">
-            <button className="volume" onClick={makeVolume}>{volume == 0 ? <HiVolumeOff /> : <HiVolumeUp />}</button>
-            {!isMobile && <div className="range-volume">
-              <input type="range" min='0' max='1' step='any' onChange={volumeChange} value={volume} />
-              <RangeVolume className="progress-volume" percent={volume * 100} />
-            </div>}
+            {!isIOS && <>
+              <button className="volume" onClick={makeVolume}>{volume == 0 ? <HiVolumeOff /> : <HiVolumeUp />}</button>
+              {!isMobile && <div className="range-volume">
+                <input type="range" min='0' max='1' step='any' onChange={volumeChange} value={volume} />
+                <RangeVolume className="progress-volume" percent={volume * 100} />
+              </div>}
+            </>}
             <div className="setting-content">
               <button className={`settings${accessible ? ' active' : ''}`} onClick={() => setAccessible(!accessible)}><MdSettings /></button>
               <div className={`menu ${list}${menuSize(list)}${accessible ? ' active' : ''}`}>
@@ -517,7 +519,7 @@ export default function SeriesPlayer({ episode }) {
                 </ul>
               </div>
             </div>
-            <button className="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>
+            {!isIOS && <button className="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>}
           </li>
         </ul>
       </div>
