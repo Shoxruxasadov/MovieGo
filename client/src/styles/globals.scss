@@ -88,6 +88,15 @@ body {
   @import "./home/section.scss";
   @import "./home/footer.scss";
 
+  #shadow {
+    @media (max-width: 440px) {
+      height: 213vw;
+    }
+    @media (max-width: 400px) and (max-height: 700px) {
+      height: 175.5vw;
+    }
+  }
+
   main {
     min-height: 132svh;
     background-image: url("/spider/banner.webp");
@@ -106,12 +115,16 @@ body {
     @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) and (min-width: 440px) {
       background-size: 100vw;
     }
-    
+
     @media (max-width: 768px) {
       background-size: 200vw;
     }
 
     @media (max-width: 440px) {
+      background-size: 340vw;
+    }
+
+    @media (max-width: 400px) and (max-height: 700px) {
       background-size: 280vw;
     }
   }
@@ -124,7 +137,6 @@ body {
   @import "./movie/player.scss";
   @import "./movie/recommendation.scss";
   @import "./home/footer.scss";
-
 
   main {
     min-height: 132svh;
@@ -144,13 +156,17 @@ body {
     @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
       background-size: 100vw;
     }
-    
+
     @media (max-width: 768px) {
       background-size: 200vw;
     }
 
     @media (max-width: 440px) {
       background-size: 280vw;
+    }
+
+    @media (max-width: 400px) and (max-height: 700px) {
+      background-size: 220vw;
     }
   }
 }
@@ -188,6 +204,10 @@ body {
 
     @media (max-width: 440px) {
       background-size: 280vw;
+    }
+
+    @media (max-width: 400px) and (max-height: 700px) {
+      background-size: 220vw;
     }
   }
 }
