@@ -333,7 +333,7 @@ export default function SeriesPlayer({ episode }) {
   }
 
   const hideControls = () => {
-    if (!playing || isHovering) return
+    if (!playing || isHovering) return setControls(true)
     setControls(false)
   }
 

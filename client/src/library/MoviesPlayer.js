@@ -331,7 +331,7 @@ export default function MoviesPlayer({ module }) {
   }
 
   const hideControls = () => {
-    if (!playing || isHovering) return
+    if (!playing || isHovering) return setControls(true)
     setControls(false)
   }
 
