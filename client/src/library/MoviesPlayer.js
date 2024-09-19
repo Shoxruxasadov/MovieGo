@@ -332,7 +332,7 @@ export default function MoviesPlayer({ module }) {
 
   const hideControls = () => {
     if (isHovering && !window.document.fullscreen) return setControls(true)
-    if (!playing) return
+    if (!playing) return setControls(true)
     setControls(false)
   }
 
