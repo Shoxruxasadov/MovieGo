@@ -331,7 +331,8 @@ export default function MoviesPlayer({ module }) {
   }
 
   const hideControls = () => {
-    if (!playing || isHovering) return setControls(true)
+    if (isHovering && !window.document.fullscreen) return setControls(true)
+    if (!playing) return
     setControls(false)
   }
 
@@ -411,9 +412,9 @@ export default function MoviesPlayer({ module }) {
 
   useEffect(() => {
     if (isMobile && !window.document.fullscreen) return
-    let interval = setInterval(hideControls, 2000)
+    let interval = setTimeout(hideControls, 2000)
     return (() => clearInterval(interval))
-  }, [isHovering, playing, window.document.fullscreen])
+  }, [isHovering, playing, window.document.fullscreen, isMobile])
 
   return (
     <div
