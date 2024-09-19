@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isIOS, isMobileSafari } from "react-device-detect";
 import { useRouter } from "next/router";
 import styled from 'styled-components';
 import { usePlayer, useStore } from "@/store/zustand";
@@ -516,6 +516,8 @@ export default function MoviesPlayer({ module }) {
               </div>
             </div>
             <button className="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>
+            {isIOS && <span>IOS</span>}
+            {isMobileSafari && <span>MobileSafari</span>}
           </li>
         </ul>
       </div>
