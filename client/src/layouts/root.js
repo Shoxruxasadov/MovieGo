@@ -18,10 +18,10 @@ export default function Root({ children, page, title }) {
             <title>{title} • MovieGo</title>
           )
         ) : (
-          <title>MovieGo</title>
+          <title>MovieGo • Marvel Movies</title>
         )}
-        <meta name="description" content="MovieGo • MCU Movies" />
-        <meta name="keywords" content="MovieGo Marvel MCU" />
+        <meta name="description" content="MovieGo • Marvel Movies" />
+        <meta name="keywords" content="MovieGo Marvel" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div id={page}>{children}</div>

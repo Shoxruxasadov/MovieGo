@@ -44,7 +44,7 @@ export default function Section({ type, title, route, name }) {
                                     <span className="format">{item.format}</span>
                                 </>}
                                 <p className="type">{translate[locale].movie.free}</p>
-                                {type == "studio" ? <h3>{item.name[locale]}</h3> : <h3>{item.title[locale]}</h3>}
+                                {type == "studio" ? <h3>{item.name[locale]}</h3> : <h3 title={item.title[locale]}>{item.title[locale]}</h3>}
                                 {type != "studio" && <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>}
                             </div>
                         </Link>
