@@ -99,15 +99,15 @@ export default function MovieHome() {
                 </svg>
                 <span>{translate[locale].movie.listBtn}</span>
               </button>
-              <Link href={`/${movie.type}/${movie.seasons[0]}`} className="next">
+              {movie.seasons && <Link href={`/${movie.type}/${movie.seasons[0]}`} className="next">
                 <TbSignRightFilled />
-              </Link>
+              </Link>}
             </div>
-            <div className="right">
+            {movie.seasons && <div className="right">
               <Link href={`/${movie.type}/${movie.seasons[0]}`}>
                 <TbSignRightFilled />
               </Link>
-            </div>
+            </div>}
           </div>
         </motion.div>
       </div>
