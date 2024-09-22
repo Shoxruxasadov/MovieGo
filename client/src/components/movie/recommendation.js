@@ -24,7 +24,7 @@ export default function MovieRecommendation() {
   }, []);
 
   return (
-    <section id="recommendation" >
+    <section id="recommendation" data-aos="fade-up">
       <h2>{translate[locale].movie.recommendation}</h2>
       <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
       <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
@@ -39,8 +39,7 @@ export default function MovieRecommendation() {
             >
               <div className="shadow" />
               <div className="title">
-                <span className="resolution">{item.resolution}</span>
-                <span className="format">{item.format}</span>
+                <div className="resolution"><span>{item.resolution}</span></div>
                 <p className="type">{translate[locale].movie.free}</p>
                 <h3>{item.title[locale]}</h3>
                 <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>

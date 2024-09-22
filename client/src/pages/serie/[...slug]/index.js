@@ -12,6 +12,7 @@ import Animated from "@/components/others/animated"
 import ErrorPage from "@/pages/404"
 import { useStore } from "@/store/zustand"
 import MovieRecommendation from "@/components/movie/recommendation"
+import MovieCredits from "@/components/movie/credits"
 
 export default function AppMovie() {
   const getMovie = useStore(state => state.getMovie);
@@ -38,8 +39,9 @@ export default function AppMovie() {
       <Animated>
         <SerieHome />
         <SeriePlayer />
+        <MovieCredits />
+        <MovieRecommendation />
         <div id="shadow" />
-        <MovieRecommendation/>
       </Animated>
       <Footer />
     </Root>

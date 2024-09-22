@@ -79,6 +79,7 @@ body {
 #__next {
   max-width: 100vw;
   min-height: 100svh;
+  overflow: hidden
 }
 
 #home {
@@ -135,6 +136,7 @@ body {
   @import "./home/header.scss";
   @import "./movie/home.scss";
   @import "./movie/player.scss";
+  @import "./movie/credits";
   @import "./movie/recommendation.scss";
   @import "./home/footer.scss";
 
@@ -176,6 +178,7 @@ body {
   @import "./home/header.scss";
   @import "./serie/home.scss";
   @import "./serie/player.scss";
+  @import "./movie/credits";
   @import "./movie/recommendation.scss";
   @import "./home/footer.scss";
 
@@ -218,7 +221,7 @@ body {
   @import "./home/footer.scss";
 
   main {
-    min-height: calc(100svh - 88.9px);
+    min-height: calc(100svh);
   }
 }
 

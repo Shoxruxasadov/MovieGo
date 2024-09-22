@@ -22,5 +22,5 @@ export default function Release({ time }) {
         if (month == '12') return translate[locale].date.release.december
     }
 
-    return `${day} ${monthText()} ${year}`
+    return `${day} ${monthText()} ${year} ${translate[locale].date.year}`
 }

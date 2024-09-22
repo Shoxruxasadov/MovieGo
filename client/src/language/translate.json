@@ -17,7 +17,7 @@
       "descHero": "Agar afsun noto'g'ri bo'lsa, boshqa dunyodan xavfli dushmanlar paydo bo'la boshlaydi va Piterni o'rgimchak odam bo'lish nimani anglatishini tushunishga majbur qiladi.",
       "watchBtn": "Tomosha Qilish",
       "moreBtn": "Batafsil",
-      "listBtn": "Ko'rilganlarga Qo'shish",
+      "listBtn": "Ko'rilgan",
       "free": "Bepul",
       "cast": "Bosh Rollarda",
       "movie": "Kino",
@@ -35,7 +35,7 @@
       "need": "Filmlarni tomosha qilish uchun ro'yxatdan o'tishingiz yoki tizimga kirishingiz kerak",
       "signup": "Ro'yxatdan o'tish",
       "login": "Kirish",
-      "release": "Chiqarilgan",
+      "release": "Premyera",
       "timeline": "Xronologiya",
       "studio": "Studiya",
       "grossing": "Daromad",
@@ -47,7 +47,7 @@
       "producers": "Ishlab chiqaruvchilar",
       "screenwriters": "Ssenariy mualliflari"
     },
-    "serie":{
+    "serie": {
       "episodes": "Qismlar",
       "episode": "Qism"
     },
@@ -94,29 +94,40 @@
     },
     "date": {
       "release": {
-        "january": "Yanvar",
-        "february": "Fevral",
-        "march": "Mart",
-        "april": "Aprel",
-        "may": "May",
-        "june": "Iyun",
-        "july": "Iyul",
-        "august": "Avgust",
-        "september": "Sentyabr",
-        "october": "Oktyabr",
-        "november": "Noyabr",
-        "december": "Dekabr"
+        "january": "yanvar",
+        "february": "fevral",
+        "march": "mart",
+        "april": "aprel",
+        "may": "may",
+        "june": "iyun",
+        "july": "iyul",
+        "august": "avgust",
+        "september": "sentyabr",
+        "october": "oktyabr",
+        "november": "noyabr",
+        "december": "dekabr"
       },
       "season": {
         "winter": "Qish",
         "spring": "Bahor",
         "summer": "Yoz",
         "autumn": "Kuz"
-      }
+      },
+      "year": "yil"
     },
     "footer": {
-      "rights": "«Marvel Studios» Barcha materiallar axborot maqsadida taqdim etilgan, barcha huquqlar marvelga tegishli.",
-      "powered": "Huquqlar"
+      "rights": "Barcha huquqlar himoyalangan.",
+      "title": "Marvel filmlarini MovieGo orqali bepul tomosha qiling.",
+      "available": "Mavjud",
+      "social": "Ijtimoiy tarmoqlar",
+      "legal": "Huquqiy",
+      "platform": "Platforma",
+      "advertising": "Reklama Xizmati",
+      "support": "Qo'llab-Quvatlash",
+      "about": "Biz Haqimizda",
+      "terms": "Xizmat Shartlari",
+      "privacy": "Maxfiylik Qoidalari",
+      "cookies": "Cookie Fayllar"
     }
   },
   "ru": {
@@ -137,7 +148,7 @@
       "descHero": "Когда заклинание идет не так, начинают появляться опасные враги из других миров, заставляя Питера узнать, что на самом деле значит быть Человеком-пауком.",
       "watchBtn": "Смотреть",
       "moreBtn": "Подробнее",
-      "listBtn": "Добавить Просмотра",
+      "listBtn": "Просмотрен",
       "free": "Бесплатные",
       "cast": "Лучшие Актеры",
       "movie": "Фильм",
@@ -155,7 +166,7 @@
       "need": "Вам необходимо зарегистрироваться или войти в систему, чтобы смотреть фильмы",
       "signup": "Зарегистрироваться",
       "login": "Войти",
-      "release": "Производства",
+      "release": "Дата выхода",
       "timeline": "Хронология",
       "studio": "Студия",
       "grossing": "Доход",
@@ -167,7 +178,7 @@
       "producers": "Производители",
       "screenwriters": "Сценаристы"
     },
-    "serie":{
+    "serie": {
       "episodes": "Части",
       "episode": "Часть"
     },
@@ -214,29 +225,40 @@
     },
     "date": {
       "release": {
-        "january": "Январь",
-        "february": "Февраль",
-        "march": "Март",
-        "april": "Апрель",
-        "may": "Май",
-        "june": "Июнь",
-        "july": "Июль",
-        "august": "Август",
-        "september": "Сентябрь",
-        "october": "Октябрь",
-        "november": "Ноябрь",
-        "december": "Декабрь"
+        "january": "январь",
+        "february": "февраль",
+        "march": "март",
+        "april": "апрель",
+        "may": "май",
+        "june": "июнь",
+        "july": "июль",
+        "august": "август",
+        "september": "сентябрь",
+        "october": "октябрь",
+        "november": "ноябрь",
+        "december": "декабрь"
       },
       "season": {
         "winter": "Зима",
         "spring": "Весна",
         "summer": "Лето",
         "autumn": "Осень"
-      }
+      },
+      "year": "года"
     },
     "footer": {
-      "rights": "«Marvel Studios» Все материалы предоставлены исключительно в информационных целях, все права принадлежат Marvel.",
-      "powered": "Права"
+      "rights": "Все права защищены.",
+      "title": "Смотрите фильмы Marvel бесплатно на MovieGo.",
+      "available": "Доступный",
+      "social": "Социальные сети",
+      "legal": "Юридический",
+      "platform": "Платформа",
+      "advertising": "Реклама",
+      "support": "Поддержка",
+      "about": "О нас",
+      "terms": "Условия обслуживания",
+      "privacy": "Конфиденциальности",
+      "cookies": "Файлы Cookie"
     }
   },
   "en": {
@@ -257,7 +279,7 @@
       "descHero": "When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
       "watchBtn": "Watch Now",
       "moreBtn": "More Info",
-      "listBtn": "Add Watchlist",
+      "listBtn": "Watchlist",
       "free": "Free",
       "cast": "Top Casts",
       "movie": "Movie",
@@ -287,7 +309,7 @@
       "producers": "Producers",
       "screenwriters": "Screenwriters"
     },
-    "serie":{
+    "serie": {
       "episodes": "Episodes",
       "episode": "Episode"
     },
@@ -334,29 +356,40 @@
     },
     "date": {
       "release": {
-        "january": "January",
-        "february": "February",
-        "march": "March",
-        "april": "April",
-        "may": "May",
-        "june": "June",
-        "july": "July",
-        "august": "August",
-        "september": "September",
-        "october": "October",
-        "november": "November",
-        "december": "December"
+        "january": "january",
+        "february": "february",
+        "march": "march",
+        "april": "april",
+        "may": "may",
+        "june": "june",
+        "july": "july",
+        "august": "august",
+        "september": "september",
+        "october": "october",
+        "november": "november",
+        "december": "december"
       },
       "season": {
         "winter": "Winter",
         "spring": "Spring",
         "summer": "Summer",
         "autumn": "Fall"
-      }
+      },
+      "year": "year"
     },
     "footer": {
-      "rights": "«Marvel Studios» All material provided for informational purposes only, all rights reserved by marvel.",
-      "powered": "Powered by"
+      "rights": "All rights reserved.",
+      "title": "Watch Marvel Movies for free on MovieGo.",
+      "available": "Available",
+      "social": "Social Media",
+      "legal": "Legal",
+      "platform": "Platform",
+      "advertising": "Advertising",
+      "support": "Support",
+      "about": "About",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookies"
     }
   }
 }

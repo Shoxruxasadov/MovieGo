@@ -1,4 +1,5 @@
 import Root from "@/layouts/root";
+import { useEffect } from "react";
 
 export default function Loading() {
     return (

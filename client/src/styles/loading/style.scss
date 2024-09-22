@@ -4,11 +4,12 @@
   }
 
   &_text {
-    margin: 5px auto;
+    padding: 5px 0;
     color: var(--main-click-color);
     text-transform: uppercase;
     letter-spacing: 1px;
     font-family: Anton, Montserrat, sans-serif;
+    background: #0d0d0d;
   }
   &_filmstrip {
     position: relative;

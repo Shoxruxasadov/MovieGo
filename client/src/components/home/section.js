@@ -40,10 +40,9 @@ export default function Section({ type, title, route, name }) {
                             <div className="shadow" />
                             <div className="title">
                                 {type != "studio" && <>
-                                    <span className="resolution">{item.resolution}</span>
-                                    <span className="format">{item.format}</span>
+                                    <div className="resolution"><span>{item.resolution}</span></div>
                                 </>}
-                                <p className="type">{translate[locale].movie.free}</p>
+                                {type != "studio" && <p className="type">{translate[locale].movie.free}</p>}
                                 {type == "studio" ? <h3>{item.name[locale]}</h3> : <h3 title={item.title[locale]}>{item.title[locale]}</h3>}
                                 {type != "studio" && <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>}
                             </div>
@@ -51,7 +50,6 @@ export default function Section({ type, title, route, name }) {
                     )) : Array(10).fill(<div className="card skeleton">
                         <div className="title">
                             <div className="resolution" />
-                            <div className="format" />
                             <div className="text" />
                         </div>
                     </div>).map(item => item)}

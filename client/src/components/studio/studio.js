@@ -37,10 +37,9 @@ export default function MovieStudio() {
                         key={item._id}
                     >
                         <div className="shadow" />
-                        <img src={item.image.poster} alt="poster" />
+                        <img src={item.image.poster} alt={item.title[locale]} />
                         <div className="title">
-                            <span className="resolution">{item.resolution}</span>
-                            <span className="format">{item.format}</span>
+                            <div className="resolution"><span>{item.resolution}</span></div>
                             <p className="type">{translate[locale].movie.free}</p>
                             <h3>{item.title[locale]}</h3>
                             <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>

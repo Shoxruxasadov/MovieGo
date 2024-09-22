@@ -13,5 +13,5 @@ export default function Timeline({ time }) {
         if (month == '09' || month == '10' || month == '11') return translate[locale].date.season.autumn
     }
 
-    return `${year} ${monthText()}`
+    return `${monthText()} ${year} ${translate[locale].date.year}`
 }

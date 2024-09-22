@@ -260,18 +260,18 @@ export default function SeriesPlayer({ episode }) {
     setLoadingMovie(true);
     setCurrentTimeChanged(currentTime)
 
-    if (!movie.source[quality][language]) {
+    if (!movie.episodes[episode][quality][language]) {
       if (language == 'uz') {
-        if (movie.source[quality].ru) return setLanguage('ru');
-        if (movie.source[quality].en) return setLanguage('en');
+        if (movie.episodes[episode][quality].ru) return setLanguage('ru');
+        if (movie.episodes[episode][quality].en) return setLanguage('en');
       }
       if (language == 'ru') {
-        if (movie.source[quality].uz) return setLanguage('uz');
-        if (movie.source[quality].en) return setLanguage('en');
+        if (movie.episodes[episode][quality].uz) return setLanguage('uz');
+        if (movie.episodes[episode][quality].en) return setLanguage('en');
       }
       if (language == 'en') {
-        if (movie.source[quality].uz) return setLanguage('uz');
-        if (movie.source[quality].ru) return setLanguage('ru');
+        if (movie.episodes[episode][quality].uz) return setLanguage('uz');
+        if (movie.episodes[episode][quality].ru) return setLanguage('ru');
       }
     }
   }
@@ -479,12 +479,12 @@ export default function SeriesPlayer({ episode }) {
             </div>
           </li>
           <li className="options right">
-            {!isIOS && <>
+            {!isMobile && <>
               <button className="volume" onClick={makeVolume}>{volume == 0 ? <HiVolumeOff /> : <HiVolumeUp />}</button>
-              {!isMobile && <div className="range-volume">
+              <div className="range-volume">
                 <input type="range" min='0' max='1' step='any' onChange={volumeChange} value={volume} />
                 <RangeVolume className="progress-volume" percent={volume * 100} />
-              </div>}
+              </div>
             </>}
             <div className="setting-content">
               <button className={`settings${accessible ? ' active' : ''}`} onClick={() => setAccessible(!accessible)}><MdSettings /></button>
@@ -503,7 +503,7 @@ export default function SeriesPlayer({ episode }) {
                 <ul className={`quality-list${accessible && list == 'quality' ? ' active' : ''}`}>
                   <li className="back" onClick={() => setList('main')}>{translate[locale].movie.quality}</li>
                   {movie.episodes[episode][`2160p`] != null && <li className={`item${quality == '2160p' ? ' selected' : ''}`} onClick={() => handleQuality('2160p')}>2160p <span className="badge">4K</span></li>}
-                  {movie.episodes[episode][`1080p`] != null && <li className={`item${quality == '1080p' ? ' selected' : ''}`} onClick={() => handleQuality('1080p')}>1080p <span className="badge">FHD</span></li>}
+                  {movie.episodes[episode][`1080p`] != null && <li className={`item${quality == '1080p' ? ' selected' : ''}`} onClick={() => handleQuality('1080p')}>1080p <span className="badge">HD</span></li>}
                   {movie.episodes[episode][`720p`] != null && <li className={`item${quality == '720p' ? ' selected' : ''}`} onClick={() => handleQuality('720p')}>720p <span className="badge">HD</span></li>}
                 </ul>
                 <ul className={`speed-list${accessible && list == 'speed' ? ' active' : ''}`}>

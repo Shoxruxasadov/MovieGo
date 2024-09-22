@@ -14,8 +14,9 @@ const nextConfig = {
     ]
   },
   i18n: {
-    defaultLocale: 'en',
-    locales: ['uz', 'ru', 'en'],
+    locales: ['ru', 'en', 'uz'],
+    localeDetection: false,
+    defaultLocale: 'ru',
   },
 };
 export default nextConfig;

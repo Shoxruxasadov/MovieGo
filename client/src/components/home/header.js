@@ -50,10 +50,10 @@ export default function Header({ movie }) {
         offset={0}
         to='home'
       >
-        <Image src='/logo/logo.png' width={256} height={256} alt="MovieGo" />
+        <Image src='/logo/logo.png' width={256} height={256} alt="MovieGo Logo" />
         <h1>MovieGo</h1>
       </Scroll> : <Link href="/" className="logo">
-        <Image src='/logo/logo.png' width={256} height={256} alt="MovieGo" />
+        <Image src='/logo/logo.png' width={256} height={256} alt="MovieGo Logo" />
         <h1>MovieGo</h1>
       </Link>}
 
@@ -78,7 +78,7 @@ export default function Header({ movie }) {
           </li>
         </ul>
       </nav> : movie ? <nav>
-        <h3>{title[locale]}</h3>
+        <h2>{title[locale]}</h2>
       </nav> : <></>}
 
       <div className="right">
@@ -86,11 +86,11 @@ export default function Header({ movie }) {
           onMouseEnter={() => setMenu(true)}
           onMouseLeave={() => setMenu(false)}
         >
-          <div className="selected">
-            <img src={`/language/${locale}.svg`} alt={locale} width={21} height={21} />
-            <span>{translate[locale].header.language}</span>
-          </div>
-          <div className={`menu${menu ? ' active' : ''}`}>
+          <div className={menu ? 'menu active' : "menu"}>
+            <div className="selected">
+              <img src={`/language/${locale}.svg`} alt={locale} width={21} height={21} />
+              <span>{translate[locale].header.language}</span>
+            </div>
             {router.locales.map(lng => (
               <button
                 key={lng}
@@ -102,6 +102,7 @@ export default function Header({ movie }) {
               </button>
             ))}
           </div>
+
         </div>
         {load && (user ? <div className="account">
           <Image
