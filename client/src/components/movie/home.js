@@ -52,7 +52,7 @@ export default function MovieHome() {
             <p className="time">{<Time time={movie.duration} />}</p>
           </div>
           <div className="watching">
-            <div className={movie.seasons.length > 0 ? "left active" : "left"}>
+            <div className={movie.seasons ? "left active" : "left"}>
               <Scroll
                 activeClass="active"
                 to="player"
