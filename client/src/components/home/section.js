@@ -44,7 +44,7 @@ export default function Section({ type, title, route, name }) {
                                 </>}
                                 {type != "studio" && <p className="type">{translate[locale].movie.free}</p>}
                                 {type == "studio" ? <h3>{item.name[locale]}</h3> : <h3 title={item.title[locale]}>{item.title[locale]}</h3>}
-                                {type != "studio" && <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>}
+                                {type != "studio" && <p className="other">{item.studio.name[locale]} • <span>{item.mpa}+</span></p>}
                             </div>
                         </Link>
                     )) : Array(10).fill(<div className="card skeleton">

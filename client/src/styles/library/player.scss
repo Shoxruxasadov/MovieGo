@@ -1,5 +1,5 @@
 #player {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -11,18 +11,10 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  visibility: hidden;
-  pointer-events: none;
 
   @media (max-width: 768px) {
     min-height: 440px;
     background-size: contain;
-  }
-
-  &.visible {
-    visibility: visible;
-    pointer-events: auto;
-    display: flex;
   }
 
   &.screen video {

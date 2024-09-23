@@ -4,8 +4,9 @@ import { Document, Types, Schema as MongooseSchema } from 'mongoose';
 import { LangDto } from './dto/lang.dto';
 import { ImageDto } from './dto/image.dto';
 import { MovieDto } from './dto/movie.dto';
-import { Actors } from 'src/actors/actors.schema';
 import { SerieDto } from './dto/serie.dto.';
+import { Actors } from 'src/actors/actors.schema';
+import { Studios } from 'src/studios/studios.schema';
 
 export type MoviesDocument = HydratedDocument<Movies>;
 
@@ -30,7 +31,7 @@ export class Movies {
   episodes: SerieDto[] | null;
 
   @Prop({ required: false })
-  seasons: string[] | null
+  seasons: string[] | null;
 
   @Prop({ required: true })
   type: string;
@@ -59,8 +60,12 @@ export class Movies {
   @Prop({ required: false })
   budget: string | null;
 
-  @Prop({ required: true })
-  studio: LangDto;
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    required: true,
+    ref: 'Studios',
+  })
+  studio: Studios;
 
   @Prop({ required: true })
   certificate: string;

@@ -21,7 +21,7 @@ const BadgePosition = styled.span`
     left: ${props => props.move}px!important;
 `;
 
-export default function MoviesPlayer({ module }) {
+export default function MoviesPlayer() {
   const setLanguage = usePlayer(state => state.setLanguage);
   const setQuality = usePlayer(state => state.setQuality);
   const setSpeed = usePlayer(state => state.setSpeed);
@@ -421,7 +421,7 @@ export default function MoviesPlayer({ module }) {
       ref={playerRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`${fullscreen ? "" : "screen "}${controls ? "" : "hide "}${module}`}
+      className={`${fullscreen ? "" : "screen "}${controls ? "" : "hide "}`}
       style={currentTime == 0 ? { backgroundImage: `url(${movie.image.preview})` } : {}}
     >
       {

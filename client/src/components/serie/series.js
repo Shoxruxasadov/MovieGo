@@ -7,7 +7,7 @@ import translate from "@/language/translate.json"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Link as Scroll } from "react-scroll";
 
-export default function Series({ module }) {
+export default function Series() {
     const movie = useStore(state => state.movie);
     const [screenSize, setScreenSize] = useState([1280, 720]);
     const [episode, setEpisode] = useState(null)
@@ -21,7 +21,7 @@ export default function Series({ module }) {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    return <div id="series-list" className={module == "Serie" ? '' : 'hide'}>
+    return <div id="series-list">
         <div className="select-series">
             <h2>1-{movie.episodes.length} {translate[locale].serie.episodes}</h2>
             <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>

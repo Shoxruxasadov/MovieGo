@@ -19,22 +19,6 @@ export default function MoviePlayer() {
   const scrollDemoRef = useRef(null);
   const pathname = usePathname()
   const { locale } = useRouter()
-  const router = useRouter()
-
-  const modules = [
-    {
-      title: translate[locale].movie.movie,
-      name: 'Movie',
-    },
-    {
-      title: translate[locale].movie.credits,
-      name: 'Credits',
-    },
-    {
-      title: translate[locale].movie.authors,
-      name: 'Authors',
-    },
-  ]
 
   return (
     <section id="movie-player">
@@ -61,9 +45,9 @@ export default function MoviePlayer() {
       </div>
 
       <div className="watching" data-aos="fade-up">
-        {user ? (movie.source ? <MoviesPlayer module={module == "Movie" ? 'visible' : ''} /> : <div id="need" className={module == "Movie" ? 'visible' : ''}>
+        {user ? (movie.source ? <MoviesPlayer /> : <div id="need">
           <p>{translate[locale].movie.soon}</p>
-        </div>) : <div id="need" className={module == "Movie" ? 'visible' : ''}>
+        </div>) : <div id="need">
           <p>{translate[locale].movie.need}</p>
           <div className="sign" onClick={() => setLink(pathname)}>
             <Link href="/signup">{translate[locale].movie.signup}</Link>

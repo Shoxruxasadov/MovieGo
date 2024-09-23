@@ -11,17 +11,34 @@ export class MoviesService {
   ) {}
 
   async findByType(type: string) {
-    if (type == 'all') return this.moviesModel.find().sort({ timeline: -1 });
-    return this.moviesModel.find({ type: type }).sort({ timeline: -1 });
+    if (type == 'all')
+      return this.moviesModel.find().populate('studio').sort({ timeline: -1 });
+    return this.moviesModel
+      .find({ type: type })
+      .populate('studio')
+      .sort({ timeline: -1 });
   }
 
   async findRandom() {
-    return this.moviesModel.aggregate([{ $sample: { size: 10 } }]);
+    return this.moviesModel.aggregate([
+      {
+        $sample: { size: 10 },
+      },
+      {
+        $lookup: {
+          from: 'studios',
+          localField: 'studio',
+          foreignField: '_id',
+          as: 'studio',
+        },
+      },
+    ]);
   }
 
   async findByName(name: string) {
     return this.moviesModel
       .findOne({ name })
+      .populate('studio')
       .populate('cast')
       .populate('directors')
       .populate('producers')
@@ -29,6 +46,7 @@ export class MoviesService {
   }
 
   async create(dto: MoviesDto) {
+    dto.studio = new mongoose.Types.ObjectId(dto.studio);
     dto.cast = dto.cast.map((id: any) => new mongoose.Types.ObjectId(id));
     dto.directors = dto.directors.map(
       (id: any) => new mongoose.Types.ObjectId(id),

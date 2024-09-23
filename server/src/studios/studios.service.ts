@@ -17,7 +17,10 @@ export class StudiosService {
   }
 
   async findByModule(module: string) {
-    return this.moviesModel.find({ module }).sort({ timeline: -1 });
+    return this.moviesModel
+      .find({ module })
+      .populate('studio')
+      .sort({ timeline: -1 });
   }
 
   async create(dto: StudiosDto) {
@@ -30,9 +33,8 @@ export class StudiosService {
     return 'success';
   }
 
-//   async remove(id: string) {
-//     await this.studiosModel.findByIdAndDelete(id);
-//     return 'success';
-//   }
-
+  //   async remove(id: string) {
+  //     await this.studiosModel.findByIdAndDelete(id);
+  //     return 'success';
+  //   }
 }

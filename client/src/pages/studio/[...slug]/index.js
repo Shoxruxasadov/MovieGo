@@ -29,7 +29,7 @@ export default function AppModule() {
   if (loading) return <Loading />
   if (!studio || studio.length == 0) return <ErrorPage />
   return (
-    <Root page="studio" title={studio[0].studio[locale]}>
+    <Root page="studio" title={studio[0].studio.name[locale]}>
       <Header movie={true} />
       <Animated>
         <MovieStudio />

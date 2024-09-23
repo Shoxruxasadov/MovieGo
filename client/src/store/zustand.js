@@ -9,7 +9,7 @@ export const useStore = create((set) => ({
     studio: null,
     setLink: link => set(() => ({ link: link })),
     getMovie: movie => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies/${movie}`).then(({ data }) => set(() => ({ movie: data, title: data ? data.title : null }))),
-    getStudio: module => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/studios/${module}`).then(({ data }) => set(() => ({ studio: data, title: data[0].studio }))),
+    getStudio: module => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/studios/${module}`).then(({ data }) => set(() => ({ studio: data, title: data[0].studio.name }))),
 }));
 
 export const useUser = create(persist((set) => ({

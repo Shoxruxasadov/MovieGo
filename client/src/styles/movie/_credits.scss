@@ -62,7 +62,12 @@
         padding: 8px 0;
       }
 
-      p {
+      a{
+        text-decoration: underline;
+        text-decoration-color: #888;
+      }
+
+      p,a {
         font-weight: 500;
 
         &:first-child {

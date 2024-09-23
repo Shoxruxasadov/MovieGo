@@ -49,7 +49,7 @@ export class MoviesDto {
   budget: string | null;
 
   @IsNotEmpty()
-  studio: LangDto;
+  studio: any;
 
   @IsNotEmpty()
   certificate: string;

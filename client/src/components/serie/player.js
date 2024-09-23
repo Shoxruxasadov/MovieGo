@@ -15,26 +15,9 @@ export default function SeriePlayer() {
   const setLink = useStore(state => state.setLink);
   const movie = useStore(state => state.movie);
   const user = useUser(state => state.user);
-  const [module, setModule] = useState('Serie')
   const scrollDemoRef = useRef(null);
   const pathname = usePathname()
   const { locale } = useRouter()
-  const router = useRouter()
-
-  const modules = [
-    {
-      title: translate[locale].movie.serie,
-      name: 'Serie',
-    },
-    {
-      title: translate[locale].movie.credits,
-      name: 'Credits',
-    },
-    {
-      title: translate[locale].movie.authors,
-      name: 'Authors',
-    },
-  ]
 
   return (
     <section id="serie-player">
@@ -61,15 +44,19 @@ export default function SeriePlayer() {
       </div>
 
       <div className="watching" data-aos="fade-up">
-        {user ? (movie.episodes != null ? <Series module={module} /> : <div className="container-movie"><div id="need" className={module == "Serie" ? 'visible' : ''}>
-          <p>{translate[locale].movie.soon}</p>
-        </div></div>) : <div className="container-movie"><div id="need" className={module == "Serie" ? 'visible' : ''}>
-          <p>{translate[locale].movie.need}</p>
-          <div className="sign" onClick={() => setLink(pathname)}>
-            <Link href="/signup">{translate[locale].movie.signup}</Link>
-            <Link href="/login">{translate[locale].movie.login}</Link>
+        {user ? (movie.episodes ? <Series /> : <div className="wrapper-need">
+          <div id="need">
+            <p>{translate[locale].movie.soon}</p>
           </div>
-        </div></div>}
+        </div>) : <div className="wrapper-need">
+          <div id="need">
+            <p>{translate[locale].movie.need}</p>
+            <div className="sign" onClick={() => setLink(pathname)}>
+              <Link href="/signup">{translate[locale].movie.signup}</Link>
+              <Link href="/login">{translate[locale].movie.login}</Link>
+            </div>
+          </div>
+        </div>}
       </div>
     </section>
   );

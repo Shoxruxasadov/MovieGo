@@ -78,7 +78,7 @@ export default function Header({ movie }) {
           </li>
         </ul>
       </nav> : movie ? <nav>
-        <h2>{title[locale]}</h2>
+        <h1>{title[locale]}</h1>
       </nav> : <></>}
 
       <div className="right">

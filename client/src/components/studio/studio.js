@@ -42,7 +42,7 @@ export default function MovieStudio() {
                             <div className="resolution"><span>{item.resolution}</span></div>
                             <p className="type">{translate[locale].movie.free}</p>
                             <h3>{item.title[locale]}</h3>
-                            <p className="other">{item.studio[locale]} • <span>{item.mpa}+</span></p>
+                            <p className="other">{item.studio.name[locale]} • <span>{item.mpa}+</span></p>
                         </div>
                     </Link>
                 ))}
