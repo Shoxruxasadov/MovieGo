@@ -45,7 +45,9 @@
       "country": "Davlat",
       "directors": "Direktorlar",
       "producers": "Ishlab chiqaruvchilar",
-      "screenwriters": "Ssenariy mualliflari"
+      "screenwriters": "Ssenariy mualliflari",
+      "usa": "AQSH",
+      "USA": "AQSH"
     },
     "serie": {
       "episodes": "Qismlar",
@@ -176,7 +178,9 @@
       "country": "Страна",
       "directors": "Директора",
       "producers": "Производители",
-      "screenwriters": "Сценаристы"
+      "screenwriters": "Сценаристы",
+      "usa": "США",
+      "USA": "США"
     },
     "serie": {
       "episodes": "Части",
@@ -307,7 +311,9 @@
       "country": "Country",
       "directors": "Directors",
       "producers": "Producers",
-      "screenwriters": "Screenwriters"
+      "screenwriters": "Screenwriters",
+      "usa": "USA",
+      "USA": "USA"
     },
     "serie": {
       "episodes": "Episodes",

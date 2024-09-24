@@ -47,7 +47,7 @@ export default function MovieCredits() {
                 </div>
                 <div className="line country">
                     <p>{translate[locale].movie.country}: </p>
-                    <p>{movie.made}</p>
+                    <p>{translate[locale].movie[movie.made]}</p>
                 </div>
                 <div className="line time">
                     <p>{translate[locale].movie.duration}: </p>
