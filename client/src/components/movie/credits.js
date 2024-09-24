@@ -34,7 +34,7 @@ export default function MovieCredits() {
                 </div>
                 <div className="line studio">
                     <p>{translate[locale].movie.studio}: </p>
-                    <a href={`/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a>
+                    {locale == 'ru' ? <a href={`/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a> : <a href={`/${locale}/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a>}
                 </div>
                 <div className="line grossing">
                     <p>{translate[locale].movie.grossing}: </p>
