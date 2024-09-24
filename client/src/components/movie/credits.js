@@ -34,15 +34,16 @@ export default function MovieCredits() {
                 </div>
                 <div className="line studio">
                     <p>{translate[locale].movie.studio}: </p>
-                    {locale == 'ru' ? <a href={`/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a> : <a href={`/${locale}/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a>}
+                    {locale == 'ru' ? <a href={`/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a> :
+                        <a href={`/${locale}/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a>}
                 </div>
                 <div className="line grossing">
                     <p>{translate[locale].movie.grossing}: </p>
-                    <p>{movie.grossing ? `$${movie.grossing}` : "—"}</p>
+                    <p>{movie.grossing ? '$' + movie.grossing : '—'}</p>
                 </div>
                 <div className="line budget">
                     <p>{translate[locale].movie.budget}: </p>
-                    <p>{movie.budget ? `$${movie.budget}` : "—"}</p>
+                    <p>{movie.budget ? '$' + movie.budget : '—'}</p>
                 </div>
                 <div className="line country">
                     <p>{translate[locale].movie.country}: </p>
@@ -54,19 +55,11 @@ export default function MovieCredits() {
                 </div>
                 <div className="line rating">
                     <p>{translate[locale].movie.rating}: </p>
-                    <p>
-                        {movie.ratings.map((item, i) => (
-                            <span key={i}>{item} </span>
-                        ))}
-                    </p>
+                    <p>{movie.ratings.map((item, i) => (<span key={i}>{item} </span>))}</p>
                 </div>
                 <div className="line language">
                     <p>{translate[locale].movie.language}: </p>
-                    <p>
-                        {movie.languages.map((item, i) => (
-                            <span key={i}>{item} </span>
-                        ))}
-                    </p>
+                    <p>{movie.languages.map((item, i) => (<span key={i}>{item} </span>))}</p>
                 </div>
             </div>
             {movie.directors.length > 0 && movie.producers.length > 0 && movie.screenwriters.length > 0 && <div id="authors" data-aos="fade-up">
