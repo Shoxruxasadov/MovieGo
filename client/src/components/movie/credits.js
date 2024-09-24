@@ -7,6 +7,7 @@ import Time from "@/utils/time";
 import Release from "@/utils/release";
 import Timeline from "@/utils/timeline";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
+import Link from "next/link";
 
 export default function MovieCredits() {
     const [posterScreen, setPosterScreen] = useState(false)
@@ -34,8 +35,7 @@ export default function MovieCredits() {
                 </div>
                 <div className="line studio">
                     <p>{translate[locale].movie.studio}: </p>
-                    {locale == 'ru' ? <a href={`/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a> :
-                        <a href={`/${locale}/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</a>}
+                    <Link href={`/studio/${movie.studio.module}`}>{movie.studio.name[locale]}</Link>
                 </div>
                 <div className="line grossing">
                     <p>{translate[locale].movie.grossing}: </p>
