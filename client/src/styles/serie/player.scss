@@ -378,7 +378,6 @@
             background-repeat: no-repeat;
             background-size: 105%;
             transition: 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.01);
             border-bottom: none;
 
             @media (max-width: 1280px) {
@@ -483,11 +482,7 @@
               bottom: 0;
               left: 0;
               right: 0;
-              background: linear-gradient(
-                to top,
-                rgba(0, 0, 0, 0.7) 10%,
-                rgba(0, 0, 0, 0.2) 40%
-              );
+              background: linear-gradient(to bottom, #0000001a 60%, #000000b3 90%);
             }
           }
         }
