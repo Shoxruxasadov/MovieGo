@@ -508,6 +508,22 @@
 
           &#title-movie {
             margin-bottom: 20px;
+            position: relative;
+            width: fit-content;
+
+            span{
+              position: absolute;
+              top: -4px;
+              right: -45px;
+
+              color: #ffffff99;
+              font-size: x-small;
+
+              &.double{
+                right: -47px;
+              }
+            }
+
           }
 
           @media (max-width: 1024px) {
