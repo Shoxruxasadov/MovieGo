@@ -62,7 +62,7 @@ export default function MovieCredits() {
                     <p>{movie.languages.map((item, i) => (<span key={i}>{item} </span>))}</p>
                 </div>
             </div>
-            {movie.directors.length > 0 && movie.producers.length > 0 && movie.screenwriters.length > 0 && <div id="authors" data-aos="fade-up">
+            {(movie.directors.length > 0 || movie.producers.length > 0 || movie.screenwriters.length > 0) && <div id="authors" data-aos="fade-up">
                 {movie.directors.length > 0 && <div className="directors">
                     <h3>{translate[locale].movie.directors}</h3>
                     <div className="wrapper">
