@@ -56,9 +56,8 @@ export default function MovieCredits() {
                 <div className="line quality">
                     <p>{translate[locale].movie.quality}: </p>
                     <p>
-                        <span className={movie.format == "IMAX" ? 'imax' : ''}>{movie.format}</span>
-                        {movie.type == 'movie' && (movie.source['2160p'] != null ? <span>4K</span> : <span>HD</span>)}
-                        {movie.type == 'serie' && (movie.episodes[0]['2160p'] != null ? <span>4K</span> : <span>HD</span>)}
+                        <span className={movie.format == "IMAX" ? 'small' : ''}>{movie.format}</span>
+                        <span>{movie.resolution}</span>
                     </p>
                 </div>
                 <div className="line language">
