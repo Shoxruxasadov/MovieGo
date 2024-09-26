@@ -102,6 +102,10 @@
         border-right: 2px solid;
         padding-right: 10px;
         margin-right: 10px;
+
+        @media (max-width: 1024px) {
+          border-right: 1px solid;
+        }
       }
 
       &.rating span {
@@ -166,7 +170,7 @@
             width: 58px;
           }
 
-          &.imax{
+          &.imax {
             width: 60px;
 
             @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
