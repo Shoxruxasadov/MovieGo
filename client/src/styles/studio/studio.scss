@@ -21,7 +21,9 @@ section {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-column: auto;
+    max-width: 4200px;
     min-width: 360px;
+    margin: 0 auto;
 
     .card {
       border-radius: 8px;
