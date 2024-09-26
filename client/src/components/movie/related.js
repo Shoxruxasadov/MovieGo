@@ -13,11 +13,6 @@ export default function MovieRelated() {
   const { locale } = useRouter()
   const scrollDemoRef = useRef(null);
 
-  const { data: movies, isLoading, isError, isSuccess, error, refetch } = useQuery({
-    queryKey: ['rec'],
-    queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies/random`).then(({ data }) => data)
-  })
-
   useEffect(() => {
     getRelated()
     setScreenSize([window.innerWidth, window.innerHeight])
@@ -26,14 +21,14 @@ export default function MovieRelated() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (related) return (
+  return (
     <section id="related" data-aos="fade-up">
       <h2>{translate[locale].movie.related}</h2>
       <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
       <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
       <div className='wrapper' ref={scrollDemoRef}>
         <div className="related">
-          {isSuccess ? movies.map(item => (
+          {related ? related.map(item => (
             <Link
               style={{ backgroundImage: `url(${item.image.poster})` }}
               href={`/${item.type}/${item.name}`}
@@ -51,7 +46,6 @@ export default function MovieRelated() {
           )) : Array(10).fill(<div className="card skeleton">
             <div className="title">
               <div className="resolution" />
-              <div className="format" />
               <div className="text" />
             </div>
           </div>).map(item => item)}
