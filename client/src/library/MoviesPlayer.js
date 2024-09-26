@@ -60,7 +60,6 @@ export default function MoviesPlayer() {
   const [languageChanger, setLanguageChanger] = useState(true)
   const [qualityChanger, setQualityChanger] = useState(true)
 
-  const [controlHovering, setControlHovering] = useState(false);
   const [isHovering, setIsHovered] = useState(false);
   const onMouseEnter = () => setIsHovered(true);
   const onMouseLeave = () => setIsHovered(false);
@@ -332,7 +331,7 @@ export default function MoviesPlayer() {
   }
 
   const hideControls = () => {
-    if (!playing || (isHovering && !window.document.fullscreen) || controlHovering) return setControls(true)
+    if (!playing || (isHovering && !window.document.fullscreen)) return setControls(true)
     setControls(false)
   }
 
@@ -411,7 +410,7 @@ export default function MoviesPlayer() {
   }, [isHovering])
 
   useEffect(() => {
-    if ((isMobile && !window.document.fullscreen) || controlHovering) return
+    if ((isMobile && !window.document.fullscreen)) return
     let interval = setTimeout(hideControls, 2000)
     return (() => clearInterval(interval))
   }, [isHovering, playing, window.document.fullscreen, isMobile])
@@ -446,10 +445,7 @@ export default function MoviesPlayer() {
         ></video>
       }
       <button className={`play-pause-circle${!playing ? ' active' : ''}`} onClick={handleVideo}><BsPlayCircleFill /></button>
-      <div className="wrapper"
-        onMouseEnter={() => setControlHovering(true)}
-        onMouseLeave={() => setControlHovering(false)}
-      >
+      <div className="wrapper">
         <ul className="video-controls">
           <li className="options left">
             <button className="skip-backward" onClick={() => skip('backward')}><FaBackward /></button>
