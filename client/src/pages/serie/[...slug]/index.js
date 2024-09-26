@@ -11,7 +11,7 @@ import Loading from "@/components/others/loading"
 import Animated from "@/components/others/animated"
 import ErrorPage from "@/pages/404"
 import { useStore } from "@/store/zustand"
-import MovieRecommendation from "@/components/movie/recommendation"
+import MovieRelated from "@/components/movie/related"
 import MovieCredits from "@/components/movie/credits"
 
 export default function AppMovie() {
@@ -40,7 +40,7 @@ export default function AppMovie() {
         <SerieHome />
         <SeriePlayer />
         <MovieCredits />
-        <MovieRecommendation />
+        <MovieRelated />
         <div id="shadow" />
       </Animated>
       <Footer />

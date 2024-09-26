@@ -27,6 +27,10 @@ footer {
       flex-direction: column;
       gap: 16px;
 
+      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+        max-width: 290px;
+      }
+
       @media (max-width: 768px) {
         max-width: 375px;
         flex-direction: row;
@@ -65,7 +69,7 @@ footer {
       }
 
       @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
-        font-size: 24px;
+        gap: 24px;
       }
 
       @media (max-width: 768px) {
@@ -80,6 +84,10 @@ footer {
 
       .platform {
         margin-right: 24px;
+
+        @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+          margin-right: 12px;
+        }
 
         @media (max-width: 440px) {
           margin: 0;
@@ -102,6 +110,7 @@ footer {
           margin-bottom: 16px;
 
           span {
+            color: white;
             font-size: 14px;
             font-weight: 500;
             white-space: nowrap;
@@ -165,6 +174,7 @@ footer {
           }
 
           span {
+            color: white;
             font-size: 14px;
             font-weight: 500;
             white-space: nowrap;
@@ -174,7 +184,7 @@ footer {
             }
           }
 
-          svg{
+          svg {
             @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
               width: 16px;
               height: 16px;
@@ -201,11 +211,11 @@ footer {
             border: 1px solid rgba(255, 255, 255, 0.32);
 
             @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
-              padding: 6px 12px;
+              padding: 6px 13px;
             }
 
             span {
-              color: #fff;
+              color: white;
               font-size: 14px;
               font-weight: 500;
               line-height: 20px;
@@ -220,10 +230,9 @@ footer {
               display: contents;
             }
 
-            svg{
+            svg {
               @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
-                width: 16px;
-                height: 16px;
+                font-size: 14px;
               }
             }
           }

@@ -1,6 +1,7 @@
 #movies,
 #series,
-#studios {
+#studios,
+#related {
   margin-bottom: 40px;
   position: relative;
   z-index: 1;
@@ -142,7 +143,8 @@
 
     .movie,
     .serie,
-    .studio {
+    .studio,
+    .related {
       display: flex;
       gap: 6px;
 

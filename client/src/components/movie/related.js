@@ -6,7 +6,9 @@ import Link from "next/link"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import translate from "@/language/translate.json"
 
-export default function MovieRecommendation() {
+export default function MovieRelated() {
+  const getRelated = useStore(state => state.getRelated);
+  const related = useStore(state => state.related);
   const [screenSize, setScreenSize] = useState();
   const { locale } = useRouter()
   const scrollDemoRef = useRef(null);
@@ -17,19 +19,20 @@ export default function MovieRecommendation() {
   })
 
   useEffect(() => {
+    getRelated()
     setScreenSize([window.innerWidth, window.innerHeight])
     const handleResize = () => setScreenSize([window.innerWidth, window.innerHeight]);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return (
-    <section id="recommendation" data-aos="fade-up">
-      <h2>{translate[locale].movie.recommendation}</h2>
+  if (related) return (
+    <section id="related" data-aos="fade-up">
+      <h2>{translate[locale].movie.related}</h2>
       <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
       <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
       <div className='wrapper' ref={scrollDemoRef}>
-        <div className="recommendation">
+        <div className="related">
           {isSuccess ? movies.map(item => (
             <Link
               style={{ backgroundImage: `url(${item.image.poster})` }}
