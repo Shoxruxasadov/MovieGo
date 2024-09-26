@@ -45,58 +45,64 @@ export default function MovieCredits() {
                     <p>{translate[locale].movie.budget}: </p>
                     <p>{movie.budget ? '$' + movie.budget : '—'}</p>
                 </div>
-                <div className="line country">
-                    <p>{translate[locale].movie.country}: </p>
-                    <p>{translate[locale].movie[movie.made]}</p>
-                </div>
-                <div className="line time">
-                    <p>{translate[locale].movie.duration}: </p>
-                    <p><Time time={movie.duration} /></p>
+                <div className="line others">
+                    <p>{translate[locale].movie.others}: </p>
+                    <p><span>{translate[locale].movie[movie.made]}</span><Time time={movie.duration} /></p>
                 </div>
                 <div className="line rating">
                     <p>{translate[locale].movie.rating}: </p>
                     <p>{movie.ratings.map((item, i) => (<span key={i}>{item} </span>))}</p>
+                </div>
+                <div className="line quality">
+                    <p>{translate[locale].movie.quality}: </p>
+                    <p>
+                        <span className={movie.format == "IMAX" ? 'imax' : ''}>{movie.format}</span>
+                        {movie.type == 'movie' && (movie.source['2160p'] != null ? <span>4K</span> : <span>HD</span>)}
+                        {movie.type == 'serie' && (movie.episodes[0]['2160p'] != null ? <span>4K</span> : <span>HD</span>)}
+                    </p>
                 </div>
                 <div className="line language">
                     <p>{translate[locale].movie.language}: </p>
                     <p>{movie.languages.map((item, i) => (<span key={i}>{item} </span>))}</p>
                 </div>
             </div>
-            {(movie.directors.length > 0 || movie.producers.length > 0 || movie.screenwriters.length > 0) && <div id="authors" data-aos="fade-up">
-                {movie.directors.length > 0 && <div className="directors">
-                    <h3>{translate[locale].movie.directors}</h3>
-                    <div className="wrapper">
-                        {movie.directors.map((item, i) => (
-                            <div className="director" key={i}>
-                                <img src={item.image} alt="avatar" />
-                                <p>{item.name}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>}
-                {movie.producers.length > 0 && <div className="producers">
-                    <h3>{translate[locale].movie.producers}</h3>
-                    <div className="wrapper">
-                        {movie.producers.map((item, i) => (
-                            <div className="producer" key={i}>
-                                <img src={item.image} alt="avatar" />
-                                <p>{item.name}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>}
-                {movie.screenwriters.length > 0 && <div className="screenwriters">
-                    <h3>{translate[locale].movie.screenwriters}</h3>
-                    <div className="wrapper">
-                        {movie.screenwriters.map((item, i) => (
-                            <div className="screenwriter" key={i}>
-                                <img src={item.image} alt="avatar" />
-                                <p>{item.name}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>}
-            </div>}
-        </section>
+            {
+                (movie.directors.length > 0 || movie.producers.length > 0 || movie.screenwriters.length > 0) && <div id="authors" data-aos="fade-up">
+                    {movie.directors.length > 0 && <div className="directors">
+                        <h3>{translate[locale].movie.directors}</h3>
+                        <div className="wrapper">
+                            {movie.directors.map((item, i) => (
+                                <div className="director" key={i}>
+                                    <img src={item.image} alt="avatar" />
+                                    <p>{item.name}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>}
+                    {movie.producers.length > 0 && <div className="producers">
+                        <h3>{translate[locale].movie.producers}</h3>
+                        <div className="wrapper">
+                            {movie.producers.map((item, i) => (
+                                <div className="producer" key={i}>
+                                    <img src={item.image} alt="avatar" />
+                                    <p>{item.name}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>}
+                    {movie.screenwriters.length > 0 && <div className="screenwriters">
+                        <h3>{translate[locale].movie.screenwriters}</h3>
+                        <div className="wrapper">
+                            {movie.screenwriters.map((item, i) => (
+                                <div className="screenwriter" key={i}>
+                                    <img src={item.image} alt="avatar" />
+                                    <p>{item.name}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>}
+                </div>
+            }
+        </section >
     );
 }

@@ -447,7 +447,10 @@ export default function SeriesPlayer({ episode }) {
         ></video>
       }
       <button className={`play-pause-circle${!playing ? ' active' : ''}`} onClick={handleVideo}><BsPlayCircleFill /></button>
-      <div className="wrapper">
+      <div className="wrapper"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         <ul className="video-controls">
           <li className="options left">
             <button className="skip-backward" onClick={() => skip('backward')}><FaBackward /></button>
