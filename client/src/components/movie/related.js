@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router';
-import axios from 'axios'
 import Link from "next/link"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import translate from "@/language/translate.json"
