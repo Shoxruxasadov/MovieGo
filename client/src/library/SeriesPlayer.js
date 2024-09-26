@@ -413,7 +413,7 @@ export default function SeriesPlayer({ episode }) {
   }, [isHovering])
 
   useEffect(() => {
-    if ((isMobile && !window.document.fullscreen)) return
+    if ((isMobile && !window.document.fullscreen) || controlHovering) return
     let interval = setTimeout(hideControls, 2000)
     return (() => clearInterval(interval))
   }, [isHovering, playing, window.document.fullscreen, isMobile])
