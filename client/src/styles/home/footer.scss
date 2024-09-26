@@ -7,6 +7,10 @@ footer {
     justify-content: space-between;
     gap: 24px;
 
+    @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+      padding: 40px 48px;
+    }
+
     @media (max-width: 768px) {
       flex-direction: column;
       padding: 32px;
@@ -38,6 +42,10 @@ footer {
         font-size: 24px;
         font-weight: 600;
 
+        @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+          font-size: 20px;
+        }
+
         @media (max-width: 768px) {
           font-size: 21px;
         }
@@ -54,6 +62,10 @@ footer {
 
       @media (max-width: 1024px) {
         gap: 48px;
+      }
+
+      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+        font-size: 24px;
       }
 
       @media (max-width: 768px) {
@@ -92,6 +104,11 @@ footer {
           span {
             font-size: 14px;
             font-weight: 500;
+            white-space: nowrap;
+
+            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+              font-size: 12px;
+            }
           }
         }
 
@@ -113,10 +130,15 @@ footer {
             cursor: pointer;
             transition: 0.2s;
             opacity: 70%;
+            white-space: nowrap;
 
             &:hover {
               transform: translateX(4px);
               opacity: 100%;
+            }
+
+            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+              font-size: 12px;
             }
           }
         }
@@ -145,6 +167,18 @@ footer {
           span {
             font-size: 14px;
             font-weight: 500;
+            white-space: nowrap;
+
+            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+              font-size: 12px;
+            }
+          }
+
+          svg{
+            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+              width: 16px;
+              height: 16px;
+            }
           }
         }
 
@@ -166,15 +200,31 @@ footer {
             border-radius: 10em;
             border: 1px solid rgba(255, 255, 255, 0.32);
 
+            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+              padding: 6px 12px;
+            }
+
             span {
               color: #fff;
               font-size: 14px;
               font-weight: 500;
               line-height: 20px;
+              white-space: nowrap;
+
+              @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+                font-size: 12px;
+              }
             }
 
             a {
               display: contents;
+            }
+
+            svg{
+              @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+                width: 16px;
+                height: 16px;
+              }
             }
           }
 
@@ -211,6 +261,10 @@ footer {
       display: flex;
       align-items: baseline;
       gap: 4px;
+
+      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 768px) {
+        font-size: 14px;
+      }
 
       @media (max-width: 440px) {
         flex-direction: column;
