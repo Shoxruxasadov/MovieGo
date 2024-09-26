@@ -51,6 +51,7 @@
 
     @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px){
       width: 50%;
+      gap: 2px;
     }
 
     @media (max-width: 768px) {
@@ -67,8 +68,8 @@
       display: flex;
       padding: 8px 0;
 
-      @media (max-width: 440px) {
-        padding: 8px 0;
+      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px){
+        padding: 6px 0;
       }
 
       a{
