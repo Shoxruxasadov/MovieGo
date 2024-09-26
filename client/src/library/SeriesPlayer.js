@@ -60,6 +60,11 @@ export default function SeriesPlayer({ episode }) {
   const [languageChanger, setLanguageChanger] = useState(true)
   const [qualityChanger, setQualityChanger] = useState(true)
 
+  const [controlHovering, setControlHovering] = useState(false);
+  const [isHovering, setIsHovered] = useState(false);
+  const onMouseEnter = () => setIsHovered(true);
+  const onMouseLeave = () => setIsHovered(false);
+
   if (languageChanger) {
     if (movie.episodes[episode][`720p`] != null) {
       if (language == 'uz') {
@@ -179,10 +184,6 @@ export default function SeriesPlayer({ episode }) {
     }
     setQualityChanger(false)
   }
-
-  const [isHovering, setIsHovered] = useState(false);
-  const onMouseEnter = () => setIsHovered(true);
-  const onMouseLeave = () => setIsHovered(false);
 
   const handleVideo = () => {
     setPlaying(!playing);
@@ -333,7 +334,7 @@ export default function SeriesPlayer({ episode }) {
   }
 
   const hideControls = () => {
-    if (!playing || (isHovering && !window.document.fullscreen)) return setControls(true)
+    if (!playing || (isHovering && !window.document.fullscreen) || controlHovering) return setControls(true)
     setControls(false)
   }
 
@@ -448,8 +449,8 @@ export default function SeriesPlayer({ episode }) {
       }
       <button className={`play-pause-circle${!playing ? ' active' : ''}`} onClick={handleVideo}><BsPlayCircleFill /></button>
       <div className="wrapper"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
+        onMouseEnter={() => setControlHovering(true)}
+        onMouseLeave={() => setControlHovering(false)}
       >
         <ul className="video-controls">
           <li className="options left">
