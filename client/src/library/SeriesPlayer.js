@@ -333,7 +333,7 @@ export default function SeriesPlayer({ episode }) {
   }
 
   const hideControls = () => {
-    if (!playing || (isHovering && !window.document.fullscreen) || isHovering) return setControls(true)
+    if (!playing || (isHovering && !window.document.fullscreen)) return setControls(true)
     setControls(false)
   }
 
@@ -412,7 +412,7 @@ export default function SeriesPlayer({ episode }) {
   }, [isHovering])
 
   useEffect(() => {
-    if ((isMobile && !window.document.fullscreen) || isHovering) return
+    if ((isMobile && !window.document.fullscreen)) return
     let interval = setTimeout(hideControls, 2000)
     return (() => clearInterval(interval))
   }, [isHovering, playing, window.document.fullscreen, isMobile])
