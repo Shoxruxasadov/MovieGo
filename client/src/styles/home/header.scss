@@ -146,6 +146,7 @@ header {
     }
 
     .language {
+      transition: .2s;
       position: relative;
       min-width: 125px;
       height: 42px;
@@ -162,10 +163,10 @@ header {
         left: 0;
 
         color: #fff;
-        border-radius: 8px;
+        transition: .2s;
         font-weight: 500;
+        border-radius: 8px;
         white-space: nowrap;
-        transition: 0.2s ease;
         border: 1px solid rgba(255, 255, 255, 0.12);
         background: hsla(0, 0%, 100%, 0.1);
         text-align: center;
@@ -173,6 +174,7 @@ header {
 
         .selected {
           position: relative;
+          transition: .2s;
           z-index: 2;
           width: 100%;
           text-align: center;
@@ -201,8 +203,9 @@ header {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 4px;
+          transition: .2s;
           padding: 8px 0;
+          gap: 4px;
 
           &,
           * {
