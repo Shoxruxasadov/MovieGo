@@ -4,8 +4,7 @@ import Link from "next/link";
 import translate from "@/language/translate.json"
 import { useStore } from "@/store/zustand";
 
-export default function MovieStudio() {
-    const studio = useStore(state => state.studio);
+export default function MovieStudio({ movies }) {
     const [columnCount, setColumnCount] = useState(6);
     const { locale } = useRouter()
 
@@ -30,7 +29,7 @@ export default function MovieStudio() {
     return (
         <section>
             <div className="container" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`, }}>
-                {studio.map(item => (
+                {movies.map(item => (
                     <Link
                         href={`/${item.type}/${item.name}`}
                         className="card"

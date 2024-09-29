@@ -10,12 +10,12 @@ import { useStore } from "@/store/zustand"
 import MovieStudio from "@/components/studio/studio"
 import { useRouter } from "next/router"
 
-export default function AppModule() {
+export default function AppStudios() {
   const getStudio = useStore(state => state.getStudio);
   const studio = useStore(state => state.studio);
   const [loading, setLoading] = useState(true)
   const pathname = usePathname()
-  const {locale} = useRouter()
+  const { locale } = useRouter()
 
   useEffect(() => {
     setLoading(true)
@@ -32,7 +32,7 @@ export default function AppModule() {
     <Root page="studio" title={studio[0].studio.name[locale]}>
       <Header movie={true} />
       <Animated>
-        <MovieStudio />
+        <MovieStudio movies={studio} />
       </Animated>
       <Footer />
     </Root>

@@ -266,7 +266,7 @@ footer {
       padding: 16px 16px 20px;
     }
 
-    .right {
+    .left {
       display: flex;
       align-items: baseline;
       gap: 4px;
@@ -281,7 +281,7 @@ footer {
 
       span,
       a {
-        font-weight: 600;
+        font-weight: bold;
         transition: 0.2s;
         white-space: nowrap;
 
@@ -296,7 +296,7 @@ footer {
       }
 
       .brand a:hover {
-        font-weight: 800;
+        font-weight: 900;
       }
 
       .brand,

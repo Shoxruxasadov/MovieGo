@@ -48,7 +48,8 @@
       "producers": "Ishlab chiqaruvchilar",
       "screenwriters": "Ssenariy mualliflari",
       "usa": "AQSH",
-      "USA": "AQSH"
+      "USA": "AQSH",
+      "allmovies": "Barcha Filmlar"
     },
     "serie": {
       "episodes": "Qismlar",
@@ -182,7 +183,8 @@
       "producers": "Производители",
       "screenwriters": "Сценаристы",
       "usa": "США",
-      "USA": "США"
+      "USA": "США",
+      "allmovies": "Все Фильмы"
     },
     "serie": {
       "episodes": "Части",
@@ -316,7 +318,8 @@
       "producers": "Producers",
       "screenwriters": "Screenwriters",
       "usa": "USA",
-      "USA": "USA"
+      "USA": "USA",
+      "allmovies": "All Movies"
     },
     "serie": {
       "episodes": "Episodes",

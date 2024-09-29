@@ -61,7 +61,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="down">
-        <div className="right">
+        <div className="left">
           <div className="brand">
             <span>&copy; {new Date().getFullYear()} </span>
             <a href="https://moviego.uz">MovieGo</a>.

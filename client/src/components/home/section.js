@@ -30,6 +30,16 @@ export default function Section({ type, title, route, name }) {
             <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
             <div className='wrapper' ref={scrollDemoRef} >
                 <div className={type}>
+                    {isSuccess && type == "studio" && <Link
+                        style={{ backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Fmovies.webp?alt=media&token=0a9c685f-063e-42fc-a5a9-5c3d42cdfcb6)` }}
+                        href="/studio/all"
+                        className="card"
+                    >
+                        <div className="shadow" />
+                        <div className="title">
+                            <h3>{translate[locale].movie.allmovies}</h3>
+                        </div>
+                    </Link>}
                     {isSuccess ? movies.map(item => (
                         <Link
                             style={{ backgroundImage: `url(${type == 'studio' ? item.image : item.image.poster})` }}
