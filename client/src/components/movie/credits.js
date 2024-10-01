@@ -51,7 +51,7 @@ export default function MovieCredits() {
                 </div>
                 <div className="line rating">
                     <p>{translate[locale].movie.rating}: </p>
-                    <p>{movie.ratings.map((item, i) => (<span key={i}>{item} </span>))}</p>
+                    <p>{movie.ratings.map((item, i) => (<span className={item == "R" ? "mini" : ""} key={i}>{item} </span>))}</p>
                 </div>
                 <div className="line quality">
                     <p>{translate[locale].movie.quality}: </p>
