@@ -36,7 +36,7 @@ export default function SerieHome() {
             onLoad={() => setLoadedImage(true)}
           />
           <div className="credits">
-            <p className="certificate">{movie.certificate}</p>
+            <p className="release">{movie.release.substring(0, 4)}</p>
             <p className="genre">{translate[locale].movie[movie.genre[0]]}</p>
             <span>•</span>
             <p className="genre">{translate[locale].movie[movie.genre[1]]}</p>
@@ -72,7 +72,7 @@ export default function SerieHome() {
                 </svg>
                 <span>{translate[locale].movie.watchBtn}</span>
               </Scroll>
-              <button onClick={()=>info(translate[locale].movie.soon)}>
+              <button onClick={() => info(translate[locale].movie.soon)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"

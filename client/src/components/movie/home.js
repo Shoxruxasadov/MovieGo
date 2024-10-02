@@ -44,7 +44,7 @@ export default function MovieHome() {
             onLoad={() => setLoadedImage(true)}
           />
           <div className="credits">
-            <p className="certificate">{movie.certificate}</p>
+            <p className="release">{movie.release.substring(0,4)}</p>
             <p className="genre">{translate[locale].movie[movie.genre[0]]}</p>
             <span>•</span>
             <p className="genre">{translate[locale].movie[movie.genre[1]]}</p>

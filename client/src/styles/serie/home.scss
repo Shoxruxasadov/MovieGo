@@ -92,7 +92,7 @@
     .credits {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       margin-bottom: 24px;
 
       @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
@@ -105,10 +105,11 @@
         gap: 8px;
       }
 
-      .certificate {
+      .release {
         border-radius: 10em;
         border: 1px solid #ffffff60;
         padding: 2px 12px;
+        margin-right: 4px;
 
         @media (max-width: 440px) {
           display: none;
