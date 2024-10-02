@@ -26,9 +26,9 @@
       align-items: center;
       padding-bottom: 40px;
       position: relative;
- 
-      &::before{
-        content: '';
+
+      &::before {
+        content: "";
         width: 100%;
         height: 100%;
         position: absolute;
@@ -38,7 +38,7 @@
         border-radius: 50%;
       }
 
-      img{
+      img {
         max-width: 90%;
         margin-bottom: 18px;
       }
@@ -46,20 +46,18 @@
       .credits {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 12px;
         margin-bottom: 15px;
 
-        .certificate {
+        .release {
           border-radius: 10em;
           border: 1px solid #ffffff60;
-          padding: 2px 12px;
-
-          @media (max-width: 440px) {
-            display: none;
-          }
+          padding: 0px 12px;
+          margin-right: 4px;
+          white-space: nowrap;
         }
 
-        p{
+        p {
           white-space: nowrap;
         }
       }
@@ -100,7 +98,9 @@
             font-weight: 500;
           }
 
-          svg, svg path, span{
+          svg,
+          svg path,
+          span {
             cursor: pointer;
           }
         }

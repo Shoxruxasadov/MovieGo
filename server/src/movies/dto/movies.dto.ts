@@ -52,9 +52,6 @@ export class MoviesDto {
   studio: any;
 
   @IsNotEmpty()
-  certificate: string;
-
-  @IsNotEmpty()
   made: string;
 
   @IsNotEmpty()

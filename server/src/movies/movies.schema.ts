@@ -68,9 +68,6 @@ export class Movies {
   studio: Studios;
 
   @Prop({ required: true })
-  certificate: string;
-
-  @Prop({ required: true })
   made: string;
 
   @Prop({ required: true })

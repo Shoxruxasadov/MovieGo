@@ -19,7 +19,7 @@ export default function Hero() {
         >
           <Image src='/spider/logo.webp' width={640} height={256} alt="logo" />
           <div className="credits">
-            <p className="certificate">CBFC:U/A</p>
+            <p className="release">2021</p>
             <p className="genre">{translate[locale].movie.action}</p>
             <span>•</span>
             <p className="genre">{translate[locale].movie.adventure}</p>
