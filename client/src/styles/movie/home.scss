@@ -102,6 +102,7 @@
       }
 
       @media (max-width: 440px) {
+        font-size: 14px;
         gap: 8px;
       }
 
@@ -110,10 +111,6 @@
         border: 1px solid #ffffff60;
         padding: 0px 12px;
         margin-right: 4px;
-
-        @media (max-width: 440px) {
-          display: none;
-        }
       }
 
       .time {
