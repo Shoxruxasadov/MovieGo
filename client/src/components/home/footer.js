@@ -22,9 +22,9 @@ export default function Footer() {
               <span>{translate[locale].footer.platform}</span>
             </div>
             <ul className="list">
-              <li onClick={()=>info(translate[locale].movie.soon)}>{translate[locale].footer.advertising}</li>
-              <li onClick={()=>info(translate[locale].movie.soon)}>{translate[locale].footer.support}</li>
-              <li onClick={()=>info(translate[locale].movie.soon)}>{translate[locale].footer.about}</li>
+              <li onClick={() => info(translate[locale].movie.soon)}>{translate[locale].footer.advertising}</li>
+              <li onClick={() => info(translate[locale].movie.soon)}>{translate[locale].footer.support}</li>
+              <li onClick={() => info(translate[locale].movie.soon)}>{translate[locale].footer.about}</li>
             </ul>
           </div>
           <div className="legal">
@@ -32,9 +32,9 @@ export default function Footer() {
               <span>{translate[locale].footer.legal}</span>
             </div>
             <ul className="list">
-              <li onClick={()=>info(translate[locale].movie.soon)}>{translate[locale].footer.terms}</li>
-              <li onClick={()=>info(translate[locale].movie.soon)}>{translate[locale].footer.privacy}</li>
-              <li onClick={()=>info(translate[locale].movie.soon)}>{translate[locale].footer.cookies}</li>
+              <li onClick={() => info(translate[locale].movie.soon)}>{translate[locale].footer.terms}</li>
+              <li onClick={() => info(translate[locale].movie.soon)}>{translate[locale].footer.privacy}</li>
+              <li onClick={() => info(translate[locale].movie.soon)}>{translate[locale].footer.cookies}</li>
             </ul>
           </div>
           <div className="social">
@@ -42,8 +42,8 @@ export default function Footer() {
               <span>{translate[locale].footer.social}</span>
             </div>
             <ul className="list click">
-              <li><a onClick={()=>info(translate[locale].movie.soon)}><SiInstagram /><span>Instagram</span></a></li>
-              <li><a onClick={()=>info(translate[locale].movie.soon)}><SiTelegram /><span>Telegram</span></a></li>
+              <li><a href="https://www.instagram.com/moviego.uz" target="_blank"><SiInstagram /><span>Instagram</span></a></li>
+              <li><a href="https://t.me/HSooport" target="_blank" ><SiTelegram /><span>Telegram</span></a></li>
             </ul>
           </div>
           <div className="available">
