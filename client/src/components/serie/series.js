@@ -68,7 +68,7 @@ export default function Series() {
             </div>
         </div>
         {episode != null && (<div className="watching-movie">
-            <h2 id="title-movie">{movie.episodes[episode].title[locale]} <span className={episode>8? "double" : ""}>{translate[locale].serie.episode} {episode + 1}</span></h2>
+            <h2 id="title-movie">{movie.episodes[episode].title[locale]} <span>{episode + 1}</span></h2>
             <SeriesPlayer episode={episode} />
         </div>)}
     </div >
