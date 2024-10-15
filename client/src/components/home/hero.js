@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import translate from "@/language/translate.json"
 import Link from "next/link";
-import { info } from "@/utils/toastify";
 
 export default function Hero() {
   const { locale } = useRouter()

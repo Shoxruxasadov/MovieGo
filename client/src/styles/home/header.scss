@@ -130,6 +130,11 @@ header {
       @media (max-width: 1024px) {
         font-size: large;
       }
+
+      @media (max-width: 1024px) and (max-height: 576px){
+        font-size: medium;
+      }
+
     }
   }
 
