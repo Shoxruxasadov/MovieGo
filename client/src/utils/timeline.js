@@ -7,10 +7,11 @@ export default function Timeline({ time }) {
     const month = time.substring(0, 7).split('-')[1]
 
     function monthText() {
-        if (month == '01' || month == '02' || month == '12') return translate[locale].date.season.winter
+        if (month == '01' || month == '02') return translate[locale].date.season.winter
         if (month == '03' || month == '04' || month == '05') return translate[locale].date.season.spring
         if (month == '06' || month == '07' || month == '08') return translate[locale].date.season.summer
         if (month == '09' || month == '10' || month == '11') return translate[locale].date.season.autumn
+        if (month == '12') return translate[locale].date.season.december
     }
 
     return `${monthText()} ${year} ${translate[locale].date.year}`

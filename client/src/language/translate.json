@@ -116,7 +116,8 @@
         "winter": "Qish",
         "spring": "Bahor",
         "summer": "Yoz",
-        "autumn": "Kuz"
+        "autumn": "Kuz",
+        "december": "Dekabr"
       },
       "year": "yil"
     },
@@ -252,7 +253,8 @@
         "winter": "Зима",
         "spring": "Весна",
         "summer": "Лето",
-        "autumn": "Осень"
+        "autumn": "Осень",
+        "december": "Декабрь"
       },
       "year": "года"
     },
@@ -388,7 +390,8 @@
         "winter": "Winter",
         "spring": "Spring",
         "summer": "Summer",
-        "autumn": "Fall"
+        "autumn": "Fall",
+        "december": "December"
       },
       "year": "year"
     },
