@@ -252,10 +252,9 @@
         }
 
         &.active {
-          button,
-          a {
+          .watch{
             @media (max-width: 440px) {
-              width: calc(100% - 120px);
+              width: calc(100% - 121px);
               min-width: auto !important;
             }
           }

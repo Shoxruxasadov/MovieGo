@@ -60,6 +60,7 @@ export default function MovieHome() {
                 smooth={true}
                 offset={-180}
                 duration={500}
+                className="watch"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
