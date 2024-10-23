@@ -302,6 +302,10 @@ header {
     .close {
       width: calc(100% - 300px);
       height: 100%;
+
+      @media (max-width: 440px) {
+        width: calc(100% - 250px);
+      }
     }
 
     .menu {
@@ -319,6 +323,12 @@ header {
       flex-direction: column;
       justify-content: space-between;
 
+      @media (max-width: 440px) {
+        right: -100px;
+        width: 250px;
+        padding: 17px 16px;
+      }
+
       .user {
         height: 50px;
         margin-bottom: 24px;
@@ -326,25 +336,47 @@ header {
         align-items: center;
         gap: 12px;
 
+        @media (max-width: 440px) {
+          gap: 8px;
+          margin-bottom: 16px;
+        }
+
         .name {
           width: calc(100% - 60px);
+
+          @media (max-width: 440px) {
+            width: calc(100% - 48px);
+          }
 
           h3 {
             font-size: 17px;
             margin-bottom: 2px;
+
+            @media (max-width: 440px) {
+              font-size: 15px;
+              margin-bottom: 0;
+            }
           }
 
           p {
             font-size: smaller;
-            color: hsl(0, 0%, 78%);
+            color: #c7c7c7;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            @media (max-width: 440px) {
+              font-size: small;
+            }
           }
         }
 
         img {
           width: 50px;
           border-radius: 50%;
+
+          @media (max-width: 440px) {
+            width: 40px;
+          }
         }
       }
 
@@ -367,6 +399,10 @@ header {
           &:hover {
             color: var(--main-click-color);
           }
+
+          @media (max-width: 440px) {
+            font-size: 15px;
+          }
         }
       }
 
@@ -382,6 +418,15 @@ header {
           align-items: center;
           padding: 8px 0 7px;
           border-radius: 4px;
+
+          @media (max-width: 440px) {
+            img{
+              width: 17px;
+            }
+            span {
+              font-size: smaller;
+            }
+          }
 
           &,
           * {
@@ -421,6 +466,7 @@ header {
 
   .rodal {
     .rodal-dialog {
+      max-width: 90%;
       width: fit-content !important;
       height: fit-content !important;
       background: #191919;
@@ -429,6 +475,12 @@ header {
 
       .text {
         padding: 16px 20px;
+
+        @media (max-width: 440px) {
+          p{
+            font-size: 15px;
+          }
+        }
       }
 
       .wrapper {
@@ -438,11 +490,19 @@ header {
 
           &.cancel {
             border-top: 1px solid #ffffff1f;
+
+            @media (max-width: 440px) {
+                font-size: 15px;
+            }
           }
 
-          &.confirm{
+          &.confirm {
             border-top: 1px solid var(--main-color);
             background: var(--main-color);
+
+            @media (max-width: 440px) {
+              font-size: 15px;
+          }
           }
         }
       }
