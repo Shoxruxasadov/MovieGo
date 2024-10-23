@@ -42,12 +42,49 @@ export default function MovieRelated() {
                 <p className="other">{item.studio[0].name[locale]} • <span>{item.mpa}+</span></p>
               </div>
             </Link>
-          )) : Array(10).fill(<div className="card skeleton">
-            <div className="title">
-              <div className="resolution" />
-              <div className="text" />
+          )) : <>
+            <div className="card skeleton">
+              <div className="title">
+                <div className="resolution" />
+                <div className="text" />
+              </div>
+            </div><div className="card skeleton">
+              <div className="title">
+                <div className="resolution" />
+                <div className="text" />
+              </div>
+            </div><div className="card skeleton">
+              <div className="title">
+                <div className="resolution" />
+                <div className="text" />
+              </div>
+            </div><div className="card skeleton">
+              <div className="title">
+                <div className="resolution" />
+                <div className="text" />
+              </div>
+            </div><div className="card skeleton">
+              <div className="title">
+                <div className="resolution" />
+                <div className="text" />
+              </div>
+            </div><div className="card skeleton">
+              <div className="title">
+                <div className="resolution" />
+                <div className="text" />
+              </div>
+            </div><div className="card skeleton">
+              <div className="title">
+                <div className="resolution" />
+                <div className="text" />
+              </div>
+            </div><div className="card skeleton">
+              <div className="title">
+                <div className="resolution" />
+                <div className="text" />
+              </div>
             </div>
-          </div>).map(item => item)}
+          </>}
         </div>
       </div>
     </section>

@@ -6,7 +6,11 @@
       "serials": "Seriallar",
       "studios": "Studiyalar",
       "language": "Uzbek",
-      "login": "Kirish"
+      "login": "Kirish",
+      "logout": "Tizimdan Chiqish",
+      "realy": "Haqiqatan ham tizimdan chiqmoqchimisiz?",
+      "cancel": "Bekor qilish",
+      "confirm": "Tasdiqlash"
     },
     "movie": {
       "action": "Jangari",
@@ -145,7 +149,11 @@
       "serials": "Сериалы",
       "studios": "Студии",
       "language": "Русский",
-      "login": "Войти"
+      "login": "Войти",
+      "logout": "Выйти",
+      "realy": "Вы действительно хотите выйти из аккаунта?",
+      "cancel": "Отменить",
+      "confirm": "Подтвердить"
     },
     "movie": {
       "action": "Боевики",
@@ -284,7 +292,11 @@
       "serials": "Series",
       "studios": "Studios",
       "language": "English",
-      "login": "Login"
+      "login": "Login",
+      "logout": "Logout",
+      "realy": "Are you sure you want to log out of your account?",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
     },
     "movie": {
       "action": "Action",
