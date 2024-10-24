@@ -171,7 +171,7 @@ export default function Header({ movie }) {
         </div>
       </div>}
 
-      <Rodal visible={rodalCloser} onClose={() => setRodalCloser(false)}>
+      {accountMenu && <Rodal visible={rodalCloser} onClose={() => setRodalCloser(false)}>
         <div className="text">
           <p>{translate[locale].header.realy}</p>
         </div>
@@ -183,7 +183,8 @@ export default function Header({ movie }) {
             setRodalCloser(false)
           }}>{translate[locale].header.confirm}</button>
         </div>
-      </Rodal>
+      </Rodal>}
+
 
     </header >
   )
