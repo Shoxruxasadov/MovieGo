@@ -20,7 +20,7 @@ header {
     padding: 0 32px 0 30px;
   }
 
-  @media (max-width: 440px) {
+  @media (max-width: 441px) {
     height: 70px;
     padding: 0 16px 0 14px;
     gap: 0;
@@ -303,7 +303,7 @@ header {
       width: calc(100% - 300px);
       height: 100%;
 
-      @media (max-width: 440px) {
+      @media (max-width: 441px) {
         width: calc(100% - 250px);
       }
     }
@@ -323,7 +323,7 @@ header {
       flex-direction: column;
       justify-content: space-between;
 
-      @media (max-width: 440px) {
+      @media (max-width: 441px) {
         right: -100px;
         width: 250px;
         padding: 17px 16px;
@@ -336,7 +336,7 @@ header {
         align-items: center;
         gap: 12px;
 
-        @media (max-width: 440px) {
+        @media (max-width: 441px) {
           gap: 8px;
           margin-bottom: 16px;
         }
@@ -344,7 +344,7 @@ header {
         .name {
           width: calc(100% - 60px);
 
-          @media (max-width: 440px) {
+          @media (max-width: 441px) {
             width: calc(100% - 48px);
           }
 
@@ -355,7 +355,7 @@ header {
             overflow: hidden;
             text-overflow: ellipsis;
 
-            @media (max-width: 440px) {
+            @media (max-width: 441px) {
               font-size: 15px;
               margin-bottom: 0;
             }
@@ -367,7 +367,7 @@ header {
             overflow: hidden;
             text-overflow: ellipsis;
 
-            @media (max-width: 440px) {
+            @media (max-width: 441px) {
               font-size: small;
             }
           }
@@ -377,7 +377,7 @@ header {
           width: 50px;
           border-radius: 50%;
 
-          @media (max-width: 440px) {
+          @media (max-width: 441px) {
             width: 40px;
           }
         }
@@ -404,7 +404,7 @@ header {
             transform: translateX(2px);
           }
 
-          @media (max-width: 440px) {
+          @media (max-width: 441px) {
             font-size: 15px;
           }
         }
@@ -423,7 +423,7 @@ header {
           padding: 8px 0 7px;
           border-radius: 4px;
 
-          @media (max-width: 440px) {
+          @media (max-width: 441px) {
             img{
               width: 17px;
             }
@@ -480,7 +480,7 @@ header {
       .text {
         padding: 16px 20px;
 
-        @media (max-width: 440px) {
+        @media (max-width: 441px) {
           p{
             font-size: 15px;
           }
@@ -495,7 +495,7 @@ header {
           &.cancel {
             border-top: 1px solid #ffffff1f;
 
-            @media (max-width: 440px) {
+            @media (max-width: 441px) {
                 font-size: 15px;
             }
           }
@@ -504,7 +504,7 @@ header {
             border-top: 1px solid var(--main-color);
             background: var(--main-color);
 
-            @media (max-width: 440px) {
+            @media (max-width: 441px) {
               font-size: 15px;
           }
           }
@@ -536,7 +536,7 @@ header {
         padding: 0 32px;
       }
 
-      @media (max-width: 440px) {
+      @media (max-width: 441px) {
         transform: translateX(-16px);
         padding: 0 16px;
       }
@@ -546,7 +546,7 @@ header {
       height: 50px;
     }
 
-    @media (max-width: 440px) {
+    @media (max-width: 441px) {
       height: 60px;
     }
 
