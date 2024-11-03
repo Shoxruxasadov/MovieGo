@@ -3,7 +3,7 @@
     "short_name": "MovieGo",
     "start_url": "/",
     "scope": "/",
-    "display": "minimal-ui",
+    "display": "standalone",
     "theme_color": "#ff3822",
     "background_color": "#0d0d0d",
     "icons": [
