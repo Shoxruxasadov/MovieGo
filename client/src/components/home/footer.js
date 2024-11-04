@@ -43,7 +43,7 @@ export default function Footer() {
             </div>
             <ul className="list click">
               <li><a href="https://www.instagram.com/moviego.uz" target="_blank"><SiInstagram /><span>Instagram</span></a></li>
-              <li><a href="https://t.me/HSooport" target="_blank" ><SiTelegram /><span>Telegram</span></a></li>
+              <li><a href="https://t.me/Shoxrux_support" target="_blank" ><SiTelegram /><span>Telegram</span></a></li>
             </ul>
           </div>
           <div className="available">
