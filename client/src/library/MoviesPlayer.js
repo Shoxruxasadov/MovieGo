@@ -434,6 +434,7 @@ export default function MoviesPlayer() {
           onPlaying={() => setLoadingMovie(false)}
           onWaiting={() => setLoadingMovie(true)}
           src={movie.source[quality][language]}
+          poster={movie.image.preview}
           style={currentTime == 0 ? { visibility: "hidden" } : {}}
         ></video> : <video
           ref={videoRef}
@@ -441,6 +442,7 @@ export default function MoviesPlayer() {
           onClick={handleVideo}
           onTimeUpdate={timeUpdate}
           onLoadedData={loadedMovie}
+          poster={movie.image.preview}
           style={currentTime == 0 ? { visibility: "hidden" } : {}}
         ></video>
       }

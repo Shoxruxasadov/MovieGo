@@ -31,7 +31,7 @@ export default function Section({ type, title, route, name }) {
             <div className='wrapper' ref={scrollDemoRef} >
                 <div className={type}>
                     {isSuccess && type == "studio" && <Link
-                        style={{ backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Fmovies.webp?alt=media&token=0a9c685f-063e-42fc-a5a9-5c3d42cdfcb6)` }}
+                        style={{ backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Fmovies.webp?alt=media&token=8f67adde-3360-4542-9d07-c24c9a03161d)` }}
                         href="/studio/all"
                         className="card"
                     >
