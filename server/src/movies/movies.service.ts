@@ -11,8 +11,7 @@ export class MoviesService {
   ) {}
 
   async findByType(type: string) {
-    if (type == 'all')
-      return this.moviesModel.find().populate('studio').sort({ timeline: -1 });
+    if (type == 'all') return this.moviesModel.find().populate('studio').sort({ timeline: -1 });
     return this.moviesModel
       .find({ type: type })
       .populate('studio')

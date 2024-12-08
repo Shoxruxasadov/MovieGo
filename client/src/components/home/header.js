@@ -92,38 +92,38 @@ export default function Header({ movie }) {
       </nav> : <></>}
 
       <div className="right">
-        {!user && <div className="language"
-          onMouseEnter={() => setLangMenu(true)}
-          onMouseLeave={() => setLangMenu(false)}
-        >
-          <div className={langMenu ? 'lang-menu active' : "lang-menu"}>
-            <div className="selected">
-              <img src={`/language/${locale}.svg`} alt={locale} width={21} height={21} />
-              <span>{translate[locale].header.language}</span>
+        {load && <>
+          {!user && <div className="language"
+            onMouseEnter={() => setLangMenu(true)}
+            onMouseLeave={() => setLangMenu(false)}
+          >
+            <div className={langMenu ? 'lang-menu active' : "lang-menu"}>
+              <div className="selected">
+                <img src={`/language/${locale}.svg`} alt={locale} width={21} height={21} />
+                <span>{translate[locale].header.language}</span>
+              </div>
+              {router.locales.map(lng => (
+                <button
+                  key={lng}
+                  disabled={lng === locale}
+                  onClick={() => handleLanguage(lng)}
+                >
+                  <img src={`/language/${lng}.svg`} alt={lng} width={21} height={21} />
+                  <span>{translate[lng].header.language}</span>
+                </button>
+              ))}
             </div>
-            {router.locales.map(lng => (
-              <button
-                key={lng}
-                disabled={lng === locale}
-                onClick={() => handleLanguage(lng)}
-              >
-                <img src={`/language/${lng}.svg`} alt={lng} width={21} height={21} />
-                <span>{translate[lng].header.language}</span>
-              </button>
-            ))}
-          </div>
-        </div>}
-
-
-        {load && (user ? <div className="account" onClick={() => setAccountMenu(true)}>
-          <Image
-            src={user.image ? user.image : '/sign/user.webp'}
-            alt="avatar"
-            width={256}
-            height={256}
-            className='avatar'
-          />
-        </div> : <Link href='/login'>{translate[locale].header.login}</Link>)}
+          </div>}
+          {user ? <div className="account" onClick={() => setAccountMenu(true)}>
+            <Image
+              src={user.image ? user.image : '/sign/user.webp'}
+              alt="avatar"
+              width={256}
+              height={256}
+              className='avatar'
+            />
+          </div> : <Link href='/login'>{translate[locale].header.login}</Link>}
+        </>}
       </div >
 
       {user && <div className={accountMenu ? 'account-menu-wrapper active' : "account-menu-wrapper"}>
