@@ -504,7 +504,7 @@ export default function MoviesPlayer() {
                   <li className="back" onClick={() => setList('main')}>{translate[locale].movie.quality}</li>
                   {movie.source[`2160p`] != null && <li className={`item${quality == '2160p' ? ' selected' : ''}`} onClick={() => handleQuality('2160p')}>2160p <span className="badge">4K</span></li>}
                   {movie.source[`1080p`] != null && <li className={`item${quality == '1080p' ? ' selected' : ''}`} onClick={() => handleQuality('1080p')}>1080p <span className="badge">HD</span></li>}
-                  {movie.source[`720p`] != null && <li className={`item${quality == '720p' ? ' selected' : ''}`} onClick={() => handleQuality('720p')}>720p <span className="badge">HD</span></li>}
+                  {movie.source[`720p`] != null && <li className={`item${quality == '720p' ? ' selected' : ''}`} onClick={() => handleQuality('720p')}>720p <span className="badge">SD</span></li>}
                 </ul>
                 <ul className={`speed-list${accessible && list == 'speed' ? ' active' : ''}`}>
                   <li className="back" onClick={() => setList('main')}>{translate[locale].movie.speed}</li>
