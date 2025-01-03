@@ -34,8 +34,8 @@ export default function MoviePlayer() {
                 <div className="cast" key={i}>
                   <img src={item.image} alt="avatar" />
                   <div>
-                    <h3>{item.name}</h3>
-                    <p>{item.role || ""}</p>
+                    <h3>{item.name ? item.name : item.role}</h3>
+                    {item.name && <p>{item.role || ""}</p>}
                   </div>
                 </div>
               ))}
