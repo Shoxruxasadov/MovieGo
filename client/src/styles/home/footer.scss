@@ -281,7 +281,7 @@ footer {
 
       span,
       a {
-        font-weight: bold;
+        font-weight: 600;
         transition: 0.2s;
         white-space: nowrap;
 
@@ -290,13 +290,12 @@ footer {
         }
 
         @media (max-width: 441px) {
-          font-weight: 700;
           font-size: 13px;
         }
       }
 
       .brand a:hover {
-        font-weight: 900;
+        font-weight: 700;
       }
 
       .brand,
