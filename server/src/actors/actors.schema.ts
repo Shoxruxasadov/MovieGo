@@ -6,8 +6,8 @@ export type ActorsDocument = HydratedDocument<Actors>;
 
 @Schema({ timestamps: true })
 export class Actors {
-  @Prop({ required: true })
-  name: string;
+  @Prop({ required: false })
+  name: string | null;
 
   @Prop({ required: false })
   role: string | null;

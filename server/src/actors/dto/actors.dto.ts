@@ -2,7 +2,7 @@ import { IsNotEmpty } from 'class-validator';
 
 export class ActorsDto {
   @IsNotEmpty()
-  name: string;
+  name: string | null;
 
   role: string | null;
 
