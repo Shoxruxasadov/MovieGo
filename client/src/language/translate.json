@@ -54,8 +54,9 @@
       "directors": "Direktorlar",
       "producers": "Ishlab chiqaruvchilar",
       "screenwriters": "Ssenariy mualliflari",
-      "usa": "AQSH",
       "USA": "AQSH",
+      "usa": "AQSH",
+      "france": "Fransiya",
       "allmovies": "Barcha Filmlar"
     },
     "serie": {
@@ -197,8 +198,9 @@
       "directors": "Директора",
       "producers": "Производители",
       "screenwriters": "Сценаристы",
-      "usa": "США",
       "USA": "США",
+      "usa": "США",
+      "france": "Франция",
       "allmovies": "Все Фильмы"
     },
     "serie": {
@@ -340,8 +342,9 @@
       "directors": "Directors",
       "producers": "Producers",
       "screenwriters": "Screenwriters",
-      "usa": "USA",
       "USA": "USA",
+      "usa": "USA",
+      "france": "France",
       "allmovies": "All Movies"
     },
     "serie": {
