@@ -13,11 +13,11 @@
       "confirm": "Tasdiqlash"
     },
     "hero": {
-      "marvel-movies": "Marvel Filmlari",
-      "marvel-series": "Marvel Seriallar",
-      "studios": "Studiyalar",
-      "famous-movies": "Mashhur Filmlar",
-      "famous-series": "Mashhur Seriallar"
+      "marvel_movies": "Marvel Filmlari",
+      "marvel_series": "Marvel Seriallar",
+      "famous_movies": "Mashhur Filmlar",
+      "famous_series": "Mashhur Seriallar",
+      "studios": "Studiyalar"
     },
     "movie": {
       "action": "Jangari",
@@ -165,11 +165,11 @@
       "confirm": "Подтвердить"
     },
     "hero": {
-      "marvel-movies": "Марвел Фильмы",
-      "marvel-series": "Марвел Сериалы",
-      "studios": "Студии",
-      "famous-movies": "Известный Фильмы",
-      "famous-series": "Известный Сериалы"
+      "marvel_movies": "Марвел Фильмы",
+      "marvel_series": "Марвел Сериалы",
+      "famous_movies": "Известный Фильмы",
+      "famous_series": "Известный Сериалы",
+      "studios": "Студии"
     },
     "movie": {
       "action": "Боевики",
@@ -317,11 +317,11 @@
       "confirm": "Confirm"
     },
     "hero": {
-      "marvel-movies": "Marvel Movies",
-      "marvel-series": "Marvel Series",
-      "studios": "Studios",
-      "famous-movies": "Famous Movies",
-      "famous-series": "Famous Series"
+      "marvel_movies": "Marvel Movies",
+      "marvel_series": "Marvel Series",
+      "famous_movies": "Famous Movies",
+      "famous_series": "Famous Series",
+      "studios": "Studios"
     },
     "movie": {
       "action": "Action",
