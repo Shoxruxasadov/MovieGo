@@ -64,8 +64,8 @@
       "USA": "AQSH",
       "usa": "AQSH",
       "france": "Fransiya",
-      "marvel_comics": "Marvel Komiks Filmlar",
-      "famous_movies": "Mashhur Filmlar"
+      "marvelcomics": "Marvel Komiks Filmlar",
+      "famousmovies": "Mashhur Filmlar"
     },
     "serie": {
       "episodes": "Qismlar",
@@ -216,8 +216,8 @@
       "USA": "США",
       "usa": "США",
       "france": "Франция",
-      "marvel_comics": "Марвел Комикс Фильмы",
-      "famous_movies": "Известный Фильмы"
+      "marvelcomics": "Марвел Комикс Фильмы",
+      "famousmovies": "Известный Фильмы"
     },
     "serie": {
       "episodes": "Части",
@@ -368,8 +368,8 @@
       "USA": "USA",
       "usa": "USA",
       "france": "France",
-      "marvel_comics": "Marvel Comics Movies",
-      "famous_movies": "Famous Movies"
+      "marvelcomics": "Marvel Comics Movies",
+      "famousmovies": "Famous Movies"
     },
     "serie": {
       "episodes": "Episodes",

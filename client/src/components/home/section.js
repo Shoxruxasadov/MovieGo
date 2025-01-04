@@ -37,7 +37,7 @@ export default function Section({ type, title, route, name }) {
                     >
                         <div className="shadow" />
                         <div className="title">
-                            <h3>{translate[locale].movie.marvel_comics}</h3>
+                            <h3>{translate[locale].movie.marvelcomics}</h3>
                         </div>
                     </Link>}
                     {isSuccess ? movies.map(item => (
@@ -107,7 +107,7 @@ export default function Section({ type, title, route, name }) {
                     >
                         <div className="shadow" />
                         <div className="title">
-                            <h3>{translate[locale].movie.famous_movies}</h3>
+                            <h3>{translate[locale].movie.famousmovies}</h3>
                         </div>
                     </Link>}
                 </div>

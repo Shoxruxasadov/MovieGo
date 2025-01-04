@@ -34,5 +34,3 @@ export default function Home() {
     </Root>
   );
 }
-
-"Hi"
