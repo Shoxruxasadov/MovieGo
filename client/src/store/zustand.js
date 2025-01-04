@@ -22,7 +22,7 @@ export const useStore = create((set) => ({
             en: "Marvel Comics Movies"
         }
     }))),
-    getAllMovies: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/famous`, { headers: { 'type': 'all' } }).then(({ data }) => set(() => ({
+    getAllFamous: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/famous`, { headers: { 'type': 'all' } }).then(({ data }) => set(() => ({
         allFamous: data,
         title: {
             uz: "Mashhur Filmlar",
