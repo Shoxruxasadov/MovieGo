@@ -32,12 +32,12 @@ export default function Section({ type, title, route, name }) {
                 <div className={type}>
                     {isSuccess && type == "studio" && <Link
                         style={{ backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Fmovies.webp?alt=media&token=8f67adde-3360-4542-9d07-c24c9a03161d)` }}
-                        href="/studio/all"
+                        href="/studio/comics"
                         className="card"
                     >
                         <div className="shadow" />
                         <div className="title">
-                            <h3>{translate[locale].movie.allmovies}</h3>
+                            <h3>{translate[locale].movie.marvel_comics}</h3>
                         </div>
                     </Link>}
                     {isSuccess ? movies.map(item => (
@@ -100,6 +100,16 @@ export default function Section({ type, title, route, name }) {
                             </div>
                         </div>
                     </>}
+                    {isSuccess && type == "studio" && <Link
+                        style={{ backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Fmovies.webp?alt=media&token=8f67adde-3360-4542-9d07-c24c9a03161d)` }}
+                        href="/studio/famous"
+                        className="card"
+                    >
+                        <div className="shadow" />
+                        <div className="title">
+                            <h3>{translate[locale].movie.famous_movies}</h3>
+                        </div>
+                    </Link>}
                 </div>
             </div>
         </section >

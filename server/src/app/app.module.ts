@@ -8,6 +8,7 @@ import { MoviesModule } from 'src/movies/movies.module';
 import { ActorsModule } from 'src/actors/actors.module';
 import { UsersModule } from 'src/users/users.module';
 import { StudiosModule } from 'src/studios/studios.module';
+import { FamousModule } from 'src/famous/famous.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { StudiosModule } from 'src/studios/studios.module';
     // }),
     UsersModule,
     MoviesModule,
+    FamousModule,
     StudiosModule,
     ActorsModule
   ],

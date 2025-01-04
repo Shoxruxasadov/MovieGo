@@ -9,6 +9,7 @@ export const useStore = create((set) => ({
     studio: null,
     related: null,
     allMovies: null,
+    allFamous: null,
     setLink: link => set(() => ({ link: link })),
     getMovie: movie => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies/${movie}`).then(({ data }) => set(() => ({ movie: data, title: data ? data.title : null }))),
     getStudio: module => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/studios/${module}`).then(({ data }) => set(() => ({ studio: data, title: data[0].studio.name }))),
@@ -16,9 +17,17 @@ export const useStore = create((set) => ({
     getAllMovies: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/movies`, { headers: { 'type': 'all' } }).then(({ data }) => set(() => ({
         allMovies: data,
         title: {
-            uz: "Barcha Filmlar",
-            ru: "Все Фильмы",
-            en: "All Movies"
+            uz: "Marvel Komiks Filmlar",
+            ru: "Марвел Комикс Фильмы",
+            en: "Marvel Comics Movies"
+        }
+    }))),
+    getAllMovies: () => axios.get(`${process.env.NEXT_PUBLIC_SERVER_API}/famous`, { headers: { 'type': 'all' } }).then(({ data }) => set(() => ({
+        allFamous: data,
+        title: {
+            uz: "Mashhur Filmlar",
+            ru: "Известный Фильмы",
+            en: "Famous Movies"
         }
     }))),
 }));

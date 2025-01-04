@@ -11,7 +11,7 @@ import MovieStudio from "@/components/studio/studio"
 import { useRouter } from "next/router"
 import translate from "@/language/translate.json"
 
-export default function AllStudios() {
+export default function ComicsStudios() {
     const getAllMovies = useStore(state => state.getAllMovies);
     const allMovies = useStore(state => state.allMovies);
     const [loading, setLoading] = useState(true)

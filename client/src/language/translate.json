@@ -12,6 +12,13 @@
       "cancel": "Bekor qilish",
       "confirm": "Tasdiqlash"
     },
+    "hero": {
+      "marvel-movies": "Marvel Filmlari",
+      "marvel-series": "Marvel Seriallar",
+      "studios": "Studiyalar",
+      "famous-movies": "Mashhur Filmlar",
+      "famous-series": "Mashhur Seriallar"
+    },
     "movie": {
       "action": "Jangari",
       "adventure": "Sarguzasht",
@@ -57,7 +64,8 @@
       "USA": "AQSH",
       "usa": "AQSH",
       "france": "Fransiya",
-      "allmovies": "Barcha Filmlar"
+      "marvel_comics": "Marvel Komiks Filmlar",
+      "famous_movies": "Mashhur Filmlar"
     },
     "serie": {
       "episodes": "Qismlar",
@@ -156,6 +164,13 @@
       "cancel": "Отменить",
       "confirm": "Подтвердить"
     },
+    "hero": {
+      "marvel-movies": "Марвел Фильмы",
+      "marvel-series": "Марвел Сериалы",
+      "studios": "Студии",
+      "famous-movies": "Известный Фильмы",
+      "famous-series": "Известный Сериалы"
+    },
     "movie": {
       "action": "Боевики",
       "adventure": "Приключения",
@@ -201,7 +216,8 @@
       "USA": "США",
       "usa": "США",
       "france": "Франция",
-      "allmovies": "Все Фильмы"
+      "marvel_comics": "Марвел Комикс Фильмы",
+      "famous_movies": "Известный Фильмы"
     },
     "serie": {
       "episodes": "Части",
@@ -300,6 +316,13 @@
       "cancel": "Cancel",
       "confirm": "Confirm"
     },
+    "hero": {
+      "marvel-movies": "Marvel Movies",
+      "marvel-series": "Marvel Series",
+      "studios": "Studios",
+      "famous-movies": "Famous Movies",
+      "famous-series": "Famous Series"
+    },
     "movie": {
       "action": "Action",
       "adventure": "Adventure",
@@ -345,7 +368,8 @@
       "USA": "USA",
       "usa": "USA",
       "france": "France",
-      "allmovies": "All Movies"
+      "marvel_comics": "Marvel Comics Movies",
+      "famous_movies": "Famous Movies"
     },
     "serie": {
       "episodes": "Episodes",
