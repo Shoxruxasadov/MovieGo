@@ -43,7 +43,7 @@ export default function Section({ type, title, route, name }) {
                     {isSuccess ? movies.map(item => (
                         <Link
                             style={{ backgroundImage: `url(${type == 'studio' ? item.image : item.image.poster})` }}
-                            href={type == 'studios' ? `/studio/${item.module}` : `/${item.type}/${item.name}`}
+                            href={type == 'studio' ? `/studio/${item.module}` : `/${item.type}/${item.name}`}
                             className="card"
                             key={item._id}
                         >
