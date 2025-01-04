@@ -26,7 +26,7 @@ export default function Home() {
         <Section type='movie' title={translate[locale].hero.marvel_movies} route='movies' name='marvel-movies' />
         <Section type='serie' title={translate[locale].hero.marvel_series} route='movies' name='marvel-series' />
         <Section type='studio' title={translate[locale].hero.studios} route='studios' name='studios' />
-        <Section type='movie' title={translate[locale].hero.famous_movies} route='famous' name='famous-movies' />
+        {/* <Section type='movie' title={translate[locale].hero.famous_movies} route='famous' name='famous-movies' /> */}
         <Section type='serie' title={translate[locale].hero.famous_series} route='famous' name='famous-series' />
         <div id="shadow" />
       </Animated>
