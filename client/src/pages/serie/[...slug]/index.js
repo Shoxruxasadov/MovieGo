@@ -14,7 +14,7 @@ import { useStore } from "@/store/zustand"
 import MovieRelated from "@/components/movie/related"
 import MovieCredits from "@/components/movie/credits"
 
-export default function SerieFamous() {
+export default function AppSerie() {
   const getMovie = useStore(state => state.getMovie);
   const movie = useStore(state => state.movie);
   const [loading, setLoading] = useState(true)
@@ -23,7 +23,7 @@ export default function SerieFamous() {
 
   useEffect(() => {
     setLoading(true)
-    if (pathname) getMovie(pathname.split('/')[2], "famous").finally(() => setLoading(false))
+    if (pathname) getMovie(pathname.split('/')[2]).finally(() => setLoading(false))
   }, [pathname])
 
   useEffect(() => {

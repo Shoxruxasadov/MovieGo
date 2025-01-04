@@ -3,15 +3,19 @@ import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { Movies, MoviesDocument } from './movies.schema';
 import { MoviesDto } from './dto/movies.dto';
+import { log } from 'console';
+import { Famous, FamousDocument } from 'src/famous/famous.schema';
 
 @Injectable()
 export class MoviesService {
   constructor(
     @InjectModel(Movies.name) private moviesModel: Model<MoviesDocument>,
+    @InjectModel(Famous.name) private famousModel: Model<FamousDocument>,
   ) {}
 
   async findByType(type: string) {
-    if (type == 'all') return this.moviesModel.find().populate('studio').sort({ timeline: -1 });
+    if (type == 'all')
+      return this.moviesModel.find().populate('studio').sort({ timeline: -1 });
     return this.moviesModel
       .find({ type: type })
       .populate('studio')
@@ -35,13 +39,26 @@ export class MoviesService {
   }
 
   async findByName(name: string) {
-    return this.moviesModel
+    const movie = await this.moviesModel
       .findOne({ name })
       .populate('studio')
       .populate('cast')
       .populate('directors')
       .populate('producers')
       .populate('screenwriters');
+
+    if (!movie) {
+      const famous = await this.famousModel
+        .findOne({ name })
+        .populate('studio')
+        .populate('cast')
+        .populate('directors')
+        .populate('producers')
+        .populate('screenwriters');
+      return famous;
+    }
+
+    return movie;
   }
 
   async create(dto: MoviesDto) {
