@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation"
 
 import Footer from "@/components/home/footer"
 import Header from "@/components/home/header"
-import MovieHome from "@/components/movie/home"
-import MoviePlayer from "@/components/movie/player"
+import SerieHome from "@/components/serie/home"
+import SeriePlayer from "@/components/serie/player"
 import Root from "@/layouts/root"
 import Loading from "@/components/others/loading"
 import Animated from "@/components/others/animated"
@@ -14,7 +14,7 @@ import { useStore } from "@/store/zustand"
 import MovieRelated from "@/components/movie/related"
 import MovieCredits from "@/components/movie/credits"
 
-export default function AppMovie() {
+export default function SerieFamous() {
   const getMovie = useStore(state => state.getMovie);
   const movie = useStore(state => state.movie);
   const [loading, setLoading] = useState(true)
@@ -23,7 +23,7 @@ export default function AppMovie() {
 
   useEffect(() => {
     setLoading(true)
-    if (pathname) getMovie(pathname.split('/')[2]).finally(() => setLoading(false))
+    if (pathname) getMovie(pathname.split('/')[2], "famous").finally(() => setLoading(false))
   }, [pathname])
 
   useEffect(() => {
@@ -34,11 +34,11 @@ export default function AppMovie() {
   if (loading) return <Loading />
   if (!movie) return <ErrorPage />
   return (
-    <Root page="movie" title={movie.title[locale]}>
+    <Root page="serie" title={movie.title[locale]}>
       <Header movie={true} />
       <Animated>
-        <MovieHome />
-        <MoviePlayer />
+        <SerieHome />
+        <SeriePlayer />
         <MovieCredits />
         <MovieRelated />
         <div id="shadow" />
