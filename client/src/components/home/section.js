@@ -101,7 +101,7 @@ export default function Section({ type, title, route, name }) {
                         </div>
                     </>}
                     {isSuccess && type == "studio" && <Link
-                        style={{ backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Fmovies.webp?alt=media&token=8f67adde-3360-4542-9d07-c24c9a03161d)` }}
+                        style={{ backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/moviegouz.appspot.com/o/movies%2Ffamous.webp?alt=media&token=2aecc90f-02f7-4bfc-9339-57f4ee5bbf2d)` }}
                         href="/studio/famous"
                         className="card"
                     >
