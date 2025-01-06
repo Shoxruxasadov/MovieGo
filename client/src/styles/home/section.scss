@@ -155,6 +155,8 @@
       .card {
         width: 15vw;
         height: 22.22vw;
+        max-width: 432px;
+        max-height: 640px;
         border-radius: 8px;
         overflow: hidden;
         position: relative;
