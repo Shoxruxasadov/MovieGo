@@ -2,6 +2,7 @@
 #series,
 #studios,
 #related,
+#cartoons,
 #marvel-movies,
 #marvel-series,
 #famous-movies,
@@ -148,6 +149,7 @@
     .movie,
     .serie,
     .studio,
+    .cartoon,
     .related {
       display: flex;
       gap: 6px;

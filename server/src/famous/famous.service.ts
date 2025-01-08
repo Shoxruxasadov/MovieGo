@@ -11,27 +11,12 @@ export class FamousService {
   ) {}
 
   async findByType(type: string) {
-    if (type == 'all') return this.famousModel.find().populate('studio').sort({ timeline: -1 });
-    return this.famousModel
+    if (type == 'all') {
+      return this.famousModel.find().populate('studio').sort({ timeline: -1 });
+    } return this.famousModel
       .find({ type: type })
       .populate('studio')
       .sort({ timeline: -1 });
-  }
-
-  async findRandom() {
-    return this.famousModel.aggregate([
-      {
-        $sample: { size: 10 },
-      },
-      {
-        $lookup: {
-          from: 'studios',
-          localField: 'studio',
-          foreignField: '_id',
-          as: 'studio',
-        },
-      },
-    ]);
   }
 
   async findByName(name: string) {

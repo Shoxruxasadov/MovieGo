@@ -17,7 +17,8 @@
       "marvel_series": "Marvel Seriallar",
       "famous_movies": "Mashhur Filmlar",
       "famous_series": "Mashhur Seriallar",
-      "studios": "Studiyalar"
+      "studios": "Studiyalar",
+      "cartoons": "Multfilmlar"
     },
     "movie": {
       "action": "Jangari",
@@ -172,7 +173,8 @@
       "marvel_series": "Марвел Сериалы",
       "famous_movies": "Известный Фильмы",
       "famous_series": "Известный Сериалы",
-      "studios": "Студии"
+      "studios": "Студии",
+      "cartoons": "Мультфильмы"
     },
     "movie": {
       "action": "Боевики",
@@ -327,7 +329,8 @@
       "marvel_series": "Marvel Series",
       "famous_movies": "Famous Movies",
       "famous_series": "Famous Series",
-      "studios": "Studios"
+      "studios": "Studios",
+      "cartoons": "Cartoons"
     },
     "movie": {
       "action": "Action",

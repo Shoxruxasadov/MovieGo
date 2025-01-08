@@ -23,19 +23,28 @@ export class MoviesService {
   }
 
   async findRandom() {
-    return this.moviesModel.aggregate([
-      {
-        $sample: { size: 10 },
-      },
-      {
-        $lookup: {
+    const marvel = await this.moviesModel.aggregate([
+      { $sample: { size: 5 }, },
+      { $lookup: {
           from: 'studios',
           localField: 'studio',
           foreignField: '_id',
           as: 'studio',
-        },
-      },
+      }, },
     ]);
+
+    const famous = await this.famousModel.aggregate([
+      { $sample: { size: 5 }, },
+      { $lookup: {
+          from: 'studios',
+          localField: 'studio',
+          foreignField: '_id',
+          as: 'studio',
+      }, },
+    ]);
+
+    const random = marvel.concat(famous);
+    return random;
   }
 
   async findByName(name: string) {
