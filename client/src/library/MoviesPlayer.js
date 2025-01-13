@@ -37,6 +37,7 @@ export default function MoviesPlayer() {
   const volume = usePlayer(state => state.volume);
   const movie = useStore(state => state.movie);
 
+  const [isCursorVisible, setIsCursorVisible] = useState(true);
   const [currentTimeChanged, setCurrentTimeChanged] = useState(0)
   const [currentTimeView, setCurrentTimeView] = useState('00:00')
   const [durationView, setDurationView] = useState('0:00:00')
@@ -53,6 +54,7 @@ export default function MoviesPlayer() {
   const [reload, setReload] = useState(false)
   const [list, setList] = useState('main')
   const progressRef = useRef(null);
+  const playBtnRef = useRef(null);
   const playerRef = useRef(null);
   const videoRef = useRef(null);
   const { locale } = useRouter()
@@ -63,6 +65,32 @@ export default function MoviesPlayer() {
   const [isHovering, setIsHovered] = useState(false);
   const onMouseEnter = () => setIsHovered(true);
   const onMouseLeave = () => setIsHovered(false);
+
+  const options = [
+    { label: translate[locale].movie.language, value: language, list: 'language' },
+    { label: translate[locale].movie.quality, value: quality, list: 'quality' },
+    { label: translate[locale].movie.speed, value: speed === 'normal' ? translate[locale].movie.normal : speed, list: 'speed' },
+  ];
+  const languages = [
+    { label: 'Uzbek', value: 'uz', badge: 'UZ' },
+    { label: 'Russian', value: 'ru', badge: 'RU' },
+    { label: 'English', value: 'en', badge: 'EN' },
+  ];
+  const qualities = [
+    { label: '2160p', value: '2160p', badge: '4K' },
+    { label: '1080p', value: '1080p', badge: 'HD' },
+    { label: '720p', value: '720p', badge: 'SD' },
+  ];
+  const speeds = [
+    { label: '0.25x', value: 0.25 },
+    { label: '0.5x', value: 0.5 },
+    { label: '0.75x', value: 0.75 },
+    { label: translate[locale].movie.normal, value: 1 },
+    { label: '1.25x', value: 1.25 },
+    { label: '1.5x', value: 1.5 },
+    { label: '1.75x', value: 1.75 },
+    { label: '2x', value: 2 },
+  ];
 
   if (languageChanger) {
     if (movie.source[`720p`] != null && quality == "720p") {
@@ -316,8 +344,11 @@ export default function MoviesPlayer() {
       return window.document.exitFullscreen()
     }
     setFullscreen(true)
-    setControls(false)
     playerRef.current.requestFullscreen()
+
+    const fullScreenBtn = document.getElementById("fullscreen");
+    fullScreenBtn.blur()
+    if (!playing) handleVideo()
   }
 
   const formatTime = time => {
@@ -333,6 +364,8 @@ export default function MoviesPlayer() {
   const hideControls = () => {
     if (!playing || (isHovering && !window.document.fullscreen)) return setControls(true)
     setControls(false)
+    setAccessible(false)
+    setList("main")
   }
 
   useEffect(() => {
@@ -370,7 +403,6 @@ export default function MoviesPlayer() {
             videoRef.current.volume -= 0.1
             setVolume(videoRef.current.volume)
           }
-
         }
         if (keyCode === 32) { // Space Key
           setPlaying(!playingKeyCode);
@@ -398,7 +430,29 @@ export default function MoviesPlayer() {
   }, [language, quality])
 
   useEffect(() => {
+    let timeout;
+
+    const handleMouseMove = () => {
+      if (window.document.fullscreen) { // Faqat fullscreen rejimida
+        setIsCursorVisible(true); // Kursorni ko'rsatish
+        setControls(true)
+        clearTimeout(timeout); // Avvalgi taymerni tozalash
+        timeout = setTimeout(() => {
+          setIsCursorVisible(false)
+          setControls(false)
+          setAccessible(false)
+          setList("main")
+        }, 2000); // 2 soniyadan keyin kursorni yashirish
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
     setFullscreen(!window.document.fullscreen);
+    playBtnRef.current.focus()
   }, [window.document.fullscreen])
 
   useEffect(() => {
@@ -446,7 +500,7 @@ export default function MoviesPlayer() {
           style={currentTime == 0 ? { visibility: "hidden" } : {}}
         ></video>
       }
-      <button className={`play-pause-circle${!playing ? ' active' : ''}`} onClick={handleVideo}><BsPlayCircleFill /></button>
+      <button ref={playBtnRef} className={`play-pause-circle${!playing ? ' active' : ''}`} onClick={handleVideo}><BsPlayCircleFill /></button>
       <div className="wrapper">
         <ul className="video-controls">
           <li className="options left">
@@ -487,39 +541,68 @@ export default function MoviesPlayer() {
               </div>
             </>}
             <div className="setting-content">
-              <button className={`settings${accessible ? ' active' : ''}`} onClick={() => setAccessible(!accessible)}><MdSettings /></button>
+              <button className={`settings${accessible ? ' active' : ''}`} onClick={() => {setAccessible(!accessible); setList("main")}}><MdSettings /></button>
               <div className={`menu ${list}${menuSize(list)}${accessible ? ' active' : ''}`}>
-                <ul className={`main-list${accessible && list == 'main' ? ' active' : ''}`}>
-                  <li className="child language" onClick={() => setList('language')}>{translate[locale].movie.language} <span>{language}</span></li>
-                  <li className="child quality" onClick={() => setList('quality')}>{translate[locale].movie.quality} <span>{quality}</span></li>
-                  <li className="child speed" onClick={() => setList('speed')}>{translate[locale].movie.speed} <span>{speed == 'normal' ? translate[locale].movie.normal : speed}</span></li>
-                </ul>
-                <ul className={`language-list${accessible && list == 'language' ? ' active' : ''}`}>
-                  <li className="back" onClick={() => setList('main')}>{translate[locale].movie.language}</li>
-                  {(movie.source[quality] && (movie.source[quality].uz != null)) && <li className={`item${language == 'uz' ? ' selected' : ''}`} onClick={() => handleLanguage('uz')}>Uzbek <span className="badge">UZ</span></li>}
-                  {(movie.source[quality] && (movie.source[quality].ru != null)) && <li className={`item${language == 'ru' ? ' selected' : ''}`} onClick={() => handleLanguage('ru')}>Russian <span className="badge">RU</span></li>}
-                  {(movie.source[quality] && (movie.source[quality].en != null)) && <li className={`item${language == 'en' ? ' selected' : ''}`} onClick={() => handleLanguage('en')}>English <span className="badge">EN</span></li>}
-                </ul>
-                <ul className={`quality-list${accessible && list == 'quality' ? ' active' : ''}`}>
-                  <li className="back" onClick={() => setList('main')}>{translate[locale].movie.quality}</li>
-                  {movie.source[`2160p`] != null && <li className={`item${quality == '2160p' ? ' selected' : ''}`} onClick={() => handleQuality('2160p')}>2160p <span className="badge">4K</span></li>}
-                  {movie.source[`1080p`] != null && <li className={`item${quality == '1080p' ? ' selected' : ''}`} onClick={() => handleQuality('1080p')}>1080p <span className="badge">HD</span></li>}
-                  {movie.source[`720p`] != null && <li className={`item${quality == '720p' ? ' selected' : ''}`} onClick={() => handleQuality('720p')}>720p <span className="badge">SD</span></li>}
-                </ul>
-                <ul className={`speed-list${accessible && list == 'speed' ? ' active' : ''}`}>
-                  <li className="back" onClick={() => setList('main')}>{translate[locale].movie.speed}</li>
-                  <li className={`item${speed == '0.25x' ? ' selected' : ''}`} onClick={() => handleSpeed(0.25)}>0.25x</li>
-                  <li className={`item${speed == '0.5x' ? ' selected' : ''}`} onClick={() => handleSpeed(0.5)}>0.5x</li>
-                  <li className={`item${speed == '0.75x' ? ' selected' : ''}`} onClick={() => handleSpeed(0.75)} >0.75x</li>
-                  <li className={`item${speed == 'normal' ? ' selected' : ''}`} onClick={() => handleSpeed(1)} >{translate[locale].movie.normal}</li>
-                  <li className={`item${speed == '1.25x' ? ' selected' : ''}`} onClick={() => handleSpeed(1.25)} >1.25x</li>
-                  <li className={`item${speed == '1.5x' ? ' selected' : ''}`} onClick={() => handleSpeed(1.5)} >1.5x</li>
-                  <li className={`item${speed == '1.75x' ? ' selected' : ''}`} onClick={() => handleSpeed(1.75)} >1.75x</li>
-                  <li className={`item${speed == '2x' ? ' selected' : ''}`} onClick={() => handleSpeed(2)}>2x</li>
-                </ul>
+                <ul className={`main-list${accessible && list === 'main' ? ' active' : ''}`}>
+                  {options.map(({ label, value, list: optionList }) => (
+                    <li
+                      key={optionList}
+                      className={`child ${optionList}`}
+                      onClick={() => setList(optionList)}
+                    >
+                      {label} <span>{value}</span>
+                    </li>
+                  ))}
+                </ul> {/* menu */}
+                <ul className={`language-list${accessible && list === 'language' ? ' active' : ''}`}>
+                  <li className="back" onClick={() => setList('main')}>
+                    {translate[locale].movie.language}
+                  </li>
+                  {languages.map(({ label, value, badge }) => (
+                    movie.source[quality] && movie.source[quality][value] != null && (
+                      <li
+                        key={value}
+                        className={`item${language === value ? ' selected' : ''}`}
+                        onClick={() => handleLanguage(value)}
+                      >
+                        {label} <span className="badge">{badge}</span>
+                      </li>
+                    )
+                  ))}
+                </ul> {/* language */}
+                <ul className={`quality-list${accessible && list === 'quality' ? ' active' : ''}`}>
+                  <li className="back" onClick={() => setList('main')}>
+                    {translate[locale].movie.quality}
+                  </li>
+                  {qualities.map(({ label, value, badge }) => (
+                    movie.source[value] != null && (
+                      <li
+                        key={value}
+                        className={`item${quality === value ? ' selected' : ''}`}
+                        onClick={() => handleQuality(value)}
+                      >
+                        {label} <span className="badge">{badge}</span>
+                      </li>
+                    )
+                  ))}
+                </ul> {/* quality */}
+                <ul className={`speed-list${accessible && list === 'speed' ? ' active' : ''}`}>
+                  <li className="back" onClick={() => setList('main')}>
+                    {translate[locale].movie.speed}
+                  </li>
+                  {speeds.map(({ label, value }) => (
+                    <li
+                      key={value}
+                      className={`item${speed === value ? ' selected' : ''}`}
+                      onClick={() => handleSpeed(value)}
+                    >
+                      {label}
+                    </li>
+                  ))}
+                </ul> {/* speed */}
               </div>
             </div>
-            {!isIOS && <button className="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>}
+            {!isIOS && <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>}
           </li>
         </ul>
       </div>

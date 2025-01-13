@@ -11,6 +11,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  
 
   @media (max-width: 768px) {
     min-height: 400px;
@@ -86,11 +87,19 @@
     }
   }
 
-  &.hide .wrapper {
-    bottom: -15px !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transition: all 0.1s ease !important;
+  &.hide {
+    cursor: none;
+
+    video{
+      cursor: none; 
+    }
+
+    .wrapper {
+      bottom: -15px !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: all 0.1s ease !important;
+    }
   }
 
   .wrapper {
