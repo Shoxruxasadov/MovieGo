@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { isMobile, isIOS } from "react-device-detect";
 import { useRouter } from "next/router";
 import styled from 'styled-components';
-import { usePlayer, useStore } from "@/store/zustand";
-import translate from "@/language/translate.json"
+import classNames from 'classnames';
 
 import { FaBackward, FaForward, FaPlay, FaPause } from "react-icons/fa6";
 import { FaExpandAlt, FaCompressAlt } from "react-icons/fa";
@@ -11,15 +10,12 @@ import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import { BsPlayCircleFill } from "react-icons/bs";
 import { MdSettings } from "react-icons/md";
 
-const RangeTime = styled.div`
-    width: ${props => props.percent}%!important;
-`;
-const RangeVolume = styled.div`
-    width: ${props => props.percent}%!important;
-`;
-const BadgePosition = styled.span`
-    left: ${props => props.move}px!important;
-`;
+import { usePlayer, useStore } from "@/store/zustand";
+import translate from "@/language/translate.json"
+
+const RangeTime = styled.div`width: ${props => props.percent}%!important;`;
+const RangeVolume = styled.div`width: ${props => props.percent}%!important;`;
+const BadgePosition = styled.span`left: ${props => props.move}px!important;`;
 
 export default function SeriesPlayer({ episode }) {
   const setLanguage = usePlayer(state => state.setLanguage);
@@ -53,6 +49,7 @@ export default function SeriesPlayer({ episode }) {
   const [reload, setReload] = useState(false)
   const [list, setList] = useState('main')
   const progressRef = useRef(null);
+  const playBtnRef = useRef(null);
   const playerRef = useRef(null);
   const videoRef = useRef(null);
   const { locale } = useRouter()
@@ -63,6 +60,10 @@ export default function SeriesPlayer({ episode }) {
   const [isHovering, setIsHovered] = useState(false);
   const onMouseEnter = () => setIsHovered(true);
   const onMouseLeave = () => setIsHovered(false);
+
+  const videoSrc = useMemo(() => reload ? movie.episodes[episode][quality][language] : undefined, [reload, movie, quality, language]);
+  const videoStyle = useMemo(() => currentTime === 0 ? { visibility: 'hidden' } : {}, [currentTime]);
+  const playerStyle = useMemo(() => currentTime == 0 ? { backgroundImage: `url(${movie.episodes[episode].image})` } : {}, [currentTime, movie]);
 
   const options = [
     { label: translate[locale].movie.language, value: language, list: 'language' },
@@ -91,123 +92,29 @@ export default function SeriesPlayer({ episode }) {
   ];
 
   if (languageChanger) {
-    if (movie.episodes[episode][`720p`] != null) {
-      if (language == 'uz') {
-        if ((movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].ru != null && movie.episodes[episode][`720p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].ru != null && movie.episodes[episode][`720p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].ru == null && movie.episodes[episode][`720p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].ru == null && movie.episodes[episode][`720p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].ru != null && movie.episodes[episode][`720p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].ru != null && movie.episodes[episode][`720p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].ru == null && movie.episodes[episode][`720p`].en != null)) setLanguage('en')
-      }
-      if (language == 'ru') {
-        if ((movie.episodes[episode][`720p`].ru != null && movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`720p`].ru != null && movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`720p`].ru != null && movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`720p`].ru != null && movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`720p`].ru == null && movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`720p`].ru == null && movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`720p`].ru == null && movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].en != null)) setLanguage('en')
-      }
-      if (language == 'en') {
-        if ((movie.episodes[episode][`720p`].en != null && movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].ru != null)) setLanguage('en')
-        if ((movie.episodes[episode][`720p`].en != null && movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].ru == null)) setLanguage('en')
-        if ((movie.episodes[episode][`720p`].en != null && movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].ru != null)) setLanguage('en')
-        if ((movie.episodes[episode][`720p`].en != null && movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].ru == null)) setLanguage('en')
-        if ((movie.episodes[episode][`720p`].en == null && movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].ru != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`720p`].en == null && movie.episodes[episode][`720p`].uz != null && movie.episodes[episode][`720p`].ru == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`720p`].en == null && movie.episodes[episode][`720p`].uz == null && movie.episodes[episode][`720p`].ru != null)) setLanguage('ru')
-      }
-    } else if (movie.episodes[episode][`1080p`] != null) {
-      if (language == 'uz') {
-        if ((movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].ru != null && movie.episodes[episode][`1080p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].ru != null && movie.episodes[episode][`1080p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].ru == null && movie.episodes[episode][`1080p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].ru == null && movie.episodes[episode][`1080p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].ru != null && movie.episodes[episode][`1080p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].ru != null && movie.episodes[episode][`1080p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].ru == null && movie.episodes[episode][`1080p`].en != null)) setLanguage('en')
-      }
-      if (language == 'ru') {
-        if ((movie.episodes[episode][`1080p`].ru != null && movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`1080p`].ru != null && movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`1080p`].ru != null && movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`1080p`].ru != null && movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`1080p`].ru == null && movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`1080p`].ru == null && movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`1080p`].ru == null && movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].en != null)) setLanguage('en')
-      }
-      if (language == 'en') {
-        if ((movie.episodes[episode][`1080p`].en != null && movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].ru != null)) setLanguage('en')
-        if ((movie.episodes[episode][`1080p`].en != null && movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].ru == null)) setLanguage('en')
-        if ((movie.episodes[episode][`1080p`].en != null && movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].ru != null)) setLanguage('en')
-        if ((movie.episodes[episode][`1080p`].en != null && movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].ru == null)) setLanguage('en')
-        if ((movie.episodes[episode][`1080p`].en == null && movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].ru != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`1080p`].en == null && movie.episodes[episode][`1080p`].uz != null && movie.episodes[episode][`1080p`].ru == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`1080p`].en == null && movie.episodes[episode][`1080p`].uz == null && movie.episodes[episode][`1080p`].ru != null)) setLanguage('ru')
-      }
-    } else if (movie.episodes[episode][`2160p`] != null) {
-      if (language == 'uz') {
-        if ((movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].ru != null && movie.episodes[episode][`2160p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].ru != null && movie.episodes[episode][`2160p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].ru == null && movie.episodes[episode][`2160p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].ru == null && movie.episodes[episode][`2160p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].ru != null && movie.episodes[episode][`2160p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].ru != null && movie.episodes[episode][`2160p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].ru == null && movie.episodes[episode][`2160p`].en != null)) setLanguage('en')
-      }
-      if (language == 'ru') {
-        if ((movie.episodes[episode][`2160p`].ru != null && movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`2160p`].ru != null && movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`2160p`].ru != null && movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].en != null)) setLanguage('ru')
-        if ((movie.episodes[episode][`2160p`].ru != null && movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].en == null)) setLanguage('ru')
-        if ((movie.episodes[episode][`2160p`].ru == null && movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].en != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`2160p`].ru == null && movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].en == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`2160p`].ru == null && movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].en != null)) setLanguage('en')
-      }
-      if (language == 'en') {
-        if ((movie.episodes[episode][`2160p`].en != null && movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].ru != null)) setLanguage('en')
-        if ((movie.episodes[episode][`2160p`].en != null && movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].ru == null)) setLanguage('en')
-        if ((movie.episodes[episode][`2160p`].en != null && movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].ru != null)) setLanguage('en')
-        if ((movie.episodes[episode][`2160p`].en != null && movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].ru == null)) setLanguage('en')
-        if ((movie.episodes[episode][`2160p`].en == null && movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].ru != null)) setLanguage('uz')
-        if ((movie.episodes[episode][`2160p`].en == null && movie.episodes[episode][`2160p`].uz != null && movie.episodes[episode][`2160p`].ru == null)) setLanguage('uz')
-        if ((movie.episodes[episode][`2160p`].en == null && movie.episodes[episode][`2160p`].uz == null && movie.episodes[episode][`2160p`].ru != null)) setLanguage('ru')
+    const availableLanguages = movie.episodes[episode][`720p`] || movie.episodes[episode][`1080p`] || movie.episodes[episode][`2160p`];
+    if (availableLanguages) {
+      if (availableLanguages[language]) {
+        setLanguage(language);
+      } else if (availableLanguages.uz) {
+        setLanguage('uz');
+      } else if (availableLanguages.ru) {
+        setLanguage('ru');
+      } else if (availableLanguages.en) {
+        setLanguage('en');
       }
     }
-    setLanguageChanger(false)
+    setLanguageChanger(false);
   }
-
   if (qualityChanger) {
-    if (quality == '2160p') {
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] != null)) setQuality('2160p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] == null)) setQuality('2160p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] != null)) setQuality('2160p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] == null)) setQuality('2160p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] != null)) setQuality('1080p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] == null)) setQuality('1080p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] != null)) setQuality('720p')
+    const availableQualities = ['2160p', '1080p', '720p'];
+    for (const quality of availableQualities) {
+      if (movie.episodes[episode][quality]) {
+        setQuality(quality);
+        break;
+      }
     }
-    if (quality == '1080p') {
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] != null)) setQuality('1080p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] == null)) setQuality('1080p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] != null)) setQuality('2160p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] == null)) setQuality('2160p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] != null)) setQuality('1080p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] == null)) setQuality('1080p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] != null)) setQuality('720p')
-    }
-    if (quality == '720p') {
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] != null)) setQuality('720p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] == null)) setQuality('1080p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] != null)) setQuality('720p')
-      if ((movie.episodes[episode][`2160p`] != null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] == null)) setQuality('2160p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] != null)) setQuality('720p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] != null && movie.episodes[episode][`720p`] == null)) setQuality('1080p')
-      if ((movie.episodes[episode][`2160p`] == null && movie.episodes[episode][`1080p`] == null && movie.episodes[episode][`720p`] != null)) setQuality('720p')
-    }
-    setQualityChanger(false)
+    setQualityChanger(false);
   }
 
   const handleVideo = () => {
@@ -372,53 +279,61 @@ export default function SeriesPlayer({ episode }) {
     setCurrentTime(0)
     setTimeout(() => { setReload(true) }, 500);
 
-    let playingKeyCode = playing;
-    let currentTimeKeyCode = currentTime;
-    const handleSpacePress = ({ keyCode }) => {
+    // === Key === \\
+    const handleKeyPress = ({ keyCode }) => {
       if (window.document.fullscreenElement) {
-        if (keyCode === 39) { // Forward Arrow
-          currentTimeKeyCode = videoRef.current.currentTime
-          videoRef.current.currentTime += 10
-          setCurrentTime(currentTimeKeyCode + 10)
-        }
-        if (keyCode === 37) { // Backward Arrow
-          currentTimeKeyCode = videoRef.current.currentTime
-          videoRef.current.currentTime -= 10
-          setCurrentTime(currentTimeKeyCode - 10)
-        }
-        if (keyCode === 38) { // Up Arrow
-          if (videoRef.current.volume > 0.89) {
-            videoRef.current.volume = 1
-            setVolume(1)
-          } else {
-            videoRef.current.volume += 0.1
-            setVolume(videoRef.current.volume)
-          }
-        }
-        if (keyCode === 40) { // Bottom Arrow
-          if (videoRef.current.volume < 0.11) {
-            videoRef.current.volume = 0
-            setVolume(0)
-          } else {
-            videoRef.current.volume -= 0.1
-            setVolume(videoRef.current.volume)
-          }
-
-        }
-        if (keyCode === 32) { // Space Key
-          setPlaying(!playingKeyCode);
-          if (playingKeyCode) {
-            videoRef.current.pause();
-          } else {
-            videoRef.current.play();
-          }
-          playingKeyCode = !playingKeyCode
+        switch (keyCode) {
+          case 39:
+            videoRef.current.currentTime += 10;
+            setCurrentTime(videoRef.current.currentTime);
+            break;
+          case 37:
+            videoRef.current.currentTime -= 10;
+            setCurrentTime(videoRef.current.currentTime);
+            break;
+          case 38:
+            const volumeUp = Math.min(videoRef.current.volume + 0.1, 1);
+            videoRef.current.volume = volumeUp;
+            setVolume(volumeUp);
+            break;
+          case 40:
+            const volumeDown = Math.max(videoRef.current.volume - 0.1, 0);
+            videoRef.current.volume = volumeDown;
+            setVolume(volumeDown);
+            break;
+          case 32:
+            setPlaying((prev) => {
+              const isPlaying = !prev;
+              isPlaying ? videoRef.current.play() : videoRef.current.pause();
+              return isPlaying;
+            });
+            break;
+          default:
+            break;
         }
       }
     }
 
-    document.addEventListener("keyup", handleSpacePress);
-    return () => { document.removeEventListener("keyup", handleSpacePress) };
+    // == Mouse == \\
+    let timeout;
+    const handleMouseMove = () => {
+      if (window.document.fullscreen) {
+        setControls(true)
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          setControls(false)
+          setAccessible(false)
+          setList("main")
+        }, 2000);
+      }
+    };
+
+    document.addEventListener("keyup", handleKeyPress);
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      document.removeEventListener("keyup", handleKeyPress)
+      document.removeEventListener('mousemove', handleMouseMove)
+    };
   }, [])
 
   useEffect(() => {
@@ -429,27 +344,6 @@ export default function SeriesPlayer({ episode }) {
       setPlaying(true)
     }; setChanges(true)
   }, [language, quality])
-
-  useEffect(() => {
-    let timeout;
-
-    const handleMouseMove = () => {
-      if (window.document.fullscreen) { // Faqat fullscreen rejimida
-        setIsCursorVisible(true); // Kursorni ko'rsatish
-        setControls(true)
-        clearTimeout(timeout); // Avvalgi taymerni tozalash
-        timeout = setTimeout(() => {
-          setIsCursorVisible(false)
-          setControls(false)
-          setAccessible(false)
-          setList("main")
-        }, 2000); // 2 soniyadan keyin kursorni yashirish
-      }
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => document.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   useEffect(() => {
     setFullscreen(!window.document.fullscreen);
@@ -476,39 +370,30 @@ export default function SeriesPlayer({ episode }) {
       ref={playerRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`${fullscreen ? "" : "screen "}${controls ? "" : "hide "}visible`}
-      style={currentTime == 0 ? { backgroundImage: `url(${movie.episodes[episode].image})` } : {}}
+      className={classNames({screen: !fullscreen, hide: !controls}, "visible")}
+      style={playerStyle}
     >
-      {
-        reload ? <video
-          ref={videoRef}
-          controls={false}
-          onClick={handleVideo}
-          onTimeUpdate={timeUpdate}
-          onLoadedData={loadedMovie}
-          onPlaying={() => setLoadingMovie(false)}
-          onWaiting={() => setLoadingMovie(true)}
-          src={movie.episodes[episode][quality][language]}
-          style={currentTime == 0 ? { visibility: "hidden" } : {}}
-        ></video> : <video
-          ref={videoRef}
-          controls={false}
-          onClick={handleVideo}
-          onTimeUpdate={timeUpdate}
-          onLoadedData={loadedMovie}
-          style={currentTime == 0 ? { visibility: "hidden" } : {}}
-        ></video>
-      }
-      <button className={`play-pause-circle${!playing ? ' active' : ''}`} onClick={handleVideo}><BsPlayCircleFill /></button>
+      <video
+        ref={videoRef}
+        controls={false}
+        onClick={handleVideo}
+        onTimeUpdate={timeUpdate}
+        onLoadedData={loadedMovie}
+        onPlaying={() => setLoadingMovie(false)}
+        onWaiting={() => setLoadingMovie(true)}
+        src={videoSrc}
+        style={videoStyle}
+      ></video>
+      <button ref={playBtnRef} className={classNames('play-pause-circle', { active: !playing })} onClick={handleVideo}><BsPlayCircleFill /></button>
       <div className="wrapper">
         <ul className="video-controls">
           <li className="options left">
             <button className="skip-backward" onClick={() => skip('backward')}><FaBackward /></button>
-            <button className={`play-pause${playing ? ' pause' : ''}`} onClick={handleVideo}>{playing ? <FaPause /> : <FaPlay />}</button>
+            <button className={classNames('play-pause', { pause: playing })} onClick={handleVideo}>{playing ? <FaPause /> : <FaPlay />}</button>
             <button className="skip-forward" onClick={() => skip('forward')}><FaForward /></button>
           </li>
           <li className="options center">
-            <div className={`video-timeline${loadingMovie ? ' loading' : ''}`}>
+            <div className={classNames('video-timeline', { loading: loadingMovie })}>
               <div className="progress-area" ref={progressRef}>
                 <BadgePosition move={badgePosition}>{badgeTime}</BadgePosition>
                 <input min={0}
@@ -540,71 +425,71 @@ export default function SeriesPlayer({ episode }) {
               </div>
             </>}
             <div className="setting-content">
-              <button className={`settings${accessible ? ' active' : ''}`} onClick={() => {setAccessible(!accessible); setList("main")}}><MdSettings /></button>
-            <div className={`menu ${list}${menuSize(list)}${accessible ? ' active' : ''}`}>
-              <ul className={`main-list${accessible && list === 'main' ? ' active' : ''}`}>
-                {options.map(({ label, value, list: optionList }) => (
-                  <li
-                    key={optionList}
-                    className={`child ${optionList}`}
-                    onClick={() => setList(optionList)}
-                  >
-                    {label} <span>{value}</span>
+              <button className={classNames('settings', { active: accessible })} onClick={() => { setAccessible(!accessible); setList("main") }}><MdSettings /></button>
+              <div className={classNames('menu', list, menuSize(list), { active: accessible })}>
+                <ul className={classNames('main-list', { active: accessible && list === 'main' })}>
+                  {options.map(({ label, value, list: optionList }) => (
+                    <li
+                      key={optionList}
+                      className={`child ${optionList}`}
+                      onClick={() => setList(optionList)}
+                    >
+                      {label} <span>{value}</span>
+                    </li>
+                  ))}
+                </ul>
+                <ul className={classNames('language-list', { active: accessible && list === 'language' })}>
+                  <li className="back" onClick={() => setList('main')}>
+                    {translate[locale].movie.language}
                   </li>
-                ))}
-              </ul> {/* menu */}
-              <ul className={`language-list${accessible && list === 'language' ? ' active' : ''}`}>
-                <li className="back" onClick={() => setList('main')}>
-                  {translate[locale].movie.language}
-                </li>
-                {languages.map(({ label, value, badge }) => (
-                  movie.episodes[episode][quality] && movie.episodes[episode][quality][value] != null && (
+                  {languages.map(({ label, value, badge }) => (
+                    movie.episodes[episode][quality] && movie.episodes[episode][quality][value] != null && (
+                      <li
+                        key={value}
+                        className={classNames('item', { selected: language === value })}
+                        onClick={() => handleLanguage(value)}
+                      >
+                        {label} <span className="badge">{badge}</span>
+                      </li>
+                    )
+                  ))}
+                </ul>
+                <ul className={classNames('quality-list', { active: accessible && list === 'quality' })}>
+                  <li className="back" onClick={() => setList('main')}>
+                    {translate[locale].movie.quality}
+                  </li>
+                  {qualities.map(({ label, value, badge }) => (
+                    movie.episodes[episode][value] != null && (
+                      <li
+                        key={value}
+                        className={classNames('item', { selected: quality === value })}
+                        onClick={() => handleQuality(value)}
+                      >
+                        {label} <span className="badge">{badge}</span>
+                      </li>
+                    )
+                  ))}
+                </ul>
+                <ul className={classNames('speed-list', { active: accessible && list === 'speed' })}>
+                  <li className="back" onClick={() => setList('main')}>
+                    {translate[locale].movie.speed}
+                  </li>
+                  {speeds.map(({ label, value }) => (
                     <li
                       key={value}
-                      className={`item${language === value ? ' selected' : ''}`}
-                      onClick={() => handleLanguage(value)}
+                      className={classNames('item', { selected: speed === value })}
+                      onClick={() => handleSpeed(value)}
                     >
-                      {label} <span className="badge">{badge}</span>
+                      {label}
                     </li>
-                  )
-                ))}
-              </ul> {/* language */}
-              <ul className={`quality-list${accessible && list === 'quality' ? ' active' : ''}`}>
-                <li className="back" onClick={() => setList('main')}>
-                  {translate[locale].movie.quality}
-                </li>
-                {qualities.map(({ label, value, badge }) => (
-                  movie.episodes[episode][value] != null && (
-                    <li
-                      key={value}
-                      className={`item${quality === value ? ' selected' : ''}`}
-                      onClick={() => handleQuality(value)}
-                    >
-                      {label} <span className="badge">{badge}</span>
-                    </li>
-                  )
-                ))}
-              </ul> {/* quality */}
-              <ul className={`speed-list${accessible && list === 'speed' ? ' active' : ''}`}>
-                <li className="back" onClick={() => setList('main')}>
-                  {translate[locale].movie.speed}
-                </li>
-                {speeds.map(({ label, value }) => (
-                  <li
-                    key={value}
-                    className={`item${speed === value ? ' selected' : ''}`}
-                    onClick={() => handleSpeed(value)}
-                  >
-                    {label}
-                  </li>
-                ))}
-              </ul> {/* speed */}
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-          {!isIOS && <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>}
-        </li>
-      </ul>
-    </div>
+            {!isIOS && <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>}
+          </li>
+        </ul>
+      </div>
     </div >
   )
 }
