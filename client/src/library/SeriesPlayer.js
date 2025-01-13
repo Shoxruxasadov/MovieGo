@@ -558,7 +558,7 @@ export default function SeriesPlayer({ episode }) {
                   {translate[locale].movie.language}
                 </li>
                 {languages.map(({ label, value, badge }) => (
-                  movie.source[quality] && movie.source[quality][value] != null && (
+                  movie.episodes[episode][quality] && movie.episodes[episode][quality][value] != null && (
                     <li
                       key={value}
                       className={`item${language === value ? ' selected' : ''}`}
@@ -574,7 +574,7 @@ export default function SeriesPlayer({ episode }) {
                   {translate[locale].movie.quality}
                 </li>
                 {qualities.map(({ label, value, badge }) => (
-                  movie.source[value] != null && (
+                  movie.episodes[episode][value] != null && (
                     <li
                       key={value}
                       className={`item${quality === value ? ' selected' : ''}`}
@@ -601,7 +601,7 @@ export default function SeriesPlayer({ episode }) {
               </ul> {/* speed */}
             </div>
           </div>
-          {!isIOS && <button className="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>}
+          {!isIOS && <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>{fullscreen ? <FaExpandAlt /> : <FaCompressAlt />}</button>}
         </li>
       </ul>
     </div>

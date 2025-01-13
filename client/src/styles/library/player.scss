@@ -482,9 +482,10 @@
             }
 
             ul {
-              visibility: hidden;
+              right: 0;
               opacity: 0;
               position: absolute;
+              visibility: hidden;
 
               &.active {
                 position: static;
