@@ -203,18 +203,16 @@ export default function MoviesPlayer() {
     setLoadingMovie(true);
     setCurrentTimeChanged(currentTime)
 
+    const fallbackLanguages = {
+      uz: ['ru', 'en'],
+      ru: ['uz', 'en'],
+      en: ['uz', 'ru']
+    };
     if (!movie.source[quality][language]) {
-      if (language == 'uz') {
-        if (movie.source[quality].ru) return setLanguage('ru');
-        if (movie.source[quality].en) return setLanguage('en');
-      }
-      if (language == 'ru') {
-        if (movie.source[quality].uz) return setLanguage('uz');
-        if (movie.source[quality].en) return setLanguage('en');
-      }
-      if (language == 'en') {
-        if (movie.source[quality].uz) return setLanguage('uz');
-        if (movie.source[quality].ru) return setLanguage('ru');
+      for (const altLang of fallbackLanguages[language]) {
+        if (movie.source[quality][altLang]) {
+          return setLanguage(altLang);
+        }
       }
     }
   }
@@ -236,35 +234,40 @@ export default function MoviesPlayer() {
   }
 
   const menuSize = menu => {
-    if (menu == 'quality') {
-      if ((movie.source[`1080p`] == null && movie.source[`720p`] == null) || (movie.source[`2160p`] == null && movie.source[`720p`] == null) || (movie.source[`2160p`] == null && movie.source[`1080p`] == null)) return ' unity'
-      if (movie.source[`2160p`] == null || movie.source[`1080p`] == null || movie.source[`720p`] == null) return ' dual'
+    const checkQuality = (qualities) => {
+      const presentQualities = qualities.filter(q => movie.source[q] != null);
+      if (presentQualities.length <= 1) return ' unity';
+      if (presentQualities.length < qualities.length) return ' dual';
+      return '';
+    };
+    const checkLanguages = (quality) => {
+      const availableLanguages = ['uz', 'ru', 'en'].filter(lang => movie.source[quality]?.[lang] != null);
+      if (availableLanguages.length <= 1) return ' unity';
+      if (availableLanguages.length < 3) return ' dual';
+      return '';
+    };
+    switch (menu) {
+      case 'quality':
+        return checkQuality(['2160p', '1080p', '720p']);
+      case 'language':
+        return checkLanguages(quality);
+      default:
+        return '';
     }
-    if (menu == 'language') {
-      if (quality == '2160p') {
-        if ((movie.source[`2160p`].ru == null && movie.source[`2160p`].en == null) || (movie.source[`2160p`].uz == null && movie.source[`2160p`].en == null) || (movie.source[`2160p`].uz == null && movie.source[`2160p`].ru == null)) return ' unity'
-        if (movie.source[`2160p`].uz == null || movie.source[`2160p`].ru == null || movie.source[`2160p`].en == null) return ' dual'
-      } else if (quality == '1080p') {
-        if ((movie.source[`1080p`].ru == null && movie.source[`1080p`].en == null) || (movie.source[`1080p`].uz == null && movie.source[`1080p`].en == null) || (movie.source[`1080p`].uz == null && movie.source[`1080p`].ru == null)) return ' unity'
-        if (movie.source[`1080p`].uz == null || movie.source[`1080p`].ru == null || movie.source[`1080p`].en == null) return ' dual'
-      } else if (quality == '720p') {
-        if ((movie.source[`720p`].ru == null && movie.source[`720p`].en == null) || (movie.source[`720p`].uz == null && movie.source[`720p`].en == null) || (movie.source[`720p`].uz == null && movie.source[`720p`].ru == null)) return ' unity'
-        if (movie.source[`720p`].uz == null || movie.source[`720p`].ru == null || movie.source[`720p`].en == null) return ' dual'
-      }
-    }
-    return ''
-  }
+  };
 
   const makeFullScreen = () => {
+    const fullscreen = document.getElementById("fullscreen");
+
     if (window.document.fullscreenElement) {
       setFullscreen(false)
+      fullscreen.blur()
       return window.document.exitFullscreen()
     }
-    setFullscreen(true)
-    playerRef.current.requestFullscreen()
 
-    const fullScreenBtn = document.getElementById("fullscreen");
-    fullScreenBtn.blur()
+    setFullscreen(true)
+    fullscreen.blur()
+    playerRef.current.requestFullscreen()
     if (!playing) handleVideo()
   }
 
@@ -380,7 +383,7 @@ export default function MoviesPlayer() {
       ref={playerRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={classNames({screen: !fullscreen, hide: !controls})}
+      className={classNames({ screen: !fullscreen, hide: !controls })}
       style={playerStyle}
     >
       <video
