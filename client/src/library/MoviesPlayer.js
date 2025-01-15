@@ -10,6 +10,7 @@ import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import { BsPlayCircleFill } from "react-icons/bs";
 import { MdSettings } from "react-icons/md";
 
+import SceletLoading from "@/components/loading/loading";
 import { usePlayer, useStore } from "@/store/zustand";
 import translate from "@/language/translate.json"
 
@@ -360,7 +361,7 @@ export default function MoviesPlayer() {
 
   useEffect(() => {
     setFullscreen(!window.document.fullscreen);
-    playBtnRef.current.focus()
+    if (window.document.fullscreen) playBtnRef.current.focus()
   }, [window.document.fullscreen])
 
   useEffect(() => {
@@ -504,6 +505,7 @@ export default function MoviesPlayer() {
           </li>
         </ul>
       </div>
+      {loadingMovie && playing && <SceletLoading />}
     </div >
   )
 }

@@ -12,6 +12,7 @@ import { MdSettings } from "react-icons/md";
 
 import { usePlayer, useStore } from "@/store/zustand";
 import translate from "@/language/translate.json"
+import SceletLoading from "@/components/loading/loading";
 
 const RangeTime = styled.div`width: ${props => props.percent}%!important;`;
 const RangeVolume = styled.div`width: ${props => props.percent}%!important;`;
@@ -254,7 +255,7 @@ export default function SeriesPlayer({ episode }) {
       fullscreen.blur()
       return window.document.exitFullscreen()
     }
-    
+
     setFullscreen(true)
     fullscreen.blur()
     playerRef.current.requestFullscreen()
@@ -350,7 +351,7 @@ export default function SeriesPlayer({ episode }) {
 
   useEffect(() => {
     setFullscreen(!window.document.fullscreen);
-    playBtnRef.current.focus()
+    if (window.document.fullscreen) playBtnRef.current.focus()
   }, [window.document.fullscreen])
 
   useEffect(() => {
@@ -493,6 +494,7 @@ export default function SeriesPlayer({ episode }) {
           </li>
         </ul>
       </div>
+      {loadingMovie && playing && <SceletLoading />}
     </div >
   )
 }

@@ -44,7 +44,7 @@ export default function MovieHome() {
             onLoad={() => setLoadedImage(true)}
           />
           <div className="credits">
-            <p className="release">{movie.release.substring(0,4)}</p>
+            <p className="release">{movie.release.substring(0, 4)}</p>
             <p className="genre">{translate[locale].movie[movie.genre[0]]}</p>
             <span>•</span>
             <p className="genre">{translate[locale].movie[movie.genre[1]]}</p>
@@ -58,7 +58,7 @@ export default function MovieHome() {
                 to="player"
                 spy={true}
                 smooth={true}
-                offset={-180}
+                offset={-200}
                 duration={500}
                 className="watch"
               >

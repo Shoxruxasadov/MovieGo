@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useUser } from "@/store/zustand";
 const queryClient = new QueryClient()
 import "@/styles/globals.scss";
+import "@/styles/loading/loading.scss"
 import 'aos/dist/aos.css';
 import 'rodal/lib/rodal.css';
 

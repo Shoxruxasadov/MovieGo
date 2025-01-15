@@ -50,8 +50,9 @@ export default function SerieHome() {
                 to="series-list"
                 spy={true}
                 smooth={true}
-                offset={-180}
+                offset={-200}
                 duration={500}
+                className="watch"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
