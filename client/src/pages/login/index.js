@@ -12,6 +12,7 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useStore, useUser } from "@/store/zustand";
 import { success, warning, wrong } from "@/utils/toastify";
 import translate from "@/language/translate.json"
+import SceletLoading from "@/components/loading/loading";
 
 export default function Login() {
   const setUser = useUser(state => state.setUser);
@@ -287,10 +288,7 @@ export default function Login() {
         <div id="shadow" />
       </Animated>
       {loading && <div id="loading">
-        <div className="loader">
-          <div className="loader_filmstrip" />
-          <p className="loader_text">loading</p>
-        </div>
+        <SceletLoading />
       </div>}
     </Root>
   );
