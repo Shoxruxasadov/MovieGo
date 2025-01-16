@@ -9,6 +9,7 @@ import { FaExpandAlt, FaCompressAlt } from "react-icons/fa";
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import { BsPlayCircleFill } from "react-icons/bs";
 import { MdSettings } from "react-icons/md";
+import { HiBackward, HiForward } from "react-icons/hi2";
 
 import SceletLoading from "@/components/loading/loading";
 import { usePlayer, useStore } from "@/store/zustand";
@@ -39,6 +40,7 @@ export default function MoviesPlayer() {
   const [durationView, setDurationView] = useState('0:00:00')
   const [badgePosition, setBadgePosition] = useState(0)
   const [loadingMovie, setLoadingMovie] = useState(true)
+  const [skipWrapper, setSkipWrapper] = useState(false)
   const [accessible, setAccessible] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
   const [percentTime, setPercentTime] = useState(0)
@@ -47,6 +49,8 @@ export default function MoviesPlayer() {
   const [badgeTime, setBadgeTime] = useState(0)
   const [changes, setChanges] = useState(false)
   const [playing, setPlaying] = useState(false)
+  const [skipped, setSkipped] = useState(null)
+
   const [reload, setReload] = useState(false)
   const [list, setList] = useState('main')
   const progressRef = useRef(null);
@@ -139,13 +143,16 @@ export default function MoviesPlayer() {
 
   const skip = move => {
     if (move == 'backward') {
+      setSkipped(false)
       videoRef.current.currentTime -= 10
       setCurrentTime(currentTime - 10)
     }
     if (move == 'forward') {
+      setSkipped(true)
       videoRef.current.currentTime += 10
       setCurrentTime(currentTime + 10)
     }
+    setTimeout(() => setSkipped(null), 1000)
   }
 
   const timeUpdate = event => {
@@ -301,10 +308,14 @@ export default function MoviesPlayer() {
           case 39:
             videoRef.current.currentTime += 10;
             setCurrentTime(videoRef.current.currentTime);
+            setSkipped(true)
+            setTimeout(() => setSkipped(null), 1000)
             break;
           case 37:
             videoRef.current.currentTime -= 10;
             setCurrentTime(videoRef.current.currentTime);
+            setSkipped(false)
+            setTimeout(() => setSkipped(null), 1000)
             break;
           case 38:
             const volumeUp = Math.min(videoRef.current.volume + 0.1, 1);
@@ -372,6 +383,11 @@ export default function MoviesPlayer() {
   useEffect(() => {
     setControls(true)
   }, [isHovering])
+
+  useEffect(() => {
+    if (skipped === true || skipped === false) setSkipWrapper(true)
+    if (skipped === null) setTimeout(() => setSkipWrapper(false), 3000)
+  }, [skipped])
 
   useEffect(() => {
     if ((isMobile && !window.document.fullscreen)) return
@@ -507,6 +523,16 @@ export default function MoviesPlayer() {
         </ul>
       </div>
       {loadingMovie && playing && <SceletLoading />}
+      <div className={classNames("skipped", { active: skipWrapper })}>
+        <div className={classNames("prev", { active: skipped === false })}>
+          <HiBackward />
+          <span>-10sec</span>
+        </div>
+        <div className={classNames("next", { active: skipped === true })}>
+          <HiForward />
+          <span>+10sec</span>
+        </div>
+      </div>
     </div >
   )
 }

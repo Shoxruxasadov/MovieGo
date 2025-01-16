@@ -11,7 +11,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
 
   @media (max-width: 768px) {
     min-height: 400px;
@@ -53,6 +52,7 @@
 
   .play-pause-circle {
     position: absolute;
+    z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -90,8 +90,8 @@
   &.hide {
     cursor: none;
 
-    video{
-      cursor: none; 
+    video {
+      cursor: none;
     }
 
     .wrapper {
@@ -620,6 +620,54 @@
             }
           }
         }
+      }
+    }
+  }
+
+  .skipped {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 400px;
+    visibility: hidden;
+
+    &.active {
+      visibility: visible;
+    }
+
+    .prev,
+    .next {
+      width: 85px;
+      height: 85px;
+      background: #00000080;
+      border-radius: 50%;
+      transition: 0.2s;
+      visibility: hidden;
+      opacity: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      svg {
+        font-size: 28px;
+      }
+
+      span {
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      &.active {
+        visibility: visible;
+        opacity: 1;
       }
     }
   }
