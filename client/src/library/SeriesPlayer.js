@@ -118,10 +118,11 @@ export default function SeriesPlayer({ episode }) {
     setQualityChanger(false);
   }
 
-  const handleVideo = () => {
+  const handleVideo = (e) => {
     setPlaying(!playing);
     if (playing) videoRef.current.pause();
     else videoRef.current.play();
+    if (e && e.detail == 2) makeFullScreen()
   }
 
   const skip = move => {
