@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row-reverse;
   gap: 15vw;
 
   @media (max-width: 1025px) {
