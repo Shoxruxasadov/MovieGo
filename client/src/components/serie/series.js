@@ -23,9 +23,13 @@ export default function Series() {
 
     return <div id="series-list">
         <div className="select-series">
-            <h2>1-{movie.episodes.length} {translate[locale].serie.episodes}</h2>
-            <div className="left" onClick={() => { scrollDemoRef.current.scrollLeft -= (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronLeft /></div>
-            <div className="right" onClick={() => { scrollDemoRef.current.scrollLeft += (screenSize[0] > 1024 && screenSize[1] > 576) ? 1100 : 780 }}><FaChevronRight /></div>
+            <div className="title-cast">
+                <h3>1-{movie.episodes.length} {translate[locale].serie.episodes}</h3>
+                <div className="navigate">
+                    <button onClick={() => { scrollDemoRef.current.scrollLeft -= 700 }}><FaChevronLeft /></button>
+                    <button onClick={() => { scrollDemoRef.current.scrollLeft += 700 }}><FaChevronRight /></button>
+                </div>
+            </div>
             <div className="serie-wrapper" ref={scrollDemoRef}>
                 <div className="child">
                     {movie.episodes.map((item, i) => (
@@ -67,9 +71,6 @@ export default function Series() {
                 </div>
             </div>
         </div>
-        {episode != null && (<div className="watching-movie">
-            <h2 id="title-movie">{movie.episodes[episode].title[locale]} <span>{episode + 1}</span></h2>
-            <SeriesPlayer episode={episode} />
-        </div>)}
+        {episode != null && <SeriesPlayer episode={episode} />}
     </div >
 }

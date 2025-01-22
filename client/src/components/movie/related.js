@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import translate from "@/language/translate.json"
 import { useStore } from '@/store/zustand';
 
-export default function MovieRelated() {
+export default function Related() {
   const getRelated = useStore(state => state.getRelated);
   const related = useStore(state => state.related);
   const [screenSize, setScreenSize] = useState();

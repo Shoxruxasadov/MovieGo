@@ -11,8 +11,7 @@ import Loading from "@/components/others/loading"
 import Animated from "@/components/others/animated"
 import ErrorPage from "@/pages/404"
 import { useStore } from "@/store/zustand"
-import MovieRelated from "@/components/movie/related"
-import MovieCredits from "@/components/movie/credits"
+import Related from "@/components/movie/related"
 
 export default function AppMovie() {
   const getMovie = useStore(state => state.getMovie);
@@ -39,8 +38,7 @@ export default function AppMovie() {
       <Animated>
         <MovieHome />
         <MoviePlayer />
-        <MovieCredits />
-        <MovieRelated />
+        <Related />
         <div id="shadow" />
       </Animated>
       <Footer />

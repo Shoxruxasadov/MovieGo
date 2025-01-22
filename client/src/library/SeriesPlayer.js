@@ -9,10 +9,11 @@ import { FaExpandAlt, FaCompressAlt } from "react-icons/fa";
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import { BsPlayCircleFill } from "react-icons/bs";
 import { MdSettings } from "react-icons/md";
+import { HiBackward, HiForward } from "react-icons/hi2";
 
+import SceletLoading from "@/components/loading/loading";
 import { usePlayer, useStore } from "@/store/zustand";
 import translate from "@/language/translate.json"
-import SceletLoading from "@/components/loading/loading";
 
 const RangeTime = styled.div`width: ${props => props.percent}%!important;`;
 const RangeVolume = styled.div`width: ${props => props.percent}%!important;`;
@@ -39,6 +40,7 @@ export default function SeriesPlayer({ episode }) {
   const [durationView, setDurationView] = useState('0:00:00')
   const [badgePosition, setBadgePosition] = useState(0)
   const [loadingMovie, setLoadingMovie] = useState(true)
+  const [skipWrapper, setSkipWrapper] = useState(false)
   const [accessible, setAccessible] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
   const [percentTime, setPercentTime] = useState(0)
@@ -47,6 +49,8 @@ export default function SeriesPlayer({ episode }) {
   const [badgeTime, setBadgeTime] = useState(0)
   const [changes, setChanges] = useState(false)
   const [playing, setPlaying] = useState(false)
+  const [skipped, setSkipped] = useState(null)
+
   const [reload, setReload] = useState(false)
   const [list, setList] = useState('main')
   const progressRef = useRef(null);
@@ -72,14 +76,14 @@ export default function SeriesPlayer({ episode }) {
     { label: translate[locale].movie.speed, value: speed === 'normal' ? translate[locale].movie.normal : speed, list: 'speed' },
   ];
   const languages = [
-    { label: 'Uzbek', value: 'uz', badge: 'UZ' },
-    { label: 'Russian', value: 'ru', badge: 'RU' },
-    { label: 'English', value: 'en', badge: 'EN' },
+    { value: 'uz' },
+    { value: 'ru' },
+    { value: 'en' },
   ];
   const qualities = [
-    { label: '2160p', value: '2160p', badge: '4K' },
-    { label: '1080p', value: '1080p', badge: 'HD' },
-    { label: '720p', value: '720p', badge: 'SD' },
+    { value: '2160p', badge: '4K' },
+    { value: '1080p', badge: 'HD' },
+    { value: '720p', badge: 'SD' },
   ];
   const speeds = [
     { label: '0.25x', value: 0.25 },
@@ -127,13 +131,18 @@ export default function SeriesPlayer({ episode }) {
 
   const skip = move => {
     if (move == 'backward') {
+      setSkipped(false)
       videoRef.current.currentTime -= 10
       setCurrentTime(currentTime - 10)
     }
     if (move == 'forward') {
+      setSkipped(true)
       videoRef.current.currentTime += 10
       setCurrentTime(currentTime + 10)
     }
+    let skippedTime
+    clearTimeout(skippedTime)
+    skippedTime = setTimeout(() => setSkipped(null), 1000)
   }
 
   const timeUpdate = event => {
@@ -291,10 +300,18 @@ export default function SeriesPlayer({ episode }) {
           case 39:
             videoRef.current.currentTime += 10;
             setCurrentTime(videoRef.current.currentTime);
+            setSkipped(true)
+            let skippedTimeFor
+            clearTimeout(skippedTimeFor)
+            skippedTimeFor = setTimeout(() => setSkipped(null), 1000)
             break;
           case 37:
             videoRef.current.currentTime -= 10;
             setCurrentTime(videoRef.current.currentTime);
+            setSkipped(false)
+            let skippedTimeBack
+            clearTimeout(skippedTimeBack)
+            skippedTimeBack = setTimeout(() => setSkipped(null), 1000)
             break;
           case 38:
             const volumeUp = Math.min(videoRef.current.volume + 0.1, 1);
@@ -364,6 +381,17 @@ export default function SeriesPlayer({ episode }) {
   }, [isHovering])
 
   useEffect(() => {
+    if (skipped === true || skipped === false) {
+      setSkipWrapper(true)
+    }
+    if (skipped === null) {
+      let skipWrapperTime
+      clearTimeout(skipWrapperTime)
+      skipWrapperTime = setTimeout(() => setSkipWrapper(false), 2000)
+    }
+  }, [skipped])
+
+  useEffect(() => {
     if ((isMobile && !window.document.fullscreen)) return
     let interval = setTimeout(hideControls, 2000)
     return (() => clearInterval(interval))
@@ -375,7 +403,7 @@ export default function SeriesPlayer({ episode }) {
       ref={playerRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={classNames({ screen: !fullscreen, hide: !controls }, "visible")}
+      className={classNames({ screen: !fullscreen, hide: !controls })}
       style={playerStyle}
     >
       <video
@@ -447,14 +475,14 @@ export default function SeriesPlayer({ episode }) {
                   <li className="back" onClick={() => setList('main')}>
                     {translate[locale].movie.language}
                   </li>
-                  {languages.map(({ label, value, badge }) => (
+                  {languages.map(({ value }) => (
                     movie.episodes[episode][quality] && movie.episodes[episode][quality][value] != null && (
                       <li
                         key={value}
                         className={classNames('item', { selected: language === value })}
                         onClick={() => handleLanguage(value)}
                       >
-                        {label} <span className="badge">{badge}</span>
+                        {translate[locale].languages[value]} <span className="badge">{value}</span>
                       </li>
                     )
                   ))}
@@ -463,14 +491,14 @@ export default function SeriesPlayer({ episode }) {
                   <li className="back" onClick={() => setList('main')}>
                     {translate[locale].movie.quality}
                   </li>
-                  {qualities.map(({ label, value, badge }) => (
+                  {qualities.map(({ value, badge }) => (
                     movie.episodes[episode][value] != null && (
                       <li
                         key={value}
                         className={classNames('item', { selected: quality === value })}
                         onClick={() => handleQuality(value)}
                       >
-                        {label} <span className="badge">{badge}</span>
+                        {value} <span className="badge">{badge}</span>
                       </li>
                     )
                   ))}
@@ -482,7 +510,7 @@ export default function SeriesPlayer({ episode }) {
                   {speeds.map(({ label, value }) => (
                     <li
                       key={value}
-                      className={classNames('item', { selected: speed === value })}
+                      className={classNames('item', { selected: (speed == "normal" && value == 1) || speed == (`${value}x`) })}
                       onClick={() => handleSpeed(value)}
                     >
                       {label}
@@ -496,6 +524,16 @@ export default function SeriesPlayer({ episode }) {
         </ul>
       </div>
       {loadingMovie && playing && <SceletLoading />}
+      <div className={classNames("skipped", { active: skipWrapper })}>
+        <div className={classNames("prev", { active: skipped === false })}>
+          <HiBackward />
+          <span>-10sec</span>
+        </div>
+        <div className={classNames("next", { active: skipped === true })}>
+          <HiForward />
+          <span>+10sec</span>
+        </div>
+      </div>
     </div >
   )
 }

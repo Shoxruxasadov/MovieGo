@@ -16,7 +16,6 @@ import SceletLoading from "@/components/loading/loading";
 
 export default function Login() {
   const setUser = useUser(state => state.setUser);
-  const link = useStore(state => state.link);
   const { register, handleSubmit, formState: { errors }, } = useForm();
   const [oauthGoogle, setOauthGoogle] = useLocalStorage("oauthGoogle", false);
   const [token, setToken] = useLocalStorage("token", null);
@@ -39,7 +38,7 @@ export default function Login() {
       setToken(data._id)
       setUser(data)
       success("You a login");
-      setTimeout(() => router.push(link), 1000)
+      setTimeout(() => router.push("/"), 1000)
     }).catch(error => wrong(error.response.data.message)).finally(() => setLoading(false))
   }
 
@@ -69,7 +68,7 @@ export default function Login() {
         setToken(data._id)
         setUser(data)
         success("You a login");
-        setTimeout(() => router.push(link), 1000)
+        setTimeout(() => router.push("/"), 1000)
       }).finally(() => setLoading(false));
       setOauthGoogle(false)
     }

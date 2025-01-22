@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Anton");
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -136,7 +136,6 @@ body {
   @import "./home/header.scss";
   @import "./movie/home.scss";
   @import "./movie/player.scss";
-  @import "./movie/credits";
   @import "./home/section.scss";
   @import "./home/footer.scss";
 
@@ -177,8 +176,7 @@ body {
   @import "./home/others.scss";
   @import "./home/header.scss";
   @import "./serie/home.scss";
-  @import "./serie/player.scss";
-  @import "./movie/credits";
+  @import "./movie/player.scss";
   @import "./home/section.scss";
   @import "./home/footer.scss";
 
