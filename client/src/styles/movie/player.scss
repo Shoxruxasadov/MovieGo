@@ -686,6 +686,7 @@
             column-gap: 16px;
 
             .item {
+              max-width: 200px;
               width: calc(50% - 8px);
               border-radius: 8px;
               border: 1px solid #262626;
