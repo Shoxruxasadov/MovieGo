@@ -95,14 +95,14 @@ export default function Credits({ movie }) {
                         <h4>MovieGo</h4>
                         <div className="rating-stars">
                             <Stars stars="9" />
-                            <p>9.0 / 10</p>
+                            <p>9.0</p>
                         </div>
                     </div>
                     <div className="item imdb">
                         <h4>IMDb</h4>
                         <div className="rating-stars">
                             <Stars stars="6.9" />
-                            <p>6.9 / 10</p>
+                            <p>6.9</p>
                         </div>
                     </div>
                 </div>
