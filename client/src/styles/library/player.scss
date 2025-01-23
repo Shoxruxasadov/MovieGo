@@ -7,26 +7,13 @@
   background: #000;
   border-radius: 12px;
   overflow: hidden;
-  min-height: 400px;
 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
-  @media (max-width: 1440px) {
-    min-height: 350px;
-  }
-
-  @media (max-width: 1280px) {
-    min-height: 300px;
-  }
-
-  @media (max-width: 991px) {
-    min-height: 250px;
-  }
-
   @media (max-width: 768px) {
-    min-height: 400px;
+    min-height: 320px;
     background-size: contain;
   }
 
