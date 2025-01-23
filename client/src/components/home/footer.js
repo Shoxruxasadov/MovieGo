@@ -42,8 +42,8 @@ export default function Footer() {
               <span>{translate[locale].footer.social}</span>
             </div>
             <ul className="list click">
-              <li><a href="https://www.instagram.com/shoxruxasadovv" target="_blank"><SiInstagram /><span>Instagram</span></a></li>
-              <li><a href="https://t.me/shoxruxasadov" target="_blank" ><SiTelegram /><span>Telegram</span></a></li>
+              <li><a href="https://t.me/moviegosupport" target="_blank" rel="noopener noreferrer" ><SiTelegram /><span>Support</span></a></li>
+              <li><a href="https://t.me/moviegouz" target="_blank" rel="noopener noreferrer" ><SiTelegram /><span>Channel</span></a></li>
             </ul>
           </div>
           <div className="available">
@@ -70,7 +70,7 @@ export default function Footer() {
             <span>{translate[locale].footer.rights}</span>
           </div>
         </div>
-        <a href="https://shoxrux.site" target="_blank" className="product">
+        <a href="https://shoxrux.site" target="_blank" rel="noopener noreferrer" className="product">
           <img src="/logo/shoxrux.webp" alt="shoxrux.site" />
         </a>
       </div>
