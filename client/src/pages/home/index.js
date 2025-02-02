@@ -9,12 +9,8 @@ import Footer from "@/components/home/footer";
 import Animated from "@/components/others/animated";
 import Section from "@/components/home/section";
 import language from "@/language/translate.json"
-import Technical from "@/components/technical/hero";
 
 export default function Home() {
-
-  // return <Technical />
-
   const { locale } = useRouter()
   
   useEffect(() => {
