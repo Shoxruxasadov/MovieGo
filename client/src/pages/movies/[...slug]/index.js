@@ -1,26 +1,29 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useParams, usePathname } from "next/navigation"
+import Image from "next/image"
 
+import { useStore } from "@/store/zustand"
 import Footer from "@/components/home/footer"
 import Header from "@/components/home/header"
-import SerieHome from "@/components/serie/home"
-import SeriePlayer from "@/components/serie/player"
+import MovieHome from "@/components/movie/home"
+import MoviePlayer from "@/components/movie/player"
 import Root from "@/layouts/root"
 import Loading from "@/components/others/loading"
 import Animated from "@/components/others/animated"
-import ErrorPage from "@/pages/404"
-import { useStore } from "@/store/zustand"
 import Related from "@/components/movie/related"
+import ErrorPage from "@/pages/404"
 
-export default function AppSerie() {
-  const { series, season } = useParams();
+export default function AppMovie() {
   const getMovie = useStore(state => state.getMovie);
   const movie = useStore(state => state.movie);
   const [movieload, setMovieload] = useState(true)
   const [imageload, setImageload] = useState(true)
   const pathname = usePathname()
+  const params = useParams()
   const { locale } = useRouter()
+
+  console.log(params);
 
   useEffect(() => {
     setMovieload(true)
@@ -46,11 +49,11 @@ export default function AppSerie() {
   if (movieload && imageload) return <Loading />
   if (!movie) return <ErrorPage />
   return (
-    <Root page="serie" title={movie.title[locale]}>
+    <Root page="movie" title={movie.title[locale]}>
       <Header movie={true} />
       <Animated>
-        <SerieHome />
-        <SeriePlayer />
+        <MovieHome />
+        <MoviePlayer />
         <Related />
         <div id="shadow" />
       </Animated>
