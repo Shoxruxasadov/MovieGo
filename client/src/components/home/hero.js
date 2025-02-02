@@ -14,7 +14,7 @@ export default function Hero() {
           initial={{ y: "-1rem", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "1rem", opacity: 0 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <Image src='/spider/logo.webp' width={640} height={256} alt="logo" />
           <div className="credits">

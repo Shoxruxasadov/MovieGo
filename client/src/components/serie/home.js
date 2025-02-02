@@ -23,7 +23,7 @@ export default function SerieHome() {
           initial={{ y: "-1rem", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "1rem", opacity: 0 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <Image
             src={movie.image.logo}

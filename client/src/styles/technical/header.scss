@@ -1,0 +1,148 @@
+header {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  transition: 0.15s ease-in-out;
+  padding: 0 48px 0 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  @media (max-width: 1024px) {
+    height: 60px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 32px 0 30px;
+  }
+
+  @media (max-width: 441px) {
+    height: 70px;
+    padding: 0 16px 0 14px;
+    gap: 0;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    .logo {
+      height: 45px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      @media (max-width: 1024px) {
+        transform: scale(0.8) translateX(-18px);
+      }
+
+      img {
+        max-width: 45px;
+        max-height: 45px;
+        min-height: 45px;
+
+        width: fit-content;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      h1 {
+        font-size: 20px;
+        line-height: 150%;
+        font-weight: 600;
+        color: var(--main-click-color);
+        cursor: pointer;
+        transition: 0.2s;
+      }
+    }
+  }
+
+  .right {
+    width: 160px;
+    height: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+
+    @media (max-width: 1024px) {
+      transform: scale(0.8) translateX(18px);
+    }
+
+    .language {
+      transition: 0.2s;
+      position: relative;
+      min-width: 130px;
+      height: 42.44px;
+
+      .lang-menu {
+        width: 100%;
+        height: 42.44px;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        overflow: hidden;
+        font-weight: 400;
+        font-size: 15px;
+
+        transition: 0.2s;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+
+        button,
+        .selected {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.2s;
+          padding: 9px 0 8px;
+          gap: 4px;
+
+          &,
+          * {
+            cursor: pointer;
+          }
+
+          *::selection {
+            background: transparent;
+          }
+
+          &:disabled {
+            display: none;
+          }
+
+          span {
+            padding-top: 1px;
+            transition: 0.2s;
+          }
+        }
+
+        &.active {
+          height: 123px;
+
+          &::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(20px);
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+    }
+  }
+}

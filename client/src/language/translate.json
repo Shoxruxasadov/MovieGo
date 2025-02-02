@@ -2,9 +2,14 @@
   "uz": {
     "header": {
       "home": "Asosiy",
+      "tv": "TV",
       "movies": "Filmlar",
-      "serials": "Seriallar",
-      "studios": "Studiyalar",
+      "series": "Seriallar",
+      "cartoon": "Multfilmlar",
+      "anime": "Anime",
+      "subscription": "Obunalar",
+      "support": "Qo'llab-quvvatlash",
+
       "language": "Uzbek",
       "login": "Kirish",
       "logout": "Tizimdan Chiqish",
@@ -13,11 +18,10 @@
       "confirm": "Tasdiqlash"
     },
     "hero": {
-      "marvel_movies": "Marvel Filmlari",
-      "marvel_series": "Marvel Seriallar",
-      "famous_movies": "Mashhur Filmlar",
-      "famous_series": "Mashhur Seriallar",
+      "movies": "Filmlar",
+      "series": "Seriallar",
       "studios": "Studiyalar",
+      "anime": "Animelar",
       "cartoons": "Multfilmlar"
     },
     "movie": {
@@ -149,6 +153,12 @@
       "ru": "Rus",
       "en": "Ingliz"
     },
+    "error": {
+      "oops": "Voooyy..",
+      "not": "Sahifa topilmadi",
+      "address": "Sahifa manzili noto'g'ri kiritilgan.",
+      "gohome": "Bosh Sahifa"
+    },
     "footer": {
       "rights": "Barcha huquqlar himoyalangan.",
       "title": "Marvel filmlarini MovieGo orqali bepul tomosha qiling.",
@@ -162,14 +172,20 @@
       "terms": "Xizmat Shartlari",
       "privacy": "Maxfiylik Qoidalari",
       "cookies": "Cookie Fayllar"
-    }
+    },
+    "technicalprocess": "Tamirlash ishlari ketmoqda.."
   },
   "ru": {
     "header": {
       "home": "Главная",
+      "tv": "ТВ",
       "movies": "Фильмы",
-      "serials": "Сериалы",
-      "studios": "Студии",
+      "series": "Сериалы",
+      "cartoon": "Мультфильмы",
+      "anime": "Аниме",
+      "subscription": "Подписки",
+      "support": "Поддержка",
+
       "language": "Русский",
       "login": "Войти",
       "logout": "Выйти",
@@ -178,11 +194,10 @@
       "confirm": "Подтвердить"
     },
     "hero": {
-      "marvel_movies": "Марвел Фильмы",
-      "marvel_series": "Марвел Сериалы",
-      "famous_movies": "Известный Фильмы",
-      "famous_series": "Известный Сериалы",
-      "studios": "Студии",
+      "movies": "Фильмы",
+      "series": "Сериалы",
+      "studios": "Студия",
+      "anime": "Аниме",
       "cartoons": "Мультфильмы"
     },
     "movie": {
@@ -314,6 +329,12 @@
       "ru": "Русский",
       "en": "Английский"
     },
+    "error": {
+      "oops": "Оооойй..",
+      "not": "Страница нету",
+      "address": "Неверно введён адрес страницы.",
+      "gohome": "На главную"
+    },
     "footer": {
       "rights": "Все права защищены.",
       "title": "Смотрите фильмы Marvel бесплатно на MovieGo.",
@@ -327,14 +348,20 @@
       "terms": "Условия обслуживания",
       "privacy": "Конфиденциальности",
       "cookies": "Файлы Cookie"
-    }
+    },
+    "technicalprocess": "Технический работа.."
   },
   "en": {
     "header": {
       "home": "Home",
+      "tv": "TV",
       "movies": "Movies",
-      "serials": "Series",
-      "studios": "Studios",
+      "series": "Series",
+      "cartoon": "Cartoons",
+      "anime": "Anime",
+      "subscription": "Subscriptions",
+      "support": "Support",
+
       "language": "English",
       "login": "Login",
       "logout": "Logout",
@@ -343,12 +370,11 @@
       "confirm": "Confirm"
     },
     "hero": {
-      "marvel_movies": "Marvel Movies",
-      "marvel_series": "Marvel Series",
-      "famous_movies": "Famous Movies",
-      "famous_series": "Famous Series",
+      "movies": "Movies",
+      "series": "Series",
       "studios": "Studios",
-      "cartoons": "Cartoons"
+      "cartoons": "Cartoons",
+      "anime": "Anime"
     },
     "movie": {
       "action": "Action",
@@ -479,6 +505,12 @@
       "ru": "Russian",
       "en": "English"
     },
+    "error": {
+      "oops": "Ooopss..",
+      "not": "Page not found",
+      "address": "Entered page address incorrectly.",
+      "gohome": "Go Home"
+    },
     "footer": {
       "rights": "All rights reserved.",
       "title": "Watch Marvel Movies for free on MovieGo.",
@@ -492,6 +524,7 @@
       "terms": "Terms of Service",
       "privacy": "Privacy Policy",
       "cookies": "Cookies"
-    }
+    },
+    "technicalprocess": "Technical Process.."
   }
 }

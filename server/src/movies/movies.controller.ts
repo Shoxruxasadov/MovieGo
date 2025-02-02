@@ -11,6 +11,7 @@ import {
   ValidationPipe,
   UsePipes,
   Headers,
+  Query,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { MoviesDto } from './dto/movies.dto';
@@ -19,10 +20,16 @@ import { MoviesDto } from './dto/movies.dto';
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
+  // @HttpCode(200)
+  // @Get()
+  // async findByType(@Headers('type') type: string) {
+  //   return this.moviesService.findByType(type);
+  // }
+
   @HttpCode(200)
   @Get()
-  async findByType(@Headers('type') type: string) {
-    return this.moviesService.findByType(type);
+  async getData(@Query('page') page: number = 1) {
+    return this.moviesService.getMovies(page);
   }
   
   @HttpCode(200)
@@ -33,8 +40,8 @@ export class MoviesController {
 
   @HttpCode(200)
   @Get(':name')
-  async findByName(@Param('name') name: string) {
-    return this.moviesService.findByName(name);
+  async findByName(@Param('url') url: string) {
+    return this.moviesService.findByUrl(url);
   }
 
   @HttpCode(201)

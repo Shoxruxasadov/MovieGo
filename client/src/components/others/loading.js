@@ -1,6 +1,5 @@
-import Root from "@/layouts/root";
-import { useEffect } from "react";
 import SceletLoading from "../loading/loading";
+import Root from "@/layouts/root";
 
 export default function Loading() {
     return (

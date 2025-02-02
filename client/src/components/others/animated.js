@@ -7,7 +7,7 @@ export default function Animated({ children }) {
                 initial={{ y: "-1rem", opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: "1rem", opacity: 0 }}
-                transition={{ duration: 0.7, ease: "easeInOut" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
             >
                 {children}
             </motion.main>

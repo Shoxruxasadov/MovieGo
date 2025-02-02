@@ -1,12 +1,17 @@
+import {
+  Types,
+  Schema as MongooseSchema,
+  HydratedDocument,
+  Date,
+} from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Date, HydratedDocument } from 'mongoose';
-import { Document, Types, Schema as MongooseSchema } from 'mongoose';
-import { LangDto } from './dto/lang.dto';
-import { ImageDto } from './dto/image.dto';
-import { MovieDto } from './dto/movie.dto';
-import { SerieDto } from './dto/serie.dto.';
-import { Actors } from 'src/actors/actors.schema';
-import { Studios } from 'src/studios/studios.schema';
+import { LangDto } from 'src/movies/dto/lang.dto';
+import { ImageMoviesDto } from 'src/movies/dto/image.movies.dto';
+import { ImageSeriesDto } from 'src/movies/dto/image.series.dto';
+import { SourceMoviesDto } from 'src/movies/dto/source.movies.dto';
+import { SourceSeriesDto } from 'src/movies/dto/source.series.dto';
+import { RatingsDto } from 'src/movies/dto/ratings.dto';
+import { CastMovie } from './schema/cast.movie.schema';
 
 export type MoviesDocument = HydratedDocument<Movies>;
 
@@ -21,102 +26,112 @@ export class Movies {
   @Prop({ required: true })
   description: LangDto;
 
-  @Prop({ required: true })
-  image: ImageDto;
+  @Prop({ type: () => [ImageMoviesDto, ImageSeriesDto], required: true })
+  image: ImageMoviesDto | ImageSeriesDto;
+
+  @Prop({ type: () => [SourceMoviesDto, Array], required: false })
+  source: SourceMoviesDto | Array<Array<SourceSeriesDto>> | null;
 
   @Prop({ required: false })
-  source: MovieDto | null;
-
-  @Prop({ required: false })
-  episodes: SerieDto[] | null;
-
-  @Prop({ required: false })
-  seasons: string[] | null;
+  trailer: SourceSeriesDto[] | null;
 
   @Prop({ required: true })
   type: string;
 
   @Prop({ required: true })
-  module: string;
+  purchase: Boolean;
 
   @Prop({ required: true })
   format: string;
 
   @Prop({ required: true })
-  resolution: string;
-
-  @Prop({ required: true })
   duration: number;
 
-  @Prop({ type: Date, required: true })
+  @Prop({
+    type: Date,
+    required: true,
+    set: (value: string) => new Date(value),
+  })
   release: Date;
 
-  @Prop({ type: Date, required: true })
-  timeline: Date;
+  @Prop({
+    type: Date,
+    required: false,
+    set: (value: string) => new Date(value),
+  })
+  timeline: Date | null;
 
   @Prop({ required: false })
-  grossing: string | null;
+  grossing: number | null;
 
   @Prop({ required: false })
-  budget: string | null;
+  budget: number | null;
+
+  @Prop({ required: true })
+  mpaa: number;
+
+  @Prop({ required: true })
+  content: string;
+
+  @Prop({ required: true })
+  ratings: RatingsDto;
+
+  // @Prop({
+  //   type: MongooseSchema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'Country',
+  // })
+  // country: MongooseSchema.Types.ObjectId;
 
   @Prop({
     type: MongooseSchema.Types.ObjectId,
     required: true,
     ref: 'Studios',
   })
-  studio: Studios;
+  studio: MongooseSchema.Types.ObjectId;
 
-  @Prop({ required: true })
-  made: string;
+  // @Prop({
+  //   type: MongooseSchema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'Category',
+  // })
+  // category: MongooseSchema.Types.ObjectId;
 
-  @Prop({ required: true })
-  mpa: number;
+  // @Prop({
+  //   type: [MongooseSchema.Types.ObjectId],
+  //   required: true,
+  //   ref: 'Genres',
+  // })
+  // genres: MongooseSchema.Types.ObjectId[];
 
-  @Prop({ required: true })
-  genre: string[];
+  @Prop({ required: false })
+  casts: CastMovie[];
 
-  @Prop({ required: true })
-  languages: string[];
+  @Prop({
+    type: [MongooseSchema.Types.ObjectId],
+    required: false,
+    ref: 'Cast',
+  })
+  directors: MongooseSchema.Types.ObjectId[];
 
-  @Prop({ required: true })
-  ratings: string[];
+  @Prop({
+    type: [MongooseSchema.Types.ObjectId],
+    required: false,
+    ref: 'Cast',
+  })
+  producers: MongooseSchema.Types.ObjectId[];
 
-  @Prop([
-    {
-      type: MongooseSchema.Types.ObjectId,
-      required: true,
-      ref: 'Actors',
-    },
-  ])
-  cast: Actors[];
-
-  @Prop([
-    {
-      type: MongooseSchema.Types.ObjectId,
-      required: true,
-      ref: 'Actors',
-    },
-  ])
-  directors: Actors[];
-
-  @Prop([
-    {
-      type: MongooseSchema.Types.ObjectId,
-      required: true,
-      ref: 'Actors',
-    },
-  ])
-  producers: Actors[];
-
-  @Prop([
-    {
-      type: MongooseSchema.Types.ObjectId,
-      required: true,
-      ref: 'Actors',
-    },
-  ])
-  screenwriters: Actors[];
+  @Prop({
+    type: [MongooseSchema.Types.ObjectId],
+    required: false,
+    ref: 'Cast',
+  })
+  scenarists: MongooseSchema.Types.ObjectId[];
 }
 
 export const MoviesSchema = SchemaFactory.createForClass(Movies);
+
+MoviesSchema.index(
+  { 'title.uz': 'text', 'title.ru': 'text', 'title.en': 'text' },
+  { weights: { 'title.ru': 3, 'title.uz': 2, 'title.en': 1 } },
+);

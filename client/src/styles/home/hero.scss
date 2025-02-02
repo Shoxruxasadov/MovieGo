@@ -20,7 +20,7 @@
     justify-content: center;
 
     .title {
-      width: 460px;
+      width: 480px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -33,7 +33,7 @@
         height: 100%;
         position: absolute;
         z-index: -1;
-        background-color: #0d0d0db3;
+        background-color: #0d0d0d92;
         filter: blur(150px);
         border-radius: 50%;
       }
@@ -51,9 +51,10 @@
 
         .release {
           border-radius: 10em;
-          border: 1px solid #ffffff60;
+          border: 1.5px solid var(--medium-color);
           padding: 0px 12px;
-          margin-right: 4px;
+          font-size: 14px;
+          margin-right: 2px;
           white-space: nowrap;
         }
 
@@ -64,7 +65,7 @@
 
       .description {
         text-align: center;
-        font-size: 15px;
+        font-size: 13px;
         margin-bottom: 20px;
         text-wrap: balance;
       }
@@ -89,13 +90,13 @@
           background: rgba(255, 255, 255, 0.9);
           backdrop-filter: blur(20px);
           color: black;
-          font-weight: 600;
+          font-weight: 500;
           font-size: 15px;
 
           &:last-child {
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            font-weight: 500;
+            font-weight: 400;
           }
 
           svg,

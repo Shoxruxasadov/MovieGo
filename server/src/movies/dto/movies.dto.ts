@@ -1,8 +1,13 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsDateString, IsArray } from 'class-validator';
+import { Transform } from 'class-transformer';
+import mongoose from 'mongoose';
+import { ImageMoviesDto } from './image.movies.dto';
+import { ImageSeriesDto } from './image.series.dto';
+import { SourceMoviesDto } from './source.movies.dto';
+import { SourceSeriesDto } from './source.series.dto';
+import { RatingsDto } from './ratings.dto';
+import { CastDto } from './cast.dto';
 import { LangDto } from './lang.dto';
-import { ImageDto } from './image.dto';
-import { MovieDto } from './movie.dto';
-import { SerieDto } from './serie.dto.';
 
 export class MoviesDto {
   @IsNotEmpty()
@@ -15,66 +20,108 @@ export class MoviesDto {
   description: LangDto;
 
   @IsNotEmpty()
-  image: ImageDto;
+  image: ImageMoviesDto | ImageSeriesDto;
 
-  source: MovieDto | null;
-  
-  episodes: SerieDto[] | null;
+  @IsOptional()
+  @IsNotEmpty()
+  source: SourceMoviesDto | Array<Array<SourceSeriesDto>> | null;
 
-  seasons: string[] | null;
+  @IsOptional()
+  @IsNotEmpty()
+  trailer: SourceSeriesDto[] | null;
 
   @IsNotEmpty()
   type: string;
 
   @IsNotEmpty()
-  module: string;
+  @Transform(
+    ({ value }) => {
+      console.log(value);
+      if (typeof value === 'boolean') return value;
+      return value === 'true';
+    },
+    { toClassOnly: true },
+  )
+  purchase: Boolean; // true = subscription // false = free
 
   @IsNotEmpty()
   format: string;
 
   @IsNotEmpty()
-  resolution: string;
-
-  @IsNotEmpty()
   duration: number;
 
+  @IsDateString()
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
+  release: Date;
+
+  @IsOptional()
+  @IsDateString()
+  @Transform(({ value }) => (value ? new Date(value) : null), {
+    toClassOnly: true,
+  })
+  timeline: Date | null;
+
+  @IsOptional()
   @IsNotEmpty()
-  release: string;
+  grossing: number | null;
 
+  @IsOptional()
   @IsNotEmpty()
-  timeline: string;
-
-  grossing: string | null;
-
-  budget: string | null;
-
-  @IsNotEmpty()
-  studio: any;
-
-  @IsNotEmpty()
-  made: string;
-
-  @IsNotEmpty()
-  mpa: number;
-
-  @IsNotEmpty()
-  genre: string[];
+  budget: number | null;
 
   @IsNotEmpty()
-  languages: string[];
+  mpaa: number;
 
   @IsNotEmpty()
-  ratings: string[];
+  content: string;
 
   @IsNotEmpty()
-  cast: any[];
+  ratings: RatingsDto;
 
   @IsNotEmpty()
-  directors: any[];
+  @IsOptional()
+  @Transform(({ value }) => new mongoose.Types.ObjectId(value))
+  country: string;
 
   @IsNotEmpty()
-  producers: any[];
+  @IsOptional()
+  @Transform(({ value }) => new mongoose.Types.ObjectId(value))
+  studio: string;
 
   @IsNotEmpty()
-  screenwriters: any[];
+  @IsOptional()
+  @Transform(({ value }) => new mongoose.Types.ObjectId(value))
+  category: string;
+
+  @IsArray()
+  @IsOptional()
+  @Transform(({ value }) =>
+    value.map((id: string) => new mongoose.Types.ObjectId(id)),
+  )
+  genres: string[];
+
+  @IsArray()
+  @IsOptional()
+  casts: CastDto[];
+
+  @IsArray()
+  @IsOptional()
+  @Transform(({ value }) =>
+    value.map((id: string) => new mongoose.Types.ObjectId(id)),
+  )
+  directors: string[];
+
+  @IsArray()
+  @IsOptional()
+  @Transform(({ value }) =>
+    value.map((id: string) => new mongoose.Types.ObjectId(id)),
+  )
+  producers: string[];
+
+  @IsArray()
+  @IsOptional()
+  @Transform(({ value }) =>
+    value.map((id: string) => new mongoose.Types.ObjectId(id)),
+  )
+  scenarists: string[];
 }

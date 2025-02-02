@@ -5,16 +5,19 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MoviesModule } from 'src/movies/movies.module';
-import { ActorsModule } from 'src/actors/actors.module';
+import { ActorsModule } from 'src/cast/cast.module';
 import { UsersModule } from 'src/users/users.module';
 import { StudiosModule } from 'src/studios/studios.module';
-import { FamousModule } from 'src/famous/famous.module';
+import { StreamModule } from 'src/stream/stream.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    // MongooseModule.forRoot(
+    //   `mongodb+srv://Shoxruxasadov:Sh4157833@moviego.5164gwd.mongodb.net/?retryWrites=true&w=majority&appName=MovieGo`,
+    // ),
     MongooseModule.forRoot(
-      `mongodb+srv://Shoxruxasadov:Sh4157833@moviego.5164gwd.mongodb.net/?retryWrites=true&w=majority&appName=MovieGo`,
+      `mongodb+srv://shoxruxasadov:test@cluster.jsosf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster`,
     ),
     // MailerModule.forRoot({
     //   transport: {
@@ -29,9 +32,9 @@ import { FamousModule } from 'src/famous/famous.module';
     //   //   adapter: new HandlebarsAdapter(),
     //   // },
     // }),
+    StreamModule,
     UsersModule,
     MoviesModule,
-    FamousModule,
     StudiosModule,
     ActorsModule
   ],
