@@ -13,7 +13,7 @@ import Technical from "@/components/technical/hero";
 
 export default function Home() {
 
-  // return <Technical />
+  return <Technical />
 
   const { locale } = useRouter()
   
