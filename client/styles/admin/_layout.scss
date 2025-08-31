@@ -1,0 +1,17 @@
+& {
+  height: 100svh;
+  display: flex;
+
+  main {
+    min-height: 100%;
+    width: calc(100% - 240px);
+    overflow: auto;
+
+    @import "./headers";
+
+    #content {
+      padding: 30px;
+      margin-top: 80px;
+    }
+  }
+}

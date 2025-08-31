@@ -20,16 +20,10 @@ import { MoviesDto } from './dto/movies.dto';
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
-  // @HttpCode(200)
-  // @Get()
-  // async findByType(@Headers('type') type: string) {
-  //   return this.moviesService.findByType(type);
-  // }
-
   @HttpCode(200)
   @Get()
-  async getData(@Query('page') page: number = 1) {
-    return this.moviesService.getMovies(page);
+  async getData(@Query('page') page: number, @Headers('module') module: string) {
+    return this.moviesService.getMovies(page, module);
   }
   
   @HttpCode(200)
@@ -39,9 +33,9 @@ export class MoviesController {
   }
 
   @HttpCode(200)
-  @Get(':name')
-  async findByName(@Param('url') url: string) {
-    return this.moviesService.findByUrl(url);
+  @Get(':path')
+  async findByName(@Param('path') path: string) {
+    return this.moviesService.findByPath(path);
   }
 
   @HttpCode(201)

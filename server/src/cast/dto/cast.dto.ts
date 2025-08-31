@@ -1,28 +1,25 @@
 import { Transform } from 'class-transformer';
 import { IsDateString, IsNotEmpty, IsOptional } from 'class-validator';
-import mongoose from 'mongoose';
-import { LangDto } from 'src/movies/dto/lang.dto';
+import { Date, Document, Types } from 'mongoose';
 
 export class CastDto {
   @IsNotEmpty()
-  name: string;
+  readonly path: string;
 
   @IsNotEmpty()
-  title: LangDto;
+  readonly name: string;
 
   @IsOptional()
   @IsDateString()
   @Transform(({ value }) => (value ? new Date(value) : null), {
     toClassOnly: true,
   })
-  birthday: Date;
-
-  @IsNotEmpty()
-  @IsOptional()
-  @Transform(({ value }) => new mongoose.Types.ObjectId(value))
-  country: string;
+  readonly birthday?: Date;
 
   @IsOptional()
-  @IsNotEmpty()
-  image: string;
+  @Transform(({ value }) => new Types.ObjectId(value))
+  readonly country?: string;
+
+  @IsOptional()
+  readonly image?: string;
 }

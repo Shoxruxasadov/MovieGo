@@ -1,0 +1,188 @@
+{
+  "header": {
+    "home": "Asosiy",
+    "tv": "TV",
+    "movies": "Filmlar",
+    "series": "Seriallar",
+    "cartoon": "Multfilmlar",
+    "anime": "Anime",
+    "subscription": "Obunalar",
+    "search": "Filmlarni izlash...",
+    "language": "UZ",
+    "login": "Kirish",
+    "logout": "Tizimdan Chiqish",
+    "realy": "Haqiqatan ham tizimdan chiqmoqchimisiz?",
+    "cancel": "Bekor qilish",
+    "confirm": "Tasdiqlash",
+    "support": "Qo'llab-quvvatlash",
+    "admins": "Boshqaruv Paneli"
+  },
+  "hero": {
+    "movies": "Filmlar",
+    "series": "Seriallar",
+    "studios": "Studiyalar",
+    "anime": "Animelar",
+    "cartoons": "Multfilmlar"
+  },
+  "movie": {
+    "action": "Jangari",
+    "adventure": "Sarguzasht",
+    "comedy": "Komediya",
+    "animation": "Animatsiya",
+    "horror": "Qo‘rqinchili",
+    "thriller": "Triller",
+    "survival": "Survival",
+    "dystopian": "Distopiya",
+    "novel": "Roman",
+    "h": "s",
+    "m": "d",
+    "descHero": "Agar afsun noto'g'ri bo'lsa, boshqa dunyodan xavfli dushmanlar paydo bo'la boshlaydi va Piterni o'rgimchak odam bo'lish nimani anglatishini tushunishga majbur qiladi.",
+    "watchBtn": "Tomosha Qilish",
+    "moreBtn": "Batafsil",
+    "listBtn": "Ko'rilgan",
+    "free": "Bepul",
+    "cast": "Bosh Rollarda",
+    "movie": "Kino",
+    "serie": "Serial",
+    "related": "Tavsiya",
+    "credits": "Tafsilotlar",
+    "authors": "Mualliflar",
+    "nextmovie": "Keyingi Film",
+    "season": "Mavsum",
+    "language": "Til",
+    "languages": "Mavjud Tillar",
+    "speed": "Tezlik",
+    "quality": "Sifat",
+    "normal": "Oddiy",
+    "soon": "Tez kunlarda",
+    "need": "Filmlarni tomosha qilish uchun ro'yxatdan o'tishingiz yoki tizimga kirishingiz kerak",
+    "signup": "Ro'yxatdan o'tish",
+    "login": "Kirish",
+    "release": "Chiqarilgan Yili",
+    "timeline": "Film Voqealari",
+    "studio": "Studia",
+    "grossing": "Film Daromadi",
+    "budget": "Film Byudjeti",
+    "duration": "Davomiyligi",
+    "others": "Boshqalar",
+    "genres": "Janrlar",
+    "rating": "Reytinglar",
+    "agerating": "Yosh Chegarasi",
+    "country": "Davlat",
+    "directors": "Direktorlar",
+    "producers": "Ishlab chiqaruvchilar",
+    "screenwriters": "Ssenariy mualliflari",
+    "marvelcomics": "Marvel Komiks Filmlar",
+    "famousmovies": "Mashhur Filmlar"
+  },
+  "serie": {
+    "episodes": "Qismlar",
+    "episode": "Qism"
+  },
+  "languages": {
+    "uz": "O'zbek",
+    "ru": "Rus",
+    "en": "Ingliz"
+  },
+  "sign": {
+    "login": {
+      "title": "MovieGo Hisobingizga Kiring",
+      "with": "Orqali kirish:",
+      "or": "yoki",
+      "email": "Pochta",
+      "password": "Parol",
+      "remember": "Eslab Qolish",
+      "button": "Kirish",
+      "have": "Hisobingiz yo'qmi?",
+      "terms": "Shartlar",
+      "privacy": "Maxfiylik",
+      "docs": "Hujjatlar",
+      "helps": "Yordam"
+    },
+    "signup": {
+      "title": "Filmlarni bepul tomosha qiling",
+      "card": "Kredit karta talab qilinmaydi",
+      "invite": {
+        "title": "Cheksiz hamkasblarni taklif qiling",
+        "description": "Qurilishga tayyor yoki past kodli yechimni tanlash uchun kafolatlangan ishlab chiquvchilarga qulay API-lar bilan integratsiya qiling yoki ochiq."
+      },
+      "ensure": {
+        "title": "Muvofiqlikni ta'minlash",
+        "description": "Real vaqt rejimida barcha raqamlaringiz haqida batafsil ma'lumot oling, tashrif buyuruvchilar qayerdan kelayotganini ko'ring."
+      },
+      "security": {
+        "title": "O'rnatilgan xavfsizlik",
+        "description": "Boshqaruv panelini hammaga ochiq baham ko'rish orqali jamoa a'zolari va mijozlaringizni doimiy ravishda kuzatib boring."
+      },
+      "with": "Orqali roʻyxatdan oʻtish:",
+      "name": {
+        "first": "Ism",
+        "last": "Familiya"
+      },
+      "repeat": "Parolni qaytaring",
+      "minimal": "Minimal uzunlik - 8 ta belgi.",
+      "button": "Ro'yxatdan O'tish",
+      "have": "Hisobingiz bormi?"
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Boshqaruv Paneli",
+      "users": "Foydalanuvchilar",
+      "movies": "Filmlar",
+      "studios": "Studiyalar",
+      "genres": "Janrlar",
+      "categories": "Kategoriyalar",
+      "countries": "Davlatlar",
+      "payments": "To'lovlar",
+      "reviews": "Sharhlar",
+      "cast": "Aktyorlar"
+    }
+  },
+  "date": {
+    "release": {
+      "january": "yanvar",
+      "february": "fevral",
+      "march": "mart",
+      "april": "aprel",
+      "may": "may",
+      "june": "iyun",
+      "july": "iyul",
+      "august": "avgust",
+      "september": "sentyabr",
+      "october": "oktyabr",
+      "november": "noyabr",
+      "december": "dekabr"
+    },
+    "season": {
+      "winter": "Qish",
+      "spring": "Bahor",
+      "summer": "Yoz",
+      "autumn": "Kuz",
+      "december": "Dekabr"
+    },
+    "year": "yil"
+  },
+  "error": {
+    "oops": "Voooyy..",
+    "not": "Sahifa topilmadi",
+    "address": "Sahifa manzili noto'g'ri kiritilgan.",
+    "gohome": "Bosh Sahifa"
+  },
+  "footer": {
+    "rights": "Barcha huquqlar himoyalangan.",
+    "title": "Marvel filmlarini MovieGo orqali bepul tomosha qiling.",
+    "available": "Mavjud",
+    "social": "Ijtimoiy tarmoqlar",
+    "legal": "Huquqiy",
+    "platform": "Platforma",
+    "advertising": "Reklama Xizmati",
+    "support": "Qo'llab-Quvatlash",
+    "about": "Biz Haqimizda",
+    "terms": "Xizmat Shartlari",
+    "privacy": "Maxfiylik Qoidalari",
+    "cookies": "Cookie Fayllar",
+    "legalname": "'PE «MovieGo»'"
+  },
+  "technicalprocess": "Tamirlash ishlari ketmoqda.."
+}

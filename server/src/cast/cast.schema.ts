@@ -8,20 +8,20 @@ export type CastDocument = HydratedDocument<Cast>;
 @Schema({ timestamps: true })
 export class Cast {
   @Prop({ required: true })
-  name: string;
+  path: string;
 
   @Prop({ required: true })
-  title: LangDto;
+  name: string;
 
   @Prop({ type: Date, required: true })
   birthday: Date;
 
   @Prop({
-    type: MongooseSchema.Types.ObjectId,
+    type: Types.ObjectId,
     required: true,
     ref: 'Country',
   })
-  country: string;
+  country: Types.ObjectId;
 
   @Prop({ required: true })
   image: string;

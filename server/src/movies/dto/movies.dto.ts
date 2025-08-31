@@ -1,127 +1,135 @@
-import { IsNotEmpty, IsOptional, IsDateString, IsArray } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsArray, IsIn } from 'class-validator';
 import { Transform } from 'class-transformer';
-import mongoose from 'mongoose';
+import { Types } from 'mongoose';
 import { ImageMoviesDto } from './image.movies.dto';
 import { ImageSeriesDto } from './image.series.dto';
-import { SourceMoviesDto } from './source.movies.dto';
 import { SourceSeriesDto } from './source.series.dto';
 import { RatingsDto } from './ratings.dto';
 import { CastDto } from './cast.dto';
 import { LangDto } from './lang.dto';
+import { MovieDto } from './movie.dto';
+
+export const VIDEO_TYPES = ['movie', 'serie'] as const;
+export type VideoType = (typeof VIDEO_TYPES)[number];
+
+export const VIDEO_MODULES = ['movies', 'series', 'anime', 'cartoon'] as const;
+export type VideoModule = (typeof VIDEO_MODULES)[number];
 
 export class MoviesDto {
   @IsNotEmpty()
-  name: string;
+  readonly path: string;
 
   @IsNotEmpty()
-  title: LangDto;
+  readonly title: LangDto;
 
   @IsNotEmpty()
-  description: LangDto;
+  readonly description: LangDto;
 
   @IsNotEmpty()
-  image: ImageMoviesDto | ImageSeriesDto;
-
-  @IsOptional()
-  @IsNotEmpty()
-  source: SourceMoviesDto | Array<Array<SourceSeriesDto>> | null;
+  readonly image: ImageMoviesDto | ImageSeriesDto;
 
   @IsOptional()
   @IsNotEmpty()
-  trailer: SourceSeriesDto[] | null;
+  readonly source: SourceSeriesDto[][] | MovieDto | null;
+
+  @IsOptional()
+  @IsNotEmpty()
+  readonly trailer: SourceSeriesDto[] | null;
 
   @IsNotEmpty()
-  type: string;
+  @IsIn(VIDEO_TYPES, {
+    message: `type must be one of: ${VIDEO_TYPES.join(' | ')}`,
+  })
+  readonly type: VideoType;
+
+  @IsNotEmpty()
+  @IsIn(VIDEO_MODULES, {
+    message: `module must be one of: ${VIDEO_MODULES.join(' | ')}`,
+  })
+  readonly module: VideoModule;
+
+  @IsOptional()
+  readonly carousel: number | null;
 
   @IsNotEmpty()
   @Transform(
     ({ value }) => {
-      console.log(value);
       if (typeof value === 'boolean') return value;
       return value === 'true';
     },
     { toClassOnly: true },
   )
-  purchase: Boolean; // true = subscription // false = free
+  readonly purchase: boolean;
 
   @IsNotEmpty()
-  format: string;
+  readonly format: string;
 
   @IsNotEmpty()
-  duration: number;
+  readonly duration: number;
 
-  @IsDateString()
   @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  release: Date;
+  readonly release: Date;
 
   @IsOptional()
-  @IsDateString()
   @Transform(({ value }) => (value ? new Date(value) : null), {
     toClassOnly: true,
   })
-  timeline: Date | null;
+  readonly timeline?: Date | null;
 
   @IsOptional()
-  @IsNotEmpty()
-  grossing: number | null;
+  readonly grossing: number | null;
 
   @IsOptional()
-  @IsNotEmpty()
-  budget: number | null;
+  readonly budget: number | null;
 
   @IsNotEmpty()
-  mpaa: number;
+  readonly mpaa: number;
 
   @IsNotEmpty()
-  content: string;
+  readonly content: string;
 
   @IsNotEmpty()
-  ratings: RatingsDto;
+  readonly resolution: string[];
 
   @IsNotEmpty()
-  @IsOptional()
-  @Transform(({ value }) => new mongoose.Types.ObjectId(value))
-  country: string;
+  readonly languages: string[];
 
   @IsNotEmpty()
-  @IsOptional()
-  @Transform(({ value }) => new mongoose.Types.ObjectId(value))
-  studio: string;
+  readonly ratings: RatingsDto;
 
   @IsNotEmpty()
-  @IsOptional()
-  @Transform(({ value }) => new mongoose.Types.ObjectId(value))
-  category: string;
+  @Transform(({ value }) => new Types.ObjectId(value))
+  readonly country: string;
+
+  @IsNotEmpty()
+  @Transform(({ value }) => new Types.ObjectId(value))
+  readonly studio: string;
+
+  @IsNotEmpty()
+  @Transform(({ value }) => new Types.ObjectId(value))
+  readonly category: string;
+
+  @IsArray()
+  @IsNotEmpty()
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)))
+  readonly genres: string[];
 
   @IsArray()
   @IsOptional()
-  @Transform(({ value }) =>
-    value.map((id: string) => new mongoose.Types.ObjectId(id)),
-  )
-  genres: string[];
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)))
+  readonly directors: string[] | null;
 
   @IsArray()
   @IsOptional()
-  casts: CastDto[];
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)))
+  readonly producers: string[] | null;
 
   @IsArray()
   @IsOptional()
-  @Transform(({ value }) =>
-    value.map((id: string) => new mongoose.Types.ObjectId(id)),
-  )
-  directors: string[];
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)))
+  readonly scenarists: string[] | null;
 
   @IsArray()
   @IsOptional()
-  @Transform(({ value }) =>
-    value.map((id: string) => new mongoose.Types.ObjectId(id)),
-  )
-  producers: string[];
-
-  @IsArray()
-  @IsOptional()
-  @Transform(({ value }) =>
-    value.map((id: string) => new mongoose.Types.ObjectId(id)),
-  )
-  scenarists: string[];
+  readonly cast: CastDto[] | null;
 }

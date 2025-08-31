@@ -7,14 +7,17 @@ export type StudiosDocument = HydratedDocument<Studios>;
 
 @Schema({ timestamps: true })
 export class Studios {
+  @Prop({ required: true, unique: true })
+  path: string;
+
   @Prop({ required: true })
-  name: LangDto;
+  title: LangDto;
+
+  @Prop({ default: null })
+  description: LangDto;
 
   @Prop({ required: true })
   image: string;
-
-  @Prop({ required: true })
-  module: string;
 }
 
 export const StudiosSchema = SchemaFactory.createForClass(Studios);

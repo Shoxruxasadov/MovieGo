@@ -16,16 +16,17 @@ export class MoviesService {
 
   async findByType(type: string) {
     if (type == 'all')
-      return this.moviesModel.find().populate('studio').sort({ timeline: -1 });
+      return this.moviesModel.find().populate('studio').sort({ createdAt: -1 });
     return this.moviesModel
       .find({ type: type })
       .populate('studio')
-      .sort({ timeline: -1 });
+      .sort({ createdAt: -1 });
   }
 
   async findRandom() {
     return this.moviesModel.aggregate([
       { $sample: { size: 5 } },
+      
       {
         $lookup: {
           from: 'studios',
@@ -34,16 +35,47 @@ export class MoviesService {
           as: 'studio',
         },
       },
+      { $unwind: { path: '$studio', preserveNullAndEmptyArrays: true } },
+    
+      {
+        $lookup: {
+          from: 'countries',
+          localField: 'country',
+          foreignField: '_id',
+          as: 'country',
+        },
+      },
+      { $unwind: { path: '$country', preserveNullAndEmptyArrays: true } },
+    
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'category',
+          foreignField: '_id',
+          as: 'category',
+        },
+      },
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
+    
+      {
+        $lookup: {
+          from: 'genres',
+          localField: 'genres',
+          foreignField: '_id',
+          as: 'genres',
+        },
+      },
     ]);
   }
 
-  async findByUrl(url: string) {
+  async findByPath(path: string) {
     return this.moviesModel
-      .findOne({ url })
+      .findOne({ path })
       .populate('studio')
       .populate('genres')
       .populate('category')
-      .populate('casts.cast')
+      .populate('country')
+      .populate('cast.actor')
       .populate('directors')
       .populate('producers')
       .populate('scenarists');
@@ -64,15 +96,63 @@ export class MoviesService {
   //   return 'success';
   // }
 
-  async getMovies(page: number) {
+  async getMovies(page: number, module: string) {
     const pageSize = 10;
-    const skip = (page - 1) * pageSize;
+    const skip = page * pageSize;
 
-    return this.moviesModel.aggregate([
+    const movies = await this.moviesModel.aggregate([
       { $sample: { size: 1000 } },
+      { $match: { module } },
+    
+      {
+        $lookup: {
+          from: 'studios',
+          localField: 'studio',
+          foreignField: '_id',
+          as: 'studio',
+        },
+      },
+      { $unwind: { path: '$studio', preserveNullAndEmptyArrays: true } },
+    
+      {
+        $lookup: {
+          from: 'countries',
+          localField: 'country',
+          foreignField: '_id',
+          as: 'country',
+        },
+      },
+      { $unwind: { path: '$country', preserveNullAndEmptyArrays: true } },
+    
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'category',
+          foreignField: '_id',
+          as: 'category',
+        },
+      },
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
+    
+      {
+        $lookup: {
+          from: 'genres',
+          localField: 'genres',
+          foreignField: '_id',
+          as: 'genres',
+        },
+      },
+    
+      // sort, skip, limit
+      { $sort: { createdAt: -1 } },
       { $skip: skip },
       { $limit: pageSize },
     ]);
+
+    return {
+      data: movies,
+      nextPage: Number(Number(page) + 1),
+    };
   }
 
   async searchByMovieTitle(query: string): Promise<Movies[]> {

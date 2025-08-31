@@ -1,0 +1,188 @@
+{
+  "header": {
+    "home": "Home",
+    "tv": "TV",
+    "movies": "Movies",
+    "series": "Series",
+    "cartoon": "Cartoons",
+    "anime": "Anime",
+    "subscription": "Subscriptions",
+    "search": "Search movie...",
+    "language": "EN",
+    "login": "Login",
+    "logout": "Logout",
+    "realy": "Are you sure you want to log out of your account?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "support": "Support",
+    "admins": "Admin Panel"
+  },
+  "hero": {
+    "movies": "Movies",
+    "series": "Series",
+    "studios": "Studios",
+    "cartoons": "Cartoons",
+    "anime": "Anime"
+  },
+  "movie": {
+    "action": "Action",
+    "adventure": "Adventure",
+    "comedy": "Comedy",
+    "animation": "Animation",
+    "horror": "Horror",
+    "thriller": "Thriller",
+    "survival": "Survival",
+    "dystopian": "Dystopian",
+    "novel": "Novel",
+    "h": "h",
+    "m": "m",
+    "descHero": "When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
+    "watchBtn": "Watch Now",
+    "moreBtn": "More Info",
+    "listBtn": "Watchlist",
+    "free": "Free",
+    "cast": "Top Casts",
+    "movie": "Movie",
+    "serie": "Serie",
+    "related": "Related",
+    "credits": "Credits",
+    "authors": "Authors",
+    "nextmovie": "Next Movie",
+    "season": "Season",
+    "language": "Language",
+    "languages": "Available Languages",
+    "speed": "Speed",
+    "quality": "Quality",
+    "normal": "Normal",
+    "soon": "Coming Soon",
+    "need": "You need to sign up or log in to watch movies",
+    "signup": "Sign Up",
+    "login": "Log In",
+    "release": "Released Year",
+    "timeline": "Cinematic Timeline",
+    "studio": "Studio",
+    "grossing": "Grossing",
+    "budget": "Budget",
+    "duration": "Duration",
+    "others": "Others",
+    "genres": "Genres",
+    "rating": "Ratings",
+    "agerating": "Age Rating",
+    "country": "Country",
+    "directors": "Directors",
+    "producers": "Producers",
+    "screenwriters": "Screenwriters",
+    "marvelcomics": "Marvel Comics Movies",
+    "famousmovies": "Famous Movies"
+  },
+  "serie": {
+    "episodes": "Episodes",
+    "episode": "Episode"
+  },
+  "languages": {
+    "uz": "Uzbek",
+    "ru": "Russion",
+    "en": "English"
+  },
+  "sign": {
+    "login": {
+      "title": "Login to MovieGo",
+      "with": "Login with:",
+      "or": "or",
+      "email": "Email",
+      "password": "Password",
+      "remember": "Remember Me",
+      "button": "Log In",
+      "have": "Do not have an account?",
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "docs": "Docs",
+      "helps": "Helps"
+    },
+    "signup": {
+      "title": "Start watching movies for free",
+      "card": "No credit card required",
+      "invite": {
+        "title": "Invite unlimited colleagues",
+        "description": "Integrate with guaranteed developer-friendly APIs or openly to choose a build-ready or low-code solution."
+      },
+      "ensure": {
+        "title": "Ensure compliance",
+        "description": "Receive detailed insights on all your numbers in real-time, see where visitors are coming from."
+      },
+      "security": {
+        "title": "Built-in security",
+        "description": "Keep your team members and customers in the loop by sharing your dashboard public."
+      },
+      "with": "Sign up with:",
+      "name": {
+        "first": "First Name",
+        "last": "Last Name"
+      },
+      "repeat": "Repeat Password",
+      "minimal": "Minimum length is 8 characters.",
+      "button": "Sign Up",
+      "have": "Already have an account?"
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "movies": "Movies",
+      "studios": "Studios",
+      "genres": "Genres",
+      "categories": "Categories",
+      "countries": "Countries",
+      "payments": "Payments",
+      "reviews": "Reviews",
+      "cast": "Cast"
+    }
+  },
+  "date": {
+    "release": {
+      "january": "january",
+      "february": "february",
+      "march": "march",
+      "april": "april",
+      "may": "may",
+      "june": "june",
+      "july": "july",
+      "august": "august",
+      "september": "september",
+      "october": "october",
+      "november": "november",
+      "december": "december"
+    },
+    "season": {
+      "winter": "Winter",
+      "spring": "Spring",
+      "summer": "Summer",
+      "autumn": "Fall",
+      "december": "December"
+    },
+    "year": "year"
+  },
+  "error": {
+    "oops": "Ooopss..",
+    "not": "Page not found",
+    "address": "Entered page address incorrectly.",
+    "gohome": "Go Home"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "title": "Watch Marvel Movies for free on MovieGo.",
+    "available": "Available",
+    "social": "Social Media",
+    "legal": "Legal",
+    "platform": "Platform",
+    "advertising": "Advertising",
+    "support": "Support",
+    "about": "About",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookies",
+    "legalname": "'INC «MovieGo»'"
+  },
+  "technicalprocess": "Technical Process.."
+}

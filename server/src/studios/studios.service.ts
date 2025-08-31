@@ -12,15 +12,80 @@ export class StudiosService {
     @InjectModel(Movies.name) private moviesModel: Model<MoviesDocument>,
   ) {}
 
-  async get() {
-    return this.studiosModel.find();
+  async getStudios(page: number) {
+    const pageSize = 10;
+    const skip = page * pageSize;
+
+    const studios = await this.studiosModel.aggregate([
+      { $sort: { createdAt: -1 } },
+      { $skip: skip },
+      { $limit: pageSize },
+    ]);
+
+    return {
+      data: studios,
+      nextPage: Number(Number(page) + 1),
+    };
   }
 
-  async findByModule(module: string) {
-    return this.moviesModel
-      .find({ module })
-      .populate('studio')
-      .sort({ timeline: -1 });
+  async findMoviesByStudio(path: string, page: number) {
+    const pageSize = 20;
+    const skip = page * pageSize;
+    const studios = await this.studiosModel.findOne({ path });
+
+    const movies = await this.moviesModel.aggregate([
+      { $sample: { size: 1000 } },
+      { $match: { studio: studios._id } },
+
+      {
+        $lookup: {
+          from: 'studios',
+          localField: 'studio',
+          foreignField: '_id',
+          as: 'studio',
+        },
+      },
+      { $unwind: { path: '$studio', preserveNullAndEmptyArrays: true } },
+
+      {
+        $lookup: {
+          from: 'countries',
+          localField: 'country',
+          foreignField: '_id',
+          as: 'country',
+        },
+      },
+      { $unwind: { path: '$country', preserveNullAndEmptyArrays: true } },
+
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'category',
+          foreignField: '_id',
+          as: 'category',
+        },
+      },
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
+
+      {
+        $lookup: {
+          from: 'genres',
+          localField: 'genres',
+          foreignField: '_id',
+          as: 'genres',
+        },
+      },
+
+      // sort, skip, limit
+      { $sort: { createdAt: -1 } },
+      { $skip: skip },
+      { $limit: pageSize },
+    ]);
+
+    return {
+      data: movies,
+      nextPage: Number(Number(page) + 1),
+    };
   }
 
   async create(dto: StudiosDto) {

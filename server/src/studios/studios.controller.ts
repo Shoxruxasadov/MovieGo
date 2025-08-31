@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -20,14 +21,14 @@ export class StudiosController {
 
   @HttpCode(200)
   @Get()
-  async get() {
-    return this.studiosService.get();
+  async get(@Query('page') page: number) {
+    return this.studiosService.getStudios(page);
   }
 
   @HttpCode(200)
-  @Get(':module')
-  async findByName(@Param('module') module: string) {
-    return this.studiosService.findByModule(module);
+  @Get(':studio')
+  async findMoviesByStudio(@Query('page') page: number, @Param('studio') studio: string) {
+    return this.studiosService.findMoviesByStudio(studio, page);
   }
 
   @HttpCode(201)

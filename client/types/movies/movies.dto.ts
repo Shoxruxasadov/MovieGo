@@ -1,0 +1,46 @@
+import ActorDto from "../admin/actor.dto";
+import CastDto from "./cast.dto";
+import GenresDto from "./genres.dto";
+import ImageMoviesDto from "./image.movies.dto";
+import ImageSeriesDto from "./image.series.dto";
+import LangDto from "./lang.dto";
+import MovieDto from "./movie.dto";
+import RatingsDto from "./ratings.dto";
+import SourceSeriesDto from "./source.series.dto";
+import StudiosDto from "./studios.dto";
+
+export default interface MoviesDto {
+  _id: string;
+  path: string;
+  title: LangDto;
+  description: LangDto;
+  image: ImageMoviesDto | ImageSeriesDto;
+  source: SourceSeriesDto[][] | MovieDto | null;
+  trailer: SourceSeriesDto[] | null;
+  type: string;
+  module: string;
+  carousel: number | null;
+  purchase: boolean;
+  format: string;
+  duration: number;
+  release: Date;
+  timeline?: Date | null;
+  grossing: number | null;
+  budget: number | null;
+  mpaa: number;
+  content: string;
+  resolution: string[];
+  languages: string[];
+  ratings: RatingsDto;
+  country: GenresDto;
+  studio: StudiosDto;
+  category: GenresDto;
+  genres: GenresDto[];
+  directors: ActorDto[] | null;
+  producers: ActorDto[] | null;
+  scenarists: ActorDto[] | null;
+  cast: CastDto[] | null;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
