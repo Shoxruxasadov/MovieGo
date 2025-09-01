@@ -40,7 +40,7 @@ export class MoviesController {
 
   @HttpCode(201)
   @Post()
-  @UsePipes(ValidationPipe)
+  @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() dto: MoviesDto) {
     return this.moviesService.create(dto);
   }

@@ -1,15 +1,13 @@
-import { IsOptional, IsArray, IsNotEmpty } from 'class-validator';
+import { IsOptional, IsArray, IsNotEmpty, IsMongoId } from 'class-validator';
 import { Transform } from 'class-transformer';
-import mongoose from 'mongoose';
+import { Types } from 'mongoose';
 import { LangDto } from './lang.dto';
 
 export class CastDto {
-  @IsArray()
-  @IsOptional()
-  @Transform(({ value }) => new mongoose.Types.ObjectId(value))
-  actor: string;
+  @IsMongoId()
+  @Transform(({ value }) => new Types.ObjectId(value), { toClassOnly: true })
+  actor: Types.ObjectId;
 
   @IsNotEmpty()
-  @IsOptional()
   role: LangDto;
 }

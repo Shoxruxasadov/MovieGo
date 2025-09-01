@@ -88,19 +88,19 @@ export class Movies {
   @Prop({ type: Types.ObjectId, required: true, ref: 'Studios' })
   studio: Types.ObjectId;
 
-  @Prop({ type: [Types.ObjectId], required: true, ref: 'Categories' })
-  category: Types.ObjectId;
+  @Prop({ type: [{ type: Types.ObjectId,  }], required: true, })
+  category: Types.ObjectId[];
 
-  @Prop({ type: [Types.ObjectId], required: true, ref: 'Genres' })
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Genres' }], required: true, })
   genres: Types.ObjectId[];
 
-  @Prop({ type: [Types.ObjectId], default: null, ref: 'Cast' })
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Cast' }], default: null, })
   directors: Types.ObjectId[];
 
-  @Prop({ type: [Types.ObjectId], default: null, ref: 'Cast' })
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Cast' }], default: null, })
   producers: Types.ObjectId[];
 
-  @Prop({ type: [Types.ObjectId], default: null, ref: 'Cast' })
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Cast' }], default: null, })
   scenarists: Types.ObjectId[];
 
   @Prop({ default: null })

@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsOptional, IsArray, IsIn } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsArray,
+  IsIn,
+  IsMongoId,
+} from 'class-validator';
 import { Transform } from 'class-transformer';
 import { Types } from 'mongoose';
 import { ImageMoviesDto } from './image.movies.dto';
@@ -97,38 +103,56 @@ export class MoviesDto {
   @IsNotEmpty()
   readonly ratings: RatingsDto;
 
+  @IsMongoId()
   @IsNotEmpty()
-  @Transform(({ value }) => new Types.ObjectId(value))
-  readonly country: string;
+  @Transform(({ value }) => new Types.ObjectId(value), { toClassOnly: true })
+  readonly country: Types.ObjectId;
 
+  @IsMongoId()
   @IsNotEmpty()
-  @Transform(({ value }) => new Types.ObjectId(value))
-  readonly studio: string;
+  @Transform(({ value }) => new Types.ObjectId(value), { toClassOnly: true })
+  readonly studio: Types.ObjectId;
 
+  @IsMongoId()
   @IsNotEmpty()
-  @Transform(({ value }) => new Types.ObjectId(value))
-  readonly category: string;
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
+    toClassOnly: true,
+  })
+  readonly category: Types.ObjectId[];
 
+  @IsMongoId({ each: true })
   @IsArray()
   @IsNotEmpty()
-  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)))
-  readonly genres: string[];
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
+    toClassOnly: true,
+  })
+  readonly genres: Types.ObjectId[];
 
+  @IsMongoId({ each: true })
   @IsArray()
   @IsOptional()
-  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)))
-  readonly directors: string[] | null;
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
+    toClassOnly: true,
+  })
+  readonly directors: Types.ObjectId[] | null;
 
+  @IsMongoId({ each: true })
   @IsArray()
   @IsOptional()
-  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)))
-  readonly producers: string[] | null;
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
+    toClassOnly: true,
+  })
+  readonly producers: Types.ObjectId[] | null;
 
+  @IsMongoId({ each: true })
   @IsArray()
   @IsOptional()
-  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)))
-  readonly scenarists: string[] | null;
+  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
+    toClassOnly: true,
+  })
+  readonly scenarists: Types.ObjectId[] | null;
 
+  @IsMongoId({ each: true })
   @IsArray()
   @IsOptional()
   readonly cast: CastDto[] | null;
