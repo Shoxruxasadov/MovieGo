@@ -739,7 +739,7 @@ export default function MoviesPlayer(): JSX.Element {
         onTimeUpdate={timeUpdate}
         onLoadedData={loadedMovie}
         onPlaying={() => {
-          if (!audioSwitching) setLoadingMovie(false);
+          setLoadingMovie(false);
         }}
         onWaiting={() => setLoadingMovie(true)}
         poster={poster}
@@ -752,6 +752,7 @@ export default function MoviesPlayer(): JSX.Element {
         src={audioSrc}
         preload="auto"
         style={{ display: "none" }}
+        
       />
       {!loadingMovie && <button
         ref={playBtnRef}
@@ -905,13 +906,13 @@ export default function MoviesPlayer(): JSX.Element {
                 </ul>
               </div>
             </div>
-            {!isIOS && <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
+            <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
               {fullscreen ? <FaCompressAlt /> : <FaExpandAlt />}
-            </button>}
+            </button>
           </li>
         </ul>
       </div>
-      {loadingMovie && <SceletLoading />}
+      {loadingMovie && !playing && <SceletLoading />}
       <div className={classNames("skipped", { active: skipWrapper })}>
         <div className={classNames("prev", { active: skipped === false })}>
           <HiBackward />
