@@ -221,10 +221,8 @@ export default function MoviesPlayer(): JSX.Element {
     return null;
   }
   function selectQuality(source: SourceMatrix): Qual | null {
-    const availableQualities: Qual[] = ["2160p", "1080p", "720p"];
-    for (const q of availableQualities) {
-      if (source[q]) return q;
-    }
+    const order: Qual[] = isIOS ? ["1080p", "720p", "2160p"] : ["2160p", "1080p", "720p"];
+    for (const q of order) if (source[q]) return q;
     return null;
   }
 
@@ -262,19 +260,20 @@ export default function MoviesPlayer(): JSX.Element {
     if (!v) return;
 
     if (playing) {
+      setPlaying(false);
       v.pause();
       a?.pause();
-      stopDriftLoop();                       // <- pause
+      stopDriftLoop();
     } else {
       try {
-        await v.play();                      // <- user gesture
-        if (hasAudio && a) {
-          syncAudioToVideo(true);            // <- birinchi marta hard sync
-          await a.play();
-          startDriftLoop();
-        }
+        syncAudioToVideo(true);
+        const tasks: Promise<any>[] = [v.play()];
+        if (hasAudio && a) tasks.push(a.play());
+        await Promise.allSettled(tasks);
+        setPlaying(true);
+        startDriftLoop();
       } catch {
-        v.pause();
+        v.pause(); a?.pause();
         setPlaying(false);
       }
     }
@@ -470,9 +469,8 @@ export default function MoviesPlayer(): JSX.Element {
     setCurrentTime(0);
     const t = window.setTimeout(() => setReload(true), 500);
     return () => window.clearTimeout(t);
-  }, [setCurrentTime]); // <- TSX: cleanup qo‘shildi
+  }, [setCurrentTime]);
 
-  // Fullscreen holatini kuzatish uchun standart eventdan foydalandim // <-
   useEffect(() => {
     const onFsChange = () => {
       setFullscreen(!!document.fullscreenElement);
@@ -480,6 +478,16 @@ export default function MoviesPlayer(): JSX.Element {
     };
     document.addEventListener("fullscreenchange", onFsChange);
     return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, []);
+
+  useEffect(() => {
+    const v = videoRef.current, a = audioRef.current;
+    if (!v) return;
+    const onErr = () => console.log('VIDEO ERROR', v.error);
+    const onAE = () => console.log('AUDIO ERROR', a?.error);
+    v.addEventListener('error', onErr);
+    a?.addEventListener('error', onAE);
+    return () => { v.removeEventListener('error', onErr); a?.removeEventListener('error', onAE); };
   }, []);
 
   useEffect(() => {
@@ -557,7 +565,7 @@ export default function MoviesPlayer(): JSX.Element {
     if (!v) return;
 
     const onPlay = async () => {
-      if (hasAudio && a) syncAudioToVideo(true);
+      if (hasAudio && a && a.paused) a.play().catch(() => { });
       startDriftLoop();
     };
     const onPause = () => { a?.pause(); stopDriftLoop(); };
@@ -584,10 +592,10 @@ export default function MoviesPlayer(): JSX.Element {
     };
   }, [hasAudio]);
 
-  useEffect(() => {
-    const v = videoRef.current;
-    if (v && videoSrc) v.load();
-  }, [videoSrc]);
+  // useEffect(() => {
+  //   const v = videoRef.current;
+  //   if (v && videoSrc) v.load();
+  // }, [videoSrc]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -737,7 +745,7 @@ export default function MoviesPlayer(): JSX.Element {
         poster={poster}
         style={videoStyle}
         playsInline
-        webkit-playsinline="true"
+      // webkit-playsinline="true"
       />
       <audio
         ref={audioRef}
