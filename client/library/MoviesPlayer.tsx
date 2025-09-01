@@ -908,9 +908,9 @@ export default function MoviesPlayer(): JSX.Element {
                 </ul>
               </div>
             </div>
-            <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
+            {!isIOS && <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
               {fullscreen ? <FaCompressAlt /> : <FaExpandAlt />}
-            </button>
+            </button>}
           </li>
         </ul>
       </div>
