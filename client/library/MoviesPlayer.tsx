@@ -313,10 +313,20 @@ export default function MoviesPlayer(): JSX.Element {
   };
 
   const volumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const val = Number(event.target.value);
-    if (!videoRef.current) return;
-    videoRef.current.volume = val;
+    const v = videoRef.current;
+    const a = audioRef.current;
+    if (!v) return;
+
+    const val = Math.max(0, Math.min(1, Number(event.target.value)));
+
+    v.volume = val;
+    v.muted = val === 0;
     setVolume(val);
+
+    if (a) {
+      a.volume = val;
+      a.muted = v.muted;
+    }
   };
 
   const rangeTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -574,14 +584,14 @@ export default function MoviesPlayer(): JSX.Element {
       v.removeEventListener("ratechange", onRateChange);
       v.removeEventListener("volumechange", onVolumeChange);
     };
-  }, [hasAudio, volume]);
+  }, [hasAudio]);
 
   useEffect(() => {
     const v = videoRef.current;
     const a = audioRef.current;
     if (!v || !a) return;
 
-    if (!audioSrc) {                       // audio umuman bo'lmasa
+    if (!audioSrc) {
       setAudioSwitching(false);
       setLoadingMovie(false);
       return;
@@ -594,23 +604,23 @@ export default function MoviesPlayer(): JSX.Element {
     a.volume = v.volume;
     a.muted = v.muted || volume === 0;
 
-    const onWaiting = () => setLoadingMovie(true);         // buffer kutilyapti
+    const onWaiting = () => setLoadingMovie(true);
     const onStalled = () => setLoadingMovie(true);
-    const onError = () => {                                // xatoda loaderni o'chiramiz
+    const onError = () => {
       setAudioSwitching(false);
       setLoadingMovie(false);
     };
 
-    const onCanPlay = async () => {                        // audio tayyor bo'ldi
+    const onCanPlay = async () => {
       try {
         if (wasPlayingRef.current) {
           await a.play();
-          await v.play();                                  // video ham qayta play
+          await v.play();
           setPlaying(true);
         }
       } finally {
-        setAudioSwitching(false);                          // switching tugadi
-        setLoadingMovie(false);                            // loader OFF
+        setAudioSwitching(false);
+        setLoadingMovie(false);
       }
     };
 
@@ -619,7 +629,7 @@ export default function MoviesPlayer(): JSX.Element {
     a.addEventListener("error", onError);
     a.addEventListener("canplay", onCanPlay);
 
-    a.load(); // force load
+    a.load();
 
     return () => {
       a.removeEventListener("waiting", onWaiting);
@@ -627,49 +637,49 @@ export default function MoviesPlayer(): JSX.Element {
       a.removeEventListener("error", onError);
       a.removeEventListener("canplay", onCanPlay);
     };
-  }, [audioSrc, volume]);
+  }, [audioSrc]);
 
   useEffect(() => {
-  const v = videoRef.current;
-  if (!v) return;
+    const v = videoRef.current;
+    if (!v) return;
 
-  const onLoadedMeta = async () => {
-    // seek
-    const seekTo = pendingSeekRef.current ?? currentTimeChanged ?? 0;
-    if (!Number.isNaN(seekTo) && seekTo > 0) {
-      try {
-        v.currentTime = Math.min(seekTo, v.duration || seekTo);
-      } catch { /* ignore */ }
-    }
+    const onLoadedMeta = async () => {
+      // seek
+      const seekTo = pendingSeekRef.current ?? currentTimeChanged ?? 0;
+      if (!Number.isNaN(seekTo) && seekTo > 0) {
+        try {
+          v.currentTime = Math.min(seekTo, v.duration || seekTo);
+        } catch { /* ignore */ }
+      }
 
-    // audio bilan sinxron
-    if (hasAudio && audioRef.current) {
-      const a = audioRef.current;
-      a.currentTime = v.currentTime;
-      a.playbackRate = v.playbackRate;
-      a.volume = v.volume;
-      a.muted = v.muted || volume === 0;
-    }
+      // audio bilan sinxron
+      if (hasAudio && audioRef.current) {
+        const a = audioRef.current;
+        a.currentTime = v.currentTime;
+        a.playbackRate = v.playbackRate;
+        a.volume = v.volume;
+        a.muted = v.muted || volume === 0;
+      }
 
-    // avval play bo'lgan bo'lsa, qayta davom ettiramiz
-    if (wasPlayingRef.current) {
-      try {
-        await v.play();
-        if (hasAudio && audioRef.current) {
-          await audioRef.current.play();
-        }
-        setPlaying(true);
-      } catch { /* autoplay blocking */ }
-    }
+      // avval play bo'lgan bo'lsa, qayta davom ettiramiz
+      if (wasPlayingRef.current) {
+        try {
+          await v.play();
+          if (hasAudio && audioRef.current) {
+            await audioRef.current.play();
+          }
+          setPlaying(true);
+        } catch { /* autoplay blocking */ }
+      }
 
-    setAudioSwitching(false);
-    setLoadingMovie(false);
-  };
+      setAudioSwitching(false);
+      setLoadingMovie(false);
+    };
 
-  v.addEventListener("loadedmetadata", onLoadedMeta);
-  return () => v.removeEventListener("loadedmetadata", onLoadedMeta);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [videoSrc, hasAudio, volume]);
+    v.addEventListener("loadedmetadata", onLoadedMeta);
+    return () => v.removeEventListener("loadedmetadata", onLoadedMeta);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoSrc, hasAudio]);
 
 
   // useEffect(() => {
@@ -898,11 +908,9 @@ export default function MoviesPlayer(): JSX.Element {
                 </ul>
               </div>
             </div>
-            {!isIOS && (
-              <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
-                {fullscreen ? <FaCompressAlt /> : <FaExpandAlt />}
-              </button>
-            )}
+            <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
+              {fullscreen ? <FaCompressAlt /> : <FaExpandAlt />}
+            </button>
           </li>
         </ul>
       </div>
