@@ -19,6 +19,10 @@
       padding-bottom: 40px;
       position: relative;
 
+      @media (max-width: 441px) {
+        max-width: 100%;
+      }
+
       &::before {
         content: "";
         width: 100%;
@@ -40,6 +44,12 @@
         align-items: center;
         gap: 12px;
         margin-bottom: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        @media (max-width: 441px) {
+          gap: 8px;
+        }
 
         .release {
           border-radius: 10em;
@@ -48,10 +58,30 @@
           font-size: 14px;
           margin-right: 2px;
           white-space: nowrap;
+
+          @media (max-width: 441px) {
+            font-size: 12px;
+          }
+        }
+
+        span:nth-child(3) {
+          @media (max-width: 441px) {
+            display: none;
+          }
+        }
+
+        .genre:nth-child(2) {
+          @media (max-width: 441px) {
+            display: none;
+          }
         }
 
         p {
           white-space: nowrap;
+
+          @media (max-width: 441px) {
+            font-size: 14px;
+          }
         }
       }
 
@@ -60,12 +90,20 @@
         font-size: 13px;
         margin-bottom: 20px;
         text-wrap: balance;
+
+        @media (max-width: 441px) {
+          font-size: 12px;
+        }
       }
 
       .watching {
         display: flex;
         align-items: center;
         gap: 20px;
+
+        @media (max-width: 441px) {
+          width: 100%;
+        }
 
         a {
           min-width: 190px;
@@ -76,6 +114,18 @@
           gap: 12px;
           padding: 0 32px;
           white-space: nowrap;
+
+          @media (max-width: 441px) {
+            min-width: calc(50% - 4px);
+            font-size: 13px;
+            padding: 0 16px;
+            height: 44px;
+
+            svg {
+              width: 18px;
+              height: 18px;
+            }
+          }
 
           border-radius: 40px;
           border: 1px solid rgba($color: white, $alpha: 0.2);
@@ -139,11 +189,11 @@
         @media (max-width: 1024px) {
           font-size: 22px;
         }
-      
+
         @media (max-width: 768px) {
           font-size: 20px;
         }
-      
+
         @media (max-width: 441px) {
           font-size: 18px;
         }

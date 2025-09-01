@@ -137,6 +137,10 @@ header {
     .search {
       position: relative;
 
+      @media (max-width: 441px) {
+        display: none;
+      }
+
       svg {
         position: absolute;
         top: 50%;
