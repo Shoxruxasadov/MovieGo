@@ -627,8 +627,8 @@ header {
       z-index: -1;
       width: 101%;
       height: 100%;
-      backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
       transform: translateX(-48px);
 
       @media (max-width: 768px) {
