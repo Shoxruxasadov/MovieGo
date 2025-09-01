@@ -77,7 +77,6 @@ export default function MoviesPlayer(): JSX.Element {
   const [controls, setControls] = useState<boolean>(true);
   const [rangeTime, setRangeTime] = useState<number>(0);
   const [badgeTime, setBadgeTime] = useState<string | number>(0);
-  const [changes, setChanges] = useState<boolean>(false);
   const [playing, setPlaying] = useState<boolean>(false);
   const [skipped, setSkipped] = useState<boolean | null>(null); // <- TSX: tip qo‘ydim
   const [reload, setReload] = useState<boolean>(false);
@@ -95,8 +94,10 @@ export default function MoviesPlayer(): JSX.Element {
   const driftTimerRef = useRef<number | null>(null);             // <- drift interval
   const [audioSwitching, setAudioSwitching] = useState(false);         // <- YANGI
   const wasPlayingRef = useRef(false);                                 // <- til almashishdan oldingi holat
-  const DRIFT_TOLERANCE = 0.30;                                  // <- 300ms
-  const DRIFT_CHECK_MS = 250;                                    // <- 0.25s
+  const DRIFT_TOLERANCE = isIOS ? 0.75 : 0.30;
+  const DRIFT_CHECK_MS = isIOS ? 1000 : 250;
+
+  const readyEnough = (m: HTMLMediaElement) => m.readyState >= 2;
 
   const { t } = useTranslation();
 
@@ -168,12 +169,12 @@ export default function MoviesPlayer(): JSX.Element {
     const a = audioRef.current;
     if (!v || !a) return;
 
-    // speed/volume/mute tenglashtirish
-    if (a.playbackRate !== v.playbackRate) a.playbackRate = v.playbackRate;
+    a.playbackRate = v.playbackRate;
     a.volume = v.volume;
-    a.muted = v.muted || volume === 0;
+    a.muted = v.muted || v.volume === 0;
 
-    // vaqt driftini tekislash
+    if (!readyEnough(v) || !readyEnough(a)) return;
+
     const drift = Math.abs((a.currentTime || 0) - (v.currentTime || 0));
     if (hard || drift > DRIFT_TOLERANCE) a.currentTime = v.currentTime;
   };
@@ -556,19 +557,16 @@ export default function MoviesPlayer(): JSX.Element {
     if (!v) return;
 
     const onPlay = async () => {
-      if (hasAudio && a) {
-        try {
-          syncAudioToVideo(true);
-          await a.play();
-        } catch { }
-      }
+      if (hasAudio && a) syncAudioToVideo(true);
       startDriftLoop();
     };
     const onPause = () => { a?.pause(); stopDriftLoop(); };
     const onSeeking = () => { if (a) a.currentTime = v.currentTime; };
     const onRateChange = () => { if (a) a.playbackRate = v.playbackRate; };
     const onVolumeChange = () => {
-      if (a) { a.volume = v.volume; a.muted = v.muted || volume === 0; }
+      if (!a) return;
+      a.volume = v.volume;
+      a.muted = v.muted || v.volume === 0;
     };
 
     v.addEventListener("play", onPlay);
@@ -588,6 +586,11 @@ export default function MoviesPlayer(): JSX.Element {
 
   useEffect(() => {
     const v = videoRef.current;
+    if (v && videoSrc) v.load();
+  }, [videoSrc]);
+
+  useEffect(() => {
+    const v = videoRef.current;
     const a = audioRef.current;
     if (!v || !a) return;
 
@@ -602,7 +605,7 @@ export default function MoviesPlayer(): JSX.Element {
     a.currentTime = v.currentTime;
     a.playbackRate = v.playbackRate;
     a.volume = v.volume;
-    a.muted = v.muted || volume === 0;
+    a.muted = v.muted || v.volume === 0;
 
     const onWaiting = () => setLoadingMovie(true);
     const onStalled = () => setLoadingMovie(true);
@@ -658,7 +661,7 @@ export default function MoviesPlayer(): JSX.Element {
         a.currentTime = v.currentTime;
         a.playbackRate = v.playbackRate;
         a.volume = v.volume;
-        a.muted = v.muted || volume === 0;
+        a.muted = v.muted || v.volume === 0;
       }
 
       // avval play bo'lgan bo'lsa, qayta davom ettiramiz
@@ -680,22 +683,6 @@ export default function MoviesPlayer(): JSX.Element {
     return () => v.removeEventListener("loadedmetadata", onLoadedMeta);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoSrc, hasAudio]);
-
-
-  // useEffect(() => {
-  //   if (changes) {
-  //     if (typeof movie?.source !== "string" && videoRef.current) {
-  //       const nextUrl = (movie.source as SourceMatrix)[quality]?.[language];
-  //       if (nextUrl) {
-  //         videoRef.current.src = nextUrl;
-  //         videoRef.current.currentTime = currentTimeChanged;
-  //         void videoRef.current.play();
-  //         setPlaying(true);
-  //       }
-  //     }
-  //   }
-  //   setChanges(true);
-  // }, [language, quality, currentTimeChanged, movie, changes]);
 
   useEffect(() => {
     makeDuration(duration);
@@ -749,6 +736,8 @@ export default function MoviesPlayer(): JSX.Element {
         onWaiting={() => setLoadingMovie(true)}
         poster={poster}
         style={videoStyle}
+        playsInline
+        webkit-playsinline="true"
       />
       <audio
         ref={audioRef}
