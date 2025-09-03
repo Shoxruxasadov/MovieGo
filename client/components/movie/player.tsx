@@ -19,11 +19,7 @@ export default function MoviePlayer() {
         <div className="main" data-aos="fade-up">
           <Description movie={movie} />
           <div className="watching">
-            {user ?
-              (movie.source ?
-                <MoviesPlayer />
-                : <Soon />)
-              : <Need />}
+            {user ? (movie.source ? <MoviesPlayer /> : <Soon />) : <Need />}
           </div>
           <Cast movie={movie} />
           <Credits movie={movie} position='left' />

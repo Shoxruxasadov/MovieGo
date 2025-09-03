@@ -17,6 +17,10 @@
     background-size: contain;
   }
 
+  @media (max-width: 441px) {
+    min-height: 400px;
+  }
+
   &.screen video {
     width: 100%;
 

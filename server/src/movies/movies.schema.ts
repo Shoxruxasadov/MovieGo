@@ -88,8 +88,8 @@ export class Movies {
   @Prop({ type: Types.ObjectId, required: true, ref: 'Studios' })
   studio: Types.ObjectId;
 
-  @Prop({ type: [Types.ObjectId], required: true, ref: 'Categories' })
-  category: Types.ObjectId[];
+  @Prop({ type: Types.ObjectId, required: true, ref: 'Categories' })
+  category: Types.ObjectId;
 
   @Prop({ type: [Types.ObjectId], required: true, ref: 'Genres' })
   genres: Types.ObjectId[];

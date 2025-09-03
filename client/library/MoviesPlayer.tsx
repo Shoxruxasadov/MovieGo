@@ -63,8 +63,6 @@ export default function MoviesPlayer(): JSX.Element {
   const volume = usePlayer((state) => state.volume) as number;           // <- TSX
   const movie = (useStore((state) => state.movie) as Movie) || {};       // <- TSX: null safety
 
-  console.log(movie);
-
   const [currentTimeChanged, setCurrentTimeChanged] = useState<number>(0);
   const [currentTimeView, setCurrentTimeView] = useState<string>("00:00");
   const [durationView, setDurationView] = useState<string>("0:00:00");
@@ -109,34 +107,26 @@ export default function MoviesPlayer(): JSX.Element {
   const onMouseLeave = () => setIsHovered(false);
 
   // VIDEO URL resolver: flat / matrix / string hammasini qo‘llaydi
-  const resolveVideoSrc = (source: SourceUnion, q: Qual, l: Lang): string | undefined => {
+  const resolveVideoSrc = (source: SourceUnion, quality: Qual): string | undefined => {
     if (!source) return undefined;
-    if (typeof source === "string") return source;
 
     // FLAT: source["1080p"] = "video-only.mp4"
-    const maybeFlatQ = (source as FlatSource)[q];
+    const maybeFlatQ = (source as FlatSource)[quality];
     if (typeof maybeFlatQ === "string" && maybeFlatQ) return maybeFlatQ;
 
-    // MATRIX: source["1080p"] = { uz: "...", ru: "..." }
-    const asMatrix = source as SourceMatrix;
-    const byQ = asMatrix[q];
-    if (byQ && typeof byQ === "object") {
-      return byQ[l] || byQ.uz || byQ.ru || byQ.en;
-    }
     return undefined;
   };
 
-  // AUDIO URL resolver: FLAT ichidan til bo‘yicha olamiz
-  const resolveAudioSrc = (source: SourceUnion, l: Lang): string | undefined => {
-    if (!source || typeof source === "string") return undefined; // string bo‘lsa bu video-only
+  const resolveAudioSrc = (source: SourceUnion, lang: Lang): string | undefined => {
+    if (!source) return undefined;
     const s = source as FlatSource;                               // FLAT: { uz, ru, en, 2160p, ... }
-    return s[l] || s.uz || s.ru || s.en;
+    return s[lang] || s.uz || s.ru || s.en;
   };
 
   // VIDEO
   const videoSrc = useMemo(
-    () => (reload ? resolveVideoSrc(movie.source, quality, language) : undefined),
-    [reload, movie.source, quality, language]
+    () => (reload ? resolveVideoSrc(movie.source, quality) : undefined),
+    [reload, movie.source, quality]
   );
 
   // AUDIO
@@ -144,9 +134,6 @@ export default function MoviesPlayer(): JSX.Element {
     () => resolveAudioSrc(movie.source, language),
     [movie.source, language]
   );
-
-  const hasVideo = !!videoSrc;
-  const hasAudio = !!audioSrc;
 
   const videoStyle = useMemo(
     () => (currentTime === 0 ? ({ visibility: "hidden" } as const) : {}),
@@ -252,8 +239,6 @@ export default function MoviesPlayer(): JSX.Element {
   }, [movie, quality, language, languageChanger, setLanguage]);
 
   const handleVideo = async (e?: React.MouseEvent<HTMLElement>) => {
-    if (!hasVideo) return; // <- Coming soon holatida hech narsa qilmaymiz
-
     const v = videoRef.current;
     const a = audioRef.current;
     setPlaying(prev => !prev);
@@ -268,7 +253,7 @@ export default function MoviesPlayer(): JSX.Element {
       try {
         syncAudioToVideo(true);
         const tasks: Promise<any>[] = [v.play()];
-        if (hasAudio && a) tasks.push(a.play());
+        if (a) tasks.push(a.play());
         await Promise.allSettled(tasks);
         setPlaying(true);
         startDriftLoop();
@@ -565,7 +550,7 @@ export default function MoviesPlayer(): JSX.Element {
     if (!v) return;
 
     const onPlay = async () => {
-      if (hasAudio && a && a.paused) a.play().catch(() => { });
+      if (a && a.paused) a.play().catch(() => { });
       startDriftLoop();
     };
     const onPause = () => { a?.pause(); stopDriftLoop(); };
@@ -590,7 +575,7 @@ export default function MoviesPlayer(): JSX.Element {
       v.removeEventListener("ratechange", onRateChange);
       v.removeEventListener("volumechange", onVolumeChange);
     };
-  }, [hasAudio]);
+  }, [videoSrc]);
 
   // useEffect(() => {
   //   const v = videoRef.current;
@@ -664,7 +649,7 @@ export default function MoviesPlayer(): JSX.Element {
       }
 
       // audio bilan sinxron
-      if (hasAudio && audioRef.current) {
+      if (audioRef.current) {
         const a = audioRef.current;
         a.currentTime = v.currentTime;
         a.playbackRate = v.playbackRate;
@@ -676,7 +661,7 @@ export default function MoviesPlayer(): JSX.Element {
       if (wasPlayingRef.current) {
         try {
           await v.play();
-          if (hasAudio && audioRef.current) {
+          if (audioRef.current) {
             await audioRef.current.play();
           }
           setPlaying(true);
@@ -690,7 +675,7 @@ export default function MoviesPlayer(): JSX.Element {
     v.addEventListener("loadedmetadata", onLoadedMeta);
     return () => v.removeEventListener("loadedmetadata", onLoadedMeta);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoSrc, hasAudio]);
+  }, [videoSrc]);
 
   useEffect(() => {
     makeDuration(duration);
@@ -717,11 +702,6 @@ export default function MoviesPlayer(): JSX.Element {
     return () => window.clearTimeout(id);
   }, [isHovering, playing, isMobile, fullscreen]); // <- TSX: dependency’da fullscreen state
 
-  const poster =
-    movie?.image && (movie.image as any).preview
-      ? (movie.image as any).preview
-      : undefined; // <- TSX: posterga safe access
-
   return (
     <div
       id="player"
@@ -742,9 +722,11 @@ export default function MoviesPlayer(): JSX.Element {
           setLoadingMovie(false);
         }}
         onWaiting={() => setLoadingMovie(true)}
-        poster={poster}
+        poster={movie?.image && (movie.image as any).preview
+          ? (movie.image as any).preview
+          : undefined}
         style={videoStyle}
-        playsInline
+      // playsInline
       // webkit-playsinline="true"
       />
       <audio
@@ -752,15 +734,14 @@ export default function MoviesPlayer(): JSX.Element {
         src={audioSrc}
         preload="auto"
         style={{ display: "none" }}
-        
       />
-      {!loadingMovie && <button
+      <button
         ref={playBtnRef}
         className={classNames("play-pause-circle", { active: !playing })}
         onClick={handleVideo}
       >
         <BsPlayCircleFill />
-      </button>}
+      </button>
       <div className="wrapper">
         <ul className="video-controls">
           <li className="options left">
@@ -778,7 +759,7 @@ export default function MoviesPlayer(): JSX.Element {
             </button>
           </li>
           <li className="options center">
-            <div className={classNames("video-timeline", { loading: loadingMovie })}>
+            <div className={classNames("video-timeline", { loading: loadingMovie && !playing })}>
               <div className="progress-area" ref={progressRef}>
                 <BadgePosition move={badgePosition < 0 ? 0 : badgePosition}>{badgeTime}</BadgePosition>
                 <input
@@ -912,7 +893,7 @@ export default function MoviesPlayer(): JSX.Element {
           </li>
         </ul>
       </div>
-      {loadingMovie && !playing && <SceletLoading />}
+      {loadingMovie && playing && <SceletLoading />}
       <div className={classNames("skipped", { active: skipWrapper })}>
         <div className={classNames("prev", { active: skipped === false })}>
           <HiBackward />

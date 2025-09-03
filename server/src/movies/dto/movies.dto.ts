@@ -103,24 +103,18 @@ export class MoviesDto {
   @IsNotEmpty()
   readonly ratings: RatingsDto;
 
-  @IsMongoId()
   @IsNotEmpty()
   @Transform(({ value }) => new Types.ObjectId(value), { toClassOnly: true })
   readonly country: Types.ObjectId;
 
-  @IsMongoId()
   @IsNotEmpty()
   @Transform(({ value }) => new Types.ObjectId(value), { toClassOnly: true })
   readonly studio: Types.ObjectId;
 
-  @IsMongoId()
   @IsNotEmpty()
-  @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
-    toClassOnly: true,
-  })
-  readonly category: Types.ObjectId[];
+   @Transform(({ value }) => new Types.ObjectId(value), { toClassOnly: true })
+  readonly category: Types.ObjectId;
 
-  @IsMongoId({ each: true })
   @IsArray()
   @IsNotEmpty()
   @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
@@ -128,7 +122,6 @@ export class MoviesDto {
   })
   readonly genres: Types.ObjectId[];
 
-  @IsMongoId({ each: true })
   @IsArray()
   @IsOptional()
   @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
@@ -136,7 +129,6 @@ export class MoviesDto {
   })
   readonly directors: Types.ObjectId[] | null;
 
-  @IsMongoId({ each: true })
   @IsArray()
   @IsOptional()
   @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
@@ -144,7 +136,6 @@ export class MoviesDto {
   })
   readonly producers: Types.ObjectId[] | null;
 
-  @IsMongoId({ each: true })
   @IsArray()
   @IsOptional()
   @Transform(({ value }) => value.map((id: string) => new Types.ObjectId(id)), {
@@ -152,7 +143,6 @@ export class MoviesDto {
   })
   readonly scenarists: Types.ObjectId[] | null;
 
-  @IsMongoId({ each: true })
   @IsArray()
   @IsOptional()
   readonly cast: CastDto[] | null;
