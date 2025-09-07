@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { isMobile, isIOS } from "react-device-detect";
-// import { useRouter } from 'next/navigation' // <- TSX: foydalanilmayapti, warning bermasligi uchun olib tashladim
 import styled from "styled-components";
 import classNames from "classnames";
 
@@ -15,9 +14,7 @@ import SceletLoading from "@/components/loading/loading";
 import { usePlayer, useStore } from "@/store/zustand";
 import { useTranslation } from "react-i18next";
 
-/**
- * TS Types
- */
+
 type Lang = "uz" | "ru" | "en";
 type Qual = "2160p" | "1080p" | "720p";
 
@@ -27,9 +24,8 @@ type ImageLike =
   | Record<string, unknown>;
 
 type FlatSource = Partial<Record<Qual | Lang, string>>;
-type SourceMatrix = { [Q in Qual]?: Partial<Record<Lang, string>> };
 
-type SourceUnion = FlatSource | SourceMatrix | null;
+type SourceUnion = FlatSource | null;
 type Movie = {
   source: SourceUnion;
   image?: ImageLike;
@@ -42,26 +38,32 @@ interface MoveProps {
   move: number;
 }
 
-// styled-components’ga generic propslar berildi:
-const RangeTime = styled.div<PercentProps>`width: ${(props) => props.percent}%!important;`; // <- TSX: props tipini berdim
-const RangeVolume = styled.div<PercentProps>`width: ${(props) => props.percent}%!important;`; // <- TSX: props tipini berdim
-const BadgePosition = styled.span<MoveProps>`left: ${(props) => props.move}px!important;`; // <- TSX: props tipini berdim
+const RangeTime = styled.div<PercentProps>`width: ${(props) => props.percent}%!important;`;
+const RangeVolume = styled.div<PercentProps>`width: ${(props) => props.percent}%!important;`;
+const BadgePosition = styled.span<MoveProps>`left: ${(props) => props.move}px!important;`;
 
 export default function MoviesPlayer(): JSX.Element {
-  const setLanguage = usePlayer((state) => state.setLanguage) as (l: Lang) => void; // <- TSX: funksiya tiplari
-  const setQuality = usePlayer((state) => state.setQuality) as (q: Qual) => void;  // <- TSX
-  const setSpeed = usePlayer((state) => state.setSpeed) as (s: string) => void;    // <- TSX
-  const setCurrentTime = usePlayer((state) => state.setCurrentTime) as (n: number) => void; // <- TSX
-  const setDuration = usePlayer((state) => state.setDuration) as (n: number) => void;       // <- TSX
-  const setVolume = usePlayer((state) => state.setVolume) as (n: number) => void;           // <- TSX
+  const setLanguage = usePlayer((state) => state.setLanguage) as (l: Lang) => void;
+  const setQuality = usePlayer((state) => state.setQuality) as (q: Qual) => void;
+  const setSpeed = usePlayer((state) => state.setSpeed) as (s: string) => void;
+  const setCurrentTime = usePlayer((state) => state.setCurrentTime) as (n: number) => void;
+  const setDuration = usePlayer((state) => state.setDuration) as (n: number) => void;
+  const setVolume = usePlayer((state) => state.setVolume) as (n: number) => void;
 
-  const language = usePlayer((state) => state.language) as Lang;   // <- TSX
-  const quality = usePlayer((state) => state.quality) as Qual;     // <- TSX
-  const speed = usePlayer((state) => state.speed) as string;       // <- TSX
-  const currentTime = usePlayer((state) => state.currentTime) as number; // <- TSX
-  const duration = usePlayer((state) => state.duration) as number;       // <- TSX
-  const volume = usePlayer((state) => state.volume) as number;           // <- TSX
-  const movie = (useStore((state) => state.movie) as Movie) || {};       // <- TSX: null safety
+  const language = usePlayer((state) => state.language) as Lang;
+  const quality = usePlayer((state) => state.quality) as Qual;
+  const speed = usePlayer((state) => state.speed) as string;
+  const currentTime = usePlayer((state) => state.currentTime) as number;
+  const duration = usePlayer((state) => state.duration) as number;
+  const volume = usePlayer((state) => state.volume) as number;
+  const movie = (useStore((state) => state.movie) as Movie) || {};
+
+  const [languageChanger, setLanguageChanger] = useState<boolean>(true);
+  const [qualityChanger, setQualityChanger] = useState<boolean>(true);
+  const [isHovering, setIsHovered] = useState<boolean>(false);
+  const onMouseEnter = () => setIsHovered(true);
+  const onMouseLeave = () => setIsHovered(false);
+  const { t } = useTranslation();
 
   const [currentTimeChanged, setCurrentTimeChanged] = useState<number>(0);
   const [currentTimeView, setCurrentTimeView] = useState<string>("00:00");
@@ -76,9 +78,9 @@ export default function MoviesPlayer(): JSX.Element {
   const [rangeTime, setRangeTime] = useState<number>(0);
   const [badgeTime, setBadgeTime] = useState<string | number>(0);
   const [playing, setPlaying] = useState<boolean>(false);
-  const [skipped, setSkipped] = useState<boolean | null>(null); // <- TSX: tip qo‘ydim
+  const [skipped, setSkipped] = useState<boolean | null>(null);
   const [reload, setReload] = useState<boolean>(false);
-  const [list, setList] = useState<"main" | "language" | "quality" | "speed">("main"); // <- TSX: string union
+  const [list, setList] = useState<"main" | "language" | "quality" | "speed">("main");
 
   // === REFS ===
 
@@ -95,39 +97,27 @@ export default function MoviesPlayer(): JSX.Element {
   const DRIFT_TOLERANCE = isIOS ? 0.75 : 0.30;
   const DRIFT_CHECK_MS = isIOS ? 1000 : 250;
 
+  // 0 → HAVE_NOTHING — hech narsa yuklanmagan.
+  // 1 → HAVE_METADATA — metadata (duration, dimension, track info) mavjud, lekin frame yo‘q.
+  // 2 → HAVE_CURRENT_DATA — joriy play head atrofida bitta frame mavjud, lekin keyingisi tayyor emas.
+  // 3 → HAVE_FUTURE_DATA — hozirgi va kelajak frame’lar mavjud (normal play qilish mumkin).
+  // 4 → HAVE_ENOUGH_DATA — media to‘liq yuklangan yoki buffering qilmasdan uzluksiz o‘ynashi mumkin.
   const readyEnough = (m: HTMLMediaElement) => m.readyState >= 2;
 
-  const { t } = useTranslation();
-
-  const [languageChanger, setLanguageChanger] = useState<boolean>(true);
-  const [qualityChanger, setQualityChanger] = useState<boolean>(true);
-
-  const [isHovering, setIsHovered] = useState<boolean>(false);
-  const onMouseEnter = () => setIsHovered(true);
-  const onMouseLeave = () => setIsHovered(false);
-
-  // VIDEO URL resolver: flat / matrix / string hammasini qo‘llaydi
   const resolveVideoSrc = (source: SourceUnion, quality: Qual): string | undefined => {
     if (!source) return undefined;
-
-    // FLAT: source["1080p"] = "video-only.mp4"
-    const maybeFlatQ = (source as FlatSource)[quality];
-    if (typeof maybeFlatQ === "string" && maybeFlatQ) return maybeFlatQ;
-
-    return undefined;
+    return (source as FlatSource)[quality];
   };
 
   const resolveAudioSrc = (source: SourceUnion, lang: Lang): string | undefined => {
     if (!source) return undefined;
-    const s = source as FlatSource;                               // FLAT: { uz, ru, en, 2160p, ... }
-    return s[lang] || s.uz || s.ru || s.en;
+    return (source as FlatSource)[lang];
   };
 
-  // VIDEO
-  const videoSrc = useMemo(
-    () => (reload ? resolveVideoSrc(movie.source, quality) : undefined),
-    [reload, movie.source, quality]
-  );
+  const videoSrc = useMemo(() => {
+    if (reload) return resolveVideoSrc(movie.source, quality);
+    return undefined;
+  }, [reload, movie.source, quality]);
 
   // AUDIO
   const audioSrc = useMemo(
@@ -138,7 +128,11 @@ export default function MoviesPlayer(): JSX.Element {
   const videoStyle = useMemo(
     () => (currentTime === 0 ? ({ visibility: "hidden" } as const) : {}),
     [currentTime]
-  ); // <- TSX: as const bilan type inference
+  );
+
+
+  console.log(currentTime, reload,);
+
 
   const playerStyle = useMemo<React.CSSProperties>(() => {
     const img =
@@ -207,20 +201,16 @@ export default function MoviesPlayer(): JSX.Element {
     }
     return null;
   }
-  function selectQuality(source: SourceMatrix): Qual | null {
+  function selectQuality(source: FlatSource): Qual | null {
     const order: Qual[] = isIOS ? ["1080p", "720p", "2160p"] : ["2160p", "1080p", "720p"];
     for (const q of order) if (source[q]) return q;
     return null;
   }
 
-  /**
-   * JSX’da render ichida setState bor edi (languageChanger/qualityChanger),
-   * bu React anti-pattern. Uni `useEffect`ga ko‘chirdim. // <-
-   */
   useEffect(() => {
     if (!movie?.source || typeof movie.source === "string") return;
     if (qualityChanger) {
-      const newQuality = selectQuality(movie.source as SourceMatrix);
+      const newQuality = selectQuality(movie.source as FlatSource);
       if (newQuality) setQuality(newQuality);
       setQualityChanger(false);
     }
@@ -229,7 +219,7 @@ export default function MoviesPlayer(): JSX.Element {
   useEffect(() => {
     if (!movie?.source) return;
     if (languageChanger) {
-      const currentSource = (movie.source as SourceMatrix)[quality];
+      const currentSource = (movie.source as FlatSource)[quality];
       if (currentSource) {
         const newLanguage = selectLanguage(currentSource as any, language);
         if (newLanguage) setLanguage(newLanguage);
@@ -321,7 +311,7 @@ export default function MoviesPlayer(): JSX.Element {
     setPercentTime((val * 100) / videoRef.current.duration);
     setRangeTime(val);
     setCurrentTime(val);
-    makeCurrentTime(val); // <- TSX
+    makeCurrentTime(val);
   };
 
   const makeCurrentTime = (time: number) => {
@@ -442,8 +432,6 @@ export default function MoviesPlayer(): JSX.Element {
   };
 
   const hideControls = () => {
-    // document.fullscreenElement o‘zgarmasdan window.document.fullscreen ishlatilgan edi
-    // TS/DOM spec bo‘yicha `fullscreenElement` to‘g‘ri. // <-
     if (!playing || (isHovering && !document.fullscreenElement)) return setControls(true);
     setControls(false);
     setAccessible(false);
@@ -451,10 +439,10 @@ export default function MoviesPlayer(): JSX.Element {
   };
 
   useEffect(() => {
-    setCurrentTime(0);
+    setCurrentTime(currentTime);
     const t = window.setTimeout(() => setReload(true), 500);
     return () => window.clearTimeout(t);
-  }, [setCurrentTime]);
+  }, []);
 
   useEffect(() => {
     const onFsChange = () => {
@@ -733,7 +721,6 @@ export default function MoviesPlayer(): JSX.Element {
         ref={audioRef}
         src={audioSrc}
         preload="auto"
-        style={{ display: "none" }}
       />
       <button
         ref={playBtnRef}
@@ -856,7 +843,7 @@ export default function MoviesPlayer(): JSX.Element {
                   </li>
                   {qualities.map(({ value, badge }) =>
                     typeof movie?.source !== "string" &&
-                      (movie.source as SourceMatrix)[value] != null ? (
+                      (movie.source as FlatSource)[value] != null ? (
                       <li
                         key={value}
                         className={classNames("item", { selected: quality === value })}
