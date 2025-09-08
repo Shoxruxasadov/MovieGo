@@ -16,7 +16,7 @@ export const useStore = create<MovieStore>((set) => ({
     set(() => ({ movie: data }));
   },
   getRelated: async () => {
-    const { data } = await api.get<MovieDto[]>(`/movies/random`);
+    const { data } = await api.get<MovieDto[]>(`/movies/random?count=7`);
     set(() => ({ related: data }));
   },
 }));

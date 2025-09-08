@@ -28,8 +28,8 @@ export class MoviesController {
   
   @HttpCode(200)
   @Get('random')
-  async findRandom() {
-    return this.moviesService.findRandom();
+  async findRandom(@Query('count') count: number) {
+    return this.moviesService.findRandom(count);
   }
 
   @HttpCode(200)

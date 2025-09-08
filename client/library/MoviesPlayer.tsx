@@ -70,6 +70,8 @@ export default function MoviesPlayer(): JSX.Element {
   const [durationView, setDurationView] = useState<string>("0:00:00");
   const [badgePosition, setBadgePosition] = useState<number>(0);
   const [loadingMovie, setLoadingMovie] = useState<boolean>(true);
+  const [videoReady, setVideoReady] = useState(false);
+  const [audioReady, setAudioReady] = useState(false);
   const [skipWrapper, setSkipWrapper] = useState<boolean>(false);
   const [accessible, setAccessible] = useState<boolean>(false);
   const [fullscreen, setFullscreen] = useState<boolean>(false);
@@ -130,10 +132,6 @@ export default function MoviesPlayer(): JSX.Element {
     [currentTime]
   );
 
-
-  console.log(currentTime, reload,);
-
-
   const playerStyle = useMemo<React.CSSProperties>(() => {
     const img =
       movie?.image && "preview" in (movie.image as any)
@@ -151,8 +149,8 @@ export default function MoviesPlayer(): JSX.Element {
     if (!v || !a) return;
 
     a.playbackRate = v.playbackRate;
-    a.volume = v.volume;
-    a.muted = v.muted || v.volume === 0;
+    // a.volume = v.volume;
+    // a.muted = v.muted || v.volume === 0;
 
     if (!readyEnough(v) || !readyEnough(a)) return;
 
@@ -275,16 +273,28 @@ export default function MoviesPlayer(): JSX.Element {
 
   const timeUpdate = (event: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     const el = event.currentTarget;
+    const a = audioRef.current;
     if (!el.duration) return;
     setPercentTime((el.currentTime / el.duration) * 100);
     setCurrentTime(el.currentTime);
     makeCurrentTime(el.currentTime); // <- TSX: argument qabul qilishga mos qildim
+
+    if (!a) return
+    if (el.paused || loadingMovie) {
+      a.volume = 0;
+      a.muted = true;
+    } else {
+      a.volume = el.volume;
+      a.muted = el.muted || el.volume === 0;
+    }
+
   };
 
   const loadedMovie = (event: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     const el = event.currentTarget;
     setDuration(el.duration || 0);
     setLoadingMovie(false);
+    setVideoReady(true)
   };
 
   const volumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -585,8 +595,6 @@ export default function MoviesPlayer(): JSX.Element {
     a.src = audioSrc;
     a.currentTime = v.currentTime;
     a.playbackRate = v.playbackRate;
-    a.volume = v.volume;
-    a.muted = v.muted || v.volume === 0;
 
     const onWaiting = () => setLoadingMovie(true);
     const onStalled = () => setLoadingMovie(true);
@@ -641,8 +649,6 @@ export default function MoviesPlayer(): JSX.Element {
         const a = audioRef.current;
         a.currentTime = v.currentTime;
         a.playbackRate = v.playbackRate;
-        a.volume = v.volume;
-        a.muted = v.muted || v.volume === 0;
       }
 
       // avval play bo'lgan bo'lsa, qayta davom ettiramiz
@@ -690,6 +696,13 @@ export default function MoviesPlayer(): JSX.Element {
     return () => window.clearTimeout(id);
   }, [isHovering, playing, isMobile, fullscreen]); // <- TSX: dependency’da fullscreen state
 
+  useEffect(() => {
+    // loadingMovie faqat video tayyor bo‘lganda false bo‘ladi
+    setLoadingMovie(!(videoReady && audioReady));
+  }, [videoReady, audioReady]);
+
+  console.log(audioRef?.current?.volume, videoRef?.current?.volume);
+
   return (
     <div
       id="player"
@@ -706,13 +719,9 @@ export default function MoviesPlayer(): JSX.Element {
         onClick={handleVideo}
         onTimeUpdate={timeUpdate}
         onLoadedData={loadedMovie}
-        onPlaying={() => {
-          setLoadingMovie(false);
-        }}
-        onWaiting={() => setLoadingMovie(true)}
-        poster={movie?.image && (movie.image as any).preview
-          ? (movie.image as any).preview
-          : undefined}
+        onPlaying={() => setVideoReady(true)}
+        onWaiting={() => setVideoReady(false)}
+        poster={movie?.image && (movie.image as any).preview ? (movie.image as any).preview : undefined}
         style={videoStyle}
       // playsInline
       // webkit-playsinline="true"
@@ -721,10 +730,14 @@ export default function MoviesPlayer(): JSX.Element {
         ref={audioRef}
         src={audioSrc}
         preload="auto"
+        onCanPlay={() => setAudioReady(true)}
+        onWaiting={() => setAudioReady(false)}
+        onStalled={() => setAudioReady(false)}
+        onError={() => setAudioReady(false)}
       />
       <button
         ref={playBtnRef}
-        className={classNames("play-pause-circle", { active: !playing })}
+        className={classNames("play-pause-circle", { active: !playing && !loadingMovie })}
         onClick={handleVideo}
       >
         <BsPlayCircleFill />
@@ -746,9 +759,9 @@ export default function MoviesPlayer(): JSX.Element {
             </button>
           </li>
           <li className="options center">
-            <div className={classNames("video-timeline", { loading: loadingMovie && !playing })}>
+            <div className={classNames("video-timeline", { loading: loadingMovie })}>
               <div className="progress-area" ref={progressRef}>
-                <BadgePosition move={badgePosition < 0 ? 0 : badgePosition}>{badgeTime}</BadgePosition>
+                {(!isIOS || !isMobile) && <BadgePosition move={badgePosition < 0 ? 0 : badgePosition}>{badgeTime}</BadgePosition>}
                 <input
                   min={0}
                   type="range"
@@ -880,7 +893,7 @@ export default function MoviesPlayer(): JSX.Element {
           </li>
         </ul>
       </div>
-      {loadingMovie && playing && <SceletLoading />}
+      {loadingMovie && <SceletLoading />}
       <div className={classNames("skipped", { active: skipWrapper })}>
         <div className={classNames("prev", { active: skipped === false })}>
           <HiBackward />

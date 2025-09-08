@@ -23,9 +23,9 @@ export class MoviesService {
       .sort({ createdAt: -1 });
   }
 
-  async findRandom() {
+  async findRandom(count:number) {    
     return this.moviesModel.aggregate([
-      { $sample: { size: 5 } },
+      { $sample: { size: Number(count) } },
       
       {
         $lookup: {

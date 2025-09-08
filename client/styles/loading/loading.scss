@@ -6,6 +6,11 @@
   height: 64px;
   border-radius: 50%;
   perspective: 800px;
+
+  @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+    width: 56px;
+    height: 56px;
+  }
 }
 
 .innerLoader {
@@ -36,7 +41,6 @@
   bottom: 0%;
   animation: rotate-third 1s linear infinite;
   border-top: 4px solid #fa3b3c;
-
 }
 
 @keyframes rotate-first {

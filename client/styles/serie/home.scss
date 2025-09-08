@@ -59,7 +59,7 @@
       filter: blur(20px);
       margin-bottom: 20px;
 
-      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+      @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
         max-height: 100px;
         margin-bottom: 14px;
       }
@@ -95,7 +95,7 @@
       gap: 12px;
       margin-bottom: 24px;
 
-      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+      @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
         margin-bottom: 16px;
         font-size: 12px;
         gap: 14px;
@@ -183,7 +183,7 @@
           }
           
           svg{
-            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+            @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
               width: 18px;
             }
           }
@@ -194,7 +194,7 @@
             font-weight: 500;
 
             svg{
-              @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+              @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
                 width: 12px;
               }
             }
@@ -231,7 +231,7 @@
               margin-left: 1px;
             }
 
-            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+            @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
               width: 36px;
               height: 36px;
 
@@ -330,7 +330,7 @@
               margin-left: 1px;
             }
 
-            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+            @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
               width: 36px;
               height: 36px;
 

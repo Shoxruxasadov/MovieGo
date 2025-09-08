@@ -15,6 +15,10 @@
     padding: 0 48px !important;
     max-width: none !important;
 
+    @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+      padding: 0 40px !important;
+    }
+
     @media (max-width: 768px) {
       padding: 0 32px !important;
     }
@@ -44,6 +48,15 @@
       z-index: -1;
       background-color: rgba($color: var(--bg-primary-rgb), $alpha: 0.9);
       filter: blur(100px);
+
+      @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+        width: 300px;
+      }
+
+      @media (max-width: 441px) {
+        max-width: 100%;
+        top: 0;
+      }
     }
 
     @media (max-width: 768px) {
@@ -59,8 +72,8 @@
       filter: blur(20px);
       margin-bottom: 20px;
 
-      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
-        max-height: 110px;
+      @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+        max-height: 90px;
         margin-bottom: 14px;
       }
 
@@ -95,7 +108,7 @@
       gap: 12px;
       margin-bottom: 24px;
 
-      @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+      @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
         margin-bottom: 16px;
         font-size: 12px;
         gap: 14px;
@@ -163,7 +176,7 @@
           font-weight: 450;
           font-size: 15px;
 
-          @media (max-width: 1024px) and (max-height: 576px){
+          @media (max-width: 1024px) and (max-height: 576px) {
             min-width: 152px;
             height: 36px;
             font-size: 11px;
@@ -179,8 +192,8 @@
             cursor: pointer;
           }
 
-          svg{
-            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+          svg {
+            @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
               width: 18px;
             }
           }
@@ -190,8 +203,8 @@
             color: white;
             font-weight: 450;
 
-            svg{
-              @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+            svg {
+              @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
                 width: 12px;
               }
             }
@@ -233,7 +246,7 @@
               margin-left: 1px;
             }
 
-            @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+            @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
               width: 36px;
               height: 36px;
 
@@ -248,12 +261,10 @@
               justify-content: center;
             }
           }
-
-        
         }
 
         &.active {
-          .watch{
+          .watch {
             @media (max-width: 441px) {
               width: calc(100% - 121px);
               min-width: auto !important;
@@ -297,7 +308,7 @@
             margin-left: 1px;
           }
 
-          @media (max-width: 1024px) and (max-height: 576px) and (min-width: 440px) {
+          @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
             width: 36px;
             height: 36px;
 
