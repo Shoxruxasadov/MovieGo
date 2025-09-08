@@ -232,7 +232,7 @@ export default function MoviesPlayer(): JSX.Element {
     setPlaying(prev => !prev);
     if (!v) return;
 
-    if (playing) {
+    if (!isIOS && playing) {
       setPlaying(false);
       v.pause();
       a?.pause();
@@ -895,13 +895,13 @@ export default function MoviesPlayer(): JSX.Element {
                 </ul>
               </div>
             </div>
-            <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
-              {!isIOS && (fullscreen ? <FaCompressAlt /> : <FaExpandAlt />)}
-            </button>
+            {!isIOS && <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
+              (fullscreen ? <FaCompressAlt /> : <FaExpandAlt />)
+            </button>}
           </li>
         </ul>
       </div>
-      {isIOS ? loadingMovie && playing && <SceletLoading /> : loadingMovie && <SceletLoading />}
+      {!isIOS && (loadingMovie && <SceletLoading />)}
       <div className={classNames("skipped", { active: skipWrapper })}>
         <div className={classNames("prev", { active: skipped === false })}>
           <HiBackward />
