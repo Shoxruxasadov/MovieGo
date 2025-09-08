@@ -279,7 +279,7 @@ export default function MoviesPlayer(): JSX.Element {
     setCurrentTime(el.currentTime);
     makeCurrentTime(el.currentTime); // <- TSX: argument qabul qilishga mos qildim
 
-    if (!a) return
+    if (!a || isIOS) return
     if (el.paused || loadingMovie) {
       a.volume = 0;
       a.muted = true;
@@ -596,6 +596,11 @@ export default function MoviesPlayer(): JSX.Element {
     a.currentTime = v.currentTime;
     a.playbackRate = v.playbackRate;
 
+    // if (isIOS) {
+    //   a.volume = v.volume;
+    //   a.muted = v.muted || v.volume === 0;
+    // }
+
     const onWaiting = () => setLoadingMovie(true);
     const onStalled = () => setLoadingMovie(true);
     const onError = () => {
@@ -649,6 +654,11 @@ export default function MoviesPlayer(): JSX.Element {
         const a = audioRef.current;
         a.currentTime = v.currentTime;
         a.playbackRate = v.playbackRate;
+
+        // if (isIOS) {
+        //   a.volume = v.volume;
+        //   a.muted = v.muted || v.volume === 0;
+        // }
       }
 
       // avval play bo'lgan bo'lsa, qayta davom ettiramiz
@@ -701,8 +711,6 @@ export default function MoviesPlayer(): JSX.Element {
     setLoadingMovie(!(videoReady && audioReady));
   }, [videoReady, audioReady]);
 
-  console.log(audioRef?.current?.volume, videoRef?.current?.volume);
-
   return (
     <div
       id="player"
@@ -737,7 +745,7 @@ export default function MoviesPlayer(): JSX.Element {
       />
       <button
         ref={playBtnRef}
-        className={classNames("play-pause-circle", { active: !playing && !loadingMovie })}
+        className={classNames("play-pause-circle", { active: (!playing && !loadingMovie) || isIOS })}
         onClick={handleVideo}
       >
         <BsPlayCircleFill />
@@ -752,7 +760,7 @@ export default function MoviesPlayer(): JSX.Element {
               className={classNames("play-pause", { pause: playing })}
               onClick={handleVideo}
             >
-              {playing ? <FaPause /> : <FaPlay />}
+              {isIOS ? <FaPlay /> : playing ? <FaPause /> : <FaPlay />}
             </button>
             <button className="skip-forward" onClick={() => skip("forward")}>
               <FaForward />
@@ -888,12 +896,12 @@ export default function MoviesPlayer(): JSX.Element {
               </div>
             </div>
             <button className="fullscreen" id="fullscreen" onClick={makeFullScreen}>
-              {fullscreen ? <FaCompressAlt /> : <FaExpandAlt />}
+              {!isIOS && (fullscreen ? <FaCompressAlt /> : <FaExpandAlt />)}
             </button>
           </li>
         </ul>
       </div>
-      {loadingMovie && <SceletLoading />}
+      {isIOS ? loadingMovie && playing && <SceletLoading /> : loadingMovie && <SceletLoading />}
       <div className={classNames("skipped", { active: skipWrapper })}>
         <div className={classNames("prev", { active: skipped === false })}>
           <HiBackward />
