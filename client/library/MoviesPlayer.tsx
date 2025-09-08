@@ -61,8 +61,8 @@ export default function MoviesPlayer(): JSX.Element {
   const [languageChanger, setLanguageChanger] = useState<boolean>(true);
   const [qualityChanger, setQualityChanger] = useState<boolean>(true);
   const [isHovering, setIsHovered] = useState<boolean>(false);
-  const onMouseEnter = () => setIsHovered(true);
-  const onMouseLeave = () => setIsHovered(false);
+  const onMouseEnter = !isMobile ? () => setIsHovered(true) : undefined;
+  const onMouseLeave = !isMobile ? () => setIsHovered(false) : undefined;
   const { t } = useTranslation();
 
   const [currentTimeChanged, setCurrentTimeChanged] = useState<number>(0);
@@ -86,16 +86,15 @@ export default function MoviesPlayer(): JSX.Element {
 
   // === REFS ===
 
-  const progressRef = useRef<HTMLDivElement | null>(null); // <- TSX: ref tiplari
-  const playBtnRef = useRef<HTMLButtonElement | null>(null); // <- TSX
-  const playerRef = useRef<HTMLDivElement | null>(null); // <- TSX
-  const videoRef = useRef<HTMLVideoElement | null>(null); // <- TSX
-  const pendingSeekRef = useRef<number | null>(null);  // qaerga qaytish kerak
+  const progressRef = useRef<HTMLDivElement | null>(null);
+  const playBtnRef = useRef<HTMLButtonElement | null>(null);
+  const playerRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const pendingSeekRef = useRef<number | null>(null);
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);        // <- audio element
-  const driftTimerRef = useRef<number | null>(null);             // <- drift interval
-  const [audioSwitching, setAudioSwitching] = useState(false);         // <- YANGI
-  const wasPlayingRef = useRef(false);                                 // <- til almashishdan oldingi holat
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const driftTimerRef = useRef<number | null>(null);
+  const wasPlayingRef = useRef(false);
   const DRIFT_TOLERANCE = isIOS ? 0.75 : 0.30;
   const DRIFT_CHECK_MS = isIOS ? 1000 : 250;
 
@@ -277,7 +276,8 @@ export default function MoviesPlayer(): JSX.Element {
     if (!el.duration) return;
     setPercentTime((el.currentTime / el.duration) * 100);
     setCurrentTime(el.currentTime);
-    makeCurrentTime(el.currentTime); // <- TSX: argument qabul qilishga mos qildim
+    makeCurrentTime(el.currentTime);
+    setCurrentTimeChanged(el.currentTime)
 
     if (!a || isIOS) return
     if (el.paused || loadingMovie) {
@@ -355,7 +355,6 @@ export default function MoviesPlayer(): JSX.Element {
     setLoadingMovie(true);
     v?.pause();
     setPlaying(false);
-    setAudioSwitching(true);
 
     setLanguage(lng);
   };
@@ -373,7 +372,6 @@ export default function MoviesPlayer(): JSX.Element {
     v?.pause();
     audioRef.current?.pause();
     setPlaying(false);
-    setAudioSwitching(true); // audio sync jarayoni
 
     setQuality(q);
   };
@@ -586,7 +584,6 @@ export default function MoviesPlayer(): JSX.Element {
     if (!v || !a) return;
 
     if (!audioSrc) {
-      setAudioSwitching(false);
       setLoadingMovie(false);
       return;
     }
@@ -598,10 +595,7 @@ export default function MoviesPlayer(): JSX.Element {
 
     const onWaiting = () => setLoadingMovie(true);
     const onStalled = () => setLoadingMovie(true);
-    const onError = () => {
-      setAudioSwitching(false);
-      setLoadingMovie(false);
-    };
+    const onError = () => setLoadingMovie(false);
 
     const onCanPlay = async () => {
       try {
@@ -611,7 +605,6 @@ export default function MoviesPlayer(): JSX.Element {
           setPlaying(true);
         }
       } finally {
-        setAudioSwitching(false);
         setLoadingMovie(false);
       }
     };
@@ -662,7 +655,6 @@ export default function MoviesPlayer(): JSX.Element {
         } catch { /* autoplay blocking */ }
       }
 
-      setAudioSwitching(false);
       setLoadingMovie(false);
     };
 
@@ -892,16 +884,18 @@ export default function MoviesPlayer(): JSX.Element {
         </ul>
       </div>
       {!isIOS && (loadingMovie && <SceletLoading />)}
-      <div className={classNames("skipped", { active: skipWrapper })}>
-        <div className={classNames("prev", { active: skipped === false })}>
-          <HiBackward />
-          <span>-10sec</span>
+      {(!isIOS && !isMobile) && (
+        <div className={classNames("skipped", { active: skipWrapper })}>
+          <div className={classNames("prev", { active: skipped === false })}>
+            <HiBackward />
+            <span>-10sec</span>
+          </div>
+          <div className={classNames("next", { active: skipped === true })}>
+            <HiForward />
+            <span>+10sec</span>
+          </div>
         </div>
-        <div className={classNames("next", { active: skipped === true })}>
-          <HiForward />
-          <span>+10sec</span>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
