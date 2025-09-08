@@ -596,11 +596,6 @@ export default function MoviesPlayer(): JSX.Element {
     a.currentTime = v.currentTime;
     a.playbackRate = v.playbackRate;
 
-    // if (isIOS) {
-    //   a.volume = v.volume;
-    //   a.muted = v.muted || v.volume === 0;
-    // }
-
     const onWaiting = () => setLoadingMovie(true);
     const onStalled = () => setLoadingMovie(true);
     const onError = () => {
@@ -654,11 +649,6 @@ export default function MoviesPlayer(): JSX.Element {
         const a = audioRef.current;
         a.currentTime = v.currentTime;
         a.playbackRate = v.playbackRate;
-
-        // if (isIOS) {
-        //   a.volume = v.volume;
-        //   a.muted = v.muted || v.volume === 0;
-        // }
       }
 
       // avval play bo'lgan bo'lsa, qayta davom ettiramiz
@@ -745,7 +735,7 @@ export default function MoviesPlayer(): JSX.Element {
       />
       <button
         ref={playBtnRef}
-        className={classNames("play-pause-circle", { active: (!playing && !loadingMovie) || isIOS })}
+        className={classNames("play-pause-circle", { active: (!playing && !loadingMovie) || (isIOS && !playing) })}
         onClick={handleVideo}
       >
         <BsPlayCircleFill />
