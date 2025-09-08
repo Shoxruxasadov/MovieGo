@@ -87,6 +87,10 @@
       @media (max-width: 1024px) {
         font-size: 24px;
       }
+
+      @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+        font-size: 24px;
+      }
     }
   }
 
@@ -294,7 +298,7 @@
             @media (max-width: 1024px) {
               font-size: 10px;
             }
-              @media (max-width: 1140px) and (max-height: 640px) {
+            @media (max-width: 1140px) and (max-height: 640px) {
               font-size: 10px;
             }
           }
@@ -317,7 +321,7 @@
             @media (max-width: 1280px) {
               font-size: 12px;
             }
-               @media (max-width: 1140px) and (max-height: 640px) {
+            @media (max-width: 1140px) and (max-height: 640px) {
               font-size: 12px;
             }
           }
@@ -348,7 +352,7 @@
                 padding: 0 6px 0 8px;
                 border-radius: 4px;
               }
-                   @media (max-width: 1140px) and (max-height: 640px) {
+              @media (max-width: 1140px) and (max-height: 640px) {
                 font-size: 9px;
                 padding: 0 4.2px 0 5.5px;
                 border-radius: 4px;
@@ -366,7 +370,7 @@
             @media (max-width: 1024px) {
               font-size: 11px;
             }
-              @media (max-width: 1140px) and (max-height: 640px) {
+            @media (max-width: 1140px) and (max-height: 640px) {
               font-size: 10px;
             }
           }
