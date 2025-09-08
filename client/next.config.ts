@@ -19,11 +19,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  i18n: {
-    defaultLocale: "ru",
-    localeDetection: false,
-    locales: ["ru", "en", "uz"],
-  },
+  // i18n: {
+  //   defaultLocale: "ru",
+  //   localeDetection: false,
+  //   locales: ["ru", "en", "uz"],
+  // },
 };
 
 export default nextConfig;
