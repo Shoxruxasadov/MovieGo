@@ -50,7 +50,8 @@ main#admin-categories #content {
     }
 
     img {
-      aspect-ratio: 27 / 40;      object-fit: contain;
+      aspect-ratio: 27 / 40;
+      object-fit: contain;
     }
 
     .title {
@@ -107,7 +108,7 @@ main#admin-categories #content {
           }
         }
 
-        @media (max-width: 1024px) and (max-height: 576px) {
+        @media (max-width: 1140px) and (max-height: 640px) {
           width: 45px;
           height: 35px;
 
@@ -244,7 +245,7 @@ main#admin-categories #content {
           height: 40px;
         }
 
-        @media (max-width: 1024px) and (max-height: 576px) {
+        @media (max-width: 1140px) and (max-height: 640px) {
           width: 45px;
           height: 35px;
         }

@@ -33,8 +33,8 @@ export default function Home() {
         <MoviesSection module='movies' title={t("hero.movies")} />
         <MoviesSection module='series' title={t("hero.series")} />
         <StudiosSection module='studios' title={t("hero.studios")} />
-        <MoviesSection module='anime' title={t("hero.anime")} />
-        <MoviesSection module='cartoon' title={t("hero.cartoons")} />
+        {/* <MoviesSection module='anime' title={t("hero.anime")} /> */}
+        {/* <MoviesSection module='cartoon' title={t("hero.cartoons")} /> */}
         <div id="shadow" />
       </Animated>
       <Footer />

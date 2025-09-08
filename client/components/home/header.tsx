@@ -32,11 +32,11 @@ export default function Header() {
 
   const nav = [
     { name: t("header.home"), link: "/" },
-    { name: t("header.tv"), link: "/tv" },
+    // { name: t("header.tv"), link: "/tv" },
     { name: t("header.movies"), link: "/movies" },
     { name: t("header.series"), link: "/series" },
-    { name: t("header.cartoon"), link: "/cartoon" },
-    { name: t("header.anime"), link: "/anime" },
+    // { name: t("header.cartoon"), link: "/cartoon" },
+    // { name: t("header.anime"), link: "/anime" },
     { name: t("header.subscription"), link: "/settings/payments" },
   ]
 

@@ -1,5 +1,5 @@
 section.studios {
-  margin-bottom: 40px;
+  // margin-bottom: 40px;
   position: relative;
   z-index: 1;
 
@@ -8,6 +8,10 @@ section.studios {
 
     @media (max-width: 1024px) {
       padding: 65px 48px 0 !important;
+    }
+
+    @media (max-width: 1140px) and (max-height: 640px) {
+      padding: 65px 40px 0 !important;
     }
 
     @media (max-width: 768px) {
@@ -21,10 +25,10 @@ section.studios {
 }
 
 section#movies {
-  margin-bottom: 40px;
+  padding-bottom: 40px;
   position: relative;
   z-index: 1;
-
+  
   .container {
     grid-gap: 8px;
     display: grid;
@@ -36,6 +40,10 @@ section#movies {
 
     @media (max-width: 1024px) {
       padding: 0 48px 0 !important;
+    }
+
+    @media (max-width: 1140px) and (max-height: 640px) {
+      padding: 0 40px 0 !important;
     }
 
     @media (max-width: 768px) {
@@ -51,7 +59,6 @@ section#movies {
       overflow: hidden;
       position: relative;
       aspect-ratio: 27 / 40;
-
 
       background-position: center;
       background-repeat: no-repeat;
@@ -95,8 +102,9 @@ section#movies {
         background: linear-gradient(#0000001a 50%, #000000e6 90%);
       }
 
-      img{
-        aspect-ratio: 27 / 40;        object-fit: contain;
+      img {
+        aspect-ratio: 27 / 40;
+        object-fit: contain;
       }
 
       .title {
@@ -117,6 +125,11 @@ section#movies {
         @media (max-width: 1280px) {
           padding: 10px;
           padding-bottom: 3px;
+        }
+
+        @media (max-width: 1140px) and (max-height: 640px) {
+          padding: 8px;
+          padding-bottom: 2px;
         }
 
         @media (max-width: 1024px) {
@@ -153,12 +166,12 @@ section#movies {
             }
           }
 
-          @media (max-width: 1024px) and (max-height: 576px) {
+          @media (max-width: 1140px) and (max-height: 640px) {
             width: 45px;
             height: 35px;
 
             span {
-              font-size: 11px;
+              font-size: 10px;
             }
           }
 
@@ -196,6 +209,10 @@ section#movies {
           @media (max-width: 1024px) {
             font-size: 10px;
           }
+
+          @media (max-width: 1140px) and (max-height: 640px) {
+            font-size: 10px;
+          }
         }
 
         h3 {
@@ -214,6 +231,10 @@ section#movies {
           }
 
           @media (max-width: 1280px) {
+            font-size: 12px;
+          }
+
+          @media (max-width: 1140px) and (max-height: 640px) {
             font-size: 12px;
           }
         }
@@ -244,6 +265,12 @@ section#movies {
               padding: 0 6px 0 8px;
               border-radius: 4px;
             }
+
+            @media (max-width: 1140px) and (max-height: 640px) {
+              font-size: 9px;
+              padding: 0 4.2px 0 5.5px;
+              border-radius: 4px;
+            }
           }
 
           @media (max-width: 1440px) {
@@ -255,6 +282,10 @@ section#movies {
           }
 
           @media (max-width: 1024px) {
+            font-size: 10px;
+          }
+
+          @media (max-width: 1140px) and (max-height: 640px) {
             font-size: 10px;
           }
         }
@@ -290,7 +321,7 @@ section#movies {
             height: 40px;
           }
 
-          @media (max-width: 1024px) and (max-height: 576px) {
+          @media (max-width: 1140px) and (max-height: 640px) {
             width: 45px;
             height: 35px;
           }

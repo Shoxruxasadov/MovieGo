@@ -34,7 +34,8 @@ export default function StudioMoviesCollection({ path, module }: { path: string,
         { width: 1440, columns: 5 },
         { width: 1536, columns: 6 },
         { width: 1680, columns: 7 },
-        { width: 1920, columns: 8 },
+        { width: 1920, columns: 7 },
+        { width: 2160, columns: 8 },
         { width: 2560, columns: 9 },
         { width: 3840, columns: 10 },
     ];
@@ -44,7 +45,7 @@ export default function StudioMoviesCollection({ path, module }: { path: string,
         const screenHeight = window.innerHeight;
 
         let columns = breakpoints.find(bp => screenWidth <= bp.width)?.columns || 2;
-        if (screenHeight < 600 && screenWidth < 1024) columns = 5;
+        if (screenHeight < 660 && screenWidth < 1140) columns = 6;
 
         setColumnCount(columns);
     }, []);
@@ -58,22 +59,6 @@ export default function StudioMoviesCollection({ path, module }: { path: string,
     if (hasNextPage) return (
         <section id="movies">
             <div className="container" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}>
-                {/* {movies.map(item => (
-                    <Link
-                        href={`/${item.type}/${item.name}`}
-                        className="card"
-                        key={item._id}
-                    >
-                        <div className="shadow" />
-                        <img src={item.image.poster} alt={item.title[i18n.language]} />
-                        <div className="title">
-                            <div className="resolution"><span>{item.resolution}</span></div>
-                            <p className="type">{t("movie.free")}</p>
-                            <h3>{item.title[i18n.language]}</h3>
-                            <p className="other">{item.studio.title[i18n.language]} • <span>{item.mpa}+</span></p>
-                        </div>
-                    </Link>
-                ))} */}
                 {data?.pages?.map((page, i) => (
                     <React.Fragment key={page.nextPage}>
                         {page.data?.map((item: MovieDto) => (
