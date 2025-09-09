@@ -1,10 +1,4 @@
-import {
-  IsNotEmpty,
-  IsOptional,
-  IsArray,
-  IsIn,
-  IsMongoId,
-} from 'class-validator';
+import { IsNotEmpty, IsOptional, IsArray, IsIn } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { Types } from 'mongoose';
 import { ImageMoviesDto } from './image.movies.dto';
@@ -14,6 +8,7 @@ import { RatingsDto } from './ratings.dto';
 import { CastDto } from './cast.dto';
 import { LangDto } from './lang.dto';
 import { MovieDto } from './movie.dto';
+import { EpisodeSeriesDto } from './episode.series.dto';
 
 export const VIDEO_TYPES = ['movie', 'serie'] as const;
 export type VideoType = (typeof VIDEO_TYPES)[number];
@@ -36,11 +31,11 @@ export class MoviesDto {
 
   @IsOptional()
   @IsNotEmpty()
-  readonly source: SourceSeriesDto[][] | MovieDto | null;
+  readonly source: SourceSeriesDto | MovieDto | null;
 
   @IsOptional()
   @IsNotEmpty()
-  readonly trailer: SourceSeriesDto[] | null;
+  readonly trailer: EpisodeSeriesDto[] | null;
 
   @IsNotEmpty()
   @IsIn(VIDEO_TYPES, {
@@ -112,7 +107,7 @@ export class MoviesDto {
   readonly studio: Types.ObjectId;
 
   @IsNotEmpty()
-   @Transform(({ value }) => new Types.ObjectId(value), { toClassOnly: true })
+  @Transform(({ value }) => new Types.ObjectId(value), { toClassOnly: true })
   readonly category: Types.ObjectId;
 
   @IsArray()

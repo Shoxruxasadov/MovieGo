@@ -3,3 +3,4 @@ export class LangDto {
     ru: string;
     en: string;
 }
+

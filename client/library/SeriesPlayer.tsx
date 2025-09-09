@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { isMobile, isIOS } from "react-device-detect";
-import styled from "styled-components";
-import classNames from "classnames";
+import styled from 'styled-components';
+import classNames from 'classnames';
+import SourceSeriesDto from "@/types/movies/source.series.dto";
 
 import { FaBackward, FaForward, FaPlay, FaPause } from "react-icons/fa6";
 import { FaExpandAlt, FaCompressAlt } from "react-icons/fa";
@@ -13,7 +14,8 @@ import { HiBackward, HiForward } from "react-icons/hi2";
 import SceletLoading from "@/components/loading/loading";
 import { usePlayer, useStore } from "@/store/zustand";
 import { useTranslation } from "react-i18next";
-import MovieDto from "@/types/movies/movie.dto";
+import EpisodeSeriesDto from "@/types/movies/episode.series.dto";
+import SeriesDto from "@/types/movies/series.dto";
 
 type Lang = "uz" | "ru" | "en";
 type Qual = "2160p" | "1080p" | "720p";
@@ -26,7 +28,7 @@ type ImageLike =
 type FlatSource = Partial<Record<Qual | Lang, string>>;
 
 type Movie = {
-  source: MovieDto;
+  source: SourceSeriesDto;
   image?: ImageLike;
 } | any;
 
@@ -41,7 +43,7 @@ const RangeTime = styled.div<PercentProps>`width: ${(props) => props.percent}%!i
 const RangeVolume = styled.div<PercentProps>`width: ${(props) => props.percent}%!important;`;
 const BadgePosition = styled.span<MoveProps>`left: ${(props) => props.move}px!important;`;
 
-export default function MoviesPlayer(): JSX.Element {
+export default function SeriesPlayer({ episode }: { episode: number }) {
   const setLanguage = usePlayer((state) => state.setLanguage) as (l: Lang) => void;
   const setQuality = usePlayer((state) => state.setQuality) as (q: Qual) => void;
   const setSpeed = usePlayer((state) => state.setSpeed) as (s: string) => void;
@@ -55,7 +57,7 @@ export default function MoviesPlayer(): JSX.Element {
   const currentTime = usePlayer((state) => state.currentTime) as number;
   const duration = usePlayer((state) => state.duration) as number;
   const volume = usePlayer((state) => state.volume) as number;
-  const movie = (useStore((state) => state.movie) as Movie) || {};
+  const movie = useStore((s) => s.movie) as SeriesDto | null;
 
   const [languageChanger, setLanguageChanger] = useState<boolean>(true);
   const [qualityChanger, setQualityChanger] = useState<boolean>(true);
@@ -104,26 +106,31 @@ export default function MoviesPlayer(): JSX.Element {
   // 4 → HAVE_ENOUGH_DATA — media to‘liq yuklangan yoki buffering qilmasdan uzluksiz o‘ynashi mumkin.
   const readyEnough = (m: HTMLMediaElement) => m.readyState >= 2;
 
-  const resolveVideoSrc = (source: MovieDto, quality: Qual): string | undefined => {
-    if (!source) return undefined;
-    return (source as FlatSource)[quality];
+  const resolveVideoSrc = (ep: EpisodeSeriesDto | undefined, quality: Qual): string | undefined => {
+    if (!ep?.watching) return undefined;
+    return ep.watching[quality] || undefined;
   };
 
-  const resolveAudioSrc = (source: MovieDto, lang: Lang): string | undefined => {
-    if (!source) return undefined;
-    return (source as FlatSource)[lang];
+  const resolveAudioSrc = (ep: EpisodeSeriesDto | undefined, lang: Lang): string | undefined => {
+    if (!ep?.watching) return undefined;
+    return ep.watching[lang] || undefined;
   };
 
   const videoSrc = useMemo(() => {
-    if (reload) return resolveVideoSrc(movie.source, quality);
-    return undefined;
-  }, [reload, movie.source, quality]);
+    if (!movie?.source || !movie.source.episode) return undefined;
+    const ep = movie.source.episode[episode];
+    if (!ep) return undefined;
+    return resolveVideoSrc(ep, quality);
+  }, [reload, movie, quality, episode]);
 
-  // AUDIO
-  const audioSrc = useMemo(
-    () => resolveAudioSrc(movie.source, language),
-    [movie.source, language]
-  );
+  // === Audio URL ===
+  const audioSrc = useMemo(() => {
+    if (!movie?.source || !movie.source.episode) return undefined;
+    const ep = movie.source.episode[episode];
+    if (!ep) return undefined;
+    return resolveAudioSrc(ep, language);
+  }, [movie, language, episode]);
+
 
   const videoStyle = useMemo(
     () => (currentTime === 0 ? ({ visibility: "hidden" } as const) : {}),
@@ -131,15 +138,12 @@ export default function MoviesPlayer(): JSX.Element {
   );
 
   const playerStyle = useMemo<React.CSSProperties>(() => {
-    const img =
-      movie?.image && "preview" in (movie.image as any)
-        ? (movie.image as any).preview
-        : undefined;
-    if (currentTime === 0 && img) {
-      return { backgroundImage: `url(${img})` };
+    const ep = movie?.source?.episode?.[episode];
+    if (currentTime === 0 && ep?.preview) {
+      return { backgroundImage: `url(${ep.preview})` };
     }
     return {};
-  }, [currentTime, movie]);
+  }, [currentTime, movie, episode]);
 
   const syncAudioToVideo = (hard = false) => {
     const v = videoRef.current;
@@ -204,9 +208,9 @@ export default function MoviesPlayer(): JSX.Element {
   }
 
   useEffect(() => {
-    if (!movie?.source || typeof movie.source === "string") return;
+    if (!movie?.source) return;
     if (qualityChanger) {
-      const newQuality = selectQuality(movie.source as FlatSource);
+      const newQuality = selectQuality(movie.source.episode?.[episode].watching as FlatSource);
       if (newQuality) setQuality(newQuality);
       setQualityChanger(false);
     }
@@ -215,7 +219,7 @@ export default function MoviesPlayer(): JSX.Element {
   useEffect(() => {
     if (!movie?.source) return;
     if (languageChanger) {
-      const currentSource = (movie.source as FlatSource)[quality];
+      const currentSource = (movie.source.episode?.[episode].watching as FlatSource)[quality];
       if (currentSource) {
         const newLanguage = selectLanguage(currentSource as any, language);
         if (newLanguage) setLanguage(newLanguage);
@@ -251,7 +255,7 @@ export default function MoviesPlayer(): JSX.Element {
     if (e && (e as any).detail === 2) makeFullScreen();
   };
 
-  const skippedTimeoutRef = useRef<number | null>(null); // <- TSX: clearTimeout’ni to‘g‘ri ishlatish uchun ref
+  const skippedTimeoutRef = useRef<number | null>(null);
 
   const skip = (move: "backward" | "forward") => {
     if (!videoRef.current) return;
@@ -392,19 +396,21 @@ export default function MoviesPlayer(): JSX.Element {
       setVolume(0);
     }
   };
-
-  const menuSize = (menu: "quality" | "language" | "speed" | "main") => {
-    const s = movie?.source as Partial<Record<Qual | Lang, string>> | undefined; // <- flat source
+  const menuSize = (
+    menu: "quality" | "language" | "speed" | "main"
+  ) => {
+    const ep = movie?.source?.episode?.[episode];
+    const s = ep?.watching;
 
     switch (menu) {
       case "language": {
-        const count = (["uz", "ru", "en"] as Lang[]).filter((l) => !!s?.[l]).length; // <- flat: source.uz/ru/en
+        const count = (["uz", "ru", "en"] as Lang[]).filter((l) => !!s?.[l]).length;
         if (count <= 1) return " unity";
         if (count < 3) return " dual";
         return "";
       }
       case "quality": {
-        const count = (["2160p", "1080p", "720p"] as Qual[]).filter((q) => !!s?.[q]).length; // <- flat: source["1080p"]
+        const count = (["2160p", "1080p", "720p"] as Qual[]).filter((q) => !!s?.[q]).length;
         if (count <= 1) return " unity";
         if (count < 3) return " dual";
         return "";
@@ -704,10 +710,10 @@ export default function MoviesPlayer(): JSX.Element {
         onLoadedData={loadedMovie}
         onPlaying={() => setVideoReady(true)}
         onWaiting={() => setVideoReady(false)}
-        poster={movie?.image && (movie.image as any).preview ? (movie.image as any).preview : undefined}
+        poster={movie?.source?.episode?.[episode]?.preview}
         style={videoStyle}
-        // playsInline
-        // webkit-playsinline="true"
+      // playsInline
+      // webkit-playsinline="true"
       />
       <audio
         ref={audioRef}
@@ -818,17 +824,19 @@ export default function MoviesPlayer(): JSX.Element {
                   <li className="back" onClick={() => setList("main")}>
                     {t("movie.language")}
                   </li>
-                  {languages.map(({ value }) => (movie.source)[value] != null ? (
-                    <li
-                      key={value}
-                      className={classNames("item", { selected: language === value })}
-                      onClick={() => handleLanguage(value)}
-                    >
-                      {t(`languages.${value}`)} <span className="badge">{value}</span>
-                    </li>
-                  ) : null
+                  {languages.map(({ value }) =>
+                    movie?.source?.episode?.[episode]?.watching?.[value] ? (
+                      <li
+                        key={value}
+                        className={classNames("item", { selected: language === value })}
+                        onClick={() => handleLanguage(value)}
+                      >
+                        {t(`languages.${value}`)} <span className="badge">{value}</span>
+                      </li>
+                    ) : null
                   )}
                 </ul>
+
                 <ul
                   className={classNames("quality-list", {
                     active: accessible && list === "quality",
@@ -838,8 +846,7 @@ export default function MoviesPlayer(): JSX.Element {
                     {t("movie.quality")}
                   </li>
                   {qualities.map(({ value, badge }) =>
-                    typeof movie?.source !== "string" &&
-                      (movie.source as FlatSource)[value] != null ? (
+                    movie?.source?.episode?.[episode]?.watching?.[value] ? (
                       <li
                         key={value}
                         className={classNames("item", { selected: quality === value })}
@@ -850,6 +857,7 @@ export default function MoviesPlayer(): JSX.Element {
                     ) : null
                   )}
                 </ul>
+
                 <ul
                   className={classNames("speed-list", { active: accessible && list === "speed" })}
                 >
@@ -889,6 +897,6 @@ export default function MoviesPlayer(): JSX.Element {
           </div>
         </div>
       )}
-    </div>
-  );
+    </div >
+  )
 }

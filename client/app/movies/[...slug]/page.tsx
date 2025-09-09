@@ -48,7 +48,7 @@ export default function AppMovie() {
   return (
     <Root page="movies">
       <Head>
-        <title>Captain America • MovieGo</title>
+        <title>{movie?.title[i18n.language as keyof typeof movie.title]}</title>
       </Head>
 
       <Header />

@@ -1,19 +1,20 @@
+"use client"
+
 import { Link as Scroll } from "react-scroll";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import translate from "@/language/translate.json"
-import { useStore } from "@/store/zustand";
-import { useRouter } from 'next/navigation'
-import Time from "@/utils/time";
 import Link from "next/link";
-import { TbSignRightFilled } from "react-icons/tb";
-import { info } from "@/utils/toastify";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import Image from "next/image";
+import { useStore } from "@/store/zustand";
+import Time from "@/utils/time";
+import { info } from "@/utils/toast";
+import { useTranslation } from "react-i18next";
+import type LangDto from "@/types/movies/lang.dto";
 
 export default function SerieHome() {
   const [loadedImage, setLoadedImage] = useState(false);
   const movie = useStore(state => state.movie);
-  const { locale } = useRouter()
+  const { t, i18n } = useTranslation();
 
   return (
     <section id="serie-home">
@@ -26,8 +27,8 @@ export default function SerieHome() {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <Image
-            src={movie.image.logo}
-            alt="logo"
+            src={movie?.image.logo || ""}
+            alt={movie?.title[i18n.language as keyof typeof movie.title] || ""}
             width={500}
             height={200}
             placeholder="blur"
@@ -36,18 +37,18 @@ export default function SerieHome() {
             onLoad={() => setLoadedImage(true)}
           />
           <div className="credits">
-            <p className="release">{movie.release ? movie.release.substring(0, 4) : movie.timeline.substring(0, 4)}</p>
-            <p className="genre">{translate[locale].movie[movie.genre[0]]}</p>
+            <p className="release">{movie?.release ? new Date(movie.release).getFullYear() : "N/A"}</p>
+            <p className="genre">{movie?.genres[0].title[i18n.language as keyof LangDto]}</p>
             <span>•</span>
-            <p className="genre">{translate[locale].movie[movie.genre[1]]}</p>
+            <p className="genre">{movie?.genres[1].title[i18n.language as keyof LangDto]}</p>
             <span>•</span>
-            <p className="time"><Time time={movie.duration} /></p>
+            <p className="time">{<Time time={movie?.duration} />}</p>
           </div>
           <div className="watching">
             <div className="left">
               <Scroll
                 activeClass="active"
-                to="series-list"
+                to="player"
                 spy={true}
                 smooth={true}
                 offset={-200}
@@ -71,9 +72,9 @@ export default function SerieHome() {
                     fill="white"
                   />
                 </svg>
-                <span>{translate[locale].movie.watchBtn}</span>
+                <span>{t("movie.watchBtn")}</span>
               </Scroll>
-              <button onClick={() => info(translate[locale].movie.soon)}>
+              <button onClick={() => info(t("movie.soon"))}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"
@@ -90,19 +91,29 @@ export default function SerieHome() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span>{translate[locale].movie.listBtn}</span>
+                <span>{t("movie.listBtn")}</span>
               </button>
+              {/* {movie.seasons && <Link href={`/${movie.type}/${movie.seasons[0]}`} className="next">
+                <TbSignRightFilled />
+              </Link>} */}
             </div>
-            <div className={movie.seasons.length > 1 ? "right active" : "right"}>
-              {movie.seasons.map((item, i) => (
-                <Link
-                  href={`/${movie.type}/${item}`}
-                  className={movie.name == item ? 'selected' : ''}
-                  key={i}
-                >
-                  {translate[locale].movie.season} {i + 1}
-                </Link>
-              ))}
+            <div
+              className={
+                movie?.source && "seasons" in movie.source && movie.source.seasons.length > 1
+                  ? "right active"
+                  : "right"
+              }
+            >
+              {movie?.source && "seasons" in movie.source &&
+                movie.source.seasons.map((item, i) => (
+                  <Link
+                    href={`/${movie.module}/${item}`}
+                    className={movie.path === item ? "selected" : ""}
+                    key={i}
+                  >
+                    {t("movie.season")} {i + 1}
+                  </Link>
+                ))}
             </div>
           </div>
         </motion.div>

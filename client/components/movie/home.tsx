@@ -6,24 +6,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useStore } from "@/store/zustand";
 import Time from "@/utils/time";
-import Link from "next/link";
-import { TbSignRightFilled } from "react-icons/tb";
 import { info } from "@/utils/toast";
 import { useTranslation } from "react-i18next";
 import type LangDto from "@/types/movies/lang.dto";
 
 export default function MovieHome() {
   const [loadedImage, setLoadedImage] = useState(false);
-  const [screenWidth, setScreenWidth] = useState<number | undefined>();
   const movie = useStore(state => state.movie);
-  const { t, i18n } = useTranslation()
-
-  useEffect(() => {
-    setScreenWidth(window.innerWidth);
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const { t, i18n } = useTranslation();
 
   return (
     <section id="movie-home">

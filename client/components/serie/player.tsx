@@ -1,16 +1,15 @@
 import { useStore, useUser } from "@/store/zustand";
-import MoviesPlayer from "@/library/MoviesPlayer"
-import Soon from "./player/soon";
-import Need from "./player/need";
+import Series from "./series";
+import Soon from "../movie/player/soon";
+import Need from "../movie/player/need";
 
-import Description from "./player/description";
-import Credits from "./player/credits";
-import Cast from "./player/cast";
-import Review from "./player/review";
-import MoviesDto from '@/types/movies/movies.dto';
+import Description from "../movie/player/description";
+import Credits from "../movie/player/credits";
+import Cast from "../movie/player/cast";
+import Review from "../movie/player/review";
 
-export default function MoviePlayer() {
-  const { movie } = useStore() as { movie: MoviesDto | null };
+export default function SeriePlayer() {
+  const { movie } = useStore();
   const { user } = useUser();
 
   if (movie) return (
@@ -19,7 +18,7 @@ export default function MoviePlayer() {
         <div className="main" data-aos="fade-up">
           <Description movie={movie} />
           <div className="watching">
-            {user ? (movie.source ? <MoviesPlayer /> : <Soon />) : <Need />}
+            {user ? (movie?.source && "episode" in movie.source && movie.source.episode?.length ? <Series /> : <Soon />) : <Need />}
           </div>
           <Cast movie={movie} />
           <Credits movie={movie} position='left' />

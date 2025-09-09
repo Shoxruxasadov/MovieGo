@@ -10,13 +10,13 @@ import RatingsDto from "./ratings.dto";
 import SourceSeriesDto from "./source.series.dto";
 import StudiosDto from "./studios.dto";
 
-export default interface MoviesDto {
+export default interface SeriesDto {
   _id: string;
   path: string;
   title: LangDto;
   description: LangDto;
   image: ImageMoviesDto | ImageSeriesDto;
-  source: SourceSeriesDto | MovieDto | null;
+  source: SourceSeriesDto | null;
   trailer: EpisodeSeriesDto[] | null;
   type: string;
   module: string;

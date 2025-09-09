@@ -1,9 +1,6 @@
-import { LangDto } from './lang.dto';
-import { MovieDto } from './movie.dto';
+import { EpisodeSeriesDto } from "./episode.series.dto";
 
 export class SourceSeriesDto {
-  'title': LangDto;
-  'duration': number;
-  'preview': string;
-  'episode': MovieDto | null;
+  'seasons': string[];
+  'episode': EpisodeSeriesDto[] | null;
 }

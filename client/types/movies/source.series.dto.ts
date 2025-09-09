@@ -1,9 +1,6 @@
-import LangDto from "./lang.dto";
-import MovieDto from "./movie.dto";
+import EpisodeSeriesDto from "./episode.series.dto";
 
 export default interface SourceSeriesDto {
-  title: LangDto;
-  duration: number;
-  preview: string;
-  video: MovieDto | null;
+  seasons: string[];
+  episode: EpisodeSeriesDto[] | null;
 }
