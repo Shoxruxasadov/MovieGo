@@ -187,9 +187,9 @@
                 cursor: pointer;
               }
 
-               &:hover {
-            background: var(--bg-primary);
-          }
+              &:hover {
+                background: var(--bg-primary);
+              }
 
               svg {
                 color: var(--text-less);
@@ -465,8 +465,16 @@
             position: relative;
             padding: min(2.3em, 12%) 0;
             border-radius: 12px;
-            border: 1px solid #282828;
+            border: 1px solid var(--border-primary);
             background: var(--bg-secondary);
+
+            @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+              padding: 24px 0;
+            }
+
+            @media (max-width: 441px) {
+              padding: 24px 0;
+            }
 
             .title-cast {
               display: flex;
@@ -474,6 +482,14 @@
               justify-content: space-between;
               margin-bottom: 12px;
               padding: 0 min(2.3em, 12%);
+
+              @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+                padding: 0 24px;
+              }
+
+              @media (max-width: 441px) {
+                padding: 0 24px;
+              }
 
               h3 {
                 color: var(--text-less);
@@ -516,9 +532,21 @@
               scroll-behavior: smooth;
               padding: 6px min(2.3em, 12%);
 
+              @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+                padding: 5px 24px;
+              }
+
+              @media (max-width: 441px) {
+                padding: 4px 24px;
+              }
+
               .child {
                 display: flex;
                 gap: 8px;
+
+                @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+                  gap: 6px;
+                }
               }
 
               .card {
@@ -536,18 +564,27 @@
 
                 @media (max-width: 1280px) {
                   width: 28.8vw;
+                  border-radius: 16px;
                 }
 
                 @media (max-width: 1024px) {
                   width: 36vw;
+                  border-radius: 14px;
+                }
+
+                @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+                  width: 27.7vw;
+                  border-radius: 12px;
                 }
 
                 @media (max-width: 880px) {
                   width: 43.2vw;
+                  border-radius: 10px;
                 }
 
                 @media (max-width: 441px) {
                   width: 70vw;
+                  border-radius: 8px;
                 }
 
                 &,
@@ -575,6 +612,10 @@
                   display: flex;
                   flex-direction: column;
                   justify-content: end;
+
+                  @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+                    padding: 16px 12px;
+                  }
 
                   .info {
                     display: flex;
@@ -612,6 +653,16 @@
 
                     h4 {
                       font-size: 17px;
+                    }
+                  }
+
+                  @media (max-width: 1140px) and (max-height: 640px) and (min-width: 440px) {
+                    .info p {
+                      font-size: 11px;
+                    }
+
+                    h4 {
+                      font-size: 14px;
                     }
                   }
 
@@ -909,7 +960,7 @@
               }
 
               h4 {
-                font-size: 16px;
+                font-size: 14.5px;
                 font-weight: 600;
                 line-height: 150%;
 

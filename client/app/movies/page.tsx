@@ -73,7 +73,7 @@ export default function Movies() {
 
         </section>
         <section className="movies">
-          <div className="container"  style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}>
+          <div className="container" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}>
             {status === 'pending' ? Array.from({ length: 14 }).map((_, index) => (
               <div key={index} className="card skeleton">
                 <div className="title">
@@ -97,6 +97,7 @@ export default function Movies() {
                         <p className="purchase">{item.purchase ? t("movie.paid") : t("movie.free")}</p>
                         <h3 title={item.title[i18n.language as keyof typeof item.title]}>{item.title[i18n.language as keyof typeof item.title]}</h3>
                         <p className="other">{item.studio.title[i18n.language as keyof typeof item.studio.title]} • <span>{item.mpaa}+</span></p>
+                        {!((item.type == "movie" && item.source) || (item?.source && 'episode' in item.source && item.source.episode?.length)) && <div id="soon"><span>{t("movie.soon")}</span></div>}
                       </div>
                     </Link>
                   ))}

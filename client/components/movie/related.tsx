@@ -41,6 +41,7 @@ export default function Related() {
                 <p className="purchase">{item.purchase ? t("movie.paid") : t("movie.free")}</p>
                 <h3 title={item.title[i18n.language as keyof typeof item.title]}>{item.title[i18n.language as keyof typeof item.title]}</h3>
                 <p className="other">{item.studio.title[i18n.language as keyof typeof item.studio.title]} • <span>{item.mpaa}+</span></p>
+                {!((item.type=="movie" && item.source) || (item?.source && 'episode' in item.source && item.source.episode?.length)) && <div id="soon"><span>{t("movie.soon")}</span></div>}
               </div>
             </Link>
           )) : Array.from({ length: 7 }).map((_, index) => (

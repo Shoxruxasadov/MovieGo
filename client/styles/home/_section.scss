@@ -188,6 +188,9 @@
                 opacity: 1;
               }
             }
+              #soon span {
+              transform: scale(1.05);
+            }
           }
         }
 
@@ -374,6 +377,47 @@
               font-size: 10px;
             }
           }
+
+           #soon {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+
+            display: flex;
+            font-weight: 500;
+            align-items: center;
+            justify-content: center;
+
+            background: #00000060;
+            backdrop-filter: blur(4px);
+
+            span {
+              font-size: 16px;
+              margin-bottom: 10%;
+              transition: 0.25s;
+
+              @media (max-width: 1024px) {
+                font-size: 14px;
+              }
+
+              @media (max-width: 1140px) and (max-height: 640px) {
+                font-size: 12px;
+              }
+
+              @media (max-width: 768px) {
+                font-size: 11px;
+              }
+
+              @media (max-width: 441px) {
+                font-size: 10px;
+              }
+            }
+          }
+
+
         }
 
         &.skeleton {
