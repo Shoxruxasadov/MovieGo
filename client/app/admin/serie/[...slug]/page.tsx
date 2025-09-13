@@ -20,6 +20,7 @@ import { success } from "@/utils/toast"
 import MoviesDto from "@/types/movies/movies.dto"
 import api from "@/library/axios"
 import EpisodeSeriesDto from "@/types/movies/episode.series.dto"
+import SourceSeriesDto from "@/types/movies/source.series.dto"
 // import Series from "@/components/serie/series"
 
 // interface MovieProps {
@@ -74,9 +75,6 @@ export default function AppSerie() {
       scenarists: movie?.scenarists || [],
       cast: movie?.cast || []
     }
-
-    console.log(merged);
-
 
     api.put(`/admin/movies/${movie?._id}`, merged).then(({ data }) => {
       success(data)
@@ -350,7 +348,7 @@ function Series({ movie, isEdit, setIsEdit, episodeModal, setEpisodeModal, setEp
 
 function Modal({ movie, isEdit, setIsEdit, episodeModal, setEpisodeModal, episodeIndex }: { movie: Partial<MoviesDto>, isEdit: boolean, setIsEdit: React.Dispatch<React.SetStateAction<boolean>>, episodeModal: boolean, setEpisodeModal: React.Dispatch<React.SetStateAction<boolean>>, episodeIndex: number, }) {
   const { register, handleSubmit, reset } = useForm<EpisodeSeriesDto>({
-    defaultValues: movie?.source?.episode[episodeIndex],
+    defaultValues: (movie?.source as SourceSeriesDto)?.episode?.[episodeIndex],
   });
 
   const getMovie = useStore(state => state.getMovie);
@@ -369,9 +367,8 @@ function Modal({ movie, isEdit, setIsEdit, episodeModal, setEpisodeModal, episod
       }
     }
 
-
     const newEpisodes = () => {
-      let episodeList = [...(movie?.source?.episode || [])]
+      let episodeList = [...((movie?.source as SourceSeriesDto)?.episode || [])]
 
       episodeList.push({
         title: newEpisode.title,
@@ -388,7 +385,7 @@ function Modal({ movie, isEdit, setIsEdit, episodeModal, setEpisodeModal, episod
       description: movie?.description,
       image: movie?.image,
       source: {
-        seasons: movie?.source?.seasons,
+        seasons: (movie?.source as SourceSeriesDto)?.seasons,
         episode: newEpisodes(),
       },
       trailer: movie?.trailer || [],
@@ -437,7 +434,7 @@ function Modal({ movie, isEdit, setIsEdit, episodeModal, setEpisodeModal, episod
     }
 
     const newEpisodes = () => {
-      let episodeList = [...(movie?.source?.episode || [])]
+      let episodeList = [...((movie?.source as SourceSeriesDto)?.episode || [])]
 
       episodeList[episodeIndex] = {
         title: updatedEpisode.title,
@@ -454,7 +451,7 @@ function Modal({ movie, isEdit, setIsEdit, episodeModal, setEpisodeModal, episod
       description: movie?.description,
       image: movie?.image,
       source: {
-        seasons: movie?.source?.seasons,
+        seasons: (movie?.source as SourceSeriesDto)?.seasons,
         episode: newEpisodes(),
       },
       trailer: movie?.trailer || [],
@@ -491,12 +488,12 @@ function Modal({ movie, isEdit, setIsEdit, episodeModal, setEpisodeModal, episod
   }
 
   useEffect(() => {
-    if (isEdit && movie?.source?.episode[episodeIndex]) {
+    if (isEdit && (movie?.source as SourceSeriesDto)?.episode?.[episodeIndex]) {
       reset({
-        title: movie.source.episode[episodeIndex].title,
-        duration: movie.source.episode[episodeIndex].duration,
-        preview: movie.source.episode[episodeIndex].preview,
-        watching: movie.source.episode[episodeIndex].watching,
+        title: (movie?.source as SourceSeriesDto)?.episode?.[episodeIndex].title,
+        duration: (movie?.source as SourceSeriesDto)?.episode?.[episodeIndex].duration,
+        preview: (movie?.source as SourceSeriesDto)?.episode?.[episodeIndex].preview,
+        watching: (movie?.source as SourceSeriesDto)?.episode?.[episodeIndex].watching,
       });
     } else {
       reset({
