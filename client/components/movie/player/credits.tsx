@@ -16,7 +16,7 @@ import LangDto from "@/types/movies/lang.dto";
 export default function Credits({ movie, position }: { movie: MovieDto, position?: "left" | "right" }) {
     const { t, i18n } = useTranslation()
 
-    const resolutionLabels = {
+    const resolutions = {
         '2160p': '4K',
         '1080p': 'FHD',
         '720p': 'HD',
@@ -86,9 +86,9 @@ export default function Credits({ movie, position }: { movie: MovieDto, position
                     <span>{t("movie.quality")}</span>
                 </h3>
                 <div className="wrapper">
-                    <span className={movie.format == "IMAX" ? 'small' : ''}>{movie.format}</span>
+                    <span>{movie.format}</span>
                     {movie.resolution.map((resolution) => (
-                        <span key={resolution}>{resolutionLabels[resolution as keyof typeof resolutionLabels]}</span>
+                        <span key={resolution}>{resolutions[resolution as keyof typeof resolutions]}</span>
                     ))}
                 </div>
             </div>

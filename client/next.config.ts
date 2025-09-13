@@ -11,11 +11,19 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "yglxvsygbxqnlqxhzdtt.supabase.co",
+      },
+      {
+        protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
       {
         protocol: "https",
-        hostname: "yglxvsygbxqnlqxhzdtt.supabase.co",
+        hostname: "cloud.moviego.uz",
+      },
+      {
+        protocol: "https",
+        hostname: "server.moviego.uz",
       },
     ],
   },

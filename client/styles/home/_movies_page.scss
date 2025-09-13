@@ -248,7 +248,7 @@ main {
             }
 
             @media (max-width: 1140px) and (max-height: 640px) {
-              font-size: 12px;
+              font-size: 11px;
             }
           }
 
@@ -260,6 +260,12 @@ main {
             visibility: hidden;
             opacity: 0;
             font-size: 13px;
+
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            text-wrap: nowrap;
+            gap: 2px;
 
             span {
               font-size: 12px;
@@ -280,8 +286,8 @@ main {
               }
 
               @media (max-width: 1140px) and (max-height: 640px) {
-                font-size: 9px;
-                padding: 0 4.2px 0 5.5px;
+                font-size: 8px;
+                padding: 0 3.5px 0 4.5px;
                 border-radius: 4px;
               }
             }

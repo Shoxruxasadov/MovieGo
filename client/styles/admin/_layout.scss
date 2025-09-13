@@ -12,6 +12,9 @@
     #content {
       padding: 30px;
       margin-top: 80px;
+
+      @import "./edit_movie";
+      @import "./edit_serie";
     }
   }
 }

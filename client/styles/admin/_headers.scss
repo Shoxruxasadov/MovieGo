@@ -8,6 +8,7 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
+  z-index: 10;
 
   &::after {
     content: "";
@@ -37,9 +38,32 @@ header {
       font-weight: 500;
       color: var(--text-primary);
       padding-top: 2px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .navigate-back {
+        all: unset;
+        color: var(--text-less);
+
+        &:hover {
+          all: unset;
+          cursor: pointer;
+          color: var(--text-many);
+        }
+      }
+
+      span {
+        color: var(--text-less);
+
+        &.current-path {
+          color: white;
+        }
+      }
     }
 
-    a {
+    a, button {
       color: var(--text-primary);
       font-size: 16px;
       font-weight: 400;

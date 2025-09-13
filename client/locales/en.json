@@ -137,6 +137,12 @@
       "payments": "Payments",
       "reviews": "Reviews",
       "cast": "Cast"
+    },
+    "movies":{
+      "information": "Movie Information"
+    },
+    "series":{
+      "information": "Series Information"
     }
   },
   "date": {

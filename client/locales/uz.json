@@ -137,6 +137,12 @@
       "payments": "To'lovlar",
       "reviews": "Sharhlar",
       "cast": "Aktyorlar"
+    },
+    "movies":{
+      "information": "Film haqida ma'lumot"
+    },
+    "series":{
+      "information": "Serial haqida ma'lumot"
     }
   },
   "date": {

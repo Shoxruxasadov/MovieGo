@@ -137,6 +137,12 @@
       "payments": "Платежи",
       "reviews": "Отзывы",
       "cast": "Актёры"
+    },
+    "movies":{
+      "information": "Сведения о фильме"
+    },
+    "series":{
+      "information": "Сведения о сериала"
     }
   },
   "date": {

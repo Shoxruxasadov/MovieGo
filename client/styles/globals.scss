@@ -134,7 +134,7 @@ body {
   }
 }
 
-#movies-page{
+#movies-page {
   @import "./home/others.scss";
   @import "./home/header.scss";
   @import "./home/movies_page";
@@ -429,10 +429,21 @@ body {
   }
 }
 
-#admin{
+#admin {
   @import "./admin/layout";
   @import "./admin/sidebar";
   @import "./admin/dashboard";
   @import "./admin/users";
   @import "./admin/categories";
+  @import "./admin/movies";
+
+  #admin-loading {
+    height: calc(100svh - 141px);
+    main {
+      width: 100%!important;
+      position: relative;
+    }
+  }
 }
+
+

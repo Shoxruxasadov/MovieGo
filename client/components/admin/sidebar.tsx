@@ -156,7 +156,7 @@ export default function Sidebar() {
     }
 
     useEffect(() => {
-        const index = links.findIndex((item) => item.link === pathname);
+        const index = links.findIndex((item) => (item.link === pathname || (item.link == "/admin/movies" && (pathname.substring(0, 12) == "/admin/movie" || pathname.substring(0, 12) == "/admin/serie"))));
         if (index !== -1) setPosition(index * 48);
         setOpacity(index !== -1 ? 1 : 0);
     }, [pathname]);
@@ -174,8 +174,8 @@ export default function Sidebar() {
             </Link>
             <ul>
                 {links.map((section, i) => (
-                    <li key={i}><Link href={section.link} className={classNames({ active: pathname == section.link })}>
-                        <div className="icon">{pathname == section.link ? section.active : section.icon}</div>
+                    <li key={i}><Link href={section.link} className={classNames({ active: (pathname == section.link || (section.link == "/admin/movies" && (pathname.substring(0, 12) == "/admin/movie" || pathname.substring(0, 12) == "/admin/serie"))) })}>
+                        <div className="icon">{(pathname == section.link || (section.link == "/admin/movies" && (pathname.substring(0, 12) == "/admin/movie" || pathname.substring(0, 12) == "/admin/serie"))) ? section.active : section.icon}</div>
                         <span>{section.name}</span>
                     </Link></li>
                 ))}

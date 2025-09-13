@@ -6,11 +6,11 @@ import { MoviesModule } from 'src/movies/movies.module';
 import { ActorsModule } from 'src/cast/cast.module';
 import { UsersModule } from 'src/users/users.module';
 import { StudiosModule } from 'src/studios/studios.module';
-import { StreamModule } from 'src/stream/stream.module';
 import { SocketGateway } from './gateways/socket.gateway';
 import { CategoriesModule } from './categories/categories.module';
 import { GenresModule } from './genres/genres.module';
 import { CountriesModule } from './countries/countries.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -33,6 +33,7 @@ import { CountriesModule } from './countries/countries.module';
     //   // },
     // }),
     // StreamModule,
+    AdminModule,
     UsersModule,
     MoviesModule,
     StudiosModule,

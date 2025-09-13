@@ -24,7 +24,7 @@ export default function Movies() {
   const { t, i18n } = useTranslation()
 
   const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery<MoviesResponse>({
-    queryKey: [module],
+    queryKey: ["moduleMovies"],
     queryFn: ({ pageParam = 0 }) => api.get<MoviesResponse>(`/movies?page=${pageParam}`, { headers: { 'module': "movies" } }).then(({ data }) => data).catch(error => { throw error }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPage ?? null,
@@ -70,7 +70,6 @@ export default function Movies() {
       <Animated url="unset">
         <section className="filter">
           <h1>{t("header.movies")}</h1>
-
         </section>
         <section className="movies">
           <div className="container" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}>

@@ -17,19 +17,19 @@ export default function AdminCategories() {
     queryFn: async (): Promise<CategoriesDto[]> => api.get(`/categories`).then(({ data }) => data).catch(error => { throw error }),
   })
 
-  const breakpoints = [
-    { width: 320, columns: 1 },
-    { width: 576, columns: 2 },
-    { width: 768, columns: 3 },
-    { width: 991, columns: 3 },
-    { width: 1024, columns: 4 },
-    { width: 1280, columns: 4 },
-    { width: 1440, columns: 5 },
-    { width: 1536, columns: 6 },
-    { width: 1680, columns: 7 },
-    { width: 1920, columns: 8 },
-    { width: 2560, columns: 9 },
-    { width: 3840, columns: 10 },
+   const breakpoints = [
+    { width: 576, columns: 1 },
+    { width: 768, columns: 2 },
+    { width: 991, columns: 2 },
+    { width: 1024, columns: 3 },
+    { width: 1280, columns: 3 },
+    { width: 1440, columns: 4 },
+    { width: 1536, columns: 5 },
+    { width: 1680, columns: 6 },
+    { width: 1920, columns: 6 },
+    { width: 2160, columns: 7 },
+    { width: 2560, columns: 8 },
+    { width: 3840, columns: 9 },
   ];
 
   const updateColumns = useCallback(() => {
