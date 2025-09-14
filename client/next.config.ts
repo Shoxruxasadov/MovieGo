@@ -19,7 +19,15 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "moviego.uz",
+      },
+      {
+        protocol: "https",
         hostname: "cloud.moviego.uz",
+      },
+      {
+        protocol: "https",
+        hostname: "moviego.b-cdn.net",
       },
       {
         protocol: "https",
