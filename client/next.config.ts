@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
         hostname: "server.moviego.uz",
       },
     ],
+    unoptimized: true,
   },
   // i18n: {
   //   defaultLocale: "ru",

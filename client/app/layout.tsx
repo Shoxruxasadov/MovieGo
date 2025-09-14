@@ -8,7 +8,7 @@ import useLocalStorage from "use-local-storage";
 import { useEffect } from "react";
 import Aos from "aos"
 import { useUser } from "@/store/zustand";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
 const queryClient = new QueryClient()
 
@@ -32,23 +32,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     getUser(token)
   }, [token, user]);
 
-  useEffect(() => {
-    if (!user) return;
+  // useEffect(() => {
+  //   if (!user) return;
 
-    const socket = io(process.env.NEXT_PUBLIC_SERVER!, {
-      transports: ["websocket"],
-    });
+  //   const socket = io(process.env.NEXT_PUBLIC_SERVER!, {
+  //     transports: ["websocket"],
+  //   });
 
-    socket.emit("user_connected", { userId: user._id });
+  //   socket.emit("user_connected", { userId: user._id });
 
-    socket.on("connect", () => {
-      console.log("Connected as", user._id);
-    });
+  //   socket.on("connect", () => {
+  //     console.log("Connected as", user._id);
+  //   });
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [user]);
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, [user]);
 
   return (
     <html lang="ru">
