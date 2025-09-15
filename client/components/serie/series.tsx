@@ -26,7 +26,7 @@ export default function Series() {
         <div className="select-series">
             <div className="title-cast">
                 {movie?.source && "seasons" in movie.source && (
-                    <h3>1-{movie?.source?.seasons?.length} {t("serie.episodes")}</h3>
+                    <h3>1-{movie?.source?.episode?.length} {t("serie.episodes")}</h3>
                 )}
                 <div className="navigate">
                     <button
