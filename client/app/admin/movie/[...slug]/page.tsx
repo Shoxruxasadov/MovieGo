@@ -352,6 +352,7 @@ export default function AppMovie() {
                     <option value="IMAX">IMAX</option>
                     <option value="BluRay">BluRay</option>
                     <option value="WebRip">WebRip</option>
+                    <option value="WEB-DL">WEB-DL</option>
                   </select>
                 </div>
               </label>
