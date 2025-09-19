@@ -16,11 +16,11 @@ export class MoviesService {
 
   async findByType(type: string) {
     if (type == 'all')
-      return this.moviesModel.find().populate('studio').sort({ createdAt: -1 });
+      return this.moviesModel.find().populate('studio').sort({ timeline: -1 });
     return this.moviesModel
       .find({ type: type })
       .populate('studio')
-      .sort({ createdAt: -1 });
+      .sort({ timeline: -1 });
   }
 
   async findRandom(count:number) {    
@@ -144,7 +144,7 @@ export class MoviesService {
       },
     
       // sort, skip, limit
-      { $sort: { createdAt: -1 } },
+      { $sort: { timeline: -1 } },
       { $skip: skip },
       { $limit: pageSize },
     ]);
