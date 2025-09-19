@@ -1,40 +1,40 @@
 # 1. Bosqich: Qurilish (Build)
 FROM node:20-alpine as builder
 
-# Environment
 ENV NODE_ENV build
-
-# Ishchi papkani belgilash
 WORKDIR /home/node
 
 # package.json va package-lock.json fayllarini nusxalash
 COPY package*.json ./
 
-# NPM paketlarini o‘rnatish
+# Faqat build uchun kerakli barcha dependencylarni o‘rnatish
 RUN npm ci
 
 # Ilova kodini nusxalash va qurish
 COPY --chown=node:node . .
 RUN npm run build
 
-# 2. Bosqich: Ishlatish (Production)
+
+# 2. Bosqich: Production
 FROM node:20-alpine
 
 # FFmpeg o‘rnatish
-RUN apk update && apk add ffmpeg
+RUN apk update && apk add --no-cache ffmpeg
 
-# Environment
 ENV NODE_ENV production
-
-# Ishchi papkani belgilash
 WORKDIR /home/node
 
-# Qurilgan fayllarni nusxalash
-COPY --from=builder --chown=node:node /home/node/package*.json ./
-COPY --from=builder --chown=node:node /home/node/node_modules/ ./node_modules/
-COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
+# Faqat dependencies (dev emas) o‘rnatish
+COPY package*.json ./
+RUN npm ci --omit=dev
 
-# Dastur portini ochish
+# Qurilgan fayllarni nusxalash
+COPY --from=builder /home/node/dist ./dist
+
+# Oddiy user sifatida ishlatish (root emas)
+USER node
+
+# Port
 EXPOSE 8080
 
 # Dastur ishga tushirish
