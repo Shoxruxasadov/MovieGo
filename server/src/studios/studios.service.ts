@@ -77,7 +77,7 @@ export class StudiosService {
       },
 
       // sort, skip, limit
-      { $sort: { createdAt: -1 } },
+      { $sort: { timeline: -1 } },
       { $skip: skip },
       { $limit: pageSize },
     ]);

@@ -13,16 +13,15 @@ interface MoviesResponse {
     data: StudiosDto[];
     nextPage?: number;
 }
-
-export default function StudiosSection({ title }: { title: string }) {
+export default function StudiosSection({ module, title }: { module: string; title: string }) {
     const [screenSize, setScreenSize] = useState<[number, number]>([0, 0]);
     const scrollDemoRef = useRef<HTMLDivElement | null>(null);
     const { ref, inView } = useInView()
     const { t, i18n } = useTranslation()
 
     const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery<MoviesResponse>({
-        queryKey: [`studios`],
-        queryFn: ({ pageParam = 0 }) => api.get<MoviesResponse>(`/studios?page=${pageParam}`).then(({ data }) => data).catch(error => { throw error }),
+        queryKey: [`${module}-studios`],
+        queryFn: ({ pageParam = 0 }) => api.get<MoviesResponse>(`/${module}?page=${pageParam}`).then(({ data }) => data).catch(error => { throw error }),
         initialPageParam: 0,
         getNextPageParam: (lastPage) => lastPage.nextPage ?? null,
         staleTime: Infinity,
@@ -36,18 +35,12 @@ export default function StudiosSection({ title }: { title: string }) {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // console.log(data);
-
-
     useEffect(() => {
         if (inView) fetchNextPage()
     }, [fetchNextPage, inView])
 
-    console.log(data);
-
-
     return (
-        <section id="studios" data-aos="fade-up">
+        <section id={module} data-aos="fade-up">
             <h2>{title}</h2>
             <div className='wrapper' ref={scrollDemoRef} >
                 <div className="left" onClick={() => {
@@ -56,7 +49,7 @@ export default function StudiosSection({ title }: { title: string }) {
                             screenSize[0] > 1024 && screenSize[1] > 576 ? 1100 : 780;
                     }
                 }}><FaChevronLeft /></div>
-                <div className="studios">
+                <div className={module}>
                     {status === 'pending' ? Array.from({ length: 7 }).map((_, index) => (
                         <div key={index} className="card skeleton">
                             <div className="title">
