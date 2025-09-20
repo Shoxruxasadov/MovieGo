@@ -222,8 +222,10 @@ body {
 }
 
 #studio {
-  @import "./home/header.scss";
-  @import "./studio/studio.scss";
+   @import "./home/others.scss";
+   @import "./home/header.scss";
+   @import "./home/movies_page";
+  // @import "./studio/studio.scss";
   @import "./home/footer.scss";
 
   main {

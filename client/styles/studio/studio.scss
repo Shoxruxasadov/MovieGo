@@ -1,25 +1,47 @@
-section.studios {
-  // margin-bottom: 40px;
+section.studio {
   position: relative;
   z-index: 1;
 
-  .container {
+  min-height: 100svh;
+  margin-bottom: 40px;
+
+  .filter {
     padding: 100px 48px 0 !important;
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 48px;
+    }
 
     @media (max-width: 1024px) {
       padding: 65px 48px 0 !important;
+
+      h1 {
+        font-size: 32px;
+      }
     }
 
     @media (max-width: 1140px) and (max-height: 640px) {
-      padding: 65px 40px 0 !important;
+      padding: 70px 48px 0 !important;
+      h1 {
+        font-size: 28px;
+      }
     }
 
     @media (max-width: 768px) {
       padding: 70px 32px 0 !important;
+
+      h1 {
+        font-size: 28px;
+      }
     }
 
     @media (max-width: 480px) {
       padding: 75px 16px 0 !important;
+
+      h1 {
+        font-size: 24px;
+      }
     }
   }
 }
@@ -28,7 +50,7 @@ section#movies {
   padding-bottom: 40px;
   position: relative;
   z-index: 1;
-  
+
   .container {
     grid-gap: 8px;
     display: grid;
