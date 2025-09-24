@@ -34,7 +34,7 @@ export class StudiosService {
     const studios = await this.studiosModel.findOne({ path });
 
     const movies = await this.moviesModel.aggregate([
-      { $sample: { size: 1000 } },
+      // { $sample: { size: 1000 } },
       { $match: { studio: studios._id } },
 
       {
