@@ -37,9 +37,6 @@ export default function MoviesSection({ module, title }: { module: string; title
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // console.log(data);
-
-
     useEffect(() => {
         if (inView) fetchNextPage()
     }, [fetchNextPage, inView])

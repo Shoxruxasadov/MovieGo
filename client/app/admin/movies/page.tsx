@@ -65,6 +65,10 @@ export default function AdminMovies() {
     return () => window.removeEventListener("resize", updateColumns);
   }, [updateColumns]);
 
+  useEffect(() => {
+    if (inView) fetchNextPage()
+  }, [fetchNextPage, inView])
+
   return (
     <Admins page="admin-movies">
       <header><div id="wrapper">
