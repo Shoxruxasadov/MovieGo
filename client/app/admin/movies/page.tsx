@@ -85,7 +85,7 @@ export default function AdminMovies() {
       </div></header>
       <div id="content">
         <div className="container" style={{ gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` }}>
-          {status === 'pending' ? Array.from({ length: 14 }).map((_, index) => (
+          {status === 'pending' ? Array.from({ length: 18 }).map((_, index) => (
             <div key={index} className="card skeleton">
               <div className="title">
                 <div className="resolution" />
