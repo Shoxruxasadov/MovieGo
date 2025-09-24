@@ -17,7 +17,7 @@ export class StudiosService {
     const skip = page * pageSize;
 
     const studios = await this.studiosModel.aggregate([
-      { $sort: { createdAt: -1 } },
+      { $sort: { timeline: -1 } },
       { $skip: skip },
       { $limit: pageSize },
     ]);
