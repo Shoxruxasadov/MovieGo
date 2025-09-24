@@ -15,7 +15,7 @@ export class AdminService {
   ) {}
 
   async getMovies(page: number) {
-    const pageSize = 10;
+    const pageSize = 18;
     const skip = page * pageSize;
 
     const count = await this.moviesModel.countDocuments({});
