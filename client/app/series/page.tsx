@@ -64,6 +64,10 @@ export default function Series() {
     return () => window.removeEventListener("resize", updateColumns);
   }, [updateColumns]);
 
+    useEffect(() => {
+      if (inView) fetchNextPage()
+    }, [fetchNextPage, inView])
+
   return (
     <Root page="movies-page">
       <Header />
